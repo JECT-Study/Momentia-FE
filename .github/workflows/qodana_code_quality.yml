@@ -22,10 +22,13 @@ jobs:
           fetch-depth: 0  # a full history is required for pull request analysis
           
       - name: Setup pnpm
-        run: |
-          npm install -g pnpm@8 # 필요 시 최신 버전 확인 후 수정
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8 # 원하는 pnpm 버전
+          run_install: false # 의존성 설치를 수동으로 실행
+          dest: ~/setup-pnpm # pnpm 파일을 저장할 경로
+          package_json_file: package.json # package.json 경로 (기본값 유지)
+          standalone: false # Node.js 없이 실행 가능하도록 standalone 설치 여부
 
       - name: Install dependencies
         run: pnpm install
