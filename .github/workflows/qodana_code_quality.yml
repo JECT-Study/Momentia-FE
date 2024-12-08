@@ -24,8 +24,8 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8 
-          run_install: false
+          version: 8 # 원하는 pnpm 버전
+          run_install: false # 의존성 설치를 수동으로 실행
 
       - name: Install dependencies
         run: pnpm install
