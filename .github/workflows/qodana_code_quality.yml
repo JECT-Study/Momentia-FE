@@ -22,13 +22,13 @@ jobs:
           fetch-depth: 0  # a full history is required for pull request analysis
           
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 8 # 원하는 pnpm 버전
-          run_install: false # 의존성 설치를 수동으로 실행
+        run: |
+          npm install -g pnpm@8 # 필요 시 최신 버전 확인 후 수정
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install
 
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2024.2
