@@ -43,7 +43,7 @@ jobs:
 
       - name: Notify Discord on Analysis Failure
         if: failure()
-        uses: bsurdy/discord-webhook-action@v1
+        uses: johnnyhuy/actions-discord-git-webhook@main
         with:
           webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
           content: |
