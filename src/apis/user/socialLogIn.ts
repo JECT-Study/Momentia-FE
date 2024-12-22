@@ -24,7 +24,7 @@ const useGetSocialLogin = ({
 
   const hasData = !!data;
 
-  const authorizedRes: SocialLoginAuthType = hasData
+  const authorizedResponse: SocialLoginAuthType = hasData
     ? data.value
     : {
         isRegistered: false,
@@ -34,7 +34,7 @@ const useGetSocialLogin = ({
         },
       };
 
-  return { hasData, authorizedRes, isLoading };
+  return { hasData, authorizedResponse, isLoading };
 };
 
 export default useGetSocialLogin;

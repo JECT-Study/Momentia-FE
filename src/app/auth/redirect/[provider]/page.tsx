@@ -5,11 +5,11 @@ import useGetSocialLogin from '@/apis/user/socialLogIn';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface ProviderPageProps {
+interface RedirectPageProps {
   provider: string;
 }
 
-function ProviderPage({ provider }: ProviderPageProps) {
+function RedirectPage({ provider }: RedirectPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { hasData, isLoading } = useGetSocialLogin({
@@ -24,4 +24,4 @@ function ProviderPage({ provider }: ProviderPageProps) {
   return <></>;
 }
 
-export default ProviderPage;
+export default RedirectPage;

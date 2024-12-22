@@ -20,20 +20,20 @@ const getValidateNickname = async (
   };
 };
 
-const useGetValidateNickName = (nickName: string) => {
+const useGetValidateNickName = (nickname: string) => {
   const { data, isLoading } = useQuery({
-    queryKey: [USER.validateNickname, nickName],
-    queryFn: () => getValidateNickname(nickName),
-    enabled: nickName.trim() !== '',
+    queryKey: [USER.validateNickname, nickname],
+    queryFn: () => getValidateNickname(nickname),
+    enabled: nickname.trim() !== '',
   });
 
   const hasData = !!data;
 
-  const validInfo = hasData
+  const validResult = hasData
     ? { isValid: data.isValid, message: data.message }
     : { isValid: false, message: '' };
 
-  return { isLoading, ...validInfo };
+  return { isLoading, ...validResult };
 };
 
 export default useGetValidateNickName;

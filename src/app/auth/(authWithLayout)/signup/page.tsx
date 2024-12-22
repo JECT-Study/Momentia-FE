@@ -11,8 +11,8 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
 export default function SignUpPage() {
-  const { mutate } = usePostSignUp();
-  const methods = useForm<SignUpFormType>({
+  const { mutate: signUpMutate } = usePostSignUp();
+  const formHandlerMethods = useForm<SignUpFormType>({
     defaultValues: {
       email: '',
       password: '',
@@ -21,18 +21,18 @@ export default function SignUpPage() {
     mode: 'onChange',
   });
 
-  const onValidForm = (data: SignUpFormType) => {
-    mutate(data);
+  const onValidForm = (formData: SignUpFormType) => {
+    signUpMutate(formData);
   };
 
-  const { isValid } = methods.formState;
+  const { isValid: isFormDataValid } = formHandlerMethods.formState;
 
   return (
     <div className='flex flex-col justify-center items-center gap-[60px]'>
       <h4>회원가입</h4>
-      <FormProvider {...methods}>
+      <FormProvider {...formHandlerMethods}>
         <form
-          onSubmit={methods.handleSubmit(onValidForm)}
+          onSubmit={formHandlerMethods.handleSubmit(onValidForm)}
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
@@ -42,8 +42,8 @@ export default function SignUpPage() {
           </div>
           <SquareButtonL
             type='submit'
-            backgroundColor={isValid ? 'bg-main' : 'bg-gray-800'}
-            disabled={!isValid}
+            backgroundColor={isFormDataValid ? 'bg-main' : 'bg-gray-800'}
+            disabled={!isFormDataValid}
           >
             <p>회원가입</p>
           </SquareButtonL>

@@ -8,14 +8,14 @@ interface LoginFormType {
   password: string;
 }
 
-interface DefaultAuthType {
+interface AuthTokenType {
   accessToken: string;
   refreshToken: string;
 }
 
 interface SocialLoginAuthType {
   isRegistered: boolean;
-  token: DefaultAuthType;
+  token: AuthTokenType;
 }
 
 interface SignUpFormType {
