@@ -29,10 +29,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
   const password = watch('password');
 
   const isPasswordInvalid = (password: string) =>
-    password !== '' &&
-    !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/.test(
-      password,
-    );
+    password !== '' && PASSWORD_REGEX.test(password);
 
   useEffect(() => {
     if (mode !== 'sign-up') return;
