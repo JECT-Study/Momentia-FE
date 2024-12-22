@@ -1,6 +1,7 @@
 'use client';
 
 import usePostSignUp from '@/apis/user/signUp';
+
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import EmailInput from '@/components/Input/EmailInput';
 import NicknameInput from '@/components/Input/NicknameInput';
