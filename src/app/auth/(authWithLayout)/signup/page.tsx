@@ -42,7 +42,6 @@ export default function SignUpPage() {
           </div>
           <SquareButtonL
             type='submit'
-            textSize={''}
             backgroundColor={isValid ? 'bg-main' : 'bg-gray-800'}
             disabled={!isValid}
           >

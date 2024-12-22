@@ -44,7 +44,6 @@ export default function LogInPage() {
           </div>
           <SquareButtonL
             type='submit'
-            textSize={''}
             backgroundColor={allFieldsFilled ? 'bg-main' : 'bg-gray-800'}
           >
             <p>로그인</p>

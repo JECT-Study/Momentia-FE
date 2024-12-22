@@ -3,7 +3,7 @@ import { SquareButtonLProps } from '@/types';
 const SquareButtonL = ({
   backgroundColor = 'bg-gray-800',
   textColor = 'text-white',
-  textSize,
+  textSize = 'body1',
   children,
 
   onClick,
