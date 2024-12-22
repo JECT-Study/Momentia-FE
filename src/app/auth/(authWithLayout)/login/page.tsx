@@ -21,7 +21,6 @@ export default function LogInPage() {
   });
 
   const onValid = (data: LoginFormType) => {
-    console.log(data);
     mutate(data);
   };
 
