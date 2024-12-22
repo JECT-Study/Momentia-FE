@@ -5,7 +5,7 @@ import GoogleLogo from '@/../public/images/google.svg';
 import KakaoLogo from '@/../public/images/kakako.svg';
 
 const SocialLoginSection = () => {
-  const handleKakaoLogin = async () => {
+  const handleKakaoLogin = () => {
     window.Kakao.Auth.authorize({
       redirectUri: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_PATH}`,
     });
