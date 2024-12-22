@@ -23,5 +23,3 @@ interface SignUpFormType {
   password: string;
   nickname: string;
 }
-
-type SocialLoginType = 'google' | 'kakao';
