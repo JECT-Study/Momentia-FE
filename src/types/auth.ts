@@ -18,8 +18,6 @@ interface SocialSignInAuthType {
   token: AuthTokenType;
 }
 
-interface SignUpFormType {
-  email: string;
-  password: string;
+interface SignUpFormType extends SignInFormType {
   nickname: string;
 }
