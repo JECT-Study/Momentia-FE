@@ -2,15 +2,10 @@ import { ReactNode } from 'react';
 
 interface SocialSignInButtonProps {
   children: ReactNode;
-  label: string;
   onClick: () => void;
 }
 
-const SocialSignInButton = ({
-  children,
-  label,
-  onClick,
-}: SocialSignInButtonProps) => {
+const SocialSignInButton = ({ children, onClick }: SocialSignInButtonProps) => {
   return (
     <button
       type='button'
@@ -18,7 +13,6 @@ const SocialSignInButton = ({
       onClick={onClick}
     >
       {children}
-      <p>{label}</p>
     </button>
   );
 };

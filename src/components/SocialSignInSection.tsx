@@ -29,12 +29,10 @@ const SocialSignInSection = () => {
       <div className='flex gap-20 justify-center'>
         <SocialSignInButton
           children={<Image src={KakaoLogo} alt='kakao logo' />}
-          label='카카오'
           onClick={handleKakaoSignIn}
         />
         <SocialSignInButton
           children={<Image src={GoogleLogo} alt='kakao logo' />}
-          label='구글'
           onClick={handleGoogleSignIn}
         />
       </div>
