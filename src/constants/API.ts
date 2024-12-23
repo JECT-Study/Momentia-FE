@@ -1,7 +1,7 @@
 const USER = {
-  login: '/user/login/normal',
-  signup: '/user/register',
-  socialLogin: '/user/login/social',
+  signIn: '/user/login/normal',
+  signUp: '/user/register',
+  socialsignIn: '/user/login/social',
   validateEmail: '/user/validation/email',
   validateNickname: '/user/validation/nickname',
 };

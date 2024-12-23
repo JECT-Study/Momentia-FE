@@ -2,29 +2,29 @@ import { USER } from '@/constants/API';
 import { useQuery } from '@tanstack/react-query';
 import defaultClient from '..';
 
-const getSocialLogin = async (queryUrl: string) => {
+const getSocialSignIn = async (queryUrl: string) => {
   const { data } =
-    await defaultClient.get<ResponseRootType<SocialLoginAuthType>>(queryUrl);
+    await defaultClient.get<ResponseRootType<SocialSignInAuthType>>(queryUrl);
 
   return data;
 };
 
-const useGetSocialLogin = ({
+const useGetSocialSignIn = ({
   provider,
   params,
 }: {
   provider: string;
   params: string;
 }) => {
-  const queryUrl = `${USER.socialLogin}/${provider}?${params}`;
+  const queryUrl = `${USER.socialsignIn}/${provider}?${params}`;
   const { data, isLoading } = useQuery({
-    queryKey: [`${USER.socialLogin}/${provider}`],
-    queryFn: () => getSocialLogin(queryUrl),
+    queryKey: [`${USER.socialsignIn}/${provider}`],
+    queryFn: () => getSocialSignIn(queryUrl),
   });
 
   const hasData = !!data;
 
-  const authorizedResponse: SocialLoginAuthType = hasData
+  const authorizedResponse: SocialSignInAuthType = hasData
     ? data.value
     : {
         isRegistered: false,
@@ -37,4 +37,4 @@ const useGetSocialLogin = ({
   return { hasData, authorizedResponse, isLoading };
 };
 
-export default useGetSocialLogin;
+export default useGetSocialSignIn;

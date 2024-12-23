@@ -1,27 +1,27 @@
 'use client';
 
-import usePostLogin from '@/apis/user/login';
+import usePostSignIn from '@/apis/user/signIn';
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import EmailInput from '@/components/Input/EmailInput';
 import PasswordInput from '@/components/Input/PasswordInput';
-import SocialLoginSection from '@/components/SocialLoginSection';
+import SocialSignInSection from '@/components/SocialSignInSection';
 
 import Link from 'next/link';
 
 import { FormProvider, useForm } from 'react-hook-form';
 
-export default function LogInPage() {
-  const { mutate } = usePostLogin();
+export default function SignInPage() {
+  const { mutate: mutateSignIn } = usePostSignIn();
 
-  const methods = useForm<LoginFormType>({
+  const methods = useForm<SignInFormType>({
     defaultValues: {
       email: '',
       password: '',
     },
   });
 
-  const onValid = (data: LoginFormType) => {
-    mutate(data);
+  const onValid = (signInData: SignInFormType) => {
+    mutateSignIn(signInData);
   };
 
   const allFieldsFilled = Object.values(methods.watch()).every(
@@ -34,7 +34,7 @@ export default function LogInPage() {
 
       <FormProvider {...methods}>
         <form
-          name='login-form'
+          name='signin-form'
           onSubmit={methods.handleSubmit(onValid)}
           className='w-full flex flex-col gap-[60px]'
         >
@@ -51,7 +51,7 @@ export default function LogInPage() {
         </form>
       </FormProvider>
       <div className='w-full flex flex-col gap-[30px] justify-center text-center'>
-        <SocialLoginSection />
+        <SocialSignInSection />
         <div className='flex gap-2.5 justify-center items-center mt-[13px]'>
           <p className='text-gray-600'>아직 회원이 아니신가요?</p>
           <Link href='/auth/signup'>회원가입하기</Link>

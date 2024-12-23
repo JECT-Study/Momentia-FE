@@ -52,7 +52,7 @@ export default function SignUpPage() {
 
       <div className='flex gap-2.5 justify-center items-center mt-[13px]'>
         <p className='text-gray-600'>이미 가입된 계정이 있으신가요?</p>
-        <Link href='/auth/login'>로그인하러가기</Link>
+        <Link href='/auth/signin'>로그인하러가기</Link>
       </div>
     </div>
   );

@@ -5,23 +5,23 @@ import { useRouter } from 'next/navigation';
 
 import defaultClient from '..';
 
-const postLogin = async (formData: LoginFormType) => {
-  const { data } = await defaultClient.post<ResponseRootType<DefaultAuthType>>(
-    USER.login,
+const postSignIn = async (formData: SignInFormType) => {
+  const { data } = await defaultClient.post<ResponseRootType<AuthTokenType>>(
+    USER.signIn,
     formData,
   );
 
   return data;
 };
 
-const usePostLogin = () => {
+const usePostSignIn = () => {
   const router = useRouter();
 
   return useMutation({
-    mutationKey: [USER.login],
-    mutationFn: (formData: LoginFormType) => postLogin(formData),
+    mutationKey: [USER.signIn],
+    mutationFn: (formData: SignInFormType) => postSignIn(formData),
     onSuccess: () => router.push('/'),
   });
 };
 
-export default usePostLogin;
+export default usePostSignIn;

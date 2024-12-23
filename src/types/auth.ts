@@ -3,7 +3,7 @@ interface ValidateResponse {
   message: string;
 }
 
-interface LoginFormType {
+interface SignInFormType {
   email: string;
   password: string;
 }
@@ -13,7 +13,7 @@ interface AuthTokenType {
   refreshToken: string;
 }
 
-interface SocialLoginAuthType {
+interface SocialSignInAuthType {
   isRegistered: boolean;
   token: AuthTokenType;
 }

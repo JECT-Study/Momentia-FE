@@ -1,16 +1,16 @@
 import { ReactNode } from 'react';
 
-interface SocialLoginButtonProps {
+interface SocialSignInButtonProps {
   children: ReactNode;
   label: string;
   onClick: () => void;
 }
 
-const SocialLoginButton = ({
+const SocialSignInButton = ({
   children,
   label,
   onClick,
-}: SocialLoginButtonProps) => {
+}: SocialSignInButtonProps) => {
   return (
     <button
       type='button'
@@ -23,4 +23,4 @@ const SocialLoginButton = ({
   );
 };
 
-export default SocialLoginButton;
+export default SocialSignInButton;

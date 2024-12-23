@@ -1,6 +1,6 @@
 'use client';
 
-import useGetSocialLogin from '@/apis/user/socialLogIn';
+import useGetSocialSignIn from '@/apis/user/socialSignIn';
 
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -12,7 +12,7 @@ interface RedirectPageProps {
 function RedirectPage({ provider }: RedirectPageProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { hasData, isLoading } = useGetSocialLogin({
+  const { hasData, isLoading } = useGetSocialSignIn({
     provider,
     params: searchParams.toString(),
   });
