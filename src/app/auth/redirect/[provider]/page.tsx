@@ -19,7 +19,7 @@ function RedirectPage({ provider }: RedirectPageProps) {
 
   useEffect(() => {
     if (hasData) router.replace('/');
-  }, [hasData, isLoading]);
+  }, [hasData]);
 
   return <></>;
 }
