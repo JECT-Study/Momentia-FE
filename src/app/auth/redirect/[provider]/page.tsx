@@ -2,18 +2,16 @@
 
 import useGetSocialSignIn from '@/apis/user/socialSignIn';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface RedirectPageProps {
-  provider: string;
-}
-
-const RedirectPage = ({ provider }: RedirectPageProps) => {
+const RedirectPage = () => {
   const router = useRouter();
+  const params = useParams();
   const searchParams = useSearchParams();
+
   const { hasData, isLoading } = useGetSocialSignIn({
-    provider,
+    provider: (params.provider as string) || '',
     params: searchParams.toString(),
   });
 
