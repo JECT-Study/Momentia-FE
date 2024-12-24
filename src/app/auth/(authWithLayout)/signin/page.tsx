@@ -1,6 +1,6 @@
 'use client';
 
-import usePostSignIn from '@/apis/user/signIn';
+import usePostSignIn from '@/apis/auth/signIn';
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import EmailInput from '@/components/Input/EmailInput';
 import PasswordInput from '@/components/Input/PasswordInput';

@@ -4,13 +4,18 @@ import Script from 'next/script';
 
 declare global {
   interface Window {
-    Kakao: any;
+    Kakao: {
+      init: (arg: string) => void;
+      Auth: {
+        authorize: (arg: { redirectUri: string }) => void;
+      };
+    };
   }
 }
 
 const KakaoProvider = () => {
   const initKakao = () => {
-    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY as string);
   };
 
   return (

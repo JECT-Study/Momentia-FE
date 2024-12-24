@@ -4,7 +4,7 @@ import { Input } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import useGetValidateNickName from '@/apis/user/validateNickname';
+import useGetValidateNickName from '@/apis/auth/validateNickname';
 import Icon from '../Icon/Icon';
 
 const NicknameInput = () => {

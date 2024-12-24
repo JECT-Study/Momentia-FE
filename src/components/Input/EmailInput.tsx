@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import { useFormContext } from 'react-hook-form';
 
-import useGetValidateEmail from '@/apis/user/validateEmail';
+import useGetValidateEmail from '@/apis/auth/validateEmail';
 import Icon from '../Icon/Icon';
 
 const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;

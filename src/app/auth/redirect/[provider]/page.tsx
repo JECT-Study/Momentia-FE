@@ -1,6 +1,6 @@
 'use client';
 
-import useGetSocialSignIn from '@/apis/user/socialSignIn';
+import useGetSocialSignIn from '@/apis/auth/socialSignIn';
 
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
