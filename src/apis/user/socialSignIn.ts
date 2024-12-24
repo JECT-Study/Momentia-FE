@@ -3,8 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import defaultClient from '..';
 
 const getSocialSignIn = async (queryUrl: string) => {
-  const { data } =
-    await defaultClient.get<ResponseRootType<SocialSignInAuthType>>(queryUrl);
+  const { data } = await defaultClient.get<SocialSignInAuthType>(queryUrl);
 
   return data;
 };
@@ -26,7 +25,7 @@ const useGetSocialSignIn = ({
   const hasData = !!data;
 
   const authorizedResponse: SocialSignInAuthType = hasData
-    ? data.value
+    ? data
     : {
         isRegistered: false,
         token: {
