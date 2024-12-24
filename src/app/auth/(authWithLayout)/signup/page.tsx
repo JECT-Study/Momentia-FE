@@ -10,7 +10,7 @@ import PasswordInput from '@/components/Input/PasswordInput';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 
-export default function SignUpPage() {
+const SignUpPage = () => {
   const { mutate: signUpMutate } = usePostSignUp();
   const formHandlerMethods = useForm<SignUpFormType>({
     defaultValues: {
@@ -56,4 +56,6 @@ export default function SignUpPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SignUpPage;

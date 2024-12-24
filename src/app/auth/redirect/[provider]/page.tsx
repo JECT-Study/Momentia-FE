@@ -9,7 +9,7 @@ interface RedirectPageProps {
   provider: string;
 }
 
-function RedirectPage({ provider }: RedirectPageProps) {
+const RedirectPage = ({ provider }: RedirectPageProps) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { hasData, isLoading } = useGetSocialSignIn({
@@ -22,6 +22,6 @@ function RedirectPage({ provider }: RedirectPageProps) {
   }, [hasData]);
 
   return <></>;
-}
+};
 
 export default RedirectPage;

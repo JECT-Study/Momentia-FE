@@ -8,7 +8,7 @@ declare global {
   }
 }
 
-export default function KakaoProvider() {
+const KakaoProvider = () => {
   const initKakao = () => {
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_API_KEY);
   };
@@ -21,4 +21,6 @@ export default function KakaoProvider() {
       onLoad={initKakao}
     />
   );
-}
+};
+
+export default KakaoProvider;
