@@ -34,7 +34,7 @@ export const handlers = [
     );
   }),
 
-  http.get(`${USER.socialsignIn}/:provider`, () => {
+  http.get(`${USER.socialSignIn}/:provider`, () => {
     return HttpResponse.json(
       {
         isRegistered: true,

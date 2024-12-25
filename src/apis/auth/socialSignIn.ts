@@ -15,10 +15,10 @@ const useGetSocialSignIn = ({
   provider: string;
   params: string;
 }) => {
-  const socialSignInUrl = `${USER.socialsignIn}/${provider}?${params}`;
+  const socialSignInUrl = `${USER.socialSignIn}/${provider}?${params}`;
 
   const { data, isLoading } = useQuery({
-    queryKey: [`${USER.socialsignIn}/${provider}`],
+    queryKey: [`${USER.socialSignIn}/${provider}`],
     queryFn: () => getSocialSignIn(socialSignInUrl),
   });
 
