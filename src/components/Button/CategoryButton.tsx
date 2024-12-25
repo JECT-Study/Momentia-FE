@@ -1,8 +1,6 @@
 import { CategoryButtonProps } from '@/types';
 
-import { FC } from 'react';
-
-const CategoryButton: FC<CategoryButtonProps> = ({
+const CategoryButton = ({
   backgroundColor = 'bg-gray-800',
   textColor = 'text-gray-300',
   textSize,
@@ -10,7 +8,7 @@ const CategoryButton: FC<CategoryButtonProps> = ({
 
   onClick,
   ariaLabel,
-}) => {
+}: CategoryButtonProps) => {
   return (
     <button
       onClick={onClick}

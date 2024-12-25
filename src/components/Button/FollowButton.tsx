@@ -1,19 +1,19 @@
 'use client';
 
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
 import Icon from '../Icon/Icon';
 
-const FollowButton: FC<FollowButtonProps> = ({
+const FollowButton = ({
   backgroundColor = 'bg-gray-900',
   textColor = 'text-white',
   textSize = 'button-s',
 
   onClick,
   ariaLabel,
-}) => {
+}: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
   const toggleFollow = () => {

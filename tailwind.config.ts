@@ -39,7 +39,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-geist-sans)'],
+        sans: ['var(--font-montserrat)'],
       },
       colors,
       spacing: {

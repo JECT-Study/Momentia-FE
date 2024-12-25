@@ -1,9 +1,12 @@
-import { FC } from 'react';
+import { ReactNode } from 'react';
 
-const Close: FC<{ className?: string; onClick?: () => void }> = ({
+const Close = ({
   className,
   onClick,
-}) => {
+}: {
+  className?: string;
+  onClick?: () => void;
+}): ReactNode => {
   return (
     <svg
       className={className}

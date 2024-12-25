@@ -33,7 +33,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
 
   const clearEmailField = () => resetField('email');
 
-  const checkEmailStatus = () => {
+  const validateEmail = () => {
     if (isLoading) {
       setValidationMessage('이메일 검증 중...');
       setValidationMessageColor('text-gray-400');
@@ -56,7 +56,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
       setValidationMessage('올바른 이메일 형식으로 입력해주세요.');
       setValidationMessageColor('text-system-error');
     } else if (email) {
-      checkEmailStatus();
+      validateEmail();
     } else {
       setValidationMessage('');
     }

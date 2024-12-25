@@ -1,8 +1,6 @@
 import { SquareButtonLProps } from '@/types';
 
-import { FC } from 'react';
-
-const SquareButtonL: FC<SquareButtonLProps> = ({
+const SquareButtonL = ({
   backgroundColor = 'bg-gray-800',
   textColor = 'text-white',
   textSize,
@@ -15,7 +13,7 @@ const SquareButtonL: FC<SquareButtonLProps> = ({
   icon,
   iconPosition,
   type = 'button',
-}) => {
+}: SquareButtonLProps) => {
   return (
     <button
       type={type}

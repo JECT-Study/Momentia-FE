@@ -16,37 +16,39 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className='fixed top-0 w-full flex items-center bg-black text-white px-14 py-5 h-[60px] z-50'>
-        <div className='absolute left-14'>
-          <Link href='/'>
-            <Image src={logo} alt='모멘티아 로고' width={45} priority />
-          </Link>
-        </div>
-
-        <div className='hidden lg:flex justify-center w-full'>
-          <ul className='button-m flex gap-20 text-gray-100'>
-            <li className='hover:text-gray-300 cursor-pointer'>작품</li>
-            <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
-            <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
-          </ul>
-        </div>
-
-        <div className='absolute right-14 flex items-center gap-7'>
-          {/* TODO: 로그인 상태에 따라 Notification 버튼, 로그인/회원가입 버튼 다르게 보이도록 처리 */}
-          <Icon name='Notification' size='l' className='text-white' />
-          <div className='hidden lg:flex items-center gap-7'>
-            <div className='rounded-full bg-white w-8 h-8'></div>
-            <button className='button-m bg-main px-6 py-2 rounded-full text-white'>
-              작품 업로드
-            </button>
-            {/* <button className='button-m text-white' >로그인/회원가입</button> */}
+      <nav className='fixed top-0 w-full bg-black text-white z-50'>
+        <div className='max-w-[1640px] mx-auto flex justify-between items-center px-[32px] lg:px-[140px] py-[29px] h-[90px] lg:h-[60px]'>
+          <div className='flex-shrink-0'>
+            <Link href='/'>
+              <Image src={logo} alt='모멘티아 로고' width={45} priority />
+            </Link>
           </div>
-          <Icon
-            name='Menu'
-            size='l'
-            onClick={toggleMenu}
-            className='lg:hidden text-white focus:outline-none'
-          />
+
+          <div className='hidden lg:flex justify-center w-full'>
+            <ul className='button-m flex gap-20 text-gray-100'>
+              <li className='hover:text-gray-300 cursor-pointer'>작품</li>
+              <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
+              <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
+            </ul>
+          </div>
+
+          <div className='flex items-center gap-7 flex-shrink-0'>
+            {/* TODO: 로그인 상태에 따라 Notification 버튼, 로그인/회원가입 버튼 다르게 보이도록 처리 */}
+            <Icon name='Notification' size='l' className='text-white' />
+            <div className='hidden lg:flex items-center gap-7'>
+              <div className='rounded-full bg-white w-8 h-8 flex-shrink-0'></div>
+              <button className='button-m bg-main px-6 py-2 rounded-full text-white flex-shrink-0'>
+                작품 업로드
+              </button>
+              {/* <button className='button-m text-white' >로그인/회원가입</button> */}
+            </div>
+            <Icon
+              name='Menu'
+              size='l'
+              onClick={toggleMenu}
+              className='lg:hidden text-white focus:outline-none'
+            />
+          </div>
         </div>
       </nav>
 

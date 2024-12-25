@@ -14,6 +14,7 @@ const AppShell = ({ children }: { children: ReactNode }) => {
       <NextUIProvider>
         <NextThemesProvider
           attribute='class'
+          defaultTheme='dark'
           value={{
             dark: 'custom-dark',
           }}

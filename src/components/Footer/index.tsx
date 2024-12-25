@@ -5,14 +5,14 @@ import logo from '../../../public/images/momentiaLogoSymbol.png';
 
 const Footer = () => {
   return (
-    <footer className='bg-black text-white px-14 py-24'>
+    <footer className='bg-black text-white px-[32px] lg:px-[140px] py-24'>
       <Link href='/'>
         <Image src={logo} alt='모멘티아 로고' width={45} priority />
       </Link>
 
       <div className='flex flex-wrap wrap-reverse items-center mt-10'>
         <div className='w-full'>
-          <p className='body1 mb-2 text-gray-300'>
+          <p className='font-sans body1 mb-2 text-gray-300'>
             Exhibitions, for Artists' Moments
           </p>
           <div className='flex flex-col justify-between md:flex-row'>

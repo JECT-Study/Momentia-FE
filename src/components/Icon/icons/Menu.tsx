@@ -1,8 +1,9 @@
-import { FC } from 'react';
-
-const Menu: FC<{ className?: string; onClick?: () => void }> = ({
+const Menu = ({
   className,
   onClick,
+}: {
+  className?: string;
+  onClick?: () => void;
 }) => {
   return (
     <svg
