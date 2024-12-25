@@ -1,4 +1,4 @@
-interface ArtWorkInfoType {
+interface ArtworkInfoType {
   postId: number;
   title: string;
   postImage: string;

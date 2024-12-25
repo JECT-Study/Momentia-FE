@@ -9,12 +9,12 @@ import Heart from '../Icon/icons/Heart';
 import HeartFilled from '../Icon/icons/HeartFilled';
 import Message from '../Icon/icons/Message';
 
-interface ArtWorkCardProps {
+interface ArtworkCardProps {
   rank?: number;
-  artworkInfo: ArtWorkInfoType;
+  artworkInfo: ArtworkInfoType;
 }
 
-const ArtWorkCard = ({ rank = -1, artworkInfo }: ArtWorkCardProps) => {
+const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
   const {
     postId,
     title,
@@ -84,4 +84,4 @@ const ArtWorkCard = ({ rank = -1, artworkInfo }: ArtWorkCardProps) => {
   );
 };
 
-export default ArtWorkCard;
+export default ArtworkCard;
