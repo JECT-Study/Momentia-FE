@@ -4,60 +4,82 @@ import { Input } from '@nextui-org/react';
 
 import { useEffect, useState } from 'react';
 
+import { useFormContext } from 'react-hook-form';
+
+import useGetValidateEmail from '@/apis/user/validateEmail';
 import Icon from '../Icon/Icon';
+
+const EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
 
 interface EmailInputProps {
   mode: 'sign-up' | 'sign-in';
 }
 
 const EmailInput = ({ mode }: EmailInputProps) => {
-  const [email, setEmail] = useState('');
   const [validationMessage, setValidationMessage] = useState('');
   const [validationMessageColor, setValidationMessageColor] = useState('');
+  const {
+    register,
+    resetField,
+    watch,
+    formState: { errors },
+  } = useFormContext();
 
-  const isEmailInvalid = (email: string) =>
-    email !== '' && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  const email = watch('email');
 
-  const clearEmailField = () => {
-    setEmail('');
-  };
+  const { isValid, message, isLoading } = useGetValidateEmail(email, mode);
 
-  const validateEmail = (email: string) => {
-    // TODO: 이메일 상태 확인 (API 호출 로직 추가)
-    if (mode === 'sign-in') {
-      if (email === 'used@example.com') {
-        setValidationMessage('');
-      } else {
-        setValidationMessage('가입되어 있지 않은 이메일입니다.');
-        setValidationMessageColor('text-system-error');
-      }
+  const isEmailInvalid = () => !EMAIL_REGEX.test(email);
+
+  const clearEmailField = () => resetField('email');
+
+  const validateEmail = () => {
+    if (isLoading) {
+      setValidationMessage('이메일 검증 중...');
+      setValidationMessageColor('text-gray-400');
+    } else if (!isValid) {
+      setValidationMessage(message || '이미 가입된 이메일입니다.');
+      setValidationMessageColor('text-system-error');
+    } else {
+      setValidationMessage('가입되어 있지 않은 이메일입니다.');
+      setValidationMessageColor('text-system-error');
     }
   };
 
   useEffect(() => {
-    if (isEmailInvalid(email)) {
+    if (mode !== 'sign-up') return;
+
+    if (email === '') {
+      setValidationMessage('');
+      setValidationMessageColor('');
+    } else if (isEmailInvalid()) {
       setValidationMessage('올바른 이메일 형식으로 입력해주세요.');
       setValidationMessageColor('text-system-error');
     } else if (email) {
-      validateEmail(email);
+      validateEmail();
     } else {
       setValidationMessage('');
     }
   }, [email]);
 
+  useEffect(() => {
+    if (errors.email) {
+      setValidationMessage(errors.email?.message as string);
+      setValidationMessageColor('text-system-error');
+    }
+  }, [errors]);
+
   return (
-    <>
+    <div>
       <Input
+        {...register('email', { required: true, pattern: EMAIL_REGEX })}
         type='email'
         label='이메일'
         labelPlacement='outside'
         placeholder='이메일을 입력해주세요.'
-        value={email}
-        onValueChange={(newEmail) => setEmail(newEmail)}
         isInvalid={false}
-        className='w-78.25'
         classNames={{
-          label: 'custom-label',
+          label: 'custom-label text-gray-400',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
@@ -84,7 +106,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
           </p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

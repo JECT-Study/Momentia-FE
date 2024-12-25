@@ -4,13 +4,29 @@ import { Input } from '@nextui-org/react';
 
 import { useEffect, useState } from 'react';
 
+import { useFormContext } from 'react-hook-form';
+
 import Icon from '../Icon/Icon';
 
-const PasswordInput = () => {
-  const [password, setPassword] = useState('');
+const PASSWORD_REGEX =
+  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/;
+
+interface PasswordnputProps {
+  mode: 'sign-up' | 'sign-in';
+}
+
+const PasswordInput = ({ mode }: PasswordnputProps) => {
   const [validationMessage, setValidationMessage] = useState('');
   const [validationMessageColor, setValidationMessageColor] = useState('');
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext();
+
+  const password = watch('password');
 
   const isPasswordInvalid = (password: string) =>
     password !== '' &&
@@ -19,6 +35,8 @@ const PasswordInput = () => {
     );
 
   useEffect(() => {
+    if (mode !== 'sign-up') return;
+
     if (isPasswordInvalid(password)) {
       setValidationMessage(
         '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
@@ -32,21 +50,29 @@ const PasswordInput = () => {
     }
   }, [password]);
 
+  useEffect(() => {
+    if (errors.password) {
+      setValidationMessage(errors.password?.message as string);
+      setValidationMessageColor('text-system-error');
+    }
+  }, [errors]);
+
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
 
   return (
-    <>
+    <div>
       <Input
+        {...register('password', {
+          required: true,
+          pattern: PASSWORD_REGEX,
+        })}
         type={isPasswordVisible ? 'text' : 'password'}
         label='비밀번호'
         labelPlacement='outside'
         placeholder='비밀번호를 입력해주세요.'
-        value={password}
-        onValueChange={(newPassword) => setPassword(newPassword)}
-        className='w-78.25'
         classNames={{
-          label: 'custom-label',
+          label: 'custom-label text-gray-400',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
@@ -94,7 +120,7 @@ const PasswordInput = () => {
           </p>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

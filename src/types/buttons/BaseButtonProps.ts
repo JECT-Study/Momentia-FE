@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 export interface BaseButtonProps {
-  backgroundColor: string;
-  textColor: string;
+  backgroundColor?: string;
+  textColor?: string;
   textSize: string;
   children: ReactNode;
 
