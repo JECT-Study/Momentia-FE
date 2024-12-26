@@ -1,45 +1,20 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-import { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import useGetValidateNickName from '@/apis/auth/validateNickname';
 import Icon from '../Icon/Icon';
 
+const MAX_NICKNAME_LENGTH = 10;
+
 const NicknameInput = () => {
-  const [validationMessage, setValidationMessage] = useState('');
-  const [validationMessageColor, setValidationMessageColor] = useState('');
-  const { register, watch } = useFormContext();
+  const {
+    register,
+    watch,
+    formState: { errors, isValidating },
+  } = useFormContext();
 
   const nickname = watch('nickname');
-
-  const { isValid, message, isLoading } = useGetValidateNickName(nickname);
-
-  const MAX_NICKNAME_LENGTH = 10;
-
-  const isNicknameInvalid = (nickname: string) =>
-    (nickname !== '' && !/^[\u3131-\u318E가-힣A-Za-z0-9]+$/.test(nickname)) ||
-    nickname.length > MAX_NICKNAME_LENGTH;
-
-  useEffect(() => {
-    if (nickname === '') {
-      setValidationMessage('');
-      setValidationMessageColor('');
-    } else if (isNicknameInvalid(nickname)) {
-      setValidationMessage('사용할 수 없는 문자 또는 길이를 초과했습니다.');
-      setValidationMessageColor('text-system-error');
-    } else if (isLoading) {
-      setValidationMessage('닉네임 검증 중...');
-      setValidationMessageColor('text-gray-400');
-    } else if (!isValid) {
-      setValidationMessage(message || '중복된 닉네임이 존재합니다.');
-      setValidationMessageColor('text-system-error');
-    } else {
-      setValidationMessage('사용 가능한 닉네임입니다.');
-      setValidationMessageColor('text-system-success');
-    }
-  }, [nickname, isLoading, isValid, message]);
 
   const currentNicknameLength = nickname.length;
   const nicknameLengthColor =
@@ -52,7 +27,7 @@ const NicknameInput = () => {
   return (
     <div>
       <Input
-        {...register('nickname', { required: true })}
+        {...register('nickname')}
         type='text'
         label='닉네임'
         labelPlacement='outside'
@@ -74,27 +49,34 @@ const NicknameInput = () => {
           </div>
         }
       />
-
-      {validationMessage && (
-        <div className='flex items-center mt-2'>
-          {validationMessageColor === 'text-system-success' ? (
+      <div className='flex items-center mt-2'>
+        {errors.nickname ? (
+          <>
             <Icon
               name='CheckCircleFilled'
               size='s'
-              className='text-system-success mr-1'
-            />
-          ) : (
-            <Icon
-              name='AlertCircle'
-              size='s'
               className='text-system-error mr-2'
             />
-          )}
-          <p className={`button-s ${validationMessageColor}`}>
-            {validationMessage}
-          </p>
-        </div>
-      )}
+            <p className='button-s text-system-error'>
+              {errors.nickname.message as string}
+            </p>
+          </>
+        ) : (
+          !!nickname &&
+          !isValidating && (
+            <>
+              <Icon
+                name='AlertCircle'
+                size='s'
+                className='text-system-success mr-2'
+              />
+              <p className='button-s text-system-success'>
+                사용가능한 닉네임입니다.
+              </p>
+            </>
+          )
+        )}
+      </div>
     </div>
   );
 };
