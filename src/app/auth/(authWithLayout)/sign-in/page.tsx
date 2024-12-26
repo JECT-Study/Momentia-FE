@@ -8,7 +8,18 @@ import SocialSignInSection from '@/components/SocialSignInSection';
 
 import Link from 'next/link';
 
+import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
+import { object, string } from 'zod';
+
+const signInValidationSchema = object({
+  email: string({
+    required_error: '이메일은 필수입니다.',
+  }),
+  password: string({
+    required_error: '비밀번호는 필수입니다.',
+  }),
+});
 
 export default function SignInPage() {
   const { mutate: mutateSignIn } = usePostSignIn();
@@ -18,6 +29,7 @@ export default function SignInPage() {
       email: '',
       password: '',
     },
+    resolver: zodResolver(signInValidationSchema),
   });
 
   const onValid = (signInData: SignInFormType) => {
