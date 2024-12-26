@@ -54,7 +54,7 @@ export default function SignInPage() {
         <SocialSignInSection />
         <div className='flex gap-2.5 justify-center items-center mt-[13px]'>
           <p className='text-gray-600'>아직 회원이 아니신가요?</p>
-          <Link href='/auth/signup'>회원가입하기</Link>
+          <Link href='/auth/sign-up'>회원가입하기</Link>
         </div>
       </div>
     </div>
