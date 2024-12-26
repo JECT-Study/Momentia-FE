@@ -30,13 +30,13 @@ const FollowButton = ({
       onClick={toggleFollow}
       aria-label={ariaLabel}
       className={`
-        flex items-center justify-center rounded-full
+        button-s flex items-center justify-center rounded-full
         w-[95px] h-[37px] gap-[3px]
         ${backgroundColor} ${textColor} ${textSize}
         ${
           isFollowing
-            ? 'border	border-gray-900 text-gray-900 bg-white'
-            : 'bg-gray-900 text-white'
+            ? 'border	border-gray-300 text-gray-300 bg-transparent'
+            : 'bg-gray-800 text-white'
         }
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
