@@ -19,7 +19,7 @@ const AppShell = ({ children }: { children: ReactNode }) => {
             dark: 'custom-dark',
           }}
         >
-          <div className='h-screen box-border'>
+          <div className='box-border'>
             <Navbar />
             <main className='pt-[60px] min-h-screen h-full'>{children}</main>
             <Footer />
