@@ -4,7 +4,7 @@ interface ArtworkInfoType {
   postImage: string;
   userId: number;
   nickname: string;
-  view: number;
+  viewCount: number;
   likeCount: number;
   commentCount: number;
   isLiked: boolean;
