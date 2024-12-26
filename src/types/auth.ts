@@ -3,25 +3,21 @@ interface ValidateResponse {
   message: string;
 }
 
-interface LoginFormType {
+interface SignInFormType {
   email: string;
   password: string;
 }
 
-interface DefaultAuthType {
+interface AuthTokenType {
   accessToken: string;
   refreshToken: string;
 }
 
-interface SocialLoginAuthType {
+interface SocialSignInAuthType {
   isRegistered: boolean;
-  token: DefaultAuthType;
+  token: AuthTokenType;
 }
 
-interface SignUpFormType {
-  email: string;
-  password: string;
+interface SignUpFormType extends SignInFormType {
   nickname: string;
 }
-
-type SocialLoginType = 'google' | 'kakao';

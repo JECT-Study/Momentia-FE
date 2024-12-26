@@ -14,7 +14,7 @@ export const handlers = [
     });
   }),
 
-  http.post(USER.login, async ({ request }) => {
+  http.post(USER.signIn, async ({ request }) => {
     return HttpResponse.json(
       {
         accessToken: '172fjdhkfjkjh38913',
@@ -24,7 +24,7 @@ export const handlers = [
     );
   }),
 
-  http.post(USER.signup, async ({ request }) => {
+  http.post(USER.signIn, async ({ request }) => {
     return HttpResponse.json(
       {
         accessToken: '172fjdhkfjkjh38913',
@@ -34,7 +34,7 @@ export const handlers = [
     );
   }),
 
-  http.get(`${USER.socialLogin}/:provider`, () => {
+  http.get(`${USER.socialSignIn}/:provider`, () => {
     return HttpResponse.json(
       {
         isRegistered: true,

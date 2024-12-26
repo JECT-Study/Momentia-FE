@@ -1,17 +1,17 @@
 import Image from 'next/image';
-import SocialLoginButton from './Button/SocialLoginButton';
+import SocialSignInButton from './Button/SocialSignInButton';
 
 import GoogleLogo from '@/../public/images/google.svg';
 import KakaoLogo from '@/../public/images/kakako.svg';
 
-const SocialLoginSection = () => {
-  const handleKakaoLogin = async () => {
+const SocialSignInSection = () => {
+  const handleKakaoSignIn = () => {
     window.Kakao.Auth.authorize({
       redirectUri: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_PATH}`,
     });
   };
 
-  const handleGoogleLogin = () => {
+  const handleGoogleSignIn = () => {
     const REDIRECT_URI = process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH;
     const GOOGLE_CLIENT_ID = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
     const GOOGLE_AUTH_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=code&scope=email profile&access_type=offline`;
@@ -27,19 +27,17 @@ const SocialLoginSection = () => {
         <div className='flex-grow h-[1px] bg-gray-600'></div>
       </div>
       <div className='flex gap-20 justify-center'>
-        <SocialLoginButton
+        <SocialSignInButton
           children={<Image src={KakaoLogo} alt='kakao logo' />}
-          label='카카오'
-          onClick={handleKakaoLogin}
+          onClick={handleKakaoSignIn}
         />
-        <SocialLoginButton
+        <SocialSignInButton
           children={<Image src={GoogleLogo} alt='kakao logo' />}
-          label='구글'
-          onClick={handleGoogleLogin}
+          onClick={handleGoogleSignIn}
         />
       </div>
     </>
   );
 };
 
-export default SocialLoginSection;
+export default SocialSignInSection;

@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 export interface BaseButtonProps {
   backgroundColor?: string;
   textColor?: string;
-  textSize: string;
+  textSize?: string;
   children: ReactNode;
 
   onClick?: () => void;

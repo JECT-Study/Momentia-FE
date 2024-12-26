@@ -29,10 +29,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
   const password = watch('password');
 
   const isPasswordInvalid = (password: string) =>
-    password !== '' &&
-    !/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/.test(
-      password,
-    );
+    password !== '' && PASSWORD_REGEX.test(password);
 
   useEffect(() => {
     if (mode !== 'sign-up') return;
@@ -72,7 +69,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
         labelPlacement='outside'
         placeholder='비밀번호를 입력해주세요.'
         classNames={{
-          label: 'custom-label text-gray-400',
+          label: 'custom-label',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}

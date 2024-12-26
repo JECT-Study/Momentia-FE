@@ -1,27 +1,25 @@
 'use client';
 
-import useGetSocialLogin from '@/apis/user/socialLogIn';
+import useGetSocialSignIn from '@/apis/auth/socialSignIn';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-interface ProviderPageProps {
-  provider: string;
-}
-
-function ProviderPage({ provider }: ProviderPageProps) {
+const RedirectPage = () => {
   const router = useRouter();
+  const params = useParams();
   const searchParams = useSearchParams();
-  const { hasData, isLoading } = useGetSocialLogin({
-    provider,
+
+  const { hasData, isLoading } = useGetSocialSignIn({
+    provider: (params.provider as string) || '',
     params: searchParams.toString(),
   });
 
   useEffect(() => {
     if (hasData) router.replace('/');
-  }, [hasData, isLoading]);
+  }, [hasData]);
 
   return <></>;
-}
+};
 
-export default ProviderPage;
+export default RedirectPage;

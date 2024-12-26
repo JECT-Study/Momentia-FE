@@ -1,5 +1,5 @@
-interface ResponseRootType<T> {
+interface ErrorResponseType<T> {
   code: number;
   message: string;
-  value: T;
+  value: T | null;
 }
