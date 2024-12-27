@@ -1,6 +1,7 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
+import { debounce } from 'lodash';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
@@ -11,18 +12,29 @@ interface PasswordnputProps {
 }
 
 const PasswordInput = ({ mode }: PasswordnputProps) => {
+  const [isPasswordValidating, setIsPasswordValidating] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const {
     register,
     watch,
-    formState: { errors, isValidating },
+    setValue,
+    trigger,
+    formState: { errors },
   } = useFormContext();
 
   const password = watch('password');
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
+
+  const handlePasswordInputOnChange = debounce(async (e) => {
+    setValue('password', e.target.value);
+
+    setIsPasswordValidating(true);
+    await trigger('password');
+    setIsPasswordValidating(false);
+  }, 300);
 
   return (
     <div>
@@ -37,6 +49,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
+        onChange={handlePasswordInputOnChange}
         endContent={
           <button
             type='button'
@@ -74,19 +87,29 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
           </>
         ) : (
           mode === 'sign-up' &&
-          !isValidating &&
-          !!password && (
+          (password !== '' && isPasswordValidating ? (
             <>
               <Icon
                 name='AlertCircle'
                 size='s'
-                className='text-system-success mr-2'
+                className='text-gray-400 mr-2'
               />
-              <p className='button-s text-system-success'>
-                사용가능한 비밀번호입니다.
-              </p>
+              <p className='button-s text-gray-400'>패스워드 검증 중...</p>
             </>
-          )
+          ) : (
+            !!password && (
+              <>
+                <Icon
+                  name='AlertCircle'
+                  size='s'
+                  className='text-system-success mr-2'
+                />
+                <p className='button-s text-system-success'>
+                  사용가능한 비밀번호입니다.
+                </p>
+              </>
+            )
+          ))
         )}
       </div>
     </div>

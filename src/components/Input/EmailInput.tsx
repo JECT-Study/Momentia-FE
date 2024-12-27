@@ -1,25 +1,40 @@
 'use client';
 
+import Icon from '../Icon/Icon';
+
 import { Input } from '@nextui-org/react';
 
+import { debounce } from 'lodash';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import Icon from '../Icon/Icon';
 
 interface EmailInputProps {
   mode: 'sign-up' | 'sign-in';
 }
 
 const EmailInput = ({ mode }: EmailInputProps) => {
+  const [isEmailValidating, setIsEmailValidating] = useState(false);
+
   const {
     register,
     resetField,
     watch,
-    formState: { errors, isValidating },
+    setValue,
+    trigger,
+    formState: { errors },
   } = useFormContext();
 
   const email = watch('email');
 
   const clearEmailField = () => resetField('email');
+
+  const handleEmailInputOnChange = debounce(async (e) => {
+    setValue('email', e.target.value);
+
+    setIsEmailValidating(true);
+    await trigger('email');
+    setIsEmailValidating(false);
+  }, 300);
 
   return (
     <div>
@@ -36,6 +51,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
         onClear={clearEmailField}
+        onChange={handleEmailInputOnChange}
       />
 
       <div className='flex items-center mt-2'>
@@ -52,19 +68,29 @@ const EmailInput = ({ mode }: EmailInputProps) => {
           </>
         ) : (
           mode === 'sign-up' &&
-          !isValidating &&
-          !!email && (
+          (email !== '' && isEmailValidating ? (
             <>
               <Icon
                 name='AlertCircle'
                 size='s'
-                className='text-system-success mr-2'
+                className='text-gray-400 mr-2'
               />
-              <p className='button-s text-system-success'>
-                사용가능한 이메일입니다.
-              </p>
+              <p className='button-s text-gray-400'>이메일 검증 중...</p>
             </>
-          )
+          ) : (
+            !!email && (
+              <>
+                <Icon
+                  name='AlertCircle'
+                  size='s'
+                  className='text-system-success mr-2'
+                />
+                <p className='button-s text-system-success'>
+                  사용가능한 이메일입니다.
+                </p>
+              </>
+            )
+          ))
         )}
       </div>
     </div>

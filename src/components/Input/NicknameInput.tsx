@@ -1,17 +1,23 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
+import { debounce } from 'lodash';
 import { useFormContext } from 'react-hook-form';
 
+import { useState } from 'react';
 import Icon from '../Icon/Icon';
 
 const MAX_NICKNAME_LENGTH = 10;
 
 const NicknameInput = () => {
+  const [isNicknameValidating, setIsNicknameValidating] = useState(false);
+
   const {
     register,
     watch,
-    formState: { errors, isValidating },
+    setValue,
+    trigger,
+    formState: { errors },
   } = useFormContext();
 
   const nickname = watch('nickname');
@@ -23,6 +29,14 @@ const NicknameInput = () => {
       : currentNicknameLength > MAX_NICKNAME_LENGTH
         ? 'text-system-error'
         : 'text-white';
+
+  const handleNicknameInputOnChange = debounce(async (e) => {
+    setValue('nickname', e.target.value);
+
+    setIsNicknameValidating(true);
+    await trigger('nickname');
+    setIsNicknameValidating(false);
+  }, 300);
 
   return (
     <div>
@@ -38,6 +52,7 @@ const NicknameInput = () => {
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
+        onChange={handleNicknameInputOnChange}
         endContent={
           <div className='flex items-center'>
             <span className={`placeholder ${nicknameLengthColor}`}>
@@ -61,9 +76,13 @@ const NicknameInput = () => {
               {errors.nickname.message as string}
             </p>
           </>
+        ) : nickname !== '' && isNicknameValidating ? (
+          <>
+            <Icon name='AlertCircle' size='s' className='text-gray-400 mr-2' />
+            <p className='button-s text-gray-400'>이메일 검증 중...</p>
+          </>
         ) : (
-          !!nickname &&
-          !isValidating && (
+          !!nickname && (
             <>
               <Icon
                 name='AlertCircle'
