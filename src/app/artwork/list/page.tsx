@@ -51,20 +51,14 @@ const ArtworkList = () => {
               />
               <div className='gap-[30px]'>
                 <p className='subtitle2 text-white'>작가 닉네임</p>
-                <p className='placeholder text-gray-500'>작업 분야</p>
+                <p className={`placeholder text-gray-500`}>작업 분야</p>
               </div>
               <FollowButton />
             </div>
             <div
-              className='w-full h-[267px] px-[22px] flex 
-              justify-end items-center gap-3.5 justify-self-stretch
-              bg-gray-700 rounded-[10px]'
+              className='w-full h-[267px] flex 
+              justify-end items-center gap-3.5 justify-self-stretch rounded-[10px]'
             >
-              {/* <img
-                src='/images/defaultArtworkImage.png'
-                alt='Artwork'
-                className='w-[200px] h-[267px] flex-shrink-0 rounded-[5px]'
-              /> */}
               {artworkData.map(({ artworkInfo }) => (
                 <ArtworkCard
                   key={artworkInfo.postId}

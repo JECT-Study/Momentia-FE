@@ -32,11 +32,18 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
 
   const modeClasses =
     mode === 'followed-author'
-      ? 'w-[200px] h-[267px] flex-shrink-0 rounded-[5px]'
-      : 'relative min-w-[395px] min-h-[511px]';
+      ? 'w-full max-w-[200px] h-auto aspect-[3/4]'
+      : 'min-w-[395px] min-h-[511px]';
+
+  const artworkInfoClasses =
+    mode === 'followed-author'
+      ? 'gap-[10px] px-[15px] py-[15px]'
+      : 'gap-[34px] px-[42px] py-[27px]';
 
   return (
-    <div className={`overflow-hidden group rounded-[5px] ${modeClasses}`}>
+    <div
+      className={`relative overflow-hidden group rounded-[5px] ${modeClasses}`}
+    >
       {postImage ? (
         <Image
           src={postImage}
@@ -68,29 +75,42 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
       )}
 
       <div
-        className='absolute top-0 left-0 flex flex-col justify-end gap-[34px] w-full h-full 
-          px-[42px] py-[27px] bg-gradient-to-b from-[#00000000] to-[#000000] 
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-5'
+        className={`absolute top-0 left-0 flex flex-col justify-end w-full h-full
+          text-white bg-gradient-to-b from-[#00000000] to-[#000000]
+          opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-5
+          ${artworkInfoClasses}`}
       >
-        <div className='flex flex-col gap-[70px]'></div>
+        {!mode && <div className='flex flex-col gap-[70px]'></div>}
         <p className='subtitle1'>{title}</p>
         <p className='placeholder'>{nickname}</p>
-        <div className='button-s flex gap-6'>
-          <div className='flex gap-2.5 items-center'>
-            <Eye className='w-[18px] h-[18px]' />
-            <p>{viewCount}</p>
+        <div
+          className={`button-s flex
+            ${mode === 'followed-author' ? 'gap-5 items-center' : 'gap-6'}`}
+        >
+          <div className={`flex items-center gap-2.5`}>
+            <Eye
+              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+            />
+            <span>{viewCount}</span>
           </div>
-          <div className='flex gap-2.5 items-center'>
+          <div className={`flex items-center gap-2.5`}>
             {isLiked ? (
-              <HeartFilled className='text-system-error w-[18px] h-[18px]' />
+              <HeartFilled
+                className={`text-system-error
+                  ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+              />
             ) : (
-              <Heart className='w-[18px] h-[18px]' />
+              <Heart
+                className={` ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+              />
             )}
-            <p>{likeCount}</p>
+            <span>{likeCount}</span>
           </div>
-          <div className='flex gap-2.5 items-center'>
-            <Message className='w-[18px] h-[18px]' />
-            <p>{commentCount}</p>
+          <div className={`flex items-center gap-2.5`}>
+            <Message
+              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+            />
+            <span>{commentCount}</span>
           </div>
         </div>
       </div>
