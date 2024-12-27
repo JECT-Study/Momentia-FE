@@ -20,7 +20,7 @@ const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
     title,
     postImage,
     nickname,
-    view,
+    viewCount,
     likeCount,
     commentCount,
     isLiked,
@@ -64,7 +64,7 @@ const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
         <div className='button-s flex gap-6'>
           <div className='flex gap-2.5 items-center'>
             <Eye className='w-[18px] h-[18px]' />
-            <p>{view}</p>
+            <p>{viewCount}</p>
           </div>
           <div className='flex gap-2.5 items-center'>
             {isLiked ? (
