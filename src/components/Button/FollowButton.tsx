@@ -31,7 +31,7 @@ const FollowButton = ({
       aria-label={ariaLabel}
       className={`
         button-s flex items-center justify-center rounded-full
-        w-[95px] h-[37px] gap-[3px]
+        w-[95px] h-[37px] gap-[3px] ml-auto
         ${backgroundColor} ${textColor} ${textSize}
         ${
           isFollowing
