@@ -21,9 +21,7 @@ const NICKNAME_REGEX = /^[\u3131-\u318E가-힣A-Za-z0-9]+$/;
 const MAX_NICKNAME_LENGTH = 10;
 
 const signUpValidationSchema = object({
-  email: string({
-    required_error: '이메일은 필수입니다.',
-  })
+  email: string()
     .min(1, '이메일은 필수입니다.')
     .email('유효하지 않은 이메일 형식입니다.')
     .refine(async (email) => {
