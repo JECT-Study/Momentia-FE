@@ -29,6 +29,7 @@ export default function SignInPage() {
       email: '',
       password: '',
     },
+    mode: 'onChange',
     resolver: zodResolver(signInValidationSchema),
   });
 
