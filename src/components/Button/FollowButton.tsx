@@ -7,7 +7,7 @@ import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
-  backgroundColor = 'bg-gray-900',
+  backgroundColor = 'bg-gray-800',
   textColor = 'text-white',
   textSize = 'button-s',
 
