@@ -24,25 +24,25 @@ const signUpValidationSchema = object({
   email: string({
     required_error: '이메일은 필수입니다.',
   })
+    .min(1, '이메일은 필수입니다.')
     .email('유효하지 않은 이메일 형식입니다.')
     .refine(async (email) => {
       const isDuplicated = await getValidateEmail(email);
-      return !isDuplicated;
+      return isDuplicated;
     }, '이미 가입된 이메일입니다.'),
-  password: string({
-    required_error: '비밀번호는 필수입니다.',
-  }).regex(
-    PASSWORD_REGEX,
-    '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
-  ),
-  nickname: string({
-    required_error: '닉네임은 필수입니다.',
-  })
+  password: string()
+    .min(1, '비밀번호는 필수입니다.')
+    .regex(
+      PASSWORD_REGEX,
+      '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
+    ),
+  nickname: string()
+    .min(1, '닉네임은 필수입니다.')
     .max(MAX_NICKNAME_LENGTH, '최대 닉네임 길이를 초과했습니다.')
     .regex(NICKNAME_REGEX, '한글, 영어, 숫자로 구성된 닉네임을 입력해주세요.')
     .refine(async (nickname) => {
       const isDuplicated = await getValidateNickname(nickname);
-      return !isDuplicated;
+      return isDuplicated;
     }, '이미 사용중인 닉네임입니다.'),
 });
 
