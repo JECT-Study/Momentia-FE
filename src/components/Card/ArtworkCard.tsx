@@ -4,17 +4,19 @@ import Image from 'next/image';
 
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
+
 import Eye from '../Icon/icons/Eye';
 import Heart from '../Icon/icons/Heart';
 import HeartFilled from '../Icon/icons/HeartFilled';
 import Message from '../Icon/icons/Message';
 
 interface ArtworkCardProps {
+  mode?: 'followed-author' | 'artwork-list';
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
 
-const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
+const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
   const {
     postId,
     title,
@@ -26,10 +28,15 @@ const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
     isLiked,
   } = artworkInfo;
 
-  const formattedRank = rank < 10 ? `0${rank}` : rank;
+  const formattedRank = rank && rank < 10 ? `0${rank}` : rank;
+
+  const modeClasses =
+    mode === 'followed-author'
+      ? 'w-[200px] h-[267px] flex-shrink-0 rounded-[5px]'
+      : 'relative min-w-[395px] min-h-[511px]';
 
   return (
-    <div className='relative min-w-[395px] min-h-[511px] rounded-[5px] overflow-hidden group'>
+    <div className={`overflow-hidden group rounded-[5px] ${modeClasses}`}>
       {postImage ? (
         <Image
           src={postImage}
@@ -46,12 +53,19 @@ const ArtworkCard = ({ rank = -1, artworkInfo }: ArtworkCardProps) => {
         />
       )}
 
-      <div className=' absolute top-0 left-[63px] z-10'>
-        <Image src={RankingLabel} alt='ranking-label' width={68} height={97} />
-        <h1 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
-          {formattedRank}
-        </h1>
-      </div>
+      {rank && (
+        <div className='absolute top-0 left-[63px] z-10'>
+          <Image
+            src={RankingLabel}
+            alt='ranking-label'
+            width={68}
+            height={97}
+          />
+          <h1 className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+            {formattedRank}
+          </h1>
+        </div>
+      )}
 
       <div
         className='absolute top-0 left-0 flex flex-col justify-end gap-[34px] w-full h-full 
