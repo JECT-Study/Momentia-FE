@@ -13,18 +13,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
 
 const signInValidationSchema = object({
-  email: string({
-    required_error: '이메일은 필수입니다.',
-  }),
-  password: string({
-    required_error: '비밀번호는 필수입니다.',
-  }),
+  email: string().min(1, '이메일은 필수입니다.'),
+  password: string().min(1, '비밀번호는 필수입니다.'),
 });
 
-export default function SignInPage() {
+const SignInPage = () => {
   const { mutate: mutateSignIn } = usePostSignIn();
 
-  const methods = useForm<SignInFormType>({
+  const formHandlerMethods = useForm<SignInFormType>({
     defaultValues: {
       email: '',
       password: '',
@@ -33,22 +29,20 @@ export default function SignInPage() {
     resolver: zodResolver(signInValidationSchema),
   });
 
-  const onValid = (signInData: SignInFormType) => {
+  const { isValid: isFormDataValid } = formHandlerMethods.formState;
+
+  const onValidForm = (signInData: SignInFormType) => {
     mutateSignIn(signInData);
   };
-
-  const allFieldsFilled = Object.values(methods.watch()).every(
-    (value) => value !== '',
-  );
 
   return (
     <div className='flex flex-col justify-center items-center gap-[60px]'>
       <h4>로그인</h4>
 
-      <FormProvider {...methods}>
+      <FormProvider {...formHandlerMethods}>
         <form
           name='signin-form'
-          onSubmit={methods.handleSubmit(onValid)}
+          onSubmit={formHandlerMethods.handleSubmit(onValidForm)}
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
@@ -57,7 +51,8 @@ export default function SignInPage() {
           </div>
           <SquareButtonL
             type='submit'
-            backgroundColor={allFieldsFilled ? 'bg-main' : 'bg-gray-800'}
+            backgroundColor={isFormDataValid ? 'bg-main' : 'bg-gray-800'}
+            disabled={!isFormDataValid}
           >
             <p>로그인</p>
           </SquareButtonL>
@@ -72,4 +67,6 @@ export default function SignInPage() {
       </div>
     </div>
   );
-}
+};
+
+export default SignInPage;
