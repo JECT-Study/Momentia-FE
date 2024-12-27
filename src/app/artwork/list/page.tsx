@@ -2,8 +2,6 @@ import FollowButton from '@/components/Button/FollowButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
 import Icon from '@/components/Icon/Icon';
 
-// TODO: 작가 닉네임/분야, 팔로우 버튼 간격 띄우기
-
 const ArtworkList = () => {
   const artworkData = [
     {
@@ -43,15 +41,17 @@ const ArtworkList = () => {
         </button>
         <div className='pr-[31px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px]'>
           <div className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px] flex flex-col justify-center items-start gap-[30px]'>
-            <div className='flex items-center gap-[10px]'>
-              <img
-                src='/images/defaultProfileImage.png'
-                alt='Artwork'
-                className='w-[50px] h-[50px] bg-gray-700 rounded-full'
-              />
-              <div className='gap-[30px]'>
-                <p className='subtitle2 text-white'>작가 닉네임</p>
-                <p className={`placeholder text-gray-500`}>작업 분야</p>
+            <div className='flex items-center justify-between w-full'>
+              <div className='flex gap-[30px]'>
+                <img
+                  src='/images/defaultProfileImage.png'
+                  alt='Artwork'
+                  className='w-[50px] h-[50px] bg-gray-700 rounded-full'
+                />
+                <div className='gap-[30px]'>
+                  <p className='subtitle2 text-white'>작가 닉네임</p>
+                  <p className='placeholder text-gray-500'>작업 분야</p>
+                </div>
               </div>
               <FollowButton />
             </div>
