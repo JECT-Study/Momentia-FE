@@ -97,7 +97,7 @@ const ArtworkList = () => {
               </div>
             ))}
 
-            {followedArtistsData.length === 0 && (
+            {!followedArtistsData.length && (
               <div
                 className='grid flex-col col-span-full items-center justify-center
                   h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
