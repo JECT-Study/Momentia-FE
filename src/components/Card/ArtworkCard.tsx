@@ -32,7 +32,7 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
 
   const modeClasses =
     mode === 'followed-author'
-      ? 'w-full max-w-[200px] h-auto aspect-[3/4]'
+      ? 'w-full max-w-[200px] h-[267px]'
       : 'min-w-[395px] min-h-[511px]';
 
   const artworkInfoClasses =
