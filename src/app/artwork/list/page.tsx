@@ -40,35 +40,6 @@ const ArtworkList = () => {
 
   // const artworkListData = artworkList.data;
 
-  // const artworkData = [
-  //   {
-  //     artworkInfo: {
-  //       postId: 1,
-  //       userId: 13,
-  //       title: '아름다운 풍경',
-  //       postImage: '/images/defaultArtworkImage.png',
-  //       nickname: '작가1',
-  //       viewCount: 123,
-  //       likeCount: 45,
-  //       commentCount: 10,
-  //       isLiked: true,
-  //     },
-  //   },
-  //   {
-  //     artworkInfo: {
-  //       postId: 2,
-  //       userId: 13,
-  //       title: '추상적인 예술',
-  //       postImage: '/images/defaultArtworkImage.png',
-  //       nickname: '작가2',
-  //       viewCount: 89,
-  //       likeCount: 23,
-  //       commentCount: 5,
-  //       isLiked: false,
-  //     },
-  //   },
-  // ];
-
   return (
     <div className='px-[36px] lg:px-[140px]'>
       <div className='pt-[70px]'>
