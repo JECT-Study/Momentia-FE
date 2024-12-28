@@ -18,8 +18,6 @@ const ArtworkList = () => {
     error: followedArtistsError,
   } = useFollowedArtists();
 
-  const followedArtistsData = followedArtists.posts;
-
   if (followedArtistsLoading) {
     return <p>팔로우한 작가 데이터 로딩 중...</p>;
   }
@@ -27,6 +25,8 @@ const ArtworkList = () => {
   if (followedArtistsError) {
     return <p>팔로우한 작가 데이터를 가져오는 중, 에러 발생</p>;
   }
+
+  const followedArtistsData = followedArtists.posts;
 
   // const {
   //   data: artworkList,
