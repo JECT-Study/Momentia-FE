@@ -96,6 +96,18 @@ const ArtworkList = () => {
                 </div>
               </div>
             ))}
+
+            {followedArtistsData.length === 0 && (
+              <div
+                className='grid flex-col col-span-full items-center justify-center
+                  h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
+              >
+                <div className='subtitle2 text-gray-500 text-center'>
+                  아직 팔로우한 작가가 없네요! 내 취향에 맞는 작가를 발견하면,
+                  팔로우해 보세요!
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>
