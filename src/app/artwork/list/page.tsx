@@ -4,6 +4,7 @@ import FollowButton from '@/components/Button/FollowButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
 import Icon from '@/components/Icon/Icon';
 
+import { useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
 
 import { useState } from 'react';
@@ -18,27 +19,30 @@ const ArtworkList = () => {
     error: followedArtistsError,
   } = useFollowedArtists();
 
+  const {
+    data: artworkList,
+    isLoading: artworkListLoading,
+    error: artworkListError,
+  } = useArtworkList();
+
   if (followedArtistsLoading) {
     return <p>팔로우한 작가 데이터 로딩 중...</p>;
+  }
+
+  if (artworkListLoading) {
+    return <p>작품 목록 데이터 로딩 중...</p>;
   }
 
   if (followedArtistsError) {
     return <p>팔로우한 작가 데이터를 가져오는 중, 에러 발생</p>;
   }
 
+  if (artworkListError) {
+    return <p>작품 목록 데이터를 가져오는 중에 에러 발생</p>;
+  }
+
   const followedArtistsData = followedArtists.posts;
-
-  // const {
-  //   data: artworkList,
-  //   isLoading: artworkListLoading,
-  //   error: artworkListError,
-  // } = useArtworkList();
-
-  // if (artworkListError) {
-  //   return <p>작품 목록 데이터를 가져오는 중에 에러 발생</p>;
-  // }
-
-  // const artworkListData = artworkList.data;
+  const artworkListData = artworkList.data;
 
   return (
     <div className='px-[36px] lg:px-[140px]'>
@@ -60,7 +64,8 @@ const ArtworkList = () => {
             {followedArtistsData.map((artist: any) => (
               <div
                 key={artist.userId}
-                className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px] flex flex-col justify-center items-start gap-[30px]'
+                className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
+                flex flex-col justify-center items-start gap-[30px]'
               >
                 <div className='flex items-center justify-between w-full'>
                   <div className='flex gap-[30px]'>
