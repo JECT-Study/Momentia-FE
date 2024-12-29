@@ -7,14 +7,12 @@ import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
-  backgroundColor = 'bg-gray-800',
-  textColor = 'text-white',
   textSize = 'button-s',
-
+  initFollowState = false,
   onClick,
   ariaLabel,
 }: FollowButtonProps) => {
-  const [isFollowing, setIsFollowing] = useState(false);
+  const [isFollowing, setIsFollowing] = useState(initFollowState);
 
   const toggleFollow = () => {
     setIsFollowing((prev) => !prev);
@@ -32,10 +30,10 @@ const FollowButton = ({
       className={`
         button-s flex items-center justify-center rounded-full
         w-[95px] h-[37px] gap-[3px] ml-auto
-        ${backgroundColor} ${textColor} ${textSize}
+        ${textSize}
         ${
           isFollowing
-            ? 'border	border-gray-300 text-gray-300 bg-transparent'
+            ? 'border	border-gray-900 text-gray-900 bg-white'
             : 'bg-gray-800 text-white'
         }
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
