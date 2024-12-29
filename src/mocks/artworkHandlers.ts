@@ -15,7 +15,6 @@ interface Artwork {
   title: string;
   userId: number;
   nickname: string;
-  artworkField: string;
   viewCount: number;
   likeCount: number;
   commentCount: number;
@@ -28,7 +27,9 @@ interface FollowedArtist {
   userImage: string | null;
   userField: string | null;
   isFollow: boolean;
-  posts: Omit<Artwork, 'userId' | 'nickname' | 'artworkField'>[];
+  posts: (Omit<Artwork, 'userId' | 'nickname' | 'artworkField'> & {
+    createdTime: string;
+  })[];
 }
 
 interface ArtworkResponse {
@@ -59,6 +60,7 @@ export const artworkHandlers = [
               likeCount: 2,
               commentCount: 5,
               isLiked: true,
+              createdTime: '2024-12-27T13:02:53',
             },
             {
               postId: 2,
@@ -68,6 +70,7 @@ export const artworkHandlers = [
               likeCount: 3,
               commentCount: 1,
               isLiked: false,
+              createdTime: '2024-12-27T13:02:53',
             },
           ],
         },
@@ -86,6 +89,7 @@ export const artworkHandlers = [
               likeCount: 33,
               commentCount: 4,
               isLiked: false,
+              createdTime: '2024-12-27T13:02:53',
             },
             {
               postId: 4,
@@ -95,6 +99,7 @@ export const artworkHandlers = [
               likeCount: 23,
               commentCount: 1,
               isLiked: true,
+              createdTime: '2024-12-27T13:02:53',
             },
           ],
         },
@@ -113,6 +118,7 @@ export const artworkHandlers = [
               likeCount: 2,
               commentCount: 6,
               isLiked: false,
+              createdTime: '2024-12-27T13:02:53',
             },
           ],
         },
@@ -131,6 +137,7 @@ export const artworkHandlers = [
         //       likeCount: 2,
         //       commentCount: 6,
         //       isLiked: false,
+        // "createdTime": "2024-12-27T13:02:53"
         //     },
         //   ],
         // },
@@ -149,6 +156,7 @@ export const artworkHandlers = [
         //       likeCount: 2,
         //       commentCount: 6,
         //       isLiked: false,
+        // "createdTime": "2024-12-27T13:02:53"
         //     },
         //   ],
         // },
@@ -167,7 +175,6 @@ export const artworkHandlers = [
           postImage: '/images/defaultArtworkImage.png',
           userId: 1,
           nickname: '작가1',
-          artworkField: 'PAINTING',
           viewCount: 800,
           likeCount: 232,
           commentCount: 20,
@@ -179,7 +186,6 @@ export const artworkHandlers = [
           postImage: '/images/defaultArtworkImage.png',
           userId: 2,
           nickname: '작가2',
-          artworkField: 'PAINTING',
           viewCount: 800,
           likeCount: 232,
           commentCount: 20,
@@ -191,7 +197,6 @@ export const artworkHandlers = [
           postImage: '/images/defaultArtworkImage.png',
           userId: 3,
           nickname: '작가1',
-          artworkField: 'PAINTING',
           viewCount: 800,
           likeCount: 232,
           commentCount: 20,
@@ -203,7 +208,6 @@ export const artworkHandlers = [
           postImage: '/images/defaultArtworkImage.png',
           userId: 4,
           nickname: '작가2',
-          artworkField: 'PAINTING',
           viewCount: 800,
           likeCount: 232,
           commentCount: 20,
@@ -215,48 +219,11 @@ export const artworkHandlers = [
           postImage: '/images/defaultArtworkImage.png',
           userId: 5,
           nickname: '작가1',
-          artworkField: 'PAINTING',
           viewCount: 800,
           likeCount: 232,
           commentCount: 20,
           isLiked: true,
         },
-        // {
-        //   postId: 6,
-        //   title: '제목2',
-        //   postImage: '/images/defaultArtworkImage.png',
-        //   userId: 6,
-        //   nickname: '작가2',
-        //   artworkField: 'PAINTING',
-        //   viewCount: 800,
-        //   likeCount: 232,
-        //   commentCount: 20,
-        //   isLiked: true,
-        // },
-        // {
-        //   postId: 7,
-        //   title: '제목1',
-        //   postImage: '/images/defaultArtworkImage.png',
-        //   userId: 7,
-        //   nickname: '작가1',
-        //   artworkField: 'PAINTING',
-        //   viewCount: 800,
-        //   likeCount: 232,
-        //   commentCount: 20,
-        //   isLiked: true,
-        // },
-        // {
-        //   postId: 8,
-        //   title: '제목2',
-        //   postImage: '/images/defaultArtworkImage.png',
-        //   userId: 8,
-        //   nickname: '작가2',
-        //   artworkField: 'PAINTING',
-        //   viewCount: 800,
-        //   likeCount: 232,
-        //   commentCount: 20,
-        //   isLiked: true,
-        // },
       ],
       page: {
         totalDataCnt: 99,
@@ -264,7 +231,7 @@ export const artworkHandlers = [
         isLastPage: false,
         isFirstPage: true,
         requestPage: 1,
-        requestSize: 10,
+        requestSize: 12,
       },
     };
 
