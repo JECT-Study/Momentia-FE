@@ -41,8 +41,11 @@ const ArtworkList = () => {
     return <p>작품 목록 데이터를 가져오는 중에 에러 발생</p>;
   }
 
-  const followedArtistsData = followedArtists.posts;
-  const artworkListData = artworkList.data;
+  const artworkListData = artworkList?.artwork;
+  const artworkListPage = artworkList?.page;
+
+  console.log('artworkListData: ', artworkListData);
+  console.log('artworkListPage: ', artworkListPage);
 
   return (
     <div className='px-[36px] lg:px-[140px]'>
@@ -61,7 +64,7 @@ const ArtworkList = () => {
 
         {showFollowedArtistsCards && (
           <div className='pr-[31px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] pb-[130px]'>
-            {followedArtistsData.map((artist: any) => (
+            {followedArtists.map((artist: any) => (
               <div
                 key={artist.userId}
                 className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
@@ -90,14 +93,14 @@ const ArtworkList = () => {
                     <ArtworkCard
                       key={post.postId}
                       artworkInfo={post}
-                      mode='followed-author'
+                      mode='followed-artists'
                     />
                   ))}
                 </div>
               </div>
             ))}
 
-            {!followedArtistsData.length && (
+            {!followedArtists.length && (
               <div
                 className='grid flex-col col-span-full items-center justify-center
                   h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
