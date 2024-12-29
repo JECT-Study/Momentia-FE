@@ -1,6 +1,6 @@
 import { http, HttpResponse } from 'msw';
 
-export interface Pagination {
+interface Pagination {
   totalDataCnt: number;
   totalPages: number;
   isLastPage: boolean;
@@ -9,7 +9,7 @@ export interface Pagination {
   requestSize: number;
 }
 
-export interface Artwork {
+interface Artwork {
   postId: number;
   postImage: string;
   title: string;
@@ -22,7 +22,7 @@ export interface Artwork {
   isLiked: boolean;
 }
 
-export interface FollowedArtist {
+interface FollowedArtist {
   userId: number;
   nickname: string;
   userImage: string | null;
@@ -31,7 +31,7 @@ export interface FollowedArtist {
   posts: Omit<Artwork, 'userId' | 'nickname' | 'artworkField'>[];
 }
 
-export interface ArtworkResponse {
+interface ArtworkResponse {
   data: Artwork[];
   page: Pagination;
 }
@@ -41,7 +41,7 @@ export interface FollowedArtistsResponse {
 }
 
 export const artworkHandlers = [
-  http.get('/artwork', () => {
+  http.get('/artwork/followingUsers/posts', () => {
     const responseData: FollowedArtistsResponse = {
       posts: [
         // {
@@ -158,7 +158,7 @@ export const artworkHandlers = [
     return HttpResponse.json(responseData, { status: 200 });
   }),
 
-  http.get('/artwork', () => {
+  http.get('/artwork/posts', () => {
     const responseData: ArtworkResponse = {
       data: [
         {
