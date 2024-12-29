@@ -6,22 +6,22 @@ import { ReactNode } from 'react';
 interface DefaultCarouselPropsType<T> {
   slides: T[];
   renderSlide: (card: T) => ReactNode;
-  spaceSize?: 'small' | 'medium' | 'large';
+  spaceSize?: 's' | 'm' | 'l';
 }
 
 const DefaultCarousel = <T,>({
   slides,
   renderSlide,
-  spaceSize = 'small',
+  spaceSize = 's',
 }: DefaultCarouselPropsType<T>) => {
   const [emblaRef] = useEmblaCarousel({
     dragFree: true,
   });
 
   const [gapSizeClassName, padddingSizeClassName] =
-    spaceSize === 'large'
+    spaceSize === 'l'
       ? ['ml-[-50px]', 'pl-[50px]']
-      : spaceSize === 'medium'
+      : spaceSize === 'm'
         ? ['ml-[-45px]', 'pl-[45px]']
         : ['ml-[-30px]', 'pl-[30px]'];
 
