@@ -4,6 +4,7 @@ import FollowButton from '@/components/Button/FollowButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
+import Pagination from '@/components/Pagination';
 
 import { useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
@@ -13,6 +14,7 @@ import { useState } from 'react';
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
+
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const filterOptions = ['최신순', '인기순', '조회순'];
 
@@ -44,8 +46,9 @@ const ArtworkList = () => {
   const artworkListData = artworkList?.artwork;
   const artworkListPage = artworkList?.page;
 
-  console.log('artworkListData: ', artworkListData);
-  console.log('artworkListPage: ', artworkListPage);
+  const handlePageChange = (page: number) => {
+    window.location.href = `/artwork/posts?page=${page}`;
+  };
 
   return (
     <div className='px-[36px] lg:px-[140px]'>
@@ -142,6 +145,12 @@ const ArtworkList = () => {
             <ArtworkCard key={post.postId} artworkInfo={post} />
           ))}
         </div>
+
+        <Pagination
+          currentPage={artworkListPage.requestPage}
+          totalPages={artworkListPage.totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );
