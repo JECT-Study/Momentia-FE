@@ -7,7 +7,7 @@ import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
-  backgroundColor = 'bg-gray-900',
+  backgroundColor = 'bg-gray-800',
   textColor = 'text-white',
   textSize = 'button-s',
 
@@ -31,7 +31,7 @@ const FollowButton = ({
       aria-label={ariaLabel}
       className={`
         button-s flex items-center justify-center rounded-full
-        w-[95px] h-[37px] gap-[3px]
+        w-[95px] h-[37px] gap-[3px] ml-auto
         ${backgroundColor} ${textColor} ${textSize}
         ${
           isFollowing
