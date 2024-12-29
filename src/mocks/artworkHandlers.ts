@@ -235,21 +235,22 @@ export const artworkHandlers = [
       },
     ];
 
-    const filteredData = mockArtworkData.filter((artwork) =>
-      artwork.title.includes(search),
+    const filteredData = mockArtworkData.filter(
+      (artwork) =>
+        artwork.title.includes(search) || artwork.nickname.includes(search),
     );
 
     const sortedData = filteredData.sort((a, b) => {
       if (sort === 'popular') {
-        return b.likeCount - a.likeCount; // 인기순
+        return b.likeCount - a.likeCount;
       } else if (sort === 'view') {
-        return b.viewCount - a.viewCount; // 조회순
+        return b.viewCount - a.viewCount;
       } else if (sort === 'recent') {
         return (
           new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime()
-        ); // 최신순
+        );
       }
-      return 0; // 기본: 정렬 없음
+      return 0;
     });
 
     const responseData: ArtworkResponse = {
