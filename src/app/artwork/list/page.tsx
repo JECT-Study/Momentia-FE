@@ -9,18 +9,14 @@ import Pagination from '@/components/Pagination';
 import { useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
 
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
 
-  const {
-    data: followedArtists,
-    isLoading: followedArtistsLoading,
-    error: followedArtistsError,
-  } = useFollowedArtists();
-
+  const [searchKeyword, setSearchKeyword] = useState('');
+  const [submittedKeyword, setSubmittedKeyword] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const filterOptions = ['최신순', '인기순', '조회순'];
 
@@ -39,11 +35,25 @@ const ArtworkList = () => {
 
   const sortValue = getSortValue(selectedFilter);
 
+  const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    setSubmittedKeyword(searchKeyword.trim());
+  };
+
+  const {
+    data: followedArtists,
+    isLoading: followedArtistsLoading,
+    error: followedArtistsError,
+  } = useFollowedArtists();
+
   const {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList(sortValue);
+  } = useArtworkList(sortValue, submittedKeyword);
 
   if (followedArtistsLoading || artworkListLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
@@ -136,12 +146,16 @@ const ArtworkList = () => {
             <input
               className='flex-grow body1 bg-transparent border-none focus:outline-none placeholder-gray-500 focus:text-white'
               placeholder={`'작품 제목 또는 작가 이름'으로 검색`}
+              value={searchKeyword}
+              onChange={handleSearchChange}
             />
-            <Icon
-              name='Search'
-              size='l'
-              className='text-white flex-shrink-0 ml-3'
-            />
+            <button onClick={handleSearchSubmit}>
+              <Icon
+                name='Search'
+                size='l'
+                className='text-white flex-shrink-0 ml-3'
+              />
+            </button>
           </div>
         </div>
 

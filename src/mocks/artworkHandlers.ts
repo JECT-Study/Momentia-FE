@@ -166,69 +166,98 @@ export const artworkHandlers = [
     return HttpResponse.json(responseData, { status: 200 });
   }),
 
-  http.get('/artwork/posts', () => {
+  http.get('/artwork/posts', ({ request }) => {
+    const url = new URL(request.url);
+
+    const search = url.searchParams.get('search') || '';
+    const sort = url.searchParams.get('sort') || 'recent';
+
+    const mockArtworkData = [
+      {
+        postId: 1,
+        title: '푸른 바다',
+        postImage: '/images/defaultArtworkImage.png',
+        userId: 1,
+        nickname: '김화백',
+        viewCount: 1020,
+        likeCount: 540,
+        commentCount: 15,
+        isLiked: true,
+        createdTime: '2024-12-25T10:00:00',
+      },
+      {
+        postId: 2,
+        title: '붉은 노을',
+        postImage: '/images/defaultArtworkImage.png',
+        userId: 2,
+        nickname: '이작가',
+        viewCount: 890,
+        likeCount: 460,
+        commentCount: 12,
+        isLiked: false,
+        createdTime: '2024-12-26T12:00:00',
+      },
+      {
+        postId: 3,
+        title: '숲 속의 고요',
+        postImage: '/images/defaultArtworkImage.png',
+        userId: 3,
+        nickname: '박디자이너',
+        viewCount: 1500,
+        likeCount: 720,
+        commentCount: 25,
+        isLiked: true,
+        createdTime: '2024-12-27T09:00:00',
+      },
+      {
+        postId: 4,
+        title: '겨울 산책',
+        postImage: '/images/defaultArtworkImage.png',
+        userId: 4,
+        nickname: '최화가',
+        viewCount: 640,
+        likeCount: 300,
+        commentCount: 8,
+        isLiked: false,
+        createdTime: '2024-12-28T14:00:00',
+      },
+      {
+        postId: 5,
+        title: '우주의 신비',
+        postImage: '/images/defaultArtworkImage.png',
+        userId: 5,
+        nickname: '정예술가',
+        viewCount: 2200,
+        likeCount: 1200,
+        commentCount: 50,
+        isLiked: true,
+        createdTime: '2024-12-29T16:00:00',
+      },
+    ];
+
+    const filteredData = mockArtworkData.filter((artwork) =>
+      artwork.title.includes(search),
+    );
+
+    const sortedData = filteredData.sort((a, b) => {
+      if (sort === 'popular') {
+        return b.likeCount - a.likeCount; // 인기순
+      } else if (sort === 'view') {
+        return b.viewCount - a.viewCount; // 조회순
+      } else if (sort === 'recent') {
+        return (
+          new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime()
+        ); // 최신순
+      }
+      return 0; // 기본: 정렬 없음
+    });
+
     const responseData: ArtworkResponse = {
-      data: [
-        {
-          postId: 1,
-          title: '제목1',
-          postImage: '/images/defaultArtworkImage.png',
-          userId: 1,
-          nickname: '작가1',
-          viewCount: 800,
-          likeCount: 232,
-          commentCount: 20,
-          isLiked: true,
-        },
-        {
-          postId: 2,
-          title: '제목2',
-          postImage: '/images/defaultArtworkImage.png',
-          userId: 2,
-          nickname: '작가2',
-          viewCount: 800,
-          likeCount: 232,
-          commentCount: 20,
-          isLiked: true,
-        },
-        {
-          postId: 3,
-          title: '제목1',
-          postImage: '/images/defaultArtworkImage.png',
-          userId: 3,
-          nickname: '작가1',
-          viewCount: 800,
-          likeCount: 232,
-          commentCount: 20,
-          isLiked: true,
-        },
-        {
-          postId: 4,
-          title: '제목2',
-          postImage: '/images/defaultArtworkImage.png',
-          userId: 4,
-          nickname: '작가2',
-          viewCount: 800,
-          likeCount: 232,
-          commentCount: 20,
-          isLiked: true,
-        },
-        {
-          postId: 5,
-          title: '제목1',
-          postImage: '/images/defaultArtworkImage.png',
-          userId: 5,
-          nickname: '작가1',
-          viewCount: 800,
-          likeCount: 232,
-          commentCount: 20,
-          isLiked: true,
-        },
-      ],
+      data: sortedData,
       page: {
-        totalDataCnt: 99,
-        totalPages: 10,
-        isLastPage: false,
+        totalDataCnt: sortedData.length,
+        totalPages: Math.ceil(sortedData.length / 12),
+        isLastPage: sortedData.length <= 12,
         isFirstPage: true,
         requestPage: 1,
         requestSize: 12,
