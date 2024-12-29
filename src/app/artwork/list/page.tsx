@@ -15,36 +15,50 @@ const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
 
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
-  const filterOptions = ['최신순', '인기순', '조회순'];
-
   const {
     data: followedArtists,
     isLoading: followedArtistsLoading,
     error: followedArtistsError,
   } = useFollowedArtists();
 
+  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const filterOptions = ['최신순', '인기순', '조회순'];
+
+  const getSortValue = (filter: string) => {
+    switch (filter) {
+      case '최신순':
+        return 'recent';
+      case '인기순':
+        return 'popular';
+      case '조회순':
+        return 'view';
+      default:
+        return 'recent';
+    }
+  };
+
+  const sortValue = getSortValue(selectedFilter);
+
   const {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList();
+  } = useArtworkList(sortValue);
 
-  // 조건문 내에서 훅 호출 방지
   if (followedArtistsLoading || artworkListLoading) {
-    return <p>데이터 로딩 중...</p>;
+    return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
   }
 
   if (followedArtistsError || artworkListError) {
-    return <p>데이터 로드 중 오류 발생</p>;
+    return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
+
+  const artworkListData = artworkList?.artwork;
+  const artworkListPage = artworkList?.page;
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
   };
-
-  const artworkListData = artworkList?.artwork;
-  const artworkListPage = artworkList?.page;
 
   const handlePageChange = (page: number) => {
     window.location.href = `/artwork/posts?page=${page}`;
