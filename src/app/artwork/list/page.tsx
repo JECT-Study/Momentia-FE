@@ -2,6 +2,7 @@
 
 import FollowButton from '@/components/Button/FollowButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
+import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 
 import { useArtworkList } from '@/hooks/useArtworkList';
@@ -12,6 +13,8 @@ import { useState } from 'react';
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
+  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const filterOptions = ['최신순', '인기순', '조회순'];
 
   const {
     data: followedArtists,
@@ -25,21 +28,18 @@ const ArtworkList = () => {
     error: artworkListError,
   } = useArtworkList();
 
-  if (followedArtistsLoading) {
-    return <p>팔로우한 작가 데이터 로딩 중...</p>;
+  // 조건문 내에서 훅 호출 방지
+  if (followedArtistsLoading || artworkListLoading) {
+    return <p>데이터 로딩 중...</p>;
   }
 
-  if (artworkListLoading) {
-    return <p>작품 목록 데이터 로딩 중...</p>;
+  if (followedArtistsError || artworkListError) {
+    return <p>데이터 로드 중 오류 발생</p>;
   }
 
-  if (followedArtistsError) {
-    return <p>팔로우한 작가 데이터를 가져오는 중, 에러 발생</p>;
-  }
-
-  if (artworkListError) {
-    return <p>작품 목록 데이터를 가져오는 중에 에러 발생</p>;
-  }
+  const handleFilterChange = (newFilter: string) => {
+    setSelectedFilter(newFilter);
+  };
 
   const artworkListData = artworkList?.artwork;
   const artworkListPage = artworkList?.page;
@@ -52,7 +52,7 @@ const ArtworkList = () => {
       <div className='pt-[70px]'>
         <button
           className='flex items-center pb-[56px] w-[202px] justify-between'
-          onClick={() => setShowFollowedArtistsCards(!showFollowedArtistsCards)}
+          onClick={() => setShowFollowedArtistsCards((prev) => !prev)}
         >
           <h3 className='text-white'>내가 팔로우한 작가</h3>
           <Icon
@@ -63,7 +63,7 @@ const ArtworkList = () => {
         </button>
 
         {showFollowedArtistsCards && (
-          <div className='pr-[31px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] pb-[130px]'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] pb-[130px]'>
             {followedArtists.map((artist: any) => (
               <div
                 key={artist.userId}
@@ -126,6 +126,15 @@ const ArtworkList = () => {
               className='text-white flex-shrink-0 ml-3'
             />
           </div>
+        </div>
+
+        <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
+          <h1>공예/조각</h1>
+          <FilterDropdown
+            options={filterOptions}
+            selected={selectedFilter}
+            onChange={handleFilterChange}
+          />
         </div>
       </div>
     </div>
