@@ -11,7 +11,7 @@ import HeartFilled from '../Icon/icons/HeartFilled';
 import Message from '../Icon/icons/Message';
 
 interface ArtworkCardProps {
-  mode?: 'followed-author' | 'artwork-list';
+  mode?: 'followed-artists' | 'artwork-list';
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
@@ -31,12 +31,12 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
   const formattedRank = rank && rank < 10 ? `0${rank}` : rank;
 
   const modeClasses =
-    mode === 'followed-author'
+    mode === 'followed-artists'
       ? 'w-full max-w-[200px] h-[267px]'
       : 'min-w-[395px] min-h-[511px]';
 
   const artworkInfoClasses =
-    mode === 'followed-author'
+    mode === 'followed-artists'
       ? 'gap-[10px] px-[15px] py-[15px]'
       : 'gap-[34px] px-[42px] py-[27px]';
 
@@ -85,11 +85,11 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
         <p className='placeholder'>{nickname}</p>
         <div
           className={`button-s flex
-            ${mode === 'followed-author' ? 'gap-5 items-center' : 'gap-6'}`}
+            ${mode === 'followed-artists' ? 'gap-5 items-center' : 'gap-6'}`}
         >
           <div className={`flex items-center gap-2.5`}>
             <Eye
-              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+              className={`${mode === 'followed-artists' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
             />
             <span>{viewCount}</span>
           </div>
@@ -97,18 +97,18 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
             {isLiked ? (
               <HeartFilled
                 className={`text-system-error
-                  ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+                  ${mode === 'followed-artists' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
               />
             ) : (
               <Heart
-                className={` ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+                className={` ${mode === 'followed-artists' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
               />
             )}
             <span>{likeCount}</span>
           </div>
           <div className={`flex items-center gap-2.5`}>
             <Message
-              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+              className={`${mode === 'followed-artists' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
             />
             <span>{commentCount}</span>
           </div>
