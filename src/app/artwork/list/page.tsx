@@ -80,12 +80,12 @@ const ArtworkList = () => {
         </button>
 
         {showFollowedArtistsCards && (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] pb-[130px]'>
+          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-[130px]'>
             {followedArtists.map((artist: any) => (
               <div
                 key={artist.userId}
                 className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
-                flex flex-col justify-center items-start gap-[30px]'
+                flex flex-col justify-start items-start gap-[31px] self-stretch'
               >
                 <div className='flex items-center justify-between w-full'>
                   <div className='flex gap-[30px]'>
@@ -99,7 +99,7 @@ const ArtworkList = () => {
                     <div className='gap-[30px]'>
                       <p className='subtitle2 text-white'>{artist.nickname}</p>
                       <p className='placeholder text-gray-500'>
-                        {artist.userField || ''}
+                        {artist.userField || '\u00A0'}
                       </p>
                     </div>
                   </div>
@@ -154,17 +154,19 @@ const ArtworkList = () => {
           />
         </div>
 
-        <div className='w-full flex flex-wrap gap-[40_20px]'>
+        <div className='w-full flex flex-wrap gap-[40_20px] justify-center items-center content-center'>
           {artworkListData.map((post: any) => (
             <ArtworkCard key={post.postId} artworkInfo={post} />
           ))}
         </div>
 
-        <Pagination
-          currentPage={artworkListPage.requestPage}
-          totalPages={artworkListPage.totalPages}
-          onPageChange={handlePageChange}
-        />
+        <div className='py-[70px]'>
+          <Pagination
+            currentPage={artworkListPage.requestPage}
+            totalPages={artworkListPage.totalPages}
+            onPageChange={handlePageChange}
+          />
+        </div>
       </div>
     </div>
   );
