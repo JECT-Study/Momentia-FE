@@ -136,6 +136,12 @@ const ArtworkList = () => {
             onChange={handleFilterChange}
           />
         </div>
+
+        <div className='w-full flex flex-wrap gap-[40_20px]'>
+          {artworkListData.map((post: any) => (
+            <ArtworkCard key={post.postId} artworkInfo={post} />
+          ))}
+        </div>
       </div>
     </div>
   );
