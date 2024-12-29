@@ -80,12 +80,12 @@ const ArtworkList = () => {
         </button>
 
         {showFollowedArtistsCards && (
-          <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 pb-[130px]'>
+          <div className='flex flex-nowrap gap-[31px] pb-[130px]'>
             {followedArtists.map((artist: any) => (
               <div
                 key={artist.userId}
                 className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
-                flex flex-col justify-start items-start gap-[31px] self-stretch'
+                flex flex-col justify-start items-start gap-[30px] self-stretch'
               >
                 <div className='flex items-center justify-between w-full'>
                   <div className='flex gap-[30px]'>
