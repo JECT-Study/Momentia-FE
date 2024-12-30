@@ -8,7 +8,7 @@ export const bgColorClasses = {
 
 export const hoverBgColorClasses = {
   primary: 'hover:bg-[#885DFF]',
-  secondary: 'hover:bg-gray-300',
+  secondary: 'hover:bg-gray-300 cursor-not-allowed',
   tertiaty: 'hover:bg-gray-700',
 };
 
@@ -39,10 +39,9 @@ const SquareButtonL = ({
       className={`
         button-m flex items-center justify-center rounded-md
         w-[420px] h-[70px] px-[175px] py-[20px] gap-[20px]
-        ${bgColorClasses[variant]} 
-        ${textColorClasses[variant]} 
-        ${hoverBgColorClasses[variant]}
-        ${disabled ? 'cursor-not-allowed' : ''}
+        ${disabled ? bgColorClasses['secondary'] : bgColorClasses[variant]} 
+        ${disabled ? textColorClasses['secondary'] : textColorClasses[variant]} 
+        ${disabled ? 'cursor-not-allowed' : hoverBgColorClasses[variant]}
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
       `}
