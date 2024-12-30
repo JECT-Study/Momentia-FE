@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface BaseButtonProps {
-  backgroundColor?: string;
-  textColor?: string;
-  textSize?: string;
+  variant: 'primary' | 'secondary' | 'tertiaty';
   children: ReactNode;
 
   onClick?: () => void;
@@ -14,5 +12,5 @@ export interface BaseButtonProps {
   icon?: ReactNode;
   iconPosition?: 'left' | 'right';
 
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit';
 }
