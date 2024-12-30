@@ -8,7 +8,7 @@ export const bgColorClasses = {
 
 export const hoverBgColorClasses = {
   primary: 'hover:bg-[#885DFF]',
-  secondary: 'hover:bg-gray-300 cursor-not-allowed',
+  secondary: 'hover:bg-gray-300',
   tertiaty: 'hover:bg-gray-700',
 };
 
