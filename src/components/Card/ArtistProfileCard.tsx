@@ -14,6 +14,7 @@ interface ArtistProfileCardProps {
 
 const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
   const {
+    userId,
     profileImage,
     nickname,
     userField,
@@ -59,7 +60,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
         <div className='flex flex-col gap-[10px] '>
           <div className='flex justify-between'>
             <p className='subtitle2 text-gray-900'>{nickname}</p>
-            <FollowButton initFollowState={isFollow} />
+            <FollowButton initFollowState={isFollow} followUserId={userId} />
           </div>
           <p className='placeholder text-gray-500'>{userField}</p>
           <p className='body2 text-gray-500'>{introduction}</p>

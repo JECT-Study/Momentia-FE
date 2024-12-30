@@ -4,22 +4,35 @@ import { useState } from 'react';
 
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
+import deleteFollow from '@/apis/follow/deleteFollow';
+import postFollow from '@/apis/follow/postFollow';
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
   textSize = 'button-s',
   initFollowState = false,
-  onClick,
   ariaLabel,
+  followUserId,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const toggleFollow = () => {
+  const toggleFollow = async () => {
+    setIsLoading(true);
+
+    const previousState = isFollowing;
     setIsFollowing((prev) => !prev);
 
-    // 외부에서 전달받은 onClick 함수 실행
-    if (onClick) {
-      onClick();
+    try {
+      if (previousState) {
+        await deleteFollow(followUserId);
+      } else {
+        await postFollow(followUserId);
+      }
+      setIsLoading(false);
+    } catch (error) {
+      setIsFollowing(previousState);
+      setIsLoading(false);
     }
   };
 
@@ -39,6 +52,7 @@ const FollowButton = ({
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
       `}
+      disabled={isLoading}
     >
       {isFollowing ? (
         <>
