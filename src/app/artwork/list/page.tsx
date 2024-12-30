@@ -188,13 +188,15 @@ const ArtworkList = () => {
           </div>
         )}
 
-        <div className='py-[70px]'>
-          <Pagination
-            currentPage={artworkListPage.requestPage}
-            totalPages={artworkListPage.totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        {artworkListData.length > 0 && (
+          <div className='py-[70px]'>
+            <Pagination
+              currentPage={artworkListPage.requestPage}
+              totalPages={artworkListPage.totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
