@@ -28,7 +28,6 @@ const FollowButton = ({ onClick, ariaLabel }: FollowButtonProps) => {
       className={`
         button-s flex items-center justify-center rounded-full
         w-[95px] h-[37px] gap-[3px] ml-auto
-        bg-gray-800 text-white
         ${
           isFollowing
             ? 'border	border-gray-300 text-gray-300 bg-transparent'
