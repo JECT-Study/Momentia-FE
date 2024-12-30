@@ -1,6 +1,7 @@
 'use client';
 
 import FollowButton from '@/components/Button/FollowButton';
+import OvalButton from '@/components/Button/OvalButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import FilterDropdown from '@/components/FilterDropdown';
@@ -36,6 +37,25 @@ const ArtworkList = () => {
   };
 
   const sortValue = getSortValue(selectedFilter);
+
+  const artworkFields = [
+    { name: '전체', value: 'ALL' },
+    { name: '회화', value: 'PAINTING' },
+    { name: '공예/조각', value: 'CRAFTSCULPTURE' },
+    { name: '드로잉', value: 'DRAWING' },
+    { name: '판화', value: 'PRINTMAKING' },
+    { name: '서예', value: 'CALLIGRAPHY' },
+    { name: '일러스트', value: 'ILLUSTRATION' },
+    { name: '디지털아트', value: 'DIGITALART' },
+    { name: '사진', value: 'PHOTOGRAPHY' },
+    { name: '기타', value: 'OTHERS' },
+  ];
+
+  const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
+
+  const handleArtworkFieldClick = (artworkField: string) => {
+    setSelectedArtworkField(artworkField);
+  };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchKeyword(e.target.value);
@@ -150,7 +170,7 @@ const ArtworkList = () => {
         )}
 
         <div className='flex items-center justify-center'>
-          <div className='flex items-center w-[760px] h-[78px] px-5 rounded-[10px] bg-gray-900 mb-[110px]'>
+          <div className='flex items-center w-[760px] h-[78px] px-5 rounded-[10px] bg-gray-900 mb-[110px] self-stretch'>
             <input
               className='flex-grow body1 bg-transparent border-none focus:outline-none placeholder-gray-500 focus:text-white'
               placeholder={`'작품 제목 또는 작가 이름'으로 검색`}
@@ -165,6 +185,26 @@ const ArtworkList = () => {
               />
             </button>
           </div>
+        </div>
+
+        <div className='flex w-full justify-between items-end pb-[59px]'>
+          <DefaultCarousel
+            slides={artworkFields}
+            renderSlide={(artworkField: any) => (
+              <OvalButton
+                key={artworkField.value}
+                variant={
+                  selectedArtworkField === artworkField.value
+                    ? 'primary'
+                    : 'tertiaty'
+                }
+                buttonSize='m'
+                onClick={() => handleArtworkFieldClick(artworkField.value)}
+              >
+                {artworkField.name}
+              </OvalButton>
+            )}
+          />
         </div>
 
         <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
