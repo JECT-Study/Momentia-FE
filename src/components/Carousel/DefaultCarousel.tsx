@@ -27,7 +27,7 @@ const DefaultCarousel = <T,>({
 
   return (
     <section className='relative flex flex-col gap-[90px]'>
-      <div className='w-[1640px] overflow-hidden' ref={emblaRef}>
+      <div className='w-full overflow-hidden' ref={emblaRef}>
         <div
           className={`flex backface-hidden touch-pan-y pinch-zoom ${gapSizeClassName}`}
         >

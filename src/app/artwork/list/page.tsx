@@ -91,7 +91,7 @@ const ArtworkList = () => {
         </button>
 
         {showFollowedArtistsCards && (
-          <div className='flex flex-nowrap gap-[31px] pb-[130px]'>
+          <div className='pb-[130px]'>
             <DefaultCarousel
               slides={followedArtists}
               spaceSize='s'
