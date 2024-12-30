@@ -182,6 +182,12 @@ const ArtworkList = () => {
           ))}
         </div>
 
+        {!artworkListData.length && (
+          <div className='body1 flex w-full h-[511px] justify-center items-center text-gray-500 text-center'>
+            선택하신 카테고리에 해당하는 작품이 아직 없어요.
+          </div>
+        )}
+
         <div className='py-[70px]'>
           <Pagination
             currentPage={artworkListPage.requestPage}
