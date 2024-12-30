@@ -21,7 +21,7 @@ interface Artwork {
   isLiked: boolean;
 }
 
-interface FollowedArtist {
+export interface FollowedArtist {
   userId: number;
   nickname: string;
   userImage: string | null;

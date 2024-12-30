@@ -9,6 +9,7 @@ import Pagination from '@/components/Pagination';
 
 import { useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
+import { FollowedArtist } from '@/mocks/artworkHandlers';
 
 import { ChangeEvent, useState } from 'react';
 
@@ -95,7 +96,7 @@ const ArtworkList = () => {
             <DefaultCarousel
               slides={followedArtists}
               spaceSize='s'
-              renderSlide={(artist: any) => (
+              renderSlide={(artist: FollowedArtist) => (
                 <div
                   key={artist.userId}
                   className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
