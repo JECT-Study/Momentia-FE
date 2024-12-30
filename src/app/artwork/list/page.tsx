@@ -2,6 +2,7 @@
 
 import FollowButton from '@/components/Button/FollowButton';
 import ArtworkCard from '@/components/Card/ArtworkCard';
+import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import Pagination from '@/components/Pagination';
@@ -91,41 +92,47 @@ const ArtworkList = () => {
 
         {showFollowedArtistsCards && (
           <div className='flex flex-nowrap gap-[31px] pb-[130px]'>
-            {followedArtists.map((artist: any) => (
-              <div
-                key={artist.userId}
-                className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
-                flex flex-col justify-start items-start gap-[30px] self-stretch'
-              >
-                <div className='flex items-center justify-between w-full'>
-                  <div className='flex gap-[30px]'>
-                    <img
-                      src={
-                        artist.userImage || '/images/defaultProfileImage.png'
-                      }
-                      alt={artist.nickname}
-                      className='w-[50px] h-[50px] bg-gray-700 rounded-full'
-                    />
-                    <div className='gap-[30px]'>
-                      <p className='subtitle2 text-white'>{artist.nickname}</p>
-                      <p className='placeholder text-gray-500'>
-                        {artist.userField || '\u00A0'}
-                      </p>
+            <DefaultCarousel
+              slides={followedArtists}
+              spaceSize='s'
+              renderSlide={(artist: any) => (
+                <div
+                  key={artist.userId}
+                  className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
+          flex flex-col justify-start items-start gap-[30px] self-stretch'
+                >
+                  <div className='flex items-center justify-between w-full'>
+                    <div className='flex gap-[30px]'>
+                      <img
+                        src={
+                          artist.userImage || '/images/defaultProfileImage.png'
+                        }
+                        alt={artist.nickname}
+                        className='w-[50px] h-[50px] bg-gray-700 rounded-full'
+                      />
+                      <div className='gap-[30px]'>
+                        <p className='subtitle2 text-white'>
+                          {artist.nickname}
+                        </p>
+                        <p className='placeholder text-gray-500'>
+                          {artist.userField || '\u00A0'}
+                        </p>
+                      </div>
                     </div>
+                    <FollowButton />
                   </div>
-                  <FollowButton />
+                  <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
+                    {artist.posts.map((post: any) => (
+                      <ArtworkCard
+                        key={post.postId}
+                        artworkInfo={post}
+                        mode='followed-artists'
+                      />
+                    ))}
+                  </div>
                 </div>
-                <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
-                  {artist.posts.map((post: any) => (
-                    <ArtworkCard
-                      key={post.postId}
-                      artworkInfo={post}
-                      mode='followed-artists'
-                    />
-                  ))}
-                </div>
-              </div>
-            ))}
+              )}
+            />
 
             {!followedArtists.length && (
               <div

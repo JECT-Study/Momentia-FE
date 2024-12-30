@@ -23,7 +23,7 @@ const DefaultCarousel = <T,>({
       ? ['ml-[-50px]', 'pl-[50px]']
       : spaceSize === 'm'
         ? ['ml-[-45px]', 'pl-[45px]']
-        : ['ml-[-30px]', 'pl-[30px]'];
+        : ['ml-[-31px]', 'pl-[31px]'];
 
   return (
     <section className='relative flex flex-col gap-[90px]'>

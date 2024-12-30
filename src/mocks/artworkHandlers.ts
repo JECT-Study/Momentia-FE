@@ -122,44 +122,44 @@ export const artworkHandlers = [
             },
           ],
         },
-        // {
-        //   userId: 4,
-        //   nickname: '닉네임4',
-        //   userImage: null,
-        //   userField: null,
-        //   isFollow: true,
-        //   posts: [
-        //     {
-        //       postId: 5,
-        //       postImage: '/images/defaultArtworkImage.png',
-        //       title: '작품 제목',
-        //       viewCount: 23,
-        //       likeCount: 2,
-        //       commentCount: 6,
-        //       isLiked: false,
-        // "createdTime": "2024-12-27T13:02:53"
-        //     },
-        //   ],
-        // },
-        // {
-        //   userId: 5,
-        //   nickname: '닉네임5',
-        //   userImage: null,
-        //   userField: null,
-        //   isFollow: true,
-        //   posts: [
-        //     {
-        //       postId: 5,
-        //       postImage: '/images/defaultArtworkImage.png',
-        //       title: '작품 제목',
-        //       viewCount: 23,
-        //       likeCount: 2,
-        //       commentCount: 6,
-        //       isLiked: false,
-        // "createdTime": "2024-12-27T13:02:53"
-        //     },
-        //   ],
-        // },
+        {
+          userId: 4,
+          nickname: '닉네임4',
+          userImage: null,
+          userField: null,
+          isFollow: true,
+          posts: [
+            {
+              postId: 5,
+              postImage: '/images/defaultArtworkImage.png',
+              title: '작품 제목',
+              viewCount: 23,
+              likeCount: 2,
+              commentCount: 6,
+              isLiked: false,
+              createdTime: '2024-12-27T13:02:53',
+            },
+          ],
+        },
+        {
+          userId: 5,
+          nickname: '닉네임5',
+          userImage: null,
+          userField: null,
+          isFollow: true,
+          posts: [
+            {
+              postId: 5,
+              postImage: '/images/defaultArtworkImage.png',
+              title: '작품 제목',
+              viewCount: 23,
+              likeCount: 2,
+              commentCount: 6,
+              isLiked: false,
+              createdTime: '2024-12-27T13:02:53',
+            },
+          ],
+        },
       ],
     };
 
