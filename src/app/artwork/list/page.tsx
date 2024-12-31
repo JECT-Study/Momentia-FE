@@ -93,8 +93,15 @@ const ArtworkList = () => {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
 
-  const artworkListData = artworkList?.artwork;
-  const artworkListPage = artworkList?.page;
+  const artworkListData = artworkList?.artwork || [];
+  const artworkListPage = artworkList?.page || {
+    totalDataCnt: 0,
+    totalPages: 0,
+    isLastPage: true,
+    isFirstPage: true,
+    requestPage: 1,
+    requestSize: currentPage - 1,
+  };
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);

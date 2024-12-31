@@ -1,3 +1,37 @@
+interface Pagination {
+  totalDataCnt: number;
+  totalPages: number;
+  isLastPage: boolean;
+  isFirstPage: boolean;
+  requestPage: number;
+  requestSize: number;
+}
+
+interface Artwork {
+  postId: number;
+  postImage: string;
+  title: string;
+  userId: number;
+  nickname: string;
+  viewCount: number;
+  likeCount: number;
+  commentCount: number;
+  isLiked: boolean;
+}
+
+interface ArtworkListResponse {
+  artwork: Artwork[];
+  page: Pagination;
+}
+
+interface ArtworkListParams {
+  sort: string;
+  artworkField: string;
+  search: string;
+  page: number;
+  size: number;
+}
+
 import defaultClient from '@/apis';
 
 import { useQuery } from '@tanstack/react-query';
@@ -8,7 +42,7 @@ export const getArtworkList = async (
   search: string,
   page: number,
   size: number,
-) => {
+): Promise<ArtworkListResponse> => {
   // try {
   const response = await defaultClient.get(
     `/artwork/posts?sort=${sort}&artworkField=${artworkField}&search=${search}&page=${page}&size=${size}`,
