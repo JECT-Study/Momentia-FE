@@ -1,6 +1,7 @@
 import defaultClient from '@/apis';
 
 import { ARTWORK } from '@/constants/API';
+import QUERY_KEYS from '@/constants/queryKeys';
 
 import { ArtworkListResponse } from '@/types';
 
@@ -51,7 +52,7 @@ export const useArtworkList = ({
   size,
 }: ArtworkListParams) => {
   return useQuery<ArtworkListResponse>({
-    queryKey: ['artwork-list', sort, artworkField, search, page, size],
+    queryKey: [QUERY_KEYS.artworkList, sort, artworkField, search, page, size],
     queryFn: () => getArtworkList({ sort, artworkField, search, page, size }),
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
