@@ -8,10 +8,10 @@ import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import Pagination from '@/components/Pagination';
 
-import { useArtworkList } from '@/hooks/useArtworkList';
+import { FollowedArtist, useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
-import { FollowedArtist } from '@/mocks/artworkHandlers';
 
+import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
 
 const ArtworkList = () => {
@@ -23,8 +23,8 @@ const ArtworkList = () => {
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const ITEMS_PER_PAGE = 12;
   const filterOptions = ['최신순', '인기순', '조회순'];
+  const ITEMS_PER_PAGE = 12;
 
   const getSortValue = (filter: string) => {
     switch (filter) {
@@ -93,7 +93,7 @@ const ArtworkList = () => {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
 
-  const artworkListData = artworkList?.artwork || [];
+  const artworkListData = artworkList?.data || [];
   const artworkListPage = artworkList?.page || {
     totalDataCnt: 0,
     totalPages: 0,
@@ -139,7 +139,7 @@ const ArtworkList = () => {
                 >
                   <div className='flex items-center justify-between w-full'>
                     <div className='flex gap-[30px]'>
-                      <img
+                      <Image
                         src={
                           artist.userImage || '/images/defaultProfileImage.png'
                         }
