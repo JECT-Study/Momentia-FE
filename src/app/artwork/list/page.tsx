@@ -21,6 +21,34 @@ interface ArtworkField {
   value: string;
 }
 
+const ITEMS_PER_PAGE = 12;
+const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
+const ARTWORK_FIELDS = [
+  { name: '전체', value: 'ALL' },
+  { name: '회화', value: 'PAINTING' },
+  { name: '공예/조각', value: 'CRAFTSCULPTURE' },
+  { name: '드로잉', value: 'DRAWING' },
+  { name: '판화', value: 'PRINTMAKING' },
+  { name: '서예', value: 'CALLIGRAPHY' },
+  { name: '일러스트', value: 'ILLUSTRATION' },
+  { name: '디지털아트', value: 'DIGITALART' },
+  { name: '사진', value: 'PHOTOGRAPHY' },
+  { name: '기타', value: 'OTHERS' },
+];
+
+const getSortValue = (filter: string) => {
+  switch (filter) {
+    case '최신순':
+      return 'recent';
+    case '인기순':
+      return 'popular';
+    case '조회순':
+      return 'view';
+    default:
+      return 'recent';
+  }
+};
+
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
@@ -30,36 +58,7 @@ const ArtworkList = () => {
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const ITEMS_PER_PAGE = 12;
-  const filterOptions = ['최신순', '인기순', '조회순'];
-
-  const getSortValue = (filter: string) => {
-    switch (filter) {
-      case '최신순':
-        return 'recent';
-      case '인기순':
-        return 'popular';
-      case '조회순':
-        return 'view';
-      default:
-        return 'recent';
-    }
-  };
-
   const sortValue = getSortValue(selectedFilter);
-
-  const artworkFields = [
-    { name: '전체', value: 'ALL' },
-    { name: '회화', value: 'PAINTING' },
-    { name: '공예/조각', value: 'CRAFTSCULPTURE' },
-    { name: '드로잉', value: 'DRAWING' },
-    { name: '판화', value: 'PRINTMAKING' },
-    { name: '서예', value: 'CALLIGRAPHY' },
-    { name: '일러스트', value: 'ILLUSTRATION' },
-    { name: '디지털아트', value: 'DIGITALART' },
-    { name: '사진', value: 'PHOTOGRAPHY' },
-    { name: '기타', value: 'OTHERS' },
-  ];
 
   const handleArtworkFieldClick = (artworkField: string) => {
     setSelectedArtworkField(artworkField);
@@ -101,8 +100,7 @@ const ArtworkList = () => {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
 
-  const artworkListData = artworkList.data;
-  const artworkListPage = artworkList.page;
+  const { data: artworkListData, page: artworkListPage } = artworkList;
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
@@ -207,7 +205,7 @@ const ArtworkList = () => {
 
         <div className='flex w-full justify-between items-end pb-[59px]'>
           <DefaultCarousel
-            slides={artworkFields}
+            slides={ARTWORK_FIELDS}
             renderSlide={(artworkField: ArtworkField) => (
               <OvalButton
                 key={artworkField.value}
@@ -228,7 +226,7 @@ const ArtworkList = () => {
         <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
           <h1>공예/조각</h1>
           <FilterDropdown
-            options={filterOptions}
+            options={FILTER_OPTIONS}
             selected={selectedFilter}
             onChange={handleFilterChange}
           />
