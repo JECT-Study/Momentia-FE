@@ -7,10 +7,13 @@ import RankingLabel from '@/../public/images/rankingLabel.png';
 
 import Icon from '../Icon/Icon';
 
-const FOLLOWED_ARTISTS = 'followed-author' | 'artwork-default' | 'artwork-latest';
+type FOLLOWED_ARTISTS =
+  | 'followed-author'
+  | 'artwork-default'
+  | 'artwork-latest';
 
 interface ArtworkCardProps {
-  mode?: typeof FOLLOWED_ARTISTS;
+  mode?: FOLLOWED_ARTISTS;
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
@@ -63,7 +66,6 @@ const ArtworkCard = ({
         fill={true}
         className={postImage ? 'object-contain' : 'object-cover'}
       />
-
 
       {rank && (
         <div className='absolute top-0 left-[44px] mobile:left-[63px] z-10'>
