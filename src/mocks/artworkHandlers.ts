@@ -411,14 +411,20 @@ export const artworkHandlers = [
     const url = new URL(request.url);
     const search = url.searchParams.get('search') || '';
     const sort = url.searchParams.get('sort') || 'recent';
-    const artworkField = url.searchParams.get('artworkField') || 'ALL';
+    const artworkField = url.searchParams.get('artworkField');
 
     const filteredData = mockArtworkData
-      .filter(
-        (artwork) =>
-          (artworkField === 'ALL' || artwork.artworkField === artworkField) &&
-          (artwork.title.includes(search) || artwork.nickname.includes(search)),
-      )
+      .filter((artwork) => {
+        if (!artworkField)
+          return (
+            artwork.title.includes(search) || artwork.nickname.includes(search)
+          );
+
+        return (
+          artwork.artworkField === artworkField &&
+          (artwork.title.includes(search) || artwork.nickname.includes(search))
+        );
+      })
       .sort((a, b) => {
         switch (sort) {
           case 'popular':

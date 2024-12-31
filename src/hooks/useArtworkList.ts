@@ -9,7 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 
 interface ArtworkListParams {
   sort: string;
-  artworkField: string;
+  artworkField?: string;
   search: string;
   page: number;
   size: number;

@@ -86,7 +86,8 @@ const ArtworkList = () => {
     error: artworkListError,
   } = useArtworkList({
     sort: sortValue,
-    artworkField: selectedArtworkField,
+    artworkField:
+      selectedArtworkField === 'ALL' ? undefined : selectedArtworkField,
     search: submittedKeyword,
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
