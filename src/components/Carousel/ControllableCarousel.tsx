@@ -5,8 +5,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { IndicatorButton, useIndicatorButton } from './CarouselIndicator';
 
 import { ReactNode } from 'react';
-import ChevronLeft from '../Icon/icons/ChevronLeft';
-import ChevronRight from '../Icon/icons/ChevronRight';
+import Icon from '../Icon/Icon';
 
 type ControlledCarouselPropsType<T> = {
   slides: T[];
@@ -49,7 +48,9 @@ const ControlledCarousel = <T,>({
           onClick={onPrevButtonClick}
           disabled={prevBtnDisabled}
         >
-          <ChevronLeft
+          <Icon
+            name='ChevronRight'
+            size='s'
             className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
           />
         </button>
@@ -59,7 +60,9 @@ const ControlledCarousel = <T,>({
           onClick={onNextButtonClick}
           disabled={nextBtnDisabled}
         >
-          <ChevronRight
+          <Icon
+            name='ChevronLeft'
+            size='s'
             className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
           />
         </button>
