@@ -4,12 +4,21 @@ import { useQuery } from '@tanstack/react-query';
 
 export const getArtworkList = async () => {
   const response = await defaultClient.get('/artwork');
-  return response.data;
+  return response.data.data;
 };
 
 export const useArtworkList = () => {
-  return useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ['artwork-list'],
-    queryFn: getArtworkList,
+    queryFn: () => getArtworkList(),
   });
+
+  if (!data)
+    return {
+      data: [],
+      isLoading,
+      error,
+    };
+
+  return { data, isLoading, error };
 };
