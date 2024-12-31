@@ -10,7 +10,7 @@ import Icon from '../Icon/Icon';
 
 const FollowButton = ({
   textSize = 'button-s',
-  initFollowState = false,
+  initFollowState,
   ariaLabel,
   followUserId,
 }: FollowButtonProps) => {

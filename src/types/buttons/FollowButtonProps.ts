@@ -5,6 +5,6 @@ export interface FollowButtonProps
     BaseButtonProps,
     'children' | 'disabled' | 'loading' | 'icon' | 'iconPosition' | 'type'
   > {
-  initFollowState?: boolean;
+  initFollowState: boolean;
   followUserId: number;
 }
