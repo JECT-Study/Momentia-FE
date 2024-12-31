@@ -1,4 +1,4 @@
-import { Artwork, ArtworkListResponse } from '@/hooks/useArtworkList';
+import { ArtworkInfoType, ArtworkListResponse } from '@/types';
 
 import { http, HttpResponse } from 'msw';
 
@@ -8,7 +8,7 @@ interface FollowedArtist {
   userImage: string | null;
   userField: string | null;
   isFollow: boolean;
-  posts: (Omit<Artwork, 'userId' | 'nickname'> & {
+  posts: (Omit<ArtworkInfoType, 'userId' | 'nickname'> & {
     createdTime: string;
   })[];
 }

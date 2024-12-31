@@ -1,4 +1,6 @@
-const Pause = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Pause = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

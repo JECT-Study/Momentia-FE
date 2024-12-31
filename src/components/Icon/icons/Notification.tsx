@@ -1,4 +1,6 @@
-const Notification = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Notification = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

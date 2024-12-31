@@ -1,4 +1,6 @@
-const Dropup = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Dropup = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

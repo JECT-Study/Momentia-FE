@@ -1,41 +1,8 @@
-export interface FollowedArtist {
-  userId: number;
-  nickname: string;
-  userImage: string | null;
-  userField: string | null;
-  isFollow: boolean;
-  posts: (Artwork & { createdTime: string })[];
-}
+import defaultClient from '@/apis';
 
-export interface FollowedArtistsResponse {
-  posts: FollowedArtist[];
-}
+import { ArtworkListResponse } from '@/types';
 
-export interface Pagination {
-  totalDataCnt: number;
-  totalPages: number;
-  isLastPage: boolean;
-  isFirstPage: boolean;
-  requestPage: number;
-  requestSize: number;
-}
-
-export interface Artwork {
-  postId: number;
-  postImage: string;
-  title: string;
-  userId: number;
-  nickname: string;
-  viewCount: number;
-  likeCount: number;
-  commentCount: number;
-  isLiked: boolean;
-}
-
-export interface ArtworkListResponse {
-  data: Artwork[];
-  page: Pagination;
-}
+import { useQuery } from '@tanstack/react-query';
 
 interface ArtworkListParams {
   sort: string;
@@ -44,10 +11,6 @@ interface ArtworkListParams {
   page: number;
   size: number;
 }
-
-import defaultClient from '@/apis';
-
-import { useQuery } from '@tanstack/react-query';
 
 export const getArtworkList = async ({
   sort,

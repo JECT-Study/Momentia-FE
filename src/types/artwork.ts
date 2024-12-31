@@ -1,4 +1,6 @@
-interface ArtworkInfoType {
+import { Pagination } from './pagination';
+
+export interface ArtworkInfoType {
   postId: number;
   title: string;
   postImage: string;
@@ -8,4 +10,9 @@ interface ArtworkInfoType {
   likeCount: number;
   commentCount: number;
   isLiked: boolean;
+}
+
+export interface ArtworkListResponse {
+  data: ArtworkInfoType[];
+  page: Pagination;
 }

@@ -8,12 +8,10 @@ import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import Pagination from '@/components/Pagination';
 
-import {
-  Artwork,
-  FollowedArtist,
-  useArtworkList,
-} from '@/hooks/useArtworkList';
+import { useArtworkList } from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
+
+import { ArtworkInfoType, FollowedArtist } from '@/types';
 
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
@@ -162,7 +160,7 @@ const ArtworkList = () => {
                     <FollowButton />
                   </div>
                   <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
-                    {artist.posts.map((post: Artwork) => (
+                    {artist.posts.map((post: ArtworkInfoType) => (
                       <ArtworkCard
                         key={post.postId}
                         artworkInfo={post}
@@ -236,7 +234,7 @@ const ArtworkList = () => {
         </div>
 
         <div className='w-full flex flex-wrap gap-[40_20px] justify-center items-center content-center'>
-          {artworkListData.map((post: Artwork) => (
+          {artworkListData.map((post: ArtworkInfoType) => (
             <ArtworkCard key={post.postId} artworkInfo={post} />
           ))}
         </div>
