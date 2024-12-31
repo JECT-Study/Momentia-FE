@@ -27,7 +27,7 @@ export interface FollowedArtist {
   userImage: string | null;
   userField: string | null;
   isFollow: boolean;
-  posts: (Omit<Artwork, 'userId' | 'nickname' | 'artworkField'> & {
+  posts: (Omit<Artwork, 'userId' | 'nickname'> & {
     createdTime: string;
   })[];
 }
@@ -236,42 +236,37 @@ export const artworkHandlers = [
     ];
 
     const url = new URL(request.url);
-
     const search = url.searchParams.get('search') || '';
     const sort = url.searchParams.get('sort') || 'recent';
     const artworkField = url.searchParams.get('artworkField') || 'ALL';
 
-    const filteredByArtworkField =
-      artworkField === 'ALL'
-        ? mockArtworkData
-        : mockArtworkData.filter(
-            (artwork) => artwork.artworkField === artworkField,
-          );
-
-    const filteredBySearch = filteredByArtworkField.filter(
-      (artwork) =>
-        artwork.title.includes(search) || artwork.nickname.includes(search),
-    );
-
-    const sortedData = filteredBySearch.sort((a, b) => {
-      if (sort === 'popular') {
-        return b.likeCount - a.likeCount;
-      } else if (sort === 'view') {
-        return b.viewCount - a.viewCount;
-      } else if (sort === 'recent') {
-        return (
-          new Date(b.createdTime).getTime() - new Date(a.createdTime).getTime()
-        );
-      }
-      return 0;
-    });
+    const filteredData = mockArtworkData
+      .filter(
+        (artwork) =>
+          (artworkField === 'ALL' || artwork.artworkField === artworkField) &&
+          (artwork.title.includes(search) || artwork.nickname.includes(search)),
+      )
+      .sort((a, b) => {
+        switch (sort) {
+          case 'popular':
+            return b.likeCount - a.likeCount;
+          case 'view':
+            return b.viewCount - a.viewCount;
+          case 'recent':
+          default:
+            return (
+              new Date(b.createdTime).getTime() -
+              new Date(a.createdTime).getTime()
+            );
+        }
+      });
 
     const responseData: ArtworkResponse = {
-      data: sortedData,
+      data: filteredData,
       page: {
-        totalDataCnt: sortedData.length,
-        totalPages: Math.ceil(sortedData.length / 12),
-        isLastPage: sortedData.length <= 12,
+        totalDataCnt: filteredData.length,
+        totalPages: Math.ceil(filteredData.length / 12),
+        isLastPage: filteredData.length <= 12,
         isFirstPage: true,
         requestPage: 1,
         requestSize: 12,
