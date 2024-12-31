@@ -1,4 +1,17 @@
-interface Pagination {
+export interface FollowedArtist {
+  userId: number;
+  nickname: string;
+  userImage: string | null;
+  userField: string | null;
+  isFollow: boolean;
+  posts: (Artwork & { createdTime: string })[];
+}
+
+export interface FollowedArtistsResponse {
+  posts: FollowedArtist[];
+}
+
+export interface Pagination {
   totalDataCnt: number;
   totalPages: number;
   isLastPage: boolean;
@@ -7,7 +20,7 @@ interface Pagination {
   requestSize: number;
 }
 
-interface Artwork {
+export interface Artwork {
   postId: number;
   postImage: string;
   title: string;
@@ -19,8 +32,8 @@ interface Artwork {
   isLiked: boolean;
 }
 
-interface ArtworkListResponse {
-  artwork: Artwork[];
+export interface ArtworkListResponse {
+  data: Artwork[];
   page: Pagination;
 }
 
@@ -56,7 +69,7 @@ export const getArtworkList = async ({
     const response = await defaultClient.get('/artwork/posts', { params });
 
     return {
-      artwork: response.data.data,
+      data: response.data.data,
       page: response.data.page,
     };
   } catch (error) {
@@ -72,7 +85,7 @@ export const useArtworkList = ({
   page,
   size,
 }: ArtworkListParams) => {
-  return useQuery({
+  return useQuery<ArtworkListResponse>({
     queryKey: ['artwork-list', sort, artworkField, search, page, size],
     queryFn: () => getArtworkList({ sort, artworkField, search, page, size }),
     staleTime: 5 * 60 * 1000,

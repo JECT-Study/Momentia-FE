@@ -1,27 +1,8 @@
+import { Artwork, ArtworkListResponse } from '@/hooks/useArtworkList';
+
 import { http, HttpResponse } from 'msw';
 
-interface Pagination {
-  totalDataCnt: number;
-  totalPages: number;
-  isLastPage: boolean;
-  isFirstPage: boolean;
-  requestPage: number;
-  requestSize: number;
-}
-
-interface Artwork {
-  postId: number;
-  postImage: string;
-  title: string;
-  userId: number;
-  nickname: string;
-  viewCount: number;
-  likeCount: number;
-  commentCount: number;
-  isLiked: boolean;
-}
-
-export interface FollowedArtist {
+interface FollowedArtist {
   userId: number;
   nickname: string;
   userImage: string | null;
@@ -32,12 +13,7 @@ export interface FollowedArtist {
   })[];
 }
 
-interface ArtworkResponse {
-  data: Artwork[];
-  page: Pagination;
-}
-
-export interface FollowedArtistsResponse {
+interface FollowedArtistsResponse {
   posts: FollowedArtist[];
 }
 
@@ -461,7 +437,7 @@ export const artworkHandlers = [
 
     const paginatedData = filteredData.slice(page * size, (page + 1) * size);
 
-    const responseData: ArtworkResponse = {
+    const responseData: ArtworkListResponse = {
       data: paginatedData,
       page: {
         totalDataCnt: filteredData.length,

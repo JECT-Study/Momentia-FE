@@ -8,11 +8,20 @@ import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import Pagination from '@/components/Pagination';
 
-import { FollowedArtist, useArtworkList } from '@/hooks/useArtworkList';
+import {
+  Artwork,
+  FollowedArtist,
+  useArtworkList,
+} from '@/hooks/useArtworkList';
 import { useFollowedArtists } from '@/hooks/useFollowedArtists';
 
 import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
+
+interface ArtworkField {
+  name: string;
+  value: string;
+}
 
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
@@ -23,8 +32,8 @@ const ArtworkList = () => {
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const filterOptions = ['최신순', '인기순', '조회순'];
   const ITEMS_PER_PAGE = 12;
+  const filterOptions = ['최신순', '인기순', '조회순'];
 
   const getSortValue = (filter: string) => {
     switch (filter) {
@@ -85,7 +94,7 @@ const ArtworkList = () => {
     size: ITEMS_PER_PAGE,
   });
 
-  if (followedArtistsLoading || artworkListLoading) {
+  if (!artworkList || followedArtistsLoading || artworkListLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
   }
 
@@ -93,15 +102,8 @@ const ArtworkList = () => {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
 
-  const artworkListData = artworkList?.data || [];
-  const artworkListPage = artworkList?.page || {
-    totalDataCnt: 0,
-    totalPages: 0,
-    isLastPage: true,
-    isFirstPage: true,
-    requestPage: currentPage - 1,
-    requestSize: ITEMS_PER_PAGE,
-  };
+  const artworkListData = artworkList.data;
+  const artworkListPage = artworkList.page;
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
@@ -144,6 +146,8 @@ const ArtworkList = () => {
                           artist.userImage || '/images/defaultProfileImage.png'
                         }
                         alt={artist.nickname}
+                        width={100}
+                        height={100}
                         className='w-[50px] h-[50px] bg-gray-700 rounded-full'
                       />
                       <div className='gap-[30px]'>
@@ -158,7 +162,7 @@ const ArtworkList = () => {
                     <FollowButton />
                   </div>
                   <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
-                    {artist.posts.map((post: any) => (
+                    {artist.posts.map((post: Artwork) => (
                       <ArtworkCard
                         key={post.postId}
                         artworkInfo={post}
@@ -205,7 +209,7 @@ const ArtworkList = () => {
         <div className='flex w-full justify-between items-end pb-[59px]'>
           <DefaultCarousel
             slides={artworkFields}
-            renderSlide={(artworkField: any) => (
+            renderSlide={(artworkField: ArtworkField) => (
               <OvalButton
                 key={artworkField.value}
                 variant={
@@ -232,7 +236,7 @@ const ArtworkList = () => {
         </div>
 
         <div className='w-full flex flex-wrap gap-[40_20px] justify-center items-center content-center'>
-          {artworkListData.map((post: any) => (
+          {artworkListData.map((post: Artwork) => (
             <ArtworkCard key={post.postId} artworkInfo={post} />
           ))}
         </div>
