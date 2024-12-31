@@ -5,13 +5,12 @@ import Image from 'next/image';
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
 
-import Eye from '../Icon/icons/Eye';
-import Heart from '../Icon/icons/Heart';
-import HeartFilled from '../Icon/icons/HeartFilled';
-import Message from '../Icon/icons/Message';
+import Icon from '../Icon/Icon';
+
+const FOLLOWED_ARTISTS = 'followed-author' | 'artwork-default' | 'artwork-latest';
 
 interface ArtworkCardProps {
-  mode?: 'followed-author' | 'artwork-default' | 'artwork-latest';
+  mode?: typeof FOLLOWED_ARTISTS;
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
@@ -54,28 +53,17 @@ const ArtworkCard = ({
     'artwork-latest': 'gap-[50px] mobile:gap-[70px],',
   };
 
-  const iconSizeClassName =
-    mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]';
-
   return (
     <div
       className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]}`}
     >
-      {postImage ? (
-        <Image
-          src={postImage}
-          alt={`artwork-${postId}`}
-          fill={true}
-          className='object-cover'
-        />
-      ) : (
-        <Image
-          src={DefaultImage}
-          alt='default_image'
-          className='object-cover'
-          fill={true}
-        />
-      )}
+      <Image
+        src={postImage || DefaultImage}
+        alt={postImage ? `artwork-${postId}` : 'default_image'}
+        fill={true}
+        className={postImage ? 'object-contain' : 'object-cover'}
+      />
+
 
       {rank && (
         <div className='absolute top-0 left-[44px] mobile:left-[63px] z-10'>
@@ -104,22 +92,24 @@ const ArtworkCard = ({
           className={`button-s flex
             ${mode === 'followed-author' ? 'gap-5 items-center' : 'gap-6'}`}
         >
-          <div className={`flex items-center gap-2.5`}>
-            <Eye className={iconSizeClassName} />
+          <div className='flex items-center gap-2.5'>
+            <Icon name='Eye' size='s' />
             <span>{viewCount}</span>
           </div>
-          <div className={`flex items-center gap-2.5`}>
+          <div className='flex items-center gap-2.5'>
             {isLiked ? (
-              <HeartFilled
-                className={`text-system-error ${iconSizeClassName}`}
+              <Icon
+                name='HeartFilled'
+                size='s'
+                className='flex-shrink-0 text-system-error'
               />
             ) : (
-              <Heart className={iconSizeClassName} />
+              <Icon name='Heart' size='s' />
             )}
             <span>{likeCount}</span>
           </div>
-          <div className={`flex items-center gap-2.5`}>
-            <Message className={iconSizeClassName} />
+          <div className='flex items-center gap-2.5'>
+            <Icon name='Message' size='s' />
             <span>{commentCount}</span>
           </div>
         </div>
