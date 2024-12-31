@@ -9,3 +9,15 @@ interface ArtworkInfoType {
   commentCount: number;
   isLiked: boolean;
 }
+
+interface Pagination {
+  totalDataCnt: number;
+  totalPages: number;
+  isLastPage: boolean;
+  requestSize: number;
+}
+
+interface ArtworkResponse {
+  data: ArtworkInfoType[];
+  page: Pagination;
+}

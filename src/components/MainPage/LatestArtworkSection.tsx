@@ -3,7 +3,10 @@ import ArtworkCard from '../Card/ArtworkCard';
 import ControlledCarousel from '../Carousel/ControllableCarousel';
 
 const LatestArtworkSection = () => {
-  const { data: artWorkData, isLoading } = useArtworkList();
+  const {
+    data: { artwork },
+    isLoading,
+  } = useArtworkList('recent', '');
 
   if (isLoading) return <div>로딩중</div>; // TODO:
 
@@ -14,7 +17,7 @@ const LatestArtworkSection = () => {
         <p className='subtitle1'>신규 작품을 가장 먼저 확인해 보세요.</p>
       </div>
       <ControlledCarousel
-        slides={artWorkData}
+        slides={artwork}
         renderSlide={(info: ArtworkInfoType) => (
           <ArtworkCard artworkInfo={info} mode='artwork-latest' />
         )}
