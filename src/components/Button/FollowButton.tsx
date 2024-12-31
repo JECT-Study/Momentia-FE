@@ -29,9 +29,9 @@ const FollowButton = ({
       } else {
         await postFollow(followUserId);
       }
-      setIsLoading(false);
     } catch (error) {
       setIsFollowing(previousState);
+    } finally {
       setIsLoading(false);
     }
   };
