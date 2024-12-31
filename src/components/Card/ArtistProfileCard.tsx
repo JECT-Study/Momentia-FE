@@ -50,11 +50,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
         {/* profile thumbnail */}
         <div className='absolute left-[30px] -top-[34px] w-[69px] h-[69px] rounded-full overflow-hidden'>
-          {profileImage ? (
-            <Image src={profileImage} alt='user-profile' />
-          ) : (
-            <Image src={DefaultProfileImage} alt='default-profile' />
-          )}
+          <Image src={profileImage ?? DefaultProfileImage} alt='user-profile' />
         </div>
         {/* profile info */}
         <div className='flex flex-col gap-[10px] '>
