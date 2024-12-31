@@ -6,4 +6,9 @@ const USER = {
   validateNickname: '/user/validation/nickname',
 };
 
-export { USER };
+const ARTWORK = {
+  artworkList: '/artwork/posts',
+  followedArtists: '/artwork/followingUsers/posts',
+};
+
+export { ARTWORK, USER };

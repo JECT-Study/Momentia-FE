@@ -1,9 +1,11 @@
 import defaultClient from '@/apis';
 
+import { ARTWORK } from '@/constants/API';
+
 import { useQuery } from '@tanstack/react-query';
 
 export const getFollowedArtists = async () => {
-  const response = await defaultClient.get('/artwork/followingUsers/posts');
+  const response = await defaultClient.get(ARTWORK.followedArtists);
   return response.data.posts;
 };
 

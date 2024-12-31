@@ -1,3 +1,5 @@
+import { ARTWORK } from '@/constants/API';
+
 import { ArtworkInfoType, ArtworkListResponse } from '@/types';
 
 import { http, HttpResponse } from 'msw';
@@ -18,7 +20,7 @@ interface FollowedArtistsResponse {
 }
 
 export const artworkHandlers = [
-  http.get('/artwork/followingUsers/posts', () => {
+  http.get(ARTWORK.followedArtists, () => {
     const responseData: FollowedArtistsResponse = {
       posts: [
         {
@@ -142,7 +144,7 @@ export const artworkHandlers = [
     return HttpResponse.json(responseData, { status: 200 });
   }),
 
-  http.get('/artwork/posts', ({ request }) => {
+  http.get(ARTWORK.artworkList, ({ request }) => {
     const mockArtworkData = [
       {
         postId: 1,

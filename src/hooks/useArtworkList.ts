@@ -1,5 +1,7 @@
 import defaultClient from '@/apis';
 
+import { ARTWORK } from '@/constants/API';
+
 import { ArtworkListResponse } from '@/types';
 
 import { useQuery } from '@tanstack/react-query';
@@ -29,7 +31,7 @@ export const getArtworkList = async ({
     if (artworkField) params.artworkField = artworkField;
     if (search) params.search = search;
 
-    const response = await defaultClient.get('/artwork/posts', { params });
+    const response = await defaultClient.get(ARTWORK.artworkList, { params });
 
     return {
       data: response.data.data,
