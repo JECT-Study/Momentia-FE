@@ -54,8 +54,6 @@ export const useArtworkList = ({
   return useQuery<ArtworkListResponse>({
     queryKey: [QUERY_KEYS.artworkList, sort, artworkField, search, page, size],
     queryFn: () => getArtworkList({ sort, artworkField, search, page, size }),
-    staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
     retry: 3,
   });
 };
