@@ -17,10 +17,13 @@ import { ChangeEvent, useState } from 'react';
 const ArtworkList = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
-
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const ITEMS_PER_PAGE = 12;
   const filterOptions = ['최신순', '인기순', '조회순'];
 
   const getSortValue = (filter: string) => {
@@ -51,10 +54,9 @@ const ArtworkList = () => {
     { name: '기타', value: 'OTHERS' },
   ];
 
-  const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
-
   const handleArtworkFieldClick = (artworkField: string) => {
     setSelectedArtworkField(artworkField);
+    setCurrentPage(1);
   };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +77,13 @@ const ArtworkList = () => {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList(sortValue, submittedKeyword);
+  } = useArtworkList(
+    sortValue,
+    selectedArtworkField,
+    submittedKeyword,
+    currentPage,
+    ITEMS_PER_PAGE,
+  );
 
   if (followedArtistsLoading || artworkListLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
@@ -93,7 +101,7 @@ const ArtworkList = () => {
   };
 
   const handlePageChange = (page: number) => {
-    window.location.href = `/artwork/posts?page=${page}`;
+    setCurrentPage(page);
   };
 
   return (

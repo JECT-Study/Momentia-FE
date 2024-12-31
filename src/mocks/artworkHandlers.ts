@@ -167,11 +167,6 @@ export const artworkHandlers = [
   }),
 
   http.get('/artwork/posts', ({ request }) => {
-    const url = new URL(request.url);
-
-    const search = url.searchParams.get('search') || '';
-    const sort = url.searchParams.get('sort') || 'recent';
-
     const mockArtworkData = [
       {
         postId: 1,
@@ -179,6 +174,7 @@ export const artworkHandlers = [
         postImage: '/images/defaultArtworkImage.png',
         userId: 1,
         nickname: '김화백',
+        artworkField: 'PAINTING',
         viewCount: 1020,
         likeCount: 540,
         commentCount: 15,
@@ -191,6 +187,7 @@ export const artworkHandlers = [
         postImage: '/images/defaultArtworkImage.png',
         userId: 2,
         nickname: '이작가',
+        artworkField: 'DRAWING',
         viewCount: 890,
         likeCount: 460,
         commentCount: 12,
@@ -203,6 +200,7 @@ export const artworkHandlers = [
         postImage: '/images/defaultArtworkImage.png',
         userId: 3,
         nickname: '박디자이너',
+        artworkField: 'CRAFTSCULPTURE',
         viewCount: 1500,
         likeCount: 720,
         commentCount: 25,
@@ -215,6 +213,7 @@ export const artworkHandlers = [
         postImage: '/images/defaultArtworkImage.png',
         userId: 4,
         nickname: '최화가',
+        artworkField: 'PAINTING',
         viewCount: 640,
         likeCount: 300,
         commentCount: 8,
@@ -227,6 +226,7 @@ export const artworkHandlers = [
         postImage: '/images/defaultArtworkImage.png',
         userId: 5,
         nickname: '정예술가',
+        artworkField: 'DIGITALART',
         viewCount: 2200,
         likeCount: 1200,
         commentCount: 50,
@@ -235,12 +235,25 @@ export const artworkHandlers = [
       },
     ];
 
-    const filteredData = mockArtworkData.filter(
+    const url = new URL(request.url);
+
+    const search = url.searchParams.get('search') || '';
+    const sort = url.searchParams.get('sort') || 'recent';
+    const artworkField = url.searchParams.get('artworkField') || 'ALL';
+
+    const filteredByArtworkField =
+      artworkField === 'ALL'
+        ? mockArtworkData
+        : mockArtworkData.filter(
+            (artwork) => artwork.artworkField === artworkField,
+          );
+
+    const filteredBySearch = filteredByArtworkField.filter(
       (artwork) =>
         artwork.title.includes(search) || artwork.nickname.includes(search),
     );
 
-    const sortedData = filteredData.sort((a, b) => {
+    const sortedData = filteredBySearch.sort((a, b) => {
       if (sort === 'popular') {
         return b.likeCount - a.likeCount;
       } else if (sort === 'view') {
