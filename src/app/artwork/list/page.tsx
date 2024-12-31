@@ -77,13 +77,13 @@ const ArtworkList = () => {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList(
-    sortValue,
-    selectedArtworkField,
-    submittedKeyword,
-    currentPage,
-    ITEMS_PER_PAGE,
-  );
+  } = useArtworkList({
+    sort: sortValue,
+    artworkField: selectedArtworkField,
+    search: submittedKeyword,
+    page: currentPage - 1,
+    size: ITEMS_PER_PAGE,
+  });
 
   if (followedArtistsLoading || artworkListLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
@@ -99,8 +99,8 @@ const ArtworkList = () => {
     totalPages: 0,
     isLastPage: true,
     isFirstPage: true,
-    requestPage: 1,
-    requestSize: currentPage - 1,
+    requestPage: currentPage - 1,
+    requestSize: ITEMS_PER_PAGE,
   };
 
   const handleFilterChange = (newFilter: string) => {
