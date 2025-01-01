@@ -15,7 +15,7 @@ interface ArtworkListParams {
   size: number;
 }
 
-export const getArtworkList = async ({
+const getArtworkList = async ({
   sort,
   artworkField,
   search,
@@ -44,7 +44,7 @@ export const getArtworkList = async ({
   }
 };
 
-export const useArtworkList = ({
+const useArtworkList = ({
   sort,
   artworkField,
   search,
@@ -57,3 +57,5 @@ export const useArtworkList = ({
     retry: 3,
   });
 };
+
+export default useArtworkList;

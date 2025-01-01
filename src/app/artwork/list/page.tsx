@@ -5,7 +5,7 @@ import ArtworkSearchBar from '@/components/artwork/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/artwork/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/artwork/FollowedArtistsSection';
 
-import { useArtworkList } from '@/hooks/useArtworkList';
+import useArtworkList from '@/apis/artwork/getArtworkList';
 
 import { useState } from 'react';
 

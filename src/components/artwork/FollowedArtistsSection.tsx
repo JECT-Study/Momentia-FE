@@ -7,7 +7,7 @@ import { ArtworkInfoType, FollowedArtist } from '@/types';
 import Image from 'next/image';
 import { useState } from 'react';
 
-import { useFollowedArtists } from '@/hooks/useFollowedArtists';
+import useFollowedArtists from '@/apis/artwork/getFollowedArtists';
 
 import ArtworkCard from '../Card/ArtworkCard';
 import Icon from '../Icon/Icon';
