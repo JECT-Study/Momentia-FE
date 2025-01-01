@@ -1,6 +1,5 @@
 'use Client';
 
-import FollowButton from '@/components/Button/FollowButton';
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 
 import { ArtworkInfoType, FollowedArtist } from '@/types';
@@ -23,7 +22,7 @@ const FollowedArtistsSection = () => {
     error: followedArtistsError,
   } = useFollowedArtists();
 
-  if (followedArtistsLoading) {
+  if (!followedArtists || followedArtistsLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
   }
 
@@ -74,7 +73,7 @@ const FollowedArtistsSection = () => {
                       </p>
                     </div>
                   </div>
-                  <FollowButton />
+                  {/* <FollowButton /> */}
                 </div>
                 <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
                   {artist.posts.map((post: ArtworkInfoType) => (
@@ -89,7 +88,7 @@ const FollowedArtistsSection = () => {
             )}
           />
 
-          {!followedArtists.length && (
+          {!followedArtists && (
             <div
               className='grid flex-col col-span-full items-center justify-center
                   h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
