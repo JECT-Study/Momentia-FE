@@ -59,7 +59,7 @@ const FilterDropdown = ({
 
       {isDropdownOpen && (
         <div
-          className='w-full mt-3 bg-gray-900 rounded-[5px] shadow-lg'
+          className='absolute z-10 w-full mt-3 bg-gray-900 rounded-[5px] shadow-lg'
           role='menu'
         >
           <ul className='py-1'>

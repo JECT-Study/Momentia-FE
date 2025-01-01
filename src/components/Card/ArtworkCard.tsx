@@ -5,13 +5,12 @@ import Image from 'next/image';
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
 
-import Eye from '../Icon/icons/Eye';
-import Heart from '../Icon/icons/Heart';
-import HeartFilled from '../Icon/icons/HeartFilled';
-import Message from '../Icon/icons/Message';
+import Icon from '../Icon/Icon';
+
+const FOLLOWED_ARTISTS = 'followed-artists';
 
 interface ArtworkCardProps {
-  mode?: 'followed-author' | 'artwork-list';
+  mode?: typeof FOLLOWED_ARTISTS;
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
@@ -31,12 +30,12 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
   const formattedRank = rank && rank < 10 ? `0${rank}` : rank;
 
   const modeClasses =
-    mode === 'followed-author'
+    mode === FOLLOWED_ARTISTS
       ? 'w-full max-w-[200px] h-[267px]'
       : 'min-w-[395px] min-h-[511px]';
 
   const artworkInfoClasses =
-    mode === 'followed-author'
+    mode === FOLLOWED_ARTISTS
       ? 'gap-[10px] px-[15px] py-[15px]'
       : 'gap-[34px] px-[42px] py-[27px]';
 
@@ -44,21 +43,12 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
     <div
       className={`relative overflow-hidden group rounded-[5px] ${modeClasses}`}
     >
-      {postImage ? (
-        <Image
-          src={postImage}
-          alt={`artwork-${postId}`}
-          fill={true}
-          className='object-contain'
-        />
-      ) : (
-        <Image
-          src={DefaultImage}
-          alt='default_image'
-          className='object-cover'
-          fill={true}
-        />
-      )}
+      <Image
+        src={postImage || DefaultImage}
+        alt={postImage ? `artwork-${postId}` : 'default_image'}
+        fill={true}
+        className={postImage ? 'object-contain' : 'object-cover'}
+      />
 
       {rank && (
         <div className='absolute top-0 left-[63px] z-10'>
@@ -77,39 +67,33 @@ const ArtworkCard = ({ mode, rank, artworkInfo }: ArtworkCardProps) => {
       <div
         className={`absolute top-0 left-0 flex flex-col justify-end w-full h-full
           text-white bg-gradient-to-b from-[#00000000] to-[#000000]
-          opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-5
-          ${artworkInfoClasses}`}
+          opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-5 ${artworkInfoClasses}`}
       >
         {!mode && <div className='flex flex-col gap-[70px]'></div>}
         <p className='subtitle1'>{title}</p>
         <p className='placeholder'>{nickname}</p>
         <div
           className={`button-s flex
-            ${mode === 'followed-author' ? 'gap-5 items-center' : 'gap-6'}`}
+            ${mode === FOLLOWED_ARTISTS ? 'gap-5 items-center' : 'gap-6'}`}
         >
-          <div className={`flex items-center gap-2.5`}>
-            <Eye
-              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
-            />
+          <div className='flex items-center gap-2.5'>
+            <Icon name='Eye' size='s' />
             <span>{viewCount}</span>
           </div>
-          <div className={`flex items-center gap-2.5`}>
+          <div className='flex items-center gap-2.5'>
             {isLiked ? (
-              <HeartFilled
-                className={`text-system-error
-                  ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
+              <Icon
+                name='HeartFilled'
+                size='s'
+                className='flex-shrink-0 text-system-error'
               />
             ) : (
-              <Heart
-                className={` ${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
-              />
+              <Icon name='Heart' size='s' />
             )}
             <span>{likeCount}</span>
           </div>
-          <div className={`flex items-center gap-2.5`}>
-            <Message
-              className={`${mode === 'followed-author' ? 'w-[16px] h-[16px]' : 'w-[18px] h-[18px]'}`}
-            />
+          <div className='flex items-center gap-2.5'>
+            <Icon name='Message' size='s' />
             <span>{commentCount}</span>
           </div>
         </div>

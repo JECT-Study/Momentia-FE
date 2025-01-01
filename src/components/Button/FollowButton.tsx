@@ -12,12 +12,22 @@ interface FollowButtonProps {
 const FollowButton = ({ onClick, ariaLabel }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(false);
 
-  const toggleFollow = () => {
+  const toggleFollow = async () => {
+    setIsLoading(true);
+
+    const previousState = isFollowing;
     setIsFollowing((prev) => !prev);
 
-    // 외부에서 전달받은 onClick 함수 실행
-    if (onClick) {
-      onClick();
+    try {
+      if (previousState) {
+        await deleteFollow(followUserId);
+      } else {
+        await postFollow(followUserId);
+      }
+    } catch (error) {
+      setIsFollowing(previousState);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -31,12 +41,13 @@ const FollowButton = ({ onClick, ariaLabel }: FollowButtonProps) => {
         bg-gray-800 text-white
         ${
           isFollowing
-            ? 'border	border-gray-300 text-gray-300 bg-transparent'
+            ? 'border	border-gray-900 text-gray-900 bg-white'
             : 'bg-gray-800 text-white'
         }
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
       `}
+      disabled={isLoading}
     >
       {isFollowing ? (
         <>
