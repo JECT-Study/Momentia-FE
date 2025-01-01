@@ -24,14 +24,13 @@ const getMonthlyPopularArtworks = async () => {
 const useGetMonthlyPopularArtworks = () => {
   const { data, isLoading } = useQuery({
     queryKey: [MONTHLY.popularArtwork],
-    queryFn: () => getMonthlyPopularArtworks(),
+    queryFn: getMonthlyPopularArtworks,
   });
 
-  if (!data) return { artworksInfo: [] as ArtworkInfoType[], isLoading };
-
   return {
-    artworksInfo: data,
+    artworksInfo: data || ([] as ArtworkInfoType[]),
     isLoading,
   };
 };
+
 export default useGetMonthlyPopularArtworks;

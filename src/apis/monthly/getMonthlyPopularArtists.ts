@@ -24,16 +24,10 @@ const getMonthlyPopularArtists = async () => {
 const useGetMonthlyPopularArtists = () => {
   const { data, isLoading } = useQuery({
     queryKey: [MONTHLY.artistOfTheMonth],
-    queryFn: () => getMonthlyPopularArtists(),
+    queryFn: getMonthlyPopularArtists,
   });
 
-  if (!data)
-    return {
-      cardsInfo: [],
-      isLoading,
-    };
-
-  return { cardsInfo: data, isLoading };
+  return { cardsInfo: data || [], isLoading };
 };
 
 export default useGetMonthlyPopularArtists;
