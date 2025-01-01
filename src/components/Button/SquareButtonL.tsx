@@ -1,23 +1,5 @@
 import { SquareButtonLProps } from '@/types';
 
-export const bgColorClasses = {
-  primary: 'bg-main',
-  secondary: 'bg-gray-200',
-  tertiaty: 'bg-gray-800',
-};
-
-export const hoverBgColorClasses = {
-  primary: 'hover:bg-[#885DFF]',
-  secondary: 'hover:bg-gray-300',
-  tertiaty: 'hover:bg-gray-700',
-};
-
-const textColorClasses = {
-  primary: 'text-white',
-  secondary: 'text-gray-500',
-  tertiaty: 'text-gray-300',
-};
-
 const SquareButtonL = ({
   variant = 'tertiaty',
   children,
@@ -30,6 +12,24 @@ const SquareButtonL = ({
   iconPosition,
   type = 'button',
 }: SquareButtonLProps) => {
+  const bgColorClasses = {
+    primary: 'bg-main',
+    secondary: 'bg-gray-200',
+    tertiaty: 'bg-gray-800',
+  };
+
+  const hoverBgColorClasses = {
+    primary: 'hover:bg-[#885DFF]',
+    secondary: 'hover:bg-gray-300',
+    tertiaty: 'hover:bg-gray-700',
+  };
+
+  const textColorClasses = {
+    primary: 'text-white',
+    secondary: 'text-gray-500',
+    tertiaty: 'text-gray-300',
+  };
+
   return (
     <button
       type={type}
@@ -40,10 +40,9 @@ const SquareButtonL = ({
         button-m flex items-center justify-center rounded-md
         w-[420px] h-[70px] px-[175px] py-[20px] gap-[20px]
         ${disabled ? bgColorClasses['secondary'] : bgColorClasses[variant]} 
-        ${disabled ? textColorClasses['secondary'] : textColorClasses[variant]} 
         ${disabled ? 'cursor-not-allowed' : hoverBgColorClasses[variant]}
-        hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
-        transition-all duration-300 ease-in-out
+        ${disabled ? textColorClasses['secondary'] : textColorClasses[variant]} 
+        transition-all duration-300 ease-in-out active:scale-95
       `}
     >
       {loading && <span>로딩중...</span>}

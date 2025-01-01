@@ -1,18 +1,5 @@
 import { OvalButtonProps } from '@/types';
 
-import { bgColorClasses, hoverBgColorClasses } from './SquareButtonL';
-
-const textColorClasses = {
-  primary: 'text-white',
-  secondary: 'text-gray-600',
-  tertiaty: 'text-gray-300',
-};
-
-const buttonSizeClasses = {
-  m: 'inline-flex h-[69px] px-[46px] py-[17px]',
-  s: 'flex w-[99px] h-[50px] px-[34px] py-[20px]',
-};
-
 const OvalButton = ({
   variant = 'primary',
   buttonSize,
@@ -21,18 +8,40 @@ const OvalButton = ({
   onClick,
   ariaLabel,
 }: OvalButtonProps) => {
+  const bgColorClasses = {
+    primary: 'bg-main',
+    secondary: buttonSize === 'm' ? '' : 'bg-gray-200',
+    tertiaty: buttonSize === 'm' ? 'bg-gray-800' : 'bg-gray-700',
+  };
+
+  const hoverBgColorClasses = {
+    primary: 'hover:bg-[#885DFF]',
+    secondary: buttonSize === 'm' ? '' : 'hover:bg-gray-300',
+    tertiaty: '',
+  };
+
+  const textColorClasses = {
+    primary: 'text-white',
+    secondary: buttonSize === 'm' ? 'text-transparent' : 'text-gray-600',
+    tertiaty: buttonSize === 'm' ? 'text-white' : 'text-gray-300',
+  };
+
+  const buttonSizeClasses = {
+    m: 'flex h-[69px] px-[46px] py-[17px]',
+    s: 'flex w-[99px] h-[50px] px-[34px] py-[20px]',
+  };
+
   return (
     <button
       onClick={onClick}
       aria-label={ariaLabel}
       className={`
-        items-center justify-center rounded-full gap-[10px]
+        items-center justify-center rounded-full gap-[10px] 
         ${bgColorClasses[variant]}
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}
         ${buttonSizeClasses[buttonSize]}
-        hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
-        transition-all duration-300 ease-in-out
+        transition-all duration-300 ease-in-out active:scale-95
       `}
     >
       {buttonSize === 'm' ? (
