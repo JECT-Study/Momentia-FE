@@ -53,7 +53,7 @@ const ArtworkCard = ({
   const artworkInfoGapClass: Record<string, string> = {
     'followed-author': 'gap-[70px]',
     'artwork-default': 'gap-[70px] mobile:gap-[90px]',
-    'artwork-latest': 'gap-[50px] mobile:gap-[70px],',
+    'artwork-latest': 'gap-[50px] mobile:gap-[70px]',
   };
 
   return (
