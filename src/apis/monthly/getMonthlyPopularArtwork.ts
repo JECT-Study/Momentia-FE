@@ -7,7 +7,7 @@ interface PopularArtworkResponseType {
   posts: ArtworkInfoType[];
 }
 
-const getMonthlyPopularArtworsk = async () => {
+const getMonthlyPopularArtworks = async () => {
   try {
     const { data } = await defaultClient.get<PopularArtworkResponseType>(
       MONTHLY.popularArtwork,
@@ -24,7 +24,7 @@ const getMonthlyPopularArtworsk = async () => {
 const useGetMonthlyPopularArtworks = () => {
   const { data, isLoading } = useQuery({
     queryKey: [MONTHLY.popularArtwork],
-    queryFn: () => getMonthlyPopularArtworsk(),
+    queryFn: () => getMonthlyPopularArtworks(),
   });
 
   if (!data) return { artworksInfo: [] as ArtworkInfoType[], isLoading };
