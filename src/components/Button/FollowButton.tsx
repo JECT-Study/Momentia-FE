@@ -2,15 +2,20 @@
 
 import { useState } from 'react';
 
+import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
+
+import deleteFollow from '@/apis/follow/deleteFollow';
+import postFollow from '@/apis/follow/postFollow';
+
 import Icon from '../Icon/Icon';
 
-interface FollowButtonProps {
-  onClick?: () => void;
-  ariaLabel?: string;
-}
-
-const FollowButton = ({ onClick, ariaLabel }: FollowButtonProps) => {
-  const [isFollowing, setIsFollowing] = useState(false);
+const FollowButton = ({
+  initFollowState,
+  followUserId,
+  ariaLabel,
+}: FollowButtonProps) => {
+  const [isFollowing, setIsFollowing] = useState(initFollowState);
+  const [isLoading, setIsLoading] = useState(false);
 
   const toggleFollow = async () => {
     setIsLoading(true);
@@ -38,7 +43,6 @@ const FollowButton = ({ onClick, ariaLabel }: FollowButtonProps) => {
       className={`
         button-s flex items-center justify-center rounded-full
         w-[95px] h-[37px] gap-[3px] ml-auto
-        bg-gray-800 text-white
         ${
           isFollowing
             ? 'border	border-gray-900 text-gray-900 bg-white'
