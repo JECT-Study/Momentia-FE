@@ -27,8 +27,8 @@ const OvalButton = ({
   };
 
   const buttonSizeClasses = {
-    m: 'flex h-[69px] px-[46px] py-[17px]',
-    s: 'flex w-[99px] h-[50px] px-[34px] py-[20px]',
+    m: 'h-[69px] px-[46px] py-[17px]',
+    s: 'w-[99px] h-[50px] px-[34px] py-[20px]',
   };
 
   return (
@@ -36,12 +36,12 @@ const OvalButton = ({
       onClick={onClick}
       aria-label={ariaLabel}
       className={`
-        items-center justify-center rounded-full gap-[10px] 
+        flex items-center justify-center rounded-full gap-[10px]
+        transition-all duration-300 ease-in-out active:scale-95
         ${bgColorClasses[variant]}
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}
         ${buttonSizeClasses[buttonSize]}
-        transition-all duration-300 ease-in-out active:scale-95
       `}
     >
       {buttonSize === 'm' ? (
