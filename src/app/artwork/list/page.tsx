@@ -12,8 +12,8 @@ import { useState } from 'react';
 const ArtworkList = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
+  const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
   const ITEMS_PER_PAGE = 12;

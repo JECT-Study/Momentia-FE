@@ -70,6 +70,7 @@ const ArtworkFilter = ({
           )}
         />
       </div>
+
       <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
         <h1>{selectedArtworkFieldName}</h1>
         <FilterDropdown
