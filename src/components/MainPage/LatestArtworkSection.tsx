@@ -8,7 +8,7 @@ const LatestArtworkSection = () => {
     isLoading,
   } = useArtworkList('recent', '');
 
-  if (isLoading) return <div>로딩중</div>; // TODO:
+  if (isLoading) return <div>로딩중</div>;
 
   return (
     <div className='flex flex-col gap-[90px]'>
