@@ -1,4 +1,4 @@
-export interface Pagination {
+export interface PaginationType {
   totalDataCnt: number;
   totalPages: number;
   isLastPage: boolean;

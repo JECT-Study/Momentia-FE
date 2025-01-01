@@ -1,4 +1,4 @@
-import { Pagination } from './pagination';
+import { PaginationType } from './pagination';
 
 export interface ArtworkInfoType {
   postId: number;
@@ -14,5 +14,5 @@ export interface ArtworkInfoType {
 
 export interface ArtworkListResponse {
   data: ArtworkInfoType[];
-  page: Pagination;
+  page: PaginationType;
 }
