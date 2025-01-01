@@ -21,7 +21,7 @@ export const getArtworkList = async ({
   search,
   page,
   size,
-}: ArtworkListParams): Promise<ArtworkListResponse> => {
+}: ArtworkListParams) => {
   try {
     const params: Record<string, string | number> = {
       sort,
