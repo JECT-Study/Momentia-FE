@@ -17,21 +17,13 @@ const ArtworkList = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const ITEMS_PER_PAGE = 12;
-
-  const getSortValue = (filter: string) => {
-    switch (filter) {
-      case '최신순':
-        return 'recent';
-      case '인기순':
-        return 'popular';
-      case '조회순':
-        return 'view';
-      default:
-        return 'recent';
-    }
+  const SORT_MAPPING: Record<string, string> = {
+    최신순: 'recent',
+    인기순: 'popular',
+    조회순: 'view',
   };
 
-  const sortValue = getSortValue(selectedFilter);
+  const sortValue = SORT_MAPPING[selectedFilter] || 'recent';
 
   const {
     data: artworkList,
