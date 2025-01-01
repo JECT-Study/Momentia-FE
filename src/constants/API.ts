@@ -4,6 +4,7 @@ const USER = {
   socialSignIn: '/user/login/social',
   validateEmail: '/user/validation/email',
   validateNickname: '/user/validation/nickname',
+  follow: '/user/follow',
 };
 
 const ARTWORK = {

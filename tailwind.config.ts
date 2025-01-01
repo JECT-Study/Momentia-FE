@@ -49,6 +49,10 @@ export default {
         '78.25': '313px',
       },
     },
+    screens: {
+      mobile: '677px',
+      tablet: '1400px',
+    },
   },
   plugins: [
     nextui({
