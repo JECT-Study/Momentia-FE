@@ -75,7 +75,7 @@ const Pagination = ({
         id='number-buttons'
       >
         {visiblePages.map((page, index) =>
-          page === totalPages ? (
+          page === -1 && page !== totalPages ? (
             <span key={`ellipsis-${index}`} className='flex items-center'>
               <Icon name='MoreHorizontal' size='s' className='mx-[13px]' />
               <span className='mx-[18px]'>{totalPages}</span>
