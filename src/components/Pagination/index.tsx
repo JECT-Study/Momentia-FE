@@ -48,7 +48,7 @@ const Pagination = ({
     <div className='flex items-center justify-center gap-6'>
       <div className='flex gap-1' id='first-previous-buttons'>
         <button
-          onClick={() => onPageChange(0)}
+          onClick={() => onPageChange(1)}
           disabled={isFirstPage}
           aria-label='Go to first page'
           className={`p-2 rounded ${
@@ -59,7 +59,7 @@ const Pagination = ({
         </button>
 
         <button
-          onClick={() => onPageChange(currentPage - 1)}
+          onClick={() => onPageChange(currentPage)}
           disabled={isFirstPage}
           aria-label='Go to previous page'
           className={`p-2 rounded ${
@@ -70,33 +70,38 @@ const Pagination = ({
         </button>
       </div>
 
-      <div className='flex gap-1' id='number-buttons'>
+      <div
+        className='button-s flex items-center text-gray-600'
+        id='number-buttons'
+      >
         {visiblePages.map((page, index) =>
           page === -1 ? (
-            <span key={`ellipsis-${index}`} className='p-3'>
-              <Icon name='MoreHorizontal' size='s' className='text-gray-600' />
+            <span key={`ellipsis-${index}`} className='flex items-center'>
+              <Icon name='MoreHorizontal' size='s' className='mx-[13px]' />
+              <span className='mx-[18px]'>{totalPages}</span>
             </span>
           ) : (
-            <button
-              key={page}
-              onClick={() => onPageChange(page + 1)}
-              aria-current={page === currentPage ? 'page' : undefined}
-              className={`button-s flex flex-col justify-center items-center rounded-full
-                w-[46px] h-[46px] p-[13px 7px] gap-[10px] ${
+            <div>
+              <button
+                key={page}
+                onClick={() => onPageChange(page + 1)}
+                aria-current={page === currentPage ? 'page' : undefined}
+                className={`rounded-full w-[46px] h-[46px] p-[13px 7px] ${
                   page === currentPage
                     ? 'text-white bg-main'
                     : 'text-gray-600 hover:bg-gray-900'
                 }`}
-            >
-              {page + 1}
-            </button>
+              >
+                {page + 1}
+              </button>
+            </div>
           ),
         )}
       </div>
 
       <div className='flex gap-1' id='next-last-buttons'>
         <button
-          onClick={() => onPageChange(currentPage + 1)}
+          onClick={() => onPageChange(currentPage + 2)}
           disabled={isLastPage}
           aria-label='Go to next page'
           className={`p-2 rounded ${
@@ -107,7 +112,7 @@ const Pagination = ({
         </button>
 
         <button
-          onClick={() => onPageChange(totalPages - 1)}
+          onClick={() => onPageChange(totalPages)}
           disabled={isLastPage}
           aria-label='Go to last page'
           className={`p-2 rounded ${
