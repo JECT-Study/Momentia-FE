@@ -9,6 +9,7 @@ import { useState } from 'react';
 
 import useFollowedArtists from '@/apis/artwork/getFollowedArtists';
 
+import FollowButton from '../Button/FollowButton';
 import ArtworkCard from '../Card/ArtworkCard';
 import Icon from '../Icon/Icon';
 
@@ -73,7 +74,10 @@ const FollowedArtistsSection = () => {
                       </p>
                     </div>
                   </div>
-                  {/* <FollowButton /> */}
+                  <FollowButton
+                    initFollowState={artist.isFollow}
+                    followUserId={artist.userId}
+                  />
                 </div>
                 <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
                   {artist.posts.map((post: ArtworkInfoType) => (
