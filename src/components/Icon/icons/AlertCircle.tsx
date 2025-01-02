@@ -1,4 +1,6 @@
-const AlertCircle = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const AlertCircle = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

@@ -1,4 +1,6 @@
-const Controller = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Controller = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

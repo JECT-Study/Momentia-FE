@@ -1,4 +1,6 @@
-const Bookmark = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Bookmark = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

@@ -1,4 +1,6 @@
-const ArrowRight = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const ArrowRight = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

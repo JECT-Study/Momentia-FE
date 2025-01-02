@@ -1,4 +1,6 @@
-const HeartFilled = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const HeartFilled = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

@@ -11,8 +11,8 @@ const Pagination = ({
   totalPages,
   onPageChange,
 }: PaginationProps) => {
-  const isFirstPage = currentPage === 1;
-  const isLastPage = currentPage === totalPages;
+  const isFirstPage = currentPage === 0;
+  const isLastPage = currentPage === totalPages - 1;
 
   const calculateVisiblePages = (
     currentPage: number,
@@ -20,14 +20,14 @@ const Pagination = ({
     maxVisiblePages: number,
   ): number[] => {
     if (totalPages <= maxVisiblePages) {
-      return Array.from({ length: totalPages }, (_, i) => i + 1);
+      return Array.from({ length: totalPages }, (_, i) => i);
     }
 
-    const currentPageGroup = Math.ceil(currentPage / maxVisiblePages);
-    const groupStartPage = (currentPageGroup - 1) * maxVisiblePages + 1;
+    const currentPageGroup = Math.floor(currentPage / maxVisiblePages);
+    const groupStartPage = currentPageGroup * maxVisiblePages;
     const groupEndPage = Math.min(
-      currentPageGroup * maxVisiblePages,
-      totalPages,
+      groupStartPage + maxVisiblePages - 1,
+      totalPages - 1,
     );
 
     const visiblePages = Array.from(
@@ -35,9 +35,8 @@ const Pagination = ({
       (_, i) => groupStartPage + i,
     );
 
-    if (groupEndPage < totalPages) {
-      if (groupEndPage < totalPages - 1) visiblePages.push(-1);
-      visiblePages.push(totalPages);
+    if (groupEndPage < totalPages - 1) {
+      visiblePages.push(-1);
     }
 
     return visiblePages;
@@ -49,7 +48,7 @@ const Pagination = ({
     <div className='flex items-center justify-center gap-6'>
       <div className='flex gap-1' id='first-previous-buttons'>
         <button
-          onClick={() => onPageChange(1)}
+          onClick={() => onPageChange(0)}
           disabled={isFirstPage}
           aria-label='Go to first page'
           className={`p-2 rounded ${
@@ -80,7 +79,7 @@ const Pagination = ({
           ) : (
             <button
               key={page}
-              onClick={() => onPageChange(page)}
+              onClick={() => onPageChange(page + 1)}
               aria-current={page === currentPage ? 'page' : undefined}
               className={`button-s flex flex-col justify-center items-center rounded-full
                 w-[46px] h-[46px] p-[13px 7px] gap-[10px] ${
@@ -89,7 +88,7 @@ const Pagination = ({
                     : 'text-gray-600 hover:bg-gray-900'
                 }`}
             >
-              {page}
+              {page + 1}
             </button>
           ),
         )}
@@ -108,7 +107,7 @@ const Pagination = ({
         </button>
 
         <button
-          onClick={() => onPageChange(totalPages)}
+          onClick={() => onPageChange(totalPages - 1)}
           disabled={isLastPage}
           aria-label='Go to last page'
           className={`p-2 rounded ${

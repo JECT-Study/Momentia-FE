@@ -1,4 +1,6 @@
-const CheckCircle = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const CheckCircle = ({ className }: IconProps) => {
   return (
     <svg
       className={className}
