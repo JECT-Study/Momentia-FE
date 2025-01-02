@@ -21,7 +21,9 @@ const AppShell = ({ children }: { children: ReactNode }) => {
         >
           <div className='box-border h-full'>
             <Navbar />
-            <main className='pt-[90px] lg:pt-[60px] h-full'>{children}</main>
+            <main className='pt-[90px] lg:pt-[60px] min-h-full flex flex-col'>
+              {children}
+            </main>
             <Footer />
           </div>
         </NextThemesProvider>
