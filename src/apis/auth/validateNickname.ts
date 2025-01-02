@@ -9,7 +9,7 @@ import { isAxiosError } from 'axios';
 
 const getValidateNickname = async (nickname: string) => {
   try {
-    const response = await defaultClient.get<null>(USER.validateEmail, {
+    const response = await defaultClient.get<null>(USER.validateNickname, {
       params: {
         nickname,
       },
