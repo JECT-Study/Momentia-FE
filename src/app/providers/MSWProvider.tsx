@@ -3,17 +3,23 @@
 import { ReactNode, useEffect, useState } from 'react';
 
 const MSWProvider = ({ children }: { children: ReactNode }) => {
-  const [mswReady, setMswReady] = useState(false);
+  const [isMSWReady, setIsMSWReady] = useState(false);
 
   useEffect(() => {
-    const init = async () => {
-      const initMsw = await import('@/mocks').then((res) => res.initMsw);
-      await initMsw();
-      setMswReady(true);
+    const initMsw = async () => {
+      if (process.env.NODE_ENV === 'development') {
+        const { initMsw } = await import('@/mocks');
+        await initMsw();
+      }
+      setIsMSWReady(true);
     };
 
-    if (!mswReady) init();
-  }, [mswReady]);
+    initMsw();
+  }, []);
+
+  if (!isMSWReady) {
+    return <div>Loading Mock Service Worker...</div>;
+  }
 
   return <>{children}</>;
 };
