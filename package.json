@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev:server": "NEXT_PUBLIC_USE_MSW=false next dev --turbopack -p 8080",
+    "dev:test": "NEXT_PUBLIC_USE_MSW=true next dev --turbopack -p 8080",
     "build": "next build",
     "start": "next start",
     "lint": "next lint . --ext .js,.jsx,.ts,.tsx",
