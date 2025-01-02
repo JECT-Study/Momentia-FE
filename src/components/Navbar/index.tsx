@@ -17,7 +17,10 @@ const Navbar = () => {
   return (
     <>
       <nav className='fixed top-0 w-full bg-black text-white z-50'>
-        <div className='max-w-[1640px] mx-auto flex justify-between items-center px-[32px] lg:px-[140px] py-[29px] h-[90px] lg:h-[60px]'>
+        <div
+          className='max-w-[1640px] mx-auto flex justify-between items-center
+        px-[32px] lg:px-[140px] py-[29px] h-[90px] lg:h-[60px]'
+        >
           <div className='flex-shrink-0'>
             <Link href='/'>
               <Image src={logo} alt='모멘티아 로고' width={45} priority />

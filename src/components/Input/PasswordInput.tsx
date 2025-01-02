@@ -1,69 +1,45 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-
-import { useEffect, useState } from 'react';
-
+import { debounce } from 'lodash';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import Icon from '../Icon/Icon';
-
-const PASSWORD_REGEX =
-  /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/;
 
 interface PasswordnputProps {
   mode: 'sign-up' | 'sign-in';
 }
 
 const PasswordInput = ({ mode }: PasswordnputProps) => {
-  const [validationMessage, setValidationMessage] = useState('');
-  const [validationMessageColor, setValidationMessageColor] = useState('');
+  const [isPasswordValidating, setIsPasswordValidating] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const {
     register,
     watch,
+    setValue,
+    trigger,
     formState: { errors },
   } = useFormContext();
 
   const password = watch('password');
 
-  const isPasswordInvalid = (password: string) =>
-    password !== '' && PASSWORD_REGEX.test(password);
-
-  useEffect(() => {
-    if (mode !== 'sign-up') return;
-
-    if (isPasswordInvalid(password)) {
-      setValidationMessage(
-        '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
-      );
-      setValidationMessageColor('text-system-error');
-    } else if (password) {
-      setValidationMessage('사용 가능한 비밀번호입니다.');
-      setValidationMessageColor('text-system-success');
-    } else {
-      setValidationMessage('');
-    }
-  }, [password]);
-
-  useEffect(() => {
-    if (errors.password) {
-      setValidationMessage(errors.password?.message as string);
-      setValidationMessageColor('text-system-error');
-    }
-  }, [errors]);
-
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
+
+  const handlePasswordInputOnChange = debounce(async (e) => {
+    setValue('password', e.target.value);
+
+    setIsPasswordValidating(true);
+    await trigger('password');
+    setIsPasswordValidating(false);
+  }, 300);
 
   return (
     <div>
       <Input
-        {...register('password', {
-          required: true,
-          pattern: PASSWORD_REGEX,
-        })}
+        {...register('password')}
         type={isPasswordVisible ? 'text' : 'password'}
         label='비밀번호'
         labelPlacement='outside'
@@ -73,6 +49,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
+        onChange={handlePasswordInputOnChange}
         endContent={
           <button
             type='button'
@@ -96,27 +73,45 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
           </button>
         }
       />
-
-      {validationMessage && (
-        <div className='flex items-center mt-2'>
-          {validationMessageColor === 'text-system-success' ? (
+      <div className='flex items-center mt-2'>
+        {errors.password ? (
+          <>
             <Icon
               name='CheckCircleFilled'
               size='s'
-              className='text-system-success mr-1'
-            />
-          ) : (
-            <Icon
-              name='AlertCircle'
-              size='s'
               className='text-system-error mr-2'
             />
-          )}
-          <p className={`button-s ${validationMessageColor}`}>
-            {validationMessage}
-          </p>
-        </div>
-      )}
+            <p className='button-s text-system-error'>
+              {errors.password.message as string}
+            </p>
+          </>
+        ) : (
+          mode === 'sign-up' &&
+          (password !== '' && isPasswordValidating ? (
+            <>
+              <Icon
+                name='AlertCircle'
+                size='s'
+                className='text-gray-400 mr-2'
+              />
+              <p className='button-s text-gray-400'>패스워드 검증 중...</p>
+            </>
+          ) : (
+            !!password && (
+              <>
+                <Icon
+                  name='AlertCircle'
+                  size='s'
+                  className='text-system-success mr-2'
+                />
+                <p className='button-s text-system-success'>
+                  사용가능한 비밀번호입니다.
+                </p>
+              </>
+            )
+          ))
+        )}
+      </div>
     </div>
   );
 };
