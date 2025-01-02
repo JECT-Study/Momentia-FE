@@ -81,7 +81,7 @@ const Pagination = ({
               <span className='mx-[18px]'>{totalPages}</span>
             </span>
           ) : (
-            <div>
+            <div key={`page-${page}`}>
               <button
                 key={page}
                 onClick={() => onPageChange(page + 1)}
