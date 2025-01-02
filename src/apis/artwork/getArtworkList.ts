@@ -44,16 +44,10 @@ const getArtworkList = async ({
   }
 };
 
-const useArtworkList = ({
-  sort,
-  artworkField,
-  search,
-  page,
-  size,
-}: ArtworkListParams) => {
+const useArtworkList = (params: ArtworkListParams) => {
   return useQuery<ArtworkListResponse>({
-    queryKey: [QUERY_KEYS.artworkList, sort, artworkField, search, page, size],
-    queryFn: () => getArtworkList({ sort, artworkField, search, page, size }),
+    queryKey: [QUERY_KEYS.artworkList, params],
+    queryFn: () => getArtworkList({ ...params }),
     retry: 3,
   });
 };
