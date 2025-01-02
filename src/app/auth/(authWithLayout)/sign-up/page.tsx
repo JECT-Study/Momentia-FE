@@ -39,6 +39,7 @@ const signUpValidationSchema = object({
     .max(MAX_NICKNAME_LENGTH, '최대 닉네임 길이를 초과했습니다.')
     .regex(NICKNAME_REGEX, '한글, 영어, 숫자로 구성된 닉네임을 입력해주세요.')
     .refine(async (nickname) => {
+      if (nickname === '') return true;
       const isDuplicated = await getValidateNickname(nickname);
       return isDuplicated;
     }, '이미 사용중인 닉네임입니다.'),
@@ -63,7 +64,7 @@ const SignUpPage = () => {
   const { isValid: isFormDataValid } = formHandlerMethods.formState;
 
   return (
-    <div className='flex flex-col justify-center items-center gap-[60px]'>
+    <div className='h-full flex flex-col justify-center items-center gap-[60px]'>
       <h4>회원가입</h4>
       <FormProvider {...formHandlerMethods}>
         <form
