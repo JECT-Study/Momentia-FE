@@ -7,9 +7,14 @@ const USER = {
   follow: '/user/follow',
 };
 
+const MONTHLY = {
+  artistOfTheMonth: '/users/top10',
+  popularArtwork: '/artwork/posts/popular',
+};
+
 const ARTWORK = {
   artworkList: '/artwork/posts',
   followedArtists: '/artwork/followingUsers/posts',
 };
 
-export { ARTWORK, USER };
+export { ARTWORK, MONTHLY, USER };

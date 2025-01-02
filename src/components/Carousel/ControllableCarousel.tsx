@@ -49,8 +49,8 @@ const ControlledCarousel = <T,>({
           disabled={prevBtnDisabled}
         >
           <Icon
-            name='ChevronRight'
-            size='s'
+            name='ChevronLeft'
+            size='xl'
             className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
           />
         </button>
@@ -61,8 +61,8 @@ const ControlledCarousel = <T,>({
           disabled={nextBtnDisabled}
         >
           <Icon
-            name='ChevronLeft'
-            size='s'
+            name='ChevronRight'
+            size='xl'
             className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
           />
         </button>
