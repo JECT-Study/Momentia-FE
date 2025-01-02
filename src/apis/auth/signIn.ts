@@ -3,7 +3,9 @@ import {
   COMMON_ERROR_MESSAGE,
   SIGNIN_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import { AuthTokenType, SignInFormType } from '@/types/auth';
 
+import TokenHandler from '@/utils/tokenHandler';
 import defaultClient from '..';
 
 import { useMutation } from '@tanstack/react-query';
@@ -25,7 +27,8 @@ const usePostSignIn = () => {
   return useMutation({
     mutationKey: [USER.signIn],
     mutationFn: (formData: SignInFormType) => postSignIn(formData),
-    onSuccess: () => {
+    onSuccess: (data) => {
+      TokenHandler.setToken(data);
       router.push('/');
     },
     onError: (error) => {

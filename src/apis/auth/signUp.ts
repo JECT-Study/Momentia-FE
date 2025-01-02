@@ -3,7 +3,9 @@ import {
   COMMON_ERROR_MESSAGE,
   SIGNUP_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import { AuthTokenType, SignUpFormType } from '@/types/auth';
 
+import TokenHandler from '@/utils/tokenHandler';
 import defaultClient from '..';
 
 import { useMutation } from '@tanstack/react-query';
@@ -25,7 +27,10 @@ const usePostSignUp = () => {
   return useMutation({
     mutationKey: [USER.signUp],
     mutationFn: (formData: SignUpFormType) => postSignUp(formData),
-    onSuccess: () => router.push('/'),
+    onSuccess: (data) => {
+      TokenHandler.setToken(data);
+      router.push('/');
+    },
     onError: (error) => {
       if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
         const { code } = error;
