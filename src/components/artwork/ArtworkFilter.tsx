@@ -15,6 +15,20 @@ interface ArtworkField {
   value: string;
 }
 
+const ARTWORK_FIELDS = [
+  { name: '전체', value: 'ALL' },
+  { name: '회화', value: 'PAINTING' },
+  { name: '공예/조각', value: 'CRAFTSCULPTURE' },
+  { name: '드로잉', value: 'DRAWING' },
+  { name: '판화', value: 'PRINTMAKING' },
+  { name: '서예', value: 'CALLIGRAPHY' },
+  { name: '일러스트', value: 'ILLUSTRATION' },
+  { name: '디지털아트', value: 'DIGITALART' },
+  { name: '사진', value: 'PHOTOGRAPHY' },
+  { name: '기타', value: 'OTHERS' },
+];
+const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
+
 const ArtworkFilter = ({
   selectedArtworkField,
   setSelectedArtworkField,
@@ -22,20 +36,6 @@ const ArtworkFilter = ({
   setSelectedFilter,
   setCurrentPage,
 }: ArtworkFilterProps) => {
-  const ARTWORK_FIELDS = [
-    { name: '전체', value: 'ALL' },
-    { name: '회화', value: 'PAINTING' },
-    { name: '공예/조각', value: 'CRAFTSCULPTURE' },
-    { name: '드로잉', value: 'DRAWING' },
-    { name: '판화', value: 'PRINTMAKING' },
-    { name: '서예', value: 'CALLIGRAPHY' },
-    { name: '일러스트', value: 'ILLUSTRATION' },
-    { name: '디지털아트', value: 'DIGITALART' },
-    { name: '사진', value: 'PHOTOGRAPHY' },
-    { name: '기타', value: 'OTHERS' },
-  ];
-  const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
-
   const selectedArtworkFieldName =
     ARTWORK_FIELDS.find((field) => field.value === selectedArtworkField)
       ?.name || '전체';

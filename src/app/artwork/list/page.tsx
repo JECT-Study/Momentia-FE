@@ -9,19 +9,19 @@ import useArtworkList from '@/apis/artwork/getArtworkList';
 
 import { useState } from 'react';
 
+const SORT_MAPPING: Record<string, string> = {
+  최신순: 'recent',
+  인기순: 'popular',
+  조회순: 'view',
+};
+const ITEMS_PER_PAGE = 12;
+
 const ArtworkList = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
-
-  const ITEMS_PER_PAGE = 12;
-  const SORT_MAPPING: Record<string, string> = {
-    최신순: 'recent',
-    인기순: 'popular',
-    조회순: 'view',
-  };
 
   const sortValue = SORT_MAPPING[selectedFilter] || 'recent';
 
@@ -33,6 +33,14 @@ const ArtworkList = () => {
     sort: sortValue,
     artworkField:
       selectedArtworkField === 'ALL' ? undefined : selectedArtworkField,
+    search: submittedKeyword,
+    page: currentPage - 1,
+    size: ITEMS_PER_PAGE,
+  });
+
+  console.log('useArtworkList 호출 파라미터: ', {
+    sort: sortValue,
+    artworkField: selectedArtworkField === 'ALL' ? '' : selectedArtworkField,
     search: submittedKeyword,
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
