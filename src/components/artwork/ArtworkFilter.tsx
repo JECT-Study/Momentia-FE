@@ -51,7 +51,7 @@ const ArtworkFilter = ({
 
   return (
     <>
-      <div className='flex w-full justify-between items-end pb-[59px] flex-n'>
+      <div className='flex w-full justify-between items-end pb-[59px] overflow-x-auto'>
         <DefaultCarousel
           slides={ARTWORK_FIELDS}
           renderSlide={(artworkField: ArtworkField) => (
