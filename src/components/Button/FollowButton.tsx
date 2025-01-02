@@ -6,13 +6,13 @@ import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
 import deleteFollow from '@/apis/follow/deleteFollow';
 import postFollow from '@/apis/follow/postFollow';
+
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
-  textSize = 'button-s',
   initFollowState,
-  ariaLabel,
   followUserId,
+  ariaLabel,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
   const [isLoading, setIsLoading] = useState(false);
@@ -43,7 +43,6 @@ const FollowButton = ({
       className={`
         button-s flex items-center justify-center rounded-full
         w-[95px] h-[37px] gap-[3px] ml-auto
-        ${textSize}
         ${
           isFollowing
             ? 'border	border-gray-900 text-gray-900 bg-white'

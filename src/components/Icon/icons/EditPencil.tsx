@@ -1,4 +1,6 @@
-const EditPencil = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const EditPencil = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

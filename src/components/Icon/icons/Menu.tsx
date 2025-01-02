@@ -1,10 +1,6 @@
-const Menu = ({
-  className,
-  onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}) => {
+import { IconProps } from '@/types/iconProps';
+
+const Menu = ({ className, onClick }: IconProps) => {
   return (
     <svg
       className={className}

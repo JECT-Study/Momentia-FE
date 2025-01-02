@@ -12,4 +12,9 @@ const MONTHLY = {
   popularArtwork: '/artwork/posts/popular',
 };
 
-export { MONTHLY, USER };
+const ARTWORK = {
+  artworkList: '/artwork/posts',
+  followedArtists: '/artwork/followingUsers/posts',
+};
+
+export { ARTWORK, MONTHLY, USER };

@@ -1,4 +1,6 @@
-const Plus = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Plus = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

@@ -9,7 +9,7 @@ const defaultClient = axios.create({
 });
 
 export const authorizedClient = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_MOCK_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_MSW_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

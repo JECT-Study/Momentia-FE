@@ -1,4 +1,6 @@
-const ChevronDoubleLeft = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const ChevronDoubleLeft = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

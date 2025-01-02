@@ -9,8 +9,13 @@
     line-height: 1.6; /* 행간 160% */
   }
 
+  html,
   body {
     width: 100%;
+    height: 100%;
+  }
+
+  body > div[data-overlay-container='true'] {
     height: 100%;
   }
 

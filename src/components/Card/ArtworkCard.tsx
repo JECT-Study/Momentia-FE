@@ -5,6 +5,7 @@ import Image from 'next/image';
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
 
+import { ArtworkInfoType } from '@/types';
 import Icon from '../Icon/Icon';
 
 type FOLLOWED_ARTISTS =

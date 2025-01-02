@@ -1,4 +1,6 @@
-const Message = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Message = ({ className }: IconProps) => {
   return (
     <svg
       className={className}
