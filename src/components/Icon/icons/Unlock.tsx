@@ -1,12 +1,8 @@
+import { IconProps } from '@/types/iconProps';
+
 import { ReactNode } from 'react';
 
-const Unlock = ({
-  className,
-  onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}): ReactNode => {
+const Unlock = ({ className, onClick }: IconProps): ReactNode => {
   return (
     <svg
       className={className}

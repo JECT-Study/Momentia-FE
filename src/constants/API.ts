@@ -7,4 +7,9 @@ const USER = {
   follow: '/user/follow',
 };
 
-export { USER };
+const ARTWORK = {
+  artworkList: '/artwork/posts',
+  followedArtists: '/artwork/followingUsers/posts',
+};
+
+export { ARTWORK, USER };

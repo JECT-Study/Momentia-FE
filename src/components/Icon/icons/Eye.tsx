@@ -1,4 +1,6 @@
-const Eye = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const Eye = ({ className }: IconProps) => {
   return (
     <svg
       className={className}

@@ -1,12 +1,8 @@
+import { IconProps } from '@/types/iconProps';
+
 import { ReactNode } from 'react';
 
-const Close = ({
-  className,
-  onClick,
-}: {
-  className?: string;
-  onClick?: () => void;
-}): ReactNode => {
+const Close = ({ className, onClick }: IconProps): ReactNode => {
   return (
     <svg
       className={className}

@@ -1,4 +1,6 @@
-const CloseCircleFilled = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types/iconProps';
+
+const CloseCircleFilled = ({ className }: IconProps) => {
   return (
     <svg
       className={className}
