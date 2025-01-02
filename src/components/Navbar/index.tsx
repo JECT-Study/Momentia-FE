@@ -55,7 +55,9 @@ const Navbar = () => {
                   </button>
                 </>
               ) : (
-                <button className='button-m text-white'>로그인/회원가입</button>
+                <button className='button-m text-white' onClick={moveToSignIn}>
+                  로그인/회원가입
+                </button>
               )}
             </div>
             <Icon
