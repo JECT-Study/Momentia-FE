@@ -1,7 +1,6 @@
 import defaultClient from '@/apis';
 
 import { ARTWORK } from '@/constants/API';
-import QUERY_KEYS from '@/constants/queryKeys';
 
 import { ArtworkListResponse } from '@/types';
 
@@ -46,7 +45,7 @@ const getArtworkList = async ({
 
 const useArtworkList = (params: ArtworkListParams) => {
   return useQuery<ArtworkListResponse>({
-    queryKey: [QUERY_KEYS.artworkList, params],
+    queryKey: [ARTWORK.artworkList, params],
     queryFn: () => getArtworkList({ ...params }),
     retry: 3,
   });
