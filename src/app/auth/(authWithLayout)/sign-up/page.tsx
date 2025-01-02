@@ -77,8 +77,8 @@ const SignUpPage = () => {
           </div>
           <SquareButtonL
             type='submit'
-            backgroundColor={isFormDataValid ? 'bg-main' : 'bg-gray-800'}
             disabled={!isFormDataValid}
+            variant={'primary'}
           >
             <p>회원가입</p>
           </SquareButtonL>
