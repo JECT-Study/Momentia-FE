@@ -1,7 +1,6 @@
 'use client';
 
 import usePostSignUp from '@/apis/auth/signUp';
-import getValidateEmail from '@/apis/auth/validateEmail';
 import getValidateNickname from '@/apis/auth/validateNickname';
 
 import SquareButtonL from '@/components/Button/SquareButtonL';
@@ -9,11 +8,17 @@ import EmailInput from '@/components/Input/EmailInput';
 import NicknameInput from '@/components/Input/NicknameInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 
-import Link from 'next/link';
+import getValidateEmail from '@/apis/auth/validateEmail';
+import {
+  NICKNAME_VALIDATE_ERROR_MESSAGE,
+  SIGNIN_ERROR_MESSAGE,
+} from '@/constants/errorMessage';
+import { SignUpFormType } from '@/types/auth';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
-import { object, string } from 'zod';
+import { object, string, ZodIssueCode } from 'zod';
 
 const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/;
@@ -22,27 +27,49 @@ const MAX_NICKNAME_LENGTH = 10;
 
 const signUpValidationSchema = object({
   email: string()
-    .min(1, '이메일은 필수입니다.')
-    .email('유효하지 않은 이메일 형식입니다.')
-    .refine(async (email) => {
-      const isDuplicated = await getValidateEmail(email);
-      return isDuplicated;
-    }, '이미 가입된 이메일입니다.'),
+    .min(1, SIGNIN_ERROR_MESSAGE.EMAIL_REQUIRED)
+    .email(SIGNIN_ERROR_MESSAGE.INVALID_EMAIL)
+    .superRefine(async (email, ctx) => {
+      const status = await getValidateEmail(email);
+
+      if (status === 400) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: SIGNIN_ERROR_MESSAGE.INVALID_EMAIL,
+        });
+      }
+
+      if (status === 409) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: SIGNIN_ERROR_MESSAGE.DUPLICATE_EMAIL,
+        });
+      }
+    }),
   password: string()
-    .min(1, '비밀번호는 필수입니다.')
-    .regex(
-      PASSWORD_REGEX,
-      '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
-    ),
+    .min(1, SIGNIN_ERROR_MESSAGE.PASSWORD_REQUIRED)
+    .regex(PASSWORD_REGEX, SIGNIN_ERROR_MESSAGE.INVALID_PASSWORD),
   nickname: string()
-    .min(1, '닉네임은 필수입니다.')
-    .max(MAX_NICKNAME_LENGTH, '최대 닉네임 길이를 초과했습니다.')
-    .regex(NICKNAME_REGEX, '한글, 영어, 숫자로 구성된 닉네임을 입력해주세요.')
-    .refine(async (nickname) => {
-      if (nickname === '') return true;
-      const isDuplicated = await getValidateNickname(nickname);
-      return isDuplicated;
-    }, '이미 사용중인 닉네임입니다.'),
+    .min(1, SIGNIN_ERROR_MESSAGE.NICKNAME_REQUIRED)
+    .max(MAX_NICKNAME_LENGTH, SIGNIN_ERROR_MESSAGE.EXCEED_NICKNAME_LENGTH)
+    .regex(NICKNAME_REGEX, SIGNIN_ERROR_MESSAGE.INVALID_NICKNAME)
+    .superRefine(async (nickname, ctx) => {
+      const status = await getValidateNickname(nickname);
+
+      if (status === 400) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: NICKNAME_VALIDATE_ERROR_MESSAGE.INVALID_NICKNAME,
+        });
+      }
+
+      if (status === 409) {
+        ctx.addIssue({
+          code: ZodIssueCode.custom,
+          message: NICKNAME_VALIDATE_ERROR_MESSAGE.DUPLICATE_NICKNAME,
+        });
+      }
+    }),
 });
 
 const SignUpPage = () => {
