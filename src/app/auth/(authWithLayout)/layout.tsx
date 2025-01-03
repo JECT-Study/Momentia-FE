@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useLayoutEffect } from 'react';
 
+import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
 
 import logo from '@/../public/images/momentiaLogoSymbol.png';
@@ -18,7 +19,7 @@ const layout = ({ children }: LayoutProps) => {
   useLayoutEffect(() => {
     const token = TokenHandler.getAccessToken();
 
-    if (token !== '') route.push('/');
+    if (token) route.push(ROUTE.home);
   }, []);
 
   return (
