@@ -65,6 +65,7 @@ const ArtworkCard = ({
         src={postImage || DefaultImage}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
+        priority
         className={postImage ? 'object-contain' : 'object-cover'}
       />
 
