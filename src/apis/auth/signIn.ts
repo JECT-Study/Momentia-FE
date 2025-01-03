@@ -8,6 +8,7 @@ import { AuthTokenType, SignInFormType } from '@/types/auth';
 import TokenHandler from '@/utils/tokenHandler';
 import defaultClient from '..';
 
+import ROUTE from '@/constants/routes';
 import { useMutation } from '@tanstack/react-query';
 import { isAxiosError } from 'axios';
 import { useRouter } from 'next/navigation';
@@ -29,7 +30,7 @@ const usePostSignIn = () => {
     mutationFn: (formData: SignInFormType) => postSignIn(formData),
     onSuccess: (data) => {
       TokenHandler.setToken(data);
-      router.push('/');
+      router.push(ROUTE.home);
     },
     onError: (error) => {
       if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
