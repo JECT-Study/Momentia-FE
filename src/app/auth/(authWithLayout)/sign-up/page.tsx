@@ -1,6 +1,7 @@
 'use client';
 
 import usePostSignUp from '@/apis/auth/signUp';
+import getValidateEmail from '@/apis/auth/validateEmail';
 import getValidateNickname from '@/apis/auth/validateNickname';
 
 import SquareButtonL from '@/components/Button/SquareButtonL';
@@ -8,11 +9,11 @@ import EmailInput from '@/components/Input/EmailInput';
 import NicknameInput from '@/components/Input/NicknameInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 
-import getValidateEmail from '@/apis/auth/validateEmail';
 import {
   NICKNAME_VALIDATE_ERROR_MESSAGE,
   SIGNIN_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import ROUTE from '@/constants/routes';
 import { SignUpFormType } from '@/types/auth';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -115,7 +116,7 @@ const SignUpPage = () => {
 
       <div className='flex gap-2.5 justify-center items-center mt-[13px]'>
         <p className='text-gray-600'>이미 가입된 계정이 있으신가요?</p>
-        <Link href='/auth/sign-in'>로그인하러가기</Link>
+        <Link href={ROUTE.signIn}>로그인하러가기</Link>
       </div>
     </div>
   );
