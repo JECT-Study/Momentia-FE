@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 
+import useClickOutside from '@/hooks/useClickOutside';
 import Icon from '../Icon/Icon';
 
 interface FilterDropdownProps {
@@ -16,21 +17,10 @@ const FilterDropdown = ({
   onChange,
 }: FilterDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  const dropdownRef = useClickOutside<HTMLDivElement>(() =>
+    setIsDropdownOpen(false),
+  );
 
   const handleOptionSelect = (option: string) => {
     onChange(option);

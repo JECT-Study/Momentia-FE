@@ -37,6 +37,7 @@ import Pause from './icons/Pause';
 import Person from './icons/Person';
 import Plus from './icons/Plus';
 import Search from './icons/Search';
+import Settings from './icons/Settings';
 import Star from './icons/Star';
 import Unlock from './icons/Unlock';
 import UploadShare from './icons/UploadShare';
@@ -85,6 +86,7 @@ export const iconsNames: Record<
   Person,
   Plus,
   Search,
+  Settings,
   Star,
   UploadShare,
   Dropup,
