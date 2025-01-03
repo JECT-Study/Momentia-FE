@@ -24,31 +24,24 @@ const FollowButton = ({
 
   const { mutate: toggleFollow } = useMutation<void, Error, number>({
     mutationFn: async (userId: number) => {
-      if (isFollowing === true) {
-        await deleteFollow(userId);
-      } else {
-        await postFollow(userId);
-      }
+      isFollowing === true
+        ? await deleteFollow(userId)
+        : await postFollow(userId);
     },
+
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [ARTWORK.followedArtists],
       });
       setIsFollowing((prev) => !prev);
     },
+
     onError: (error) => {
       console.error(error.message);
-      alert('팔로우 상태 변경에 실패했습니다. 다시 시도해주세요.');
     },
   });
 
-  const handleFollowClick = () => {
-    try {
-      toggleFollow(followUserId);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  const handleFollowClick = () => toggleFollow(followUserId);
 
   return (
     <button
