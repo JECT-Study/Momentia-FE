@@ -9,9 +9,9 @@ interface NoticHeaderProps {
 
 const NoticeHeader = ({ noticeCount, closeAction }: NoticHeaderProps) => {
   return (
-    <div className='flex w-full items-center gap-[21px] px-[30px] small-chip '>
+    <div className='flex w-full items-center gap-[21px] px-[30px] small-chip'>
       <div className='flex-1 flex justify-between items-center'>
-        <p className=''>읽지 않은 알림 ({noticeCount})</p>
+        <p>읽지 않은 알림 ({noticeCount})</p>
         <div className='flex items-center gap-[21px]'>
           <button className='text-gray-500' type='button'>
             모두 읽기
