@@ -1,8 +1,13 @@
 type MessageConstantType = Record<string, string>;
 
 export const SIGNIN_ERROR_MESSAGE: MessageConstantType = {
-  INVALID_EMAIL: '이메일 형식이 아닙니다.',
+  EMAIL_REQUIRED: '이메일은 필수입니다.',
+  NICKNAME_REQUIRED: '닉네임은 필수입니다.',
+  PASSWORD_REQUIRED: '닉네임은 필수입니다.',
+  INVALID_EMAIL: '유효하지 않은 이메일 형식입니다.',
+  INVALID_PASSWORD: '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
   INVALID_NICKNAME: '사용할 수 없는 닉네임입니다.',
+  EXCEED_NICKNAME_LENGTH: '최대 닉네임 길이를 초과했습니다.',
   EMAIL_NOT_VERIFIED: '잘못된 인증번호입니다.',
   DUPLICATE_EMAIL: '이미 가입된 이메일입니다.',
   DUPLICATE_NICKNAME: '이미 사용 중인 닉네임입니다.',

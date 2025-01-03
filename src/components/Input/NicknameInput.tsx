@@ -76,7 +76,7 @@ const NicknameInput = () => {
               {errors.nickname.message as string}
             </p>
           </>
-        ) : nickname !== '' && isNicknameValidating ? (
+        ) : nickname && isNicknameValidating ? (
           <>
             <Icon name='AlertCircle' size='s' className='text-gray-400 mr-2' />
             <p className='button-s text-gray-400'>이메일 검증 중...</p>
