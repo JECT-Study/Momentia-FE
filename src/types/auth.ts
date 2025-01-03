@@ -1,23 +1,18 @@
-interface ValidateResponse {
-  isValid: boolean;
-  message: string;
-}
-
-interface SignInFormType {
+export interface SignInFormType {
   email: string;
   password: string;
 }
 
-interface AuthTokenType {
+export interface AuthTokenType {
   accessToken: string;
   refreshToken: string;
 }
 
-interface SocialSignInAuthType {
+export interface SocialSignInAuthType {
   isRegistered: boolean;
   token: AuthTokenType;
 }
 
-interface SignUpFormType extends SignInFormType {
+export interface SignUpFormType extends SignInFormType {
   nickname: string;
 }
