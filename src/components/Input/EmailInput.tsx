@@ -68,7 +68,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
           </>
         ) : (
           mode === 'sign-up' &&
-          (email !== '' && isEmailValidating ? (
+          (email && isEmailValidating ? (
             <>
               <Icon
                 name='AlertCircle'

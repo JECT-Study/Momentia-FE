@@ -27,7 +27,7 @@ export const authorizedClient = axios.create({
 authorizedClient.interceptors.request.use((config) => {
   const token = TokenHandler.getAccessToken();
 
-  if (token !== '') {
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   } else {
     window.location.href = ROUTE.signIn;

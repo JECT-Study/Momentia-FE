@@ -87,7 +87,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
           </>
         ) : (
           mode === 'sign-up' &&
-          (password !== '' && isPasswordValidating ? (
+          (password && isPasswordValidating ? (
             <>
               <Icon
                 name='AlertCircle'

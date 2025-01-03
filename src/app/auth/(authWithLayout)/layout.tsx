@@ -19,7 +19,7 @@ const layout = ({ children }: LayoutProps) => {
   useLayoutEffect(() => {
     const token = TokenHandler.getAccessToken();
 
-    if (token !== '') route.push(ROUTE.home);
+    if (token) route.push(ROUTE.home);
   }, []);
 
   return (
