@@ -81,20 +81,18 @@ const Pagination = ({
               <span className='mx-[18px]'>{totalPages}</span>
             </span>
           ) : (
-            <div key={`page-${page}`}>
-              <button
-                key={page}
-                onClick={() => onPageChange(page + 1)}
-                aria-current={page === currentPage ? 'page' : undefined}
-                className={`rounded-full w-[46px] h-[46px] p-[13px 7px] ${
-                  page === currentPage
-                    ? 'text-white bg-main'
-                    : 'text-gray-600 hover:bg-gray-900'
-                }`}
-              >
-                {page + 1}
-              </button>
-            </div>
+            <button
+              key={`page-${page}`}
+              onClick={() => onPageChange(page + 1)}
+              aria-current={page === currentPage ? 'page' : undefined}
+              className={`rounded-full w-[46px] h-[46px] p-[13px 7px] ${
+                page === currentPage
+                  ? 'text-white bg-main'
+                  : 'text-gray-600 hover:bg-gray-900'
+              }`}
+            >
+              {page + 1}
+            </button>
           ),
         )}
       </div>
