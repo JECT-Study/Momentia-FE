@@ -4,8 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import ROUTE from '@/constants/routes';
+
 import TokenHandler from '@/utils/tokenHandler';
+
 import { useRouter } from 'next/navigation';
+
 import logo from '../../../public/images/momentiaLogoSymbol.png';
 import Icon from '../Icon/Icon';
 
@@ -15,8 +19,8 @@ const Navbar = () => {
 
   const isSignedIn = TokenHandler.getAccessToken() !== '';
 
-  const moveToSignIn = () => router.push('/auth/sign-in');
-  const moveToArtworkList = () => router.push('/artwork/list');
+  const moveToSignIn = () => router.push(ROUTE.signIn);
+  const moveToArtworkList = () => router.push(ROUTE.artworkList);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
