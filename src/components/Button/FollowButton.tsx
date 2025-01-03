@@ -4,7 +4,8 @@ import { useState } from 'react';
 
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
-import useToggleFollow from '@/apis/follow/deleteFollow';
+import useToggleFollow from '@/hooks/serverStateHooks/useToggleFollow';
+
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
