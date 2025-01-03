@@ -32,6 +32,7 @@ authorizedClient.interceptors.request.use((config) => {
   } else {
     window.location.href = ROUTE.signIn;
   }
+
   return config;
 });
 

@@ -8,13 +8,13 @@ import RankingLabel from '@/../public/images/rankingLabel.png';
 import { ArtworkInfoType } from '@/types';
 import Icon from '../Icon/Icon';
 
-type FOLLOWED_ARTISTS =
-  | 'followed-author'
+type ARTWORK_CARD_MODE =
+  | 'followed-artists'
   | 'artwork-default'
   | 'artwork-latest';
 
 interface ArtworkCardProps {
-  mode?: FOLLOWED_ARTISTS;
+  mode?: ARTWORK_CARD_MODE;
   rank?: number;
   artworkInfo: ArtworkInfoType;
 }
@@ -38,7 +38,7 @@ const ArtworkCard = ({
   const formattedRank = rank && rank < 10 ? `0${rank}` : rank;
 
   const modeClasses: Record<string, string> = {
-    'followed-author': 'w-full max-w-[200px] h-[267px]',
+    'followed-artists': 'w-full max-w-[200px] h-[267px]',
     'artwork-default':
       'min-w-[402px] min-h-[458px]  mobile:min-w-[512px] mobile:min-h-[584px]',
     'artwork-latest':
@@ -46,13 +46,13 @@ const ArtworkCard = ({
   };
 
   const artworkBoxSizeClasses: Record<string, string> = {
-    'followed-author': 'gap-[10px] px-[15px] py-[15px]',
+    'followed-artists': 'gap-[10px] px-[15px] py-[15px]',
     'artwork-default': 'gap-[34px] px-[63px] py-[62px] mobile:gap-[45px]',
     'artwork-latest': 'gap-[24px] px-[45px] py-[51px] mobile:gap-[34px]',
   };
 
   const artworkInfoGapClass: Record<string, string> = {
-    'followed-author': 'gap-[70px]',
+    'followed-artists': 'gap-[70px]',
     'artwork-default': 'gap-[70px] mobile:gap-[90px]',
     'artwork-latest': 'gap-[50px] mobile:gap-[70px]',
   };
@@ -65,6 +65,7 @@ const ArtworkCard = ({
         src={postImage || DefaultImage}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
+        priority
         className={postImage ? 'object-contain' : 'object-cover'}
       />
 
@@ -93,7 +94,7 @@ const ArtworkCard = ({
         </div>
         <div
           className={`button-s flex
-            ${mode === 'followed-author' ? 'gap-5 items-center' : 'gap-6'}`}
+            ${mode === 'followed-artists' ? 'gap-5 items-center' : 'gap-6'}`}
         >
           <div className='flex items-center gap-2.5'>
             <Icon name='Eye' size='s' />

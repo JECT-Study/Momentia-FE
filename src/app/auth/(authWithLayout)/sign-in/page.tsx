@@ -9,6 +9,8 @@ import ROUTE from '@/constants/routes';
 
 import Link from 'next/link';
 
+import { SignInFormType } from '@/types/auth';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
@@ -55,7 +57,7 @@ const SignInPage = () => {
             disabled={!isFormDataValid}
             variant={isFormDataValid ? 'primary' : 'tertiaty'}
           >
-            <p>로그인</p>
+            로그인
           </SquareButtonL>
         </form>
       </FormProvider>

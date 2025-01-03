@@ -21,6 +21,8 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string, ZodIssueCode } from 'zod';
 
+import { SignUpFormType } from '@/types/auth';
+
 const PASSWORD_REGEX =
   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])[A-Za-z\d!@#$%^&*(),.?":{}|<>]{9,}$/;
 const NICKNAME_REGEX = /^[\u3131-\u318E가-힣A-Za-z0-9]+$/;
