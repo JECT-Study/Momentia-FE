@@ -1,4 +1,6 @@
-const Settings = ({ className }: { className?: string }) => {
+import { IconProps } from '@/types';
+
+const Settings = ({ className }: IconProps) => {
   return (
     <svg
       className={className}
