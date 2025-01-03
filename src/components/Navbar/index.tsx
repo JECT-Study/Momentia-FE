@@ -10,12 +10,13 @@ import logo from '../../../public/images/momentiaLogoSymbol.png';
 import Icon from '../Icon/Icon';
 
 const Navbar = () => {
-  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const router = useRouter();
 
   const isSignedIn = TokenHandler.getAccessToken() !== '';
 
   const moveToSignIn = () => router.push('/auth/sign-in');
+  const moveToArtworkList = () => router.push('/artwork/list');
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -36,7 +37,12 @@ const Navbar = () => {
 
           <div className='hidden lg:flex justify-center w-full'>
             <ul className='button-m flex gap-20 text-gray-100'>
-              <li className='hover:text-gray-300 cursor-pointer'>작품</li>
+              <li
+                className='hover:text-gray-300 cursor-pointer'
+                onClick={moveToArtworkList}
+              >
+                작품
+              </li>
               <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
               <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
             </ul>
@@ -109,7 +115,12 @@ const Navbar = () => {
               <div className='border-t border-gray-800 my-6'></div>
 
               <ul className='button-m space-y-6 text-lg mt-6 text-gray-100'>
-                <li className='hover:text-gray-300 cursor-pointer'>작품</li>
+                <li
+                  className='hover:text-gray-300 cursor-pointer'
+                  onClick={moveToArtworkList}
+                >
+                  작품
+                </li>
                 <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
                 <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
               </ul>
