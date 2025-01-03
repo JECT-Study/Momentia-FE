@@ -14,7 +14,10 @@ const FollowButton = ({
   ariaLabel,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
-  const { mutate: toggleFollow } = useToggleFollow(isFollowing, setIsFollowing);
+  const { mutate: toggleFollow } = useToggleFollow({
+    isFollowing,
+    setIsFollowing,
+  });
 
   const handleFollowClick = () => toggleFollow(followUserId);
 

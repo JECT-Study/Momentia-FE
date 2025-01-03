@@ -5,10 +5,15 @@ import { ARTWORK } from '@/constants/API';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-const useToggleFollow = (
-  isFollowing: boolean,
-  setIsFollowing: (value: boolean) => void,
-) => {
+interface ToggleFollowParams {
+  isFollowing: boolean;
+  setIsFollowing: (value: boolean) => void;
+}
+
+const useToggleFollow = ({
+  isFollowing,
+  setIsFollowing,
+}: ToggleFollowParams) => {
   const queryClient = useQueryClient();
 
   return useMutation<void, Error, number>({
