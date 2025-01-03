@@ -14,17 +14,18 @@ import NavbarNoticeDetail from './NavbarNoticeDetail';
 import NavbarUserOption from './NavbarUserOption';
 
 const Navbar = () => {
-  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSignedIn, setIsSignedIn] = useState(
     TokenHandler.getAccessToken() !== '',
   );
+  const router = useRouter();
 
   const moveToSignIn = () => {
     router.push(ROUTE.signIn);
 
     if (isMenuOpen) toggleMenu();
   };
+  const moveToArtworkList = () => router.push(ROUTE.artworkList);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -71,7 +72,12 @@ const Navbar = () => {
 
           <div className='hidden lg:flex justify-center w-full'>
             <ul className='button-m flex gap-20 text-gray-100'>
-              <li className='hover:text-gray-300 cursor-pointer'>작품</li>
+              <li
+                className='hover:text-gray-300 cursor-pointer'
+                onClick={moveToArtworkList}
+              >
+                작품
+              </li>
               <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
               <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
             </ul>
@@ -142,7 +148,10 @@ const Navbar = () => {
                 <hr className='border-t border-gray-800' />
 
                 <ul className='button-m space-y-6 text-lg mt-6 text-gray-100'>
-                  <li className='hover:text-gray-300 cursor-pointer px-10 py-8'>
+                  <li
+                    className='hover:text-gray-300 cursor-pointer'
+                    onClick={moveToArtworkList}
+                  >
                     작품
                   </li>
                   <li className='hover:text-gray-300 cursor-pointer px-10 py-8'>

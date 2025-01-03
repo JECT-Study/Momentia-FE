@@ -1,6 +1,7 @@
 'use client';
 
-import { usePrevNextButtons } from '@/hooks/usePrevNextButtons';
+import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
+
 import useEmblaCarousel from 'embla-carousel-react';
 import { IndicatorButton, useIndicatorButton } from './CarouselIndicator';
 

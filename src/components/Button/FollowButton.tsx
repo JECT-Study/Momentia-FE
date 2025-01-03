@@ -4,8 +4,7 @@ import { useState } from 'react';
 
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
-import deleteFollow from '@/apis/follow/deleteFollow';
-import postFollow from '@/apis/follow/postFollow';
+import useToggleFollow from '@/hooks/serverStateHooks/useToggleFollow';
 
 import Icon from '../Icon/Icon';
 
@@ -15,30 +14,16 @@ const FollowButton = ({
   ariaLabel,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
-  const [isLoading, setIsLoading] = useState(false);
+  const { mutate: toggleFollow } = useToggleFollow({
+    isFollowing,
+    setIsFollowing,
+  });
 
-  const toggleFollow = async () => {
-    setIsLoading(true);
-
-    const previousState = isFollowing;
-    setIsFollowing((prev) => !prev);
-
-    try {
-      if (previousState) {
-        await deleteFollow(followUserId);
-      } else {
-        await postFollow(followUserId);
-      }
-    } catch (error) {
-      setIsFollowing(previousState);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const handleFollowClick = () => toggleFollow(followUserId);
 
   return (
     <button
-      onClick={toggleFollow}
+      onClick={handleFollowClick}
       aria-label={ariaLabel}
       className={`
         button-s flex items-center justify-center rounded-full
@@ -51,7 +36,6 @@ const FollowButton = ({
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
       `}
-      disabled={isLoading}
     >
       {isFollowing ? (
         <>
