@@ -1,3 +1,4 @@
+import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
 import axios from 'axios';
 import postRefreshToken from './auth/postRefreshToken';
@@ -28,6 +29,8 @@ authorizedClient.interceptors.request.use((config) => {
 
   if (token !== '') {
     config.headers.Authorization = `Bearer ${token}`;
+  } else {
+    window.location.href = ROUTE.signIn;
   }
   return config;
 });
@@ -40,7 +43,7 @@ authorizedClient.interceptors.response.use(
     if (error.response?.status === 401) {
       const refreshToken = TokenHandler.getRefreshToken();
 
-      if (refreshToken === '') window.location.href = '/';
+      if (refreshToken === '') window.location.href = ROUTE.home;
       const newToken = await postRefreshToken(refreshToken);
 
       TokenHandler.setToken(newToken);
