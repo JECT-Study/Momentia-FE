@@ -52,8 +52,8 @@ const SignInPage = () => {
           </div>
           <SquareButtonL
             type='submit'
-            backgroundColor={isFormDataValid ? 'bg-main' : 'bg-gray-800'}
             disabled={!isFormDataValid}
+            variant={'primary'}
           >
             <p>로그인</p>
           </SquareButtonL>
