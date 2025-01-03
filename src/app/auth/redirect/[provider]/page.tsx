@@ -1,6 +1,7 @@
 'use client';
 
 import useGetSocialSignIn from '@/apis/auth/socialSignIn';
+import ROUTE from '@/constants/routes';
 
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
@@ -16,7 +17,7 @@ const RedirectPage = () => {
   });
 
   useEffect(() => {
-    if (hasData) router.replace('/');
+    if (hasData) router.replace(ROUTE.home);
   }, [hasData]);
 
   return <></>;
