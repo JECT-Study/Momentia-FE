@@ -1,7 +1,7 @@
 import { USER } from '@/constants/API';
 import defaultClient from '..';
 
-const getValidateNickname = async (nickname: string) => {
+const getValidateNickname = async (nickname: string) => 
   const response = await defaultClient.get<null>(USER.validateNickname, {
     params: {
       nickname,

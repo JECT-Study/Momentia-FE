@@ -4,11 +4,18 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
+import TokenHandler from '@/utils/tokenHandler';
+import { useRouter } from 'next/navigation';
 import logo from '../../../public/images/momentiaLogoSymbol.png';
 import Icon from '../Icon/Icon';
 
 const Navbar = () => {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const isSignedIn = TokenHandler.getAccessToken() !== '';
+
+  const moveToSignIn = () => router.push('/auth/sign-in');
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -36,14 +43,22 @@ const Navbar = () => {
           </div>
 
           <div className='flex items-center gap-7 flex-shrink-0'>
-            {/* TODO: 로그인 상태에 따라 Notification 버튼, 로그인/회원가입 버튼 다르게 보이도록 처리 */}
-            <Icon name='Notification' size='l' className='text-white' />
+            {isSignedIn && (
+              <Icon name='Notification' size='l' className='text-white' />
+            )}
             <div className='hidden lg:flex items-center gap-7'>
-              <div className='rounded-full bg-white w-8 h-8 flex-shrink-0'></div>
-              <button className='button-m bg-main px-6 py-2 rounded-full text-white flex-shrink-0'>
-                작품 업로드
-              </button>
-              {/* <button className='button-m text-white' >로그인/회원가입</button> */}
+              {isSignedIn ? (
+                <>
+                  <div className='rounded-full bg-white w-8 h-8 flex-shrink-0'></div>
+                  <button className='button-m bg-main px-6 py-2 rounded-full text-white flex-shrink-0'>
+                    작품 업로드
+                  </button>
+                </>
+              ) : (
+                <button className='button-m text-white' onClick={moveToSignIn}>
+                  로그인/회원가입
+                </button>
+              )}
             </div>
             <Icon
               name='Menu'
@@ -73,10 +88,22 @@ const Navbar = () => {
 
             <div className='ml-10'>
               <div className='flex-col space-y-1'>
-                {/* <button className='button-m text-white' >로그인/회원가입</button> */}
-                <p className='button-m text-white'>닉네임</p>
-                <p className='button-m text-gray-500'>momentia@gmail.com</p>
-                <button className='button-m text-main pt-3'>작품 업로드</button>
+                {isSignedIn ? (
+                  <>
+                    <p className='button-m text-white'>닉네임</p>
+                    <p className='button-m text-gray-500'>momentia@gmail.com</p>
+                    <button className='button-m text-main pt-3'>
+                      작품 업로드
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    className='button-m text-white'
+                    onClick={moveToSignIn}
+                  >
+                    로그인/회원가입
+                  </button>
+                )}
               </div>
 
               <div className='border-t border-gray-800 my-6'></div>
