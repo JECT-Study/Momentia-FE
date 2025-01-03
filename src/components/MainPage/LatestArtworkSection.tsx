@@ -1,12 +1,18 @@
-import { useArtworkList } from '@/hooks/useArtworkList';
+import useArtworkList from '@/apis/artwork/getArtworkList';
+import { ArtworkInfoType } from '@/types';
 import ArtworkCard from '../Card/ArtworkCard';
 import ControlledCarousel from '../Carousel/ControllableCarousel';
 
 const LatestArtworkSection = () => {
   const {
-    data: { artwork },
+    data: { data: artwork },
     isLoading,
-  } = useArtworkList('recent', '');
+  } = useArtworkList({
+    sort: 'recent',
+    search: '',
+    page: 1,
+    size: 10,
+  });
 
   if (isLoading) return <div>로딩중</div>;
 
