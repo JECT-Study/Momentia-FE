@@ -10,6 +10,8 @@ import TokenHandler from '@/utils/tokenHandler';
 
 import logo from '../../../public/images/momentiaLogoSymbol.png';
 import Icon from '../Icon/Icon';
+import NavbarNoticeDetail from './NavbarNoticeDetail';
+import NavbarUserOption from './NavbarUserOption';
 
 const Navbar = () => {
   const router = useRouter();
@@ -76,13 +78,11 @@ const Navbar = () => {
           </div>
 
           <div className='flex items-center gap-7 flex-shrink-0'>
-            {isSignedIn && (
-              <Icon name='Notification' size='l' className='text-white' />
-            )}
+            {isSignedIn && <NavbarNoticeDetail />}
             <div className='hidden lg:flex items-center gap-7'>
               {isSignedIn ? (
                 <>
-                  <div className='rounded-full bg-white w-8 h-8 flex-shrink-0'></div>
+                  <NavbarUserOption />
                   <button className='button-m bg-main px-6 py-2 rounded-full text-white flex-shrink-0'>
                     작품 업로드
                   </button>
