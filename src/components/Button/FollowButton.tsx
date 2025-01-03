@@ -2,10 +2,14 @@
 
 import { useState } from 'react';
 
-import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import deleteFollow from '@/apis/follow/deleteFollow';
 import postFollow from '@/apis/follow/postFollow';
+
+import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
+
+import { ARTWORK } from '@/constants/API';
 
 import Icon from '../Icon/Icon';
 
@@ -15,30 +19,40 @@ const FollowButton = ({
   ariaLabel,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const toggleFollow = async () => {
-    setIsLoading(true);
+  const queryClient = useQueryClient();
 
-    const previousState = isFollowing;
-    setIsFollowing((prev) => !prev);
-
-    try {
-      if (previousState) {
-        await deleteFollow(followUserId);
+  const { mutate: toggleFollow } = useMutation<void, Error, number>({
+    mutationFn: async (userId: number) => {
+      if (isFollowing === true) {
+        await deleteFollow(userId);
       } else {
-        await postFollow(followUserId);
+        await postFollow(userId);
       }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [ARTWORK.followedArtists],
+      });
+      setIsFollowing((prev) => !prev);
+    },
+    onError: (error) => {
+      console.error(error.message);
+      alert('팔로우 상태 변경에 실패했습니다. 다시 시도해주세요.');
+    },
+  });
+
+  const handleFollowClick = () => {
+    try {
+      toggleFollow(followUserId);
     } catch (error) {
-      setIsFollowing(previousState);
-    } finally {
-      setIsLoading(false);
+      console.error(error);
     }
   };
 
   return (
     <button
-      onClick={toggleFollow}
+      onClick={handleFollowClick}
       aria-label={ariaLabel}
       className={`
         button-s flex items-center justify-center rounded-full
@@ -51,7 +65,6 @@ const FollowButton = ({
         hover:bg-opacity-80 active:bg-opacity-60 active:scale-95
         transition-all duration-300 ease-in-out
       `}
-      disabled={isLoading}
     >
       {isFollowing ? (
         <>

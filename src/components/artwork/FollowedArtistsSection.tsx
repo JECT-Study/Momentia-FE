@@ -65,6 +65,7 @@ const FollowedArtistsSection = () => {
                       alt={artist.nickname}
                       width={100}
                       height={100}
+                      priority
                       className='w-[50px] h-[50px] bg-gray-700 rounded-full'
                     />
                     <div className='gap-[30px]'>
