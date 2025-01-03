@@ -2,15 +2,9 @@
 
 import { useState } from 'react';
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import deleteFollow from '@/apis/follow/deleteFollow';
-import postFollow from '@/apis/follow/postFollow';
-
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
-import { ARTWORK } from '@/constants/API';
-
+import useToggleFollow from '@/apis/follow/deleteFollow';
 import Icon from '../Icon/Icon';
 
 const FollowButton = ({
@@ -19,27 +13,7 @@ const FollowButton = ({
   ariaLabel,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
-
-  const queryClient = useQueryClient();
-
-  const { mutate: toggleFollow } = useMutation<void, Error, number>({
-    mutationFn: async (userId: number) => {
-      isFollowing === true
-        ? await deleteFollow(userId)
-        : await postFollow(userId);
-    },
-
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [ARTWORK.followedArtists],
-      });
-      setIsFollowing((prev) => !prev);
-    },
-
-    onError: (error) => {
-      console.error(error.message);
-    },
-  });
+  const { mutate: toggleFollow } = useToggleFollow(isFollowing, setIsFollowing);
 
   const handleFollowClick = () => toggleFollow(followUserId);
 
