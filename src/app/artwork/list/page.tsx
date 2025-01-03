@@ -38,14 +38,6 @@ const ArtworkList = () => {
     size: ITEMS_PER_PAGE,
   });
 
-  console.log('useArtworkList 호출 파라미터: ', {
-    sort: sortValue,
-    artworkField: selectedArtworkField === 'ALL' ? '' : selectedArtworkField,
-    search: submittedKeyword,
-    page: currentPage - 1,
-    size: ITEMS_PER_PAGE,
-  });
-
   if (!artworkList || artworkListLoading) {
     return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
   }
