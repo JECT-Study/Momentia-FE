@@ -149,7 +149,7 @@ const Navbar = () => {
 
                 <ul className='button-m space-y-6 text-lg mt-6 text-gray-100'>
                   <li
-                    className='hover:text-gray-300 cursor-pointer'
+                    className='hover:text-gray-300 cursor-pointer px-10 py-8'
                     onClick={moveToArtworkList}
                   >
                     작품
