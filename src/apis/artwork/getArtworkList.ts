@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { authorizedClient } from '@/apis';
+import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
 import { ArtworkListResponse, PaginationType } from '@/types';
 
@@ -29,7 +29,7 @@ const getArtworkList = async ({
     if (artworkField) params.artworkField = artworkField;
     if (search) params.search = search;
 
-    const response = await authorizedClient.get(ARTWORK.artworkList, {
+    const response = await defaultClient.get(ARTWORK.artworkList, {
       params,
     });
 

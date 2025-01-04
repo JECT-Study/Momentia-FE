@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 
+import defaultClient from '@/apis';
 import { MONTHLY } from '@/constants/API';
 import { COMMON_ERROR_MESSAGE } from '@/constants/errorMessage';
 import { ArtworkInfoType } from '@/types';
-
-import defaultClient from '..';
 
 interface PopularArtworkResponseType {
   posts: ArtworkInfoType[];
