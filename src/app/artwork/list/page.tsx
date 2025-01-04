@@ -48,7 +48,7 @@ const ArtworkList = () => {
   const { data: artworkListData, page: artworkListPage } = artworkList;
 
   return (
-    <div className='px-[36px] lg:px-[140px]'>
+    <div className='max-w-[1920px] m-auto px-[36px] lg:px-[140px]'>
       <div className='pt-[70px]'>
         <FollowedArtistsSection />
         <ArtworkSearchBar
