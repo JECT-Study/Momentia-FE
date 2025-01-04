@@ -1,4 +1,4 @@
-interface ArtistInfoType {
+export interface ArtistInfoType {
   userId: number;
   profileImage: string;
   nickname: string;

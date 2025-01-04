@@ -1,5 +1,7 @@
 'use client';
 import useGetMonthlyPopularArtworks from '@/apis/monthly/getMonthlyPopularArtwork';
+import { ArtworkInfoType } from '@/types';
+
 import ArtworkCard from '../Card/ArtworkCard';
 import ControlledCarousel from '../Carousel/ControllableCarousel';
 
