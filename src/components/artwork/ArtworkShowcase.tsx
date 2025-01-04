@@ -22,7 +22,11 @@ const ArtworkShowcase = ({
     <>
       <div className='w-full flex flex-wrap gap-[40_20px] justify-center items-center content-center'>
         {artworkListData.map((post: ArtworkInfoType) => (
-          <ArtworkCard key={post.postId} artworkInfo={post} />
+          <ArtworkCard
+            key={post.postId}
+            artworkInfo={post}
+            mode='artwork-list'
+          />
         ))}
       </div>
 
