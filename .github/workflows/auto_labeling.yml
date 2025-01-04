@@ -1,0 +1,57 @@
+name: Auto Label PR
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  auto-label:
+    runs-on: ubuntu-latest
+
+    steps:
+      # PR 이벤트 트리거
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 커밋 메시지 키워드에 따라 라벨 추가
+      - name: Add labels based on commit messages
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const commitKeywords = {
+              feat: 'feature',
+              fix: 'bug',
+              chore: 'chore',
+              docs: 'documentation',
+              style: 'style',
+              refactor: 'refactor',
+              test: 'test',
+              perf: 'performance',
+            };
+
+            const { context } = require('@actions/github');
+            const { commits } = context.payload.pull_request;
+
+            // 커밋 메시지에서 키워드 추출
+            const labelsToAdd = new Set();
+
+            commits.forEach(commit => {
+              const message = commit.commit.message;
+              const keyword = message.split(':')[0].trim();
+              if (commitKeywords[keyword]) {
+                labelsToAdd.add(commitKeywords[keyword]);
+              }
+            });
+
+            // 라벨 추가 요청
+            if (labelsToAdd.size > 0) {
+              const response = await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: [...labelsToAdd],
+              });
+              console.log('Labels added:', response.data);
+            } else {
+              console.log('No matching labels found for commits.');
+            }

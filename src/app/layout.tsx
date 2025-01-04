@@ -1,23 +1,36 @@
-import type { Metadata } from 'next';
-import React from 'react';
 import '../styles/globals.css';
-import ReactQueryProvider from './ReactQueryProvider';
+
+import type { Metadata } from 'next';
+import { ReactNode } from 'react';
+
+import AppShell from '../components/Layout/AppShell';
+import { montserrat, pretendard } from './fonts';
+import KakaoProvider from './providers/KakaoProvider';
+import MSWProvider from './providers/MSWProvider';
+import ReactQueryProvider from './providers/ReactQueryProvider';
 
 export const metadata: Metadata = {
   title: '',
   description: '',
 };
 
-export default function RootLayout({
+const RootLayout = ({
   children,
 }: Readonly<{
-  children: React.ReactNode;
-}>) {
+  children: ReactNode;
+}>) => {
   return (
-    <html lang="ko">
-      <body>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+    <html lang='ko'>
+      <body className={`${pretendard} ${montserrat.variable}`}>
+        <MSWProvider>
+          <ReactQueryProvider>
+            <AppShell>{children}</AppShell>
+          </ReactQueryProvider>
+        </MSWProvider>
+        <KakaoProvider />
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

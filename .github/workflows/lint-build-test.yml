@@ -1,0 +1,71 @@
+name: Lint, Build, and Test
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main", "dev"]
+
+jobs:
+  lint-build-test:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Cache Node Modules
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.pnpm-store
+          node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 18
+        
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Run Lint
+      run: pnpm lint
+
+    - name: Prettier Check
+      run: pnpm prettier --check .
+
+    - name: Build
+      if: success()
+      run: pnpm build
+
+    - name: Run Tests
+      if: success()
+      run: pnpm test -- --ci
+
+    - name: Notify Discord on Failure
+      if: failure()
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        args: |
+          🚨 **Lint/Build/Test Workflow 실패** 🚨
+
+          **Repository**: ${{ github.repository }}
+          **Branch**: ${{ github.ref_name }}
+          **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+          **Author**: ${{ github.actor }}
+          **Job**: ${{ github.job }}
+
+          ❗ 자세한 내용은 [GitHub Actions Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})를 확인하세요.
+
+          ---
+          🕒 **Timestamp**: ${{ github.event.head_commit.timestamp }}

@@ -1,3 +1,97 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'pretendard';
+    letter-spacing: -0.02em; /* 자간 -2% */
+    line-height: 1.6; /* 행간 160% */
+  }
+
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+  }
+
+  body > div[data-overlay-container='true'] {
+    height: 100%;
+  }
+
+  .title-l {
+    font-size: 2.813rem; /* 45px */
+  }
+
+  h1 {
+    font-size: 2rem; /* 32px */
+  }
+
+  h2 {
+    font-size: 1.625rem; /* 26px */
+  }
+
+  h3 {
+    font-size: 1.5rem; /* 24px */
+  }
+
+  h4,
+  .button-l {
+    font-size: 1.375rem; /* 22px */
+  }
+
+  .subtitle1 {
+    font-size: 1.25rem; /* 20px */
+  }
+
+  .body1,
+  .subtitle2,
+  .button-m {
+    font-size: 1.125rem; /* 18px */
+  }
+
+  .body2,
+  .placeholder,
+  .custom-label {
+    font-size: 1rem; /* 16px */
+  }
+
+  .small-chip,
+  .button-s {
+    font-size: 0.875rem; /* 14px */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  .title-l,
+  .subtitle1,
+  .small-chip,
+  .button-m {
+    font-weight: 600; /* SemiBold */
+  }
+
+  .custom-label,
+  .subtitle2,
+  .placeholder,
+  .button-l,
+  .button-s {
+    font-weight: 500; /* Medium */
+  }
+
+  p,
+  span,
+  div,
+  li,
+  .body1,
+  .body2 {
+    font-weight: 400; /* Regular */
+  }
+
+  svg {
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor; /* 텍스트 색상과 동일하게 적용 */
+  }
+}

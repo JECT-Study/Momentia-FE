@@ -2,20 +2,45 @@
   "name": "momentia",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev:server": "NEXT_PUBLIC_USE_MSW=false next dev --turbopack -p 8080",
+    "dev:test": "NEXT_PUBLIC_USE_MSW=true next dev --turbopack -p 8080",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "next lint . --ext .js,.jsx,.ts,.tsx",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "prettier": "prettier --write \"**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@nextui-org/react": "^2.6.8",
     "@tanstack/react-query": "^5.62.3",
+    "@types/lodash": "^4.17.13",
+    "axios": "^1.7.9",
+    "embla-carousel": "^8.5.1",
+    "embla-carousel-autoplay": "^8.5.1",
+    "embla-carousel-react": "^8.5.1",
+    "framer-motion": "^11.14.4",
+    "lodash": "^4.17.21",
     "next": "15.0.4",
+    "next-themes": "^0.4.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
+    "react-hook-form": "^7.54.1",
+    "zod": "^3.24.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.2",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-onboarding": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/nextjs": "^8.4.7",
+    "@storybook/react": "^8.4.7",
+    "@storybook/test": "^8.4.7",
     "@types/node": "^22.10.1",
     "@types/react": "^19.0.1",
     "@types/react-dom": "^19.0.1",
@@ -32,9 +57,17 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-storybook": "^0.11.1",
+    "msw": "^2.7.0",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "storybook": "^8.4.7",
     "tailwindcss": "^3.4.16",
     "typescript": "^5.7.2"
+  },
+  "msw": {
+    "workerDirectory": [
+      "public"
+    ]
   }
 }
