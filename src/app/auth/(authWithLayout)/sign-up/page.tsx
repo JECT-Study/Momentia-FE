@@ -1,26 +1,22 @@
 'use client';
 
-import usePostSignUp from '@/apis/auth/signUp';
-import getValidateEmail from '@/apis/auth/validateEmail';
-import getValidateNickname from '@/apis/auth/validateNickname';
-
-import SquareButtonL from '@/components/Button/SquareButtonL';
-import EmailInput from '@/components/Input/EmailInput';
-import NicknameInput from '@/components/Input/NicknameInput';
-import PasswordInput from '@/components/Input/PasswordInput';
-
-import {
-  NICKNAME_VALIDATE_ERROR_MESSAGE,
-  SIGNIN_ERROR_MESSAGE,
-} from '@/constants/errorMessage';
-import ROUTE from '@/constants/routes';
-import { SignUpFormType } from '@/types/auth';
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string, ZodIssueCode } from 'zod';
 
+import usePostSignUp from '@/apis/auth/signUp';
+import getValidateEmail from '@/apis/auth/validateEmail';
+import getValidateNickname from '@/apis/auth/validateNickname';
+import SquareButtonL from '@/components/Button/SquareButtonL';
+import EmailInput from '@/components/Input/EmailInput';
+import NicknameInput from '@/components/Input/NicknameInput';
+import PasswordInput from '@/components/Input/PasswordInput';
+import {
+  NICKNAME_VALIDATE_ERROR_MESSAGE,
+  SIGNIN_ERROR_MESSAGE,
+} from '@/constants/errorMessage';
+import ROUTE from '@/constants/routes';
 import { SignUpFormType } from '@/types/auth';
 
 const PASSWORD_REGEX =

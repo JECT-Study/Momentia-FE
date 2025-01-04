@@ -1,10 +1,10 @@
 'use client';
 
-import useGetSocialSignIn from '@/apis/auth/socialSignIn';
-import ROUTE from '@/constants/routes';
-
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
+
+import useGetSocialSignIn from '@/apis/auth/socialSignIn';
+import ROUTE from '@/constants/routes';
 
 const RedirectPage = () => {
   const router = useRouter();

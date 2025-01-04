@@ -1,15 +1,13 @@
+import '../styles/globals.css';
+
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import '../styles/globals.css';
-
+import AppShell from '../components/Layout/AppShell';
+import { montserrat, pretendard } from './fonts';
 import KakaoProvider from './providers/KakaoProvider';
 import MSWProvider from './providers/MSWProvider';
 import ReactQueryProvider from './providers/ReactQueryProvider';
-
-import AppShell from '../components/Layout/AppShell';
-
-import { montserrat, pretendard } from './fonts';
 
 export const metadata: Metadata = {
   title: '',

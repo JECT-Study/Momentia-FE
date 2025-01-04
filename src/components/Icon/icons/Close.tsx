@@ -1,6 +1,6 @@
-import { IconProps } from '@/types/iconProps';
-
 import { ReactNode } from 'react';
+
+import { IconProps } from '@/types/iconProps';
 
 const Close = ({ className, onClick }: IconProps): ReactNode => {
   return (

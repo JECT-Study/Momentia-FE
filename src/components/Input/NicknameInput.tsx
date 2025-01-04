@@ -2,9 +2,9 @@
 
 import { Input } from '@nextui-org/react';
 import { debounce } from 'lodash';
+import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { useState } from 'react';
 import Icon from '../Icon/Icon';
 
 const MAX_NICKNAME_LENGTH = 10;

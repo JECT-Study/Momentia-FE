@@ -1,13 +1,11 @@
 'use Client';
 
-import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
-
-import { ArtworkInfoType, FollowedArtist } from '@/types';
-
 import Image from 'next/image';
 import { useState } from 'react';
 
 import useFollowedArtists from '@/apis/artwork/getFollowedArtists';
+import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
+import { ArtworkInfoType, FollowedArtist } from '@/types';
 
 import FollowButton from '../Button/FollowButton';
 import ArtworkCard from '../Card/ArtworkCard';

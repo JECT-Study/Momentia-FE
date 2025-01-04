@@ -1,9 +1,8 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+
 import deleteFollow from '@/apis/follow/deleteFollow';
 import postFollow from '@/apis/follow/postFollow';
-
 import { ARTWORK } from '@/constants/API';
-
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface ToggleFollowParams {
   isFollowing: boolean;

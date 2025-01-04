@@ -1,3 +1,7 @@
+import { useMutation } from '@tanstack/react-query';
+import { isAxiosError } from 'axios';
+import { useRouter } from 'next/navigation';
+
 import { USER } from '@/constants/API';
 import {
   COMMON_ERROR_MESSAGE,
@@ -5,12 +9,9 @@ import {
 } from '@/constants/errorMessage';
 import ROUTE from '@/constants/routes';
 import { AuthTokenType, SignUpFormType } from '@/types/auth';
+import { ErrorResponseType } from '@/types/errorResponse';
 
 import defaultClient from '..';
-
-import { useMutation } from '@tanstack/react-query';
-import { isAxiosError } from 'axios';
-import { useRouter } from 'next/navigation';
 
 const postSignUp = async (formData: SignUpFormType) => {
   const { data } = await defaultClient.post<AuthTokenType>(

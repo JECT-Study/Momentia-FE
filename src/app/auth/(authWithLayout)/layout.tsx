@@ -4,10 +4,9 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useLayoutEffect } from 'react';
 
+import logo from '@/../public/images/momentiaLogoSymbol.png';
 import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
-
-import logo from '@/../public/images/momentiaLogoSymbol.png';
 
 interface LayoutProps {
   readonly children: ReactNode;

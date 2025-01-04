@@ -1,8 +1,7 @@
-import { authorizedClient } from '@/apis';
-
-import { ARTWORK } from '@/constants/API';
-
 import { useQuery } from '@tanstack/react-query';
+
+import { authorizedClient } from '@/apis';
+import { ARTWORK } from '@/constants/API';
 
 const getFollowedArtists = async () => {
   try {

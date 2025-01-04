@@ -1,12 +1,11 @@
 'use client';
 
-import Icon from '../Icon/Icon';
-
 import { Input } from '@nextui-org/react';
-
 import { debounce } from 'lodash';
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+
+import Icon from '../Icon/Icon';
 
 interface EmailInputProps {
   mode: 'sign-up' | 'sign-in';
