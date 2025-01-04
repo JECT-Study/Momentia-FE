@@ -11,7 +11,8 @@ import Icon from '../Icon/Icon';
 type ARTWORK_CARD_MODE =
   | 'followed-artists'
   | 'artwork-default'
-  | 'artwork-latest';
+  | 'artwork-latest'
+  | 'artwork-list';
 
 interface ArtworkCardProps {
   mode?: ARTWORK_CARD_MODE;
@@ -43,18 +44,21 @@ const ArtworkCard = ({
       'min-w-[402px] min-h-[458px]  mobile:min-w-[512px] mobile:min-h-[584px]',
     'artwork-latest':
       'min-w-[269px] min-h-[306px] mobile:min-w-[376px] mobile:min-h-[434px]',
+    'artwork-list': 'min-w-[395px] min-h-[511px]',
   };
 
   const artworkBoxSizeClasses: Record<string, string> = {
     'followed-artists': 'gap-[10px] px-[15px] py-[15px]',
     'artwork-default': 'gap-[34px] px-[63px] py-[62px] mobile:gap-[45px]',
     'artwork-latest': 'gap-[24px] px-[45px] py-[51px] mobile:gap-[34px]',
+    'artwork-list': 'gap-[34px] px-[42px] py-[27px]',
   };
 
   const artworkInfoGapClass: Record<string, string> = {
     'followed-artists': 'gap-[70px]',
     'artwork-default': 'gap-[70px] mobile:gap-[90px]',
     'artwork-latest': 'gap-[50px] mobile:gap-[70px]',
+    'artwork-list': 'gap-[70px]',
   };
 
   return (
