@@ -1,4 +1,6 @@
 import useGetMonthlyPopularArtists from '@/apis/monthly/getMonthlyPopularArtists';
+import { ArtistInfoType } from '@/types/artist';
+
 import ArtistProfileCard from '../Card/ArtistProfileCard';
 import ControlledCarousel from '../Carousel/ControllableCarousel';
 

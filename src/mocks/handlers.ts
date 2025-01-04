@@ -1,6 +1,6 @@
-import { MONTHLY, USER } from '@/constants/API';
-
 import { delay, http, HttpResponse } from 'msw';
+
+import { MONTHLY, USER } from '@/constants/API';
 
 export const handlers = [
   http.all('*', async () => {

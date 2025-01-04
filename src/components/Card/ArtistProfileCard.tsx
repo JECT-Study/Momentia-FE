@@ -5,6 +5,8 @@ import Image from 'next/image';
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
+import { ArtistInfoType } from '@/types/artist';
+
 import FollowButton from '../Button/FollowButton';
 
 interface ArtistProfileCardProps {

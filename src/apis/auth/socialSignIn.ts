@@ -1,9 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { USER } from '@/constants/API';
 import { SocialSignInAuthType } from '@/types/auth';
 import TokenHandler from '@/utils/tokenHandler';
-import defaultClient from '..';
 
-import { useQuery } from '@tanstack/react-query';
+import defaultClient from '..';
 
 const getSocialSignIn = async (queryUrl: string) => {
   const { data } = await defaultClient.get<SocialSignInAuthType>(queryUrl);

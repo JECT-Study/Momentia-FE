@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 
-import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
-
 import useToggleFollow from '@/hooks/serverStateHooks/useToggleFollow';
+import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
 import Icon from '../Icon/Icon';
 

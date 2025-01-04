@@ -1,6 +1,9 @@
+import { useQuery } from '@tanstack/react-query';
+
 import { MONTHLY } from '@/constants/API';
 import { COMMON_ERROR_MESSAGE } from '@/constants/errorMessage';
-import { useQuery } from '@tanstack/react-query';
+import { ArtistInfoType } from '@/types/artist';
+
 import defaultClient from '..';
 
 interface MonthlyPopularArtistsResponseType {

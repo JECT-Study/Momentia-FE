@@ -1,5 +1,6 @@
 import { USER } from '@/constants/API';
 import { AuthTokenType } from '@/types/auth';
+
 import defaultClient from '..';
 
 const postRefreshToken = async (refreshToken: string) => {

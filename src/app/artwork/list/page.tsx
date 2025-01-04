@@ -1,13 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
+import useArtworkList from '@/apis/artwork/getArtworkList';
 import ArtworkFilter from '@/components/artwork/ArtworkFilter';
 import ArtworkSearchBar from '@/components/artwork/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/artwork/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/artwork/FollowedArtistsSection';
-
-import useArtworkList from '@/apis/artwork/getArtworkList';
-
-import { useState } from 'react';
 
 const SORT_MAPPING: Record<string, string> = {
   최신순: 'recent',

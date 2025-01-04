@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import ROUTE from '@/constants/routes';
+
 import logo from '../../../public/images/momentiaLogoSymbol.png';
 
 const Footer = () => {

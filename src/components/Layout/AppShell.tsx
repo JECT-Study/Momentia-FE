@@ -1,12 +1,11 @@
 'use client';
 
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
-
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-
 import { ReactNode } from 'react';
+
+import Footer from '@/components/Footer';
+import Navbar from '@/components/Navbar';
 
 const AppShell = ({ children }: { children: ReactNode }) => {
   return (

@@ -1,10 +1,8 @@
-import { authorizedClient } from '@/apis';
-
-import { ARTWORK } from '@/constants/API';
-
-import { ArtworkListResponse, PaginationType } from '@/types';
-
 import { useQuery } from '@tanstack/react-query';
+
+import { authorizedClient } from '@/apis';
+import { ARTWORK } from '@/constants/API';
+import { ArtworkListResponse, PaginationType } from '@/types';
 
 interface ArtworkListParams {
   sort: string;

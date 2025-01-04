@@ -1,8 +1,7 @@
-import { ARTWORK } from '@/constants/API';
-
-import { ArtworkInfoType, ArtworkListResponse } from '@/types';
-
 import { http, HttpResponse } from 'msw';
+
+import { ARTWORK } from '@/constants/API';
+import { ArtworkInfoType, ArtworkListResponse } from '@/types';
 
 interface FollowedArtist {
   userId: number;

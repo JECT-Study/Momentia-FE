@@ -1,12 +1,12 @@
 'use client';
 
+import useEmblaCarousel from 'embla-carousel-react';
+import { ReactNode } from 'react';
+
 import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
 
-import useEmblaCarousel from 'embla-carousel-react';
-import { IndicatorButton, useIndicatorButton } from './CarouselIndicator';
-
-import { ReactNode } from 'react';
 import Icon from '../Icon/Icon';
+import { IndicatorButton, useIndicatorButton } from './CarouselIndicator';
 
 type ControlledCarouselPropsType<T> = {
   slides: T[];

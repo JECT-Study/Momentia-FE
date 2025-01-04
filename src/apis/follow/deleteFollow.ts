@@ -5,6 +5,7 @@ import {
   COMMON_ERROR_MESSAGE,
   FOLLOW_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
 

@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import SocialSignInButton from './Button/SocialSignInButton';
 
 import GoogleLogo from '@/../public/images/google.svg';
 import KakaoLogo from '@/../public/images/kakako.svg';
+
+import SocialSignInButton from './Button/SocialSignInButton';
 
 const SocialSignInSection = () => {
   const handleKakaoSignIn = () => {

@@ -1,5 +1,6 @@
 import useArtworkList from '@/apis/artwork/getArtworkList';
 import { ArtworkInfoType } from '@/types';
+
 import ArtworkCard from '../Card/ArtworkCard';
 import ControlledCarousel from '../Carousel/ControllableCarousel';
 

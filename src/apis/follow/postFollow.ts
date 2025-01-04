@@ -1,10 +1,11 @@
+import { isAxiosError } from 'axios';
+
 import { USER } from '@/constants/API';
 import {
   COMMON_ERROR_MESSAGE,
   FOLLOW_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
-
-import { isAxiosError } from 'axios';
+import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
 

@@ -1,7 +1,9 @@
-import { USER } from '@/constants/API';
-import defaultClient from '..';
-
 import { isAxiosError } from 'axios';
+
+import { USER } from '@/constants/API';
+import { ErrorResponseType } from '@/types/errorResponse';
+
+import defaultClient from '..';
 
 const getValidateNickname = async (nickname: string) => {
   try {

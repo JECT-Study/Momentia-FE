@@ -1,6 +1,8 @@
+import axios from 'axios';
+
 import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
-import axios from 'axios';
+
 import postRefreshToken from './auth/postRefreshToken';
 
 const baseURL =
