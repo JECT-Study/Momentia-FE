@@ -29,8 +29,19 @@ jobs:
               perf: 'performance',
             };
 
-            const { context } = require('@actions/github');
-            const { commits } = context.payload.pull_request;
+            // GitHub context 가져오기
+            const { context, github } = require('@actions/github');
+
+            // PR 번호와 저장소 정보 추출
+            const { owner, repo } = context.repo;
+            const pullRequestNumber = context.payload.pull_request.number;
+
+            // 커밋 정보 가져오기
+            const { data: commits } = await github.rest.pulls.listCommits({
+              owner,
+              repo,
+              pull_number: pullRequestNumber,
+            });
 
             // 커밋 메시지에서 키워드 추출
             const labelsToAdd = new Set();
@@ -46,9 +57,9 @@ jobs:
             // 라벨 추가 요청
             if (labelsToAdd.size > 0) {
               const response = await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
+                owner,
+                repo,
+                issue_number: pullRequestNumber,
                 labels: [...labelsToAdd],
               });
               console.log('Labels added:', response.data);
