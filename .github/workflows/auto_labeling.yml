@@ -28,41 +28,35 @@ jobs:
               test: 'test',
               perf: 'performance',
             };
-
-            // GitHub context 가져오기
-            const { context, github } = require('@actions/github');
-
-            // PR 번호와 저장소 정보 추출
+      
+            // 기본 제공되는 context와 github 객체 사용
+            const { github, context } = githubScript;
+      
             const { owner, repo } = context.repo;
             const pullRequestNumber = context.payload.pull_request.number;
-
-            // 커밋 정보 가져오기
+      
             const { data: commits } = await github.rest.pulls.listCommits({
               owner,
               repo,
               pull_number: pullRequestNumber,
             });
-
-            // 커밋 메시지에서 키워드 추출
+      
             const labelsToAdd = new Set();
-
             commits.forEach(commit => {
-              const message = commit.commit.message;
-              const keyword = message.split(':')[0].trim();
+              const keyword = commit.commit.message.split(':')[0].trim();
               if (commitKeywords[keyword]) {
                 labelsToAdd.add(commitKeywords[keyword]);
               }
             });
-
-            // 라벨 추가 요청
+      
             if (labelsToAdd.size > 0) {
-              const response = await github.rest.issues.addLabels({
+              await github.rest.issues.addLabels({
                 owner,
                 repo,
                 issue_number: pullRequestNumber,
                 labels: [...labelsToAdd],
               });
-              console.log('Labels added:', response.data);
+              console.log('Labels added:', [...labelsToAdd]);
             } else {
               console.log('No matching labels found for commits.');
             }
