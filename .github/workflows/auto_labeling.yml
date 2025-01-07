@@ -29,9 +29,7 @@ jobs:
               perf: 'performance',
             };
       
-            // 기본 제공되는 context와 github 객체 사용
-            const { github, context } = githubScript;
-      
+            // context와 github는 기본적으로 제공됨
             const { owner, repo } = context.repo;
             const pullRequestNumber = context.payload.pull_request.number;
       
@@ -58,5 +56,4 @@ jobs:
               });
               console.log('Labels added:', [...labelsToAdd]);
             } else {
-              console.log('No matching labels found for commits.');
-            }
+         
