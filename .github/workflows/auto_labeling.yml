@@ -56,4 +56,5 @@ jobs:
               });
               console.log('Labels added:', [...labelsToAdd]);
             } else {
-         
+              console.log('No matching labels found for commits.');
+            }
