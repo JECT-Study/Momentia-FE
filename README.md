@@ -32,7 +32,7 @@ https://momentia-fe-62do.vercel.app (향후 변경 예정)
 | :----------------------------: | :----------------------------: |
 | <img width="230" src="https://avatars.githubusercontent.com/u/154739298?s=400&u=ffcac1e1be1165a48832c6f33c04f9b617c70802&v=4" /> | <img width="230" src="https://avatars.githubusercontent.com/u/49917043?v=4"/> |
 | [@dahyeo-n](https://github.com/dahyeo-n) | [@SangWoo9734](https://github.com/SangWoo9734) |
-| 디자인 시스템, 작품 목록 페이지 | 로그인/회원가입 페이지, 메인 페이지 |
+| 디자인 시스템, 작품 목록 페이지, `README` 작성 | 로그인/회원가입 페이지, 메인 페이지 |
 
 
 ## 2. 기술 스택
