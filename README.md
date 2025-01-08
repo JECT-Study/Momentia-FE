@@ -14,8 +14,9 @@ https://momentia-fe-62do.vercel.app (향후 변경 예정)
 [1. 팀원 소개 (FE)](#1-팀원-소개-fe) <br/>
 [2. 기술 스택](#2-기술-스택) <br/>
 [3. 아키텍처 다이어그램](#3-아키텍처-다이어그램) <br/>
-[4. 화면 구성](#4-화면-구성) <br/>
-[5. 폴더 구조](#5-폴더-구조)
+[4. User Flow](#4-user-flow) <br/>
+[5. 화면 구성](#5-화면-구성) <br/>
+[6. 폴더 구조](#6-폴더-구조)
 
 
 ## 0. 프로젝트 소개
@@ -67,11 +68,15 @@ https://momentia-fe-62do.vercel.app (향후 변경 예정)
 </div>
 
 
-## 4. 화면 구성
+## 4. User Flow
+![Momentia | User Flow](https://github.com/user-attachments/assets/0aed4e03-13a2-4c8d-925c-f885e9126d57)
+
+
+## 5. 화면 구성
 
 
 
-## 5. 폴더 구조
+## 6. 폴더 구조
 
 *** 깔끔히 정리해서 추가할 예정 ***
 
