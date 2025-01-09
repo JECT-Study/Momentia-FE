@@ -73,7 +73,13 @@ const Navbar = () => {
         >
           <div className='justify-items-start'>
             <Link href={ROUTE.home}>
-              <Image src={logo} alt='모멘티아 로고' width={45} priority />
+              <Image
+                src={logo}
+                alt='momentia logo'
+                width={64}
+                height={31}
+                priority
+              />
             </Link>
           </div>
           <ul className='button-m hidden tablet:grid grid-cols-3 items-center gap-[70px] text-gray-100 w-full justify-items-center'>

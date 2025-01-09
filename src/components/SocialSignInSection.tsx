@@ -1,7 +1,7 @@
 import Image from 'next/image';
 
 import GoogleLogo from '@/../public/images/google.svg';
-import KakaoLogo from '@/../public/images/kakako.svg';
+import KakaoLogo from '@/../public/images/kakao.svg';
 
 import SocialSignInButton from './Button/SocialSignInButton';
 
@@ -29,11 +29,11 @@ const SocialSignInSection = () => {
       </div>
       <div className='flex gap-20 justify-center'>
         <SocialSignInButton
-          children={<Image src={KakaoLogo} alt='kakao logo' />}
+          children={<Image src={KakaoLogo} alt='kakao logo' priority />}
           onClick={handleKakaoSignIn}
         />
         <SocialSignInButton
-          children={<Image src={GoogleLogo} alt='kakao logo' />}
+          children={<Image src={GoogleLogo} alt='kakao logo' priority />}
           onClick={handleGoogleSignIn}
         />
       </div>
