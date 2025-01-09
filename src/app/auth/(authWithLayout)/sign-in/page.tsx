@@ -52,7 +52,6 @@ const SignInPage = () => {
           </div>
           <SquareButtonL
             type='submit'
-            disabled={!isFormDataValid}
             variant={isFormDataValid ? 'primary' : 'tertiaty'}
           >
             로그인
