@@ -38,22 +38,24 @@ jobs:
       run: pnpm install
 
     - name: Run Lint
+      id: Run_Lint
       run: pnpm lint
 
     - name: Prettier Check
+      id: Prettier_Check
       run: pnpm prettier --check .
 
     - name: Build
       if: success()
       run: pnpm build
 
-    - name: Notify Discord on Failure
-      if: failure()
+    - name: Notify Discord on Lint/Prettier/Build Failure
+      if: failure() && (steps.Run_Lint.outcome == 'failure' || steps.Prettier_Check.outcome == 'failure')
       uses: johnnyhuy/actions-discord-git-webhook@main
       with:
         webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
         args: |
-          🚨 **Lint/Build/Test Workflow 실패** 🚨
+          🚨 **Lint, Prettier, Build Workflow 실패** 🚨
 
           **Repository**: ${{ github.repository }}
           **Branch**: ${{ github.ref_name }}
@@ -61,7 +63,6 @@ jobs:
           **Author**: ${{ github.actor }}
           **Job**: ${{ github.job }}
 
-          ❗ 자세한 내용은 [GitHub Actions Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})를 확인하세요.
-
+          ❗ 자세한 내용은 [GitHub Actions Logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) 확인
           ---
           🕒 **Timestamp**: ${{ github.event.head_commit.timestamp }}
