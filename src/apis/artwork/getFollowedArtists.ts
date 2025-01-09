@@ -1,5 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { authorizedClient } from '@/apis';
 import { ARTWORK } from '@/constants/API';
 
@@ -13,11 +11,4 @@ const getFollowedArtists = async () => {
   }
 };
 
-const useFollowedArtists = () => {
-  return useQuery({
-    queryKey: [ARTWORK.followedArtists],
-    queryFn: getFollowedArtists,
-  });
-};
-
-export default useFollowedArtists;
+export default getFollowedArtists;
