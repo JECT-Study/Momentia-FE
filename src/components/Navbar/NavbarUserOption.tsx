@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import ROUTE from '@/constants/routes';
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
 import TokenHandler from '@/utils/tokenHandler';
 
 const NavbarUserOption = () => {

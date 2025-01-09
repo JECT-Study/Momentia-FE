@@ -3,7 +3,7 @@
 import { useState } from 'react';
 
 import Icon from '@/components/Icon/Icon';
-import useClickOutside from '@/hooks/useClickOutside';
+import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
 
 import NoticeContent from './NoticeContent';
 import NoticeHeader from './NoticeHeader';
