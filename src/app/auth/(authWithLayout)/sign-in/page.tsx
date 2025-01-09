@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
 
-import usePostSignIn from '@/apis/auth/signIn';
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import EmailInput from '@/components/Input/EmailInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import SocialSignInSection from '@/components/SocialSignInSection';
 import ROUTE from '@/constants/routes';
+import usePostSignIn from '@/hooks/serverStateHooks/usePostSignIn';
 import { SignInFormType } from '@/types/auth';
 
 const signInValidationSchema = object({
