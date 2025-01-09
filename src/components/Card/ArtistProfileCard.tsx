@@ -2,7 +2,6 @@
 
 import Image from 'next/image';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
 import { ArtistInfoType } from '@/types/artist';
@@ -30,23 +29,27 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
   return (
     <div className='relative w-[346px] h-[330px] rounded-[10px] overflow-hidden'>
       {/* badge */}
-      <div className='absolute left-[30px] top-0 z-10'>
-        <Image src={RankingLabel} alt='ranking-label' width={33} height={48} />
+      <div className='absolute left-[30px] top-0 z-10 w-[33px] h-[48px]'>
+        <Image
+          src={RankingLabel}
+          alt='ranking label'
+          width={68}
+          height={97}
+          style={{ width: '33px', height: 'auto' }}
+        />
         <p className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 placeholder'>
           {formattedRank}
         </p>
       </div>
-      {/* image */}
-      {artworkImage ? (
-        <Image
-          src={artworkImage}
-          alt='artworks'
-          fill={true}
-          className='object-contain'
-        />
-      ) : (
-        <Image src={DefaultImage} alt='artwork=default-image' fill={true} />
-      )}
+
+      <Image
+        src={profileImage ?? DefaultProfileImage}
+        alt={profileImage ? 'artwork image' : 'artwork default image'}
+        className={profileImage ? 'object-contain' : ''}
+        fill={true}
+        sizes='346px'
+        priority
+      />
 
       {/* info */}
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
@@ -55,7 +58,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
           <Image src={profileImage ?? DefaultProfileImage} alt='user-profile' />
         </div>
         {/* profile info */}
-        <div className='flex flex-col gap-[10px] '>
+        <div className='flex flex-col gap-[10px]'>
           <div className='flex justify-between'>
             <p className='subtitle2 text-gray-900'>{nickname}</p>
             <FollowButton initFollowState={isFollow} followUserId={userId} />

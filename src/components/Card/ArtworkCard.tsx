@@ -41,7 +41,7 @@ const ArtworkCard = ({
   const modeClasses: Record<string, string> = {
     'followed-artists': 'w-full max-w-[200px] h-[267px]',
     'artwork-default':
-      'min-w-[402px] min-h-[458px]  mobile:min-w-[512px] mobile:min-h-[584px]',
+      'min-w-[402px] min-h-[458px] mobile:min-w-[512px] mobile:min-h-[584px]',
     'artwork-latest':
       'min-w-[269px] min-h-[306px] mobile:min-w-[376px] mobile:min-h-[434px]',
     'artwork-list': 'min-w-[395px] min-h-[511px]',
@@ -69,16 +69,19 @@ const ArtworkCard = ({
         src={postImage || DefaultImage}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
+        sizes={modeClasses[mode] || '402px'}
         priority
         className={postImage ? 'object-contain' : 'object-cover'}
       />
 
       {rank && (
-        <div className='absolute top-0 left-[44px] mobile:left-[63px] z-10'>
+        <div className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px] absolute top-0 left-[44px] mobile:left-[63px] z-10'>
           <Image
-            className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px]'
             src={RankingLabel}
             alt='ranking-label'
+            width={68}
+            height={97}
+            sizes='(max-width: 768px) 33px, 48px'
           />
           <p className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base font-medium mobile:text-[2rem] mobile:font-semibold'>
             {formattedRank}
