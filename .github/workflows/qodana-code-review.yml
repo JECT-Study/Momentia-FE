@@ -11,22 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.head.sha }}
-        fetch-depth: 0
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
 
-    - name: Setup Qodana
-      uses: JetBrains/qodana-action@v2023.3
-      with:
-        results-dir: ./qodana-results  # 결과 저장 디렉토리
-        pr-mode: true  # PR에 분석 결과를 주석으로 추가
-      env:
-        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+      - name: Setup Qodana
+        uses: JetBrains/qodana-action@v2024.1.3
+        with:
+          results-dir: ./qodana-results
+          pr-mode: true # PR에 분석 결과를 주석으로 추가
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_592621362 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
 
-    - name: Upload Qodana Results
-      uses: actions/upload-artifact@v3
-      with:
-        name: qodana-results
-        path: ./qodana-results
+      - name: Upload Qodana Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: qodana-results
+          path: ./qodana-results
