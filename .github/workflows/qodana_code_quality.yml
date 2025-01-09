@@ -16,7 +16,7 @@ jobs:
       
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v3
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.sha }} # PR에서 실제 커밋 체크아웃
           fetch-depth: 0 # 풀 히스토리 필요 (PR 분석을 위해)
