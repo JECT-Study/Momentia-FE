@@ -1,0 +1,59 @@
+name: PR Review Reminder and dev Branch Merge
+
+on:
+  # 매일 오전 9시 (한국 시간, UTC+9)
+  schedule:
+    - cron: "0 0 * * *" # UTC 기준: 0시 (한국 시간으로 오전 9시)
+
+jobs:
+  pr-review-reminder:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Fetch Open Pull Requests
+      id: fetch_prs
+      run: |
+        curl -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+          https://api.github.com/repos/${{ github.repository }}/pulls \
+          > open_prs.json
+
+    - name: Send PR Review Reminders
+      if: always()
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        args: |
+          ✅ **PR Review Reminder** ✅
+          **Repository**: ${{ github.repository }}
+          **Open PRs**: $(jq '.[] | .title + " (" + .html_url + ")"' open_prs.json | tr '\n' '\n')
+          ---
+          🕒 **Reminder sent at**: $(date)
+
+  dev-branch-merge:
+    needs: pr-review-reminder
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up SSH for Local Merge
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    - name: Merge dev into local branches
+      run: |
+        git fetch origin
+        git checkout dev
+        git pull origin dev
+        for branch in $(git branch -r | grep -v 'HEAD\|dev\|main'); do
+          branch_name=$(echo $branch | sed 's/origin\///')
+          git checkout $branch_name
+          git merge dev
+          git push origin $branch_name
+        done

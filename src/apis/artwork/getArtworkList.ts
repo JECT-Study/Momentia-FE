@@ -1,4 +1,4 @@
-import { authorizedClient } from '@/apis';
+import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
 
 export interface ArtworkListParams {
@@ -26,7 +26,7 @@ const getArtworkList = async ({
     if (artworkField) params.artworkField = artworkField;
     if (search) params.search = search;
 
-    const response = await authorizedClient.get(ARTWORK.artworkList, {
+    const response = await defaultClient.get(ARTWORK.artworkList, {
       params,
     });
 
