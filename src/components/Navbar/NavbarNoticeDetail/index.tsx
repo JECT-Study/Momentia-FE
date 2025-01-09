@@ -18,7 +18,7 @@ const NavbarNoticeDetail = () => {
   const targetRef = useClickOutside<HTMLDivElement>(closeNotice);
 
   return (
-    <div className='relative z-20' ref={targetRef}>
+    <div className='flex item-center relative z-20' ref={targetRef}>
       <button
         type='button'
         onClick={() => {

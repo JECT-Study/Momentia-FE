@@ -61,31 +61,27 @@ const Navbar = () => {
     <>
       <nav className='fixed top-0 w-full bg-black text-white z-40'>
         <div
-          className='max-w-[1640px] mx-auto flex justify-between items-center
-        px-[32px] lg:px-[140px] py-[29px] h-[90px] lg:h-[60px]'
+          className='max-w-[1640px] mx-auto tablet:grid tablet:grid-cols-3 flex justify-between items-center 
+        px-[32px] tablet:px-[140px]  h-[90px] tablet:h-[60px]'
         >
-          <div className='flex-shrink-0'>
+          <div className='justify-items-start'>
             <Link href={ROUTE.home}>
               <Image src={logo} alt='모멘티아 로고' width={45} priority />
             </Link>
           </div>
-
-          <div className='hidden lg:flex justify-center w-full'>
-            <ul className='button-m flex gap-20 text-gray-100'>
-              <li
-                className='hover:text-gray-300 cursor-pointer'
-                onClick={moveToArtworkList}
-              >
-                작품
-              </li>
-              <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
-              <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
-            </ul>
-          </div>
-
-          <div className='flex items-center gap-7 flex-shrink-0'>
+          <ul className='button-m hidden tablet:grid grid-cols-3 items-center gap-[70px] text-gray-100 w-full justify-items-center'>
+            <li
+              className='hover:text-gray-300 cursor-pointer w-content'
+              onClick={moveToArtworkList}
+            >
+              작품
+            </li>
+            <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
+            <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
+          </ul>
+          <div className='flex justify-end item-center gap-[50px] justify-items-end'>
             {isSignedIn && <NavbarNoticeDetail />}
-            <div className='hidden lg:flex items-center gap-7'>
+            <div className='hidden tablet:flex items-center gap-[35px]'>
               {isSignedIn ? (
                 <>
                   <NavbarUserOption />
@@ -103,7 +99,7 @@ const Navbar = () => {
               name='Menu'
               size='l'
               onClick={toggleMenu}
-              className='lg:hidden text-white focus:outline-none'
+              className='tablet:hidden text-white focus:outline-none '
             />
           </div>
         </div>
