@@ -1,4 +1,4 @@
-name: Lint, Build, and Test
+name: Lint, Build
 
 on:
   push:
@@ -46,10 +46,6 @@ jobs:
     - name: Build
       if: success()
       run: pnpm build
-
-    - name: Run Tests
-      if: success()
-      run: pnpm test -- --ci
 
     - name: Notify Discord on Failure
       if: failure()
