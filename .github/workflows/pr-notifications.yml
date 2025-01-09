@@ -1,0 +1,30 @@
+name: PR Notifications
+
+on:
+  pull_request:
+    types: [opened, closed, synchronize]
+
+jobs:
+  notify-discord:
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Format Timestamp
+      run: |
+        echo "TIMESTAMP=$(TZ=Asia/Seoul date '+%Y.%m.%d(%a)')" >> $GITHUB_ENV
+    
+    - name: Notify Discord on PR
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        args: |
+            👾 **GitHub PR 발생** 👾
+            **Status**: ${{ github.event.pull_request.merged && 'Merged' || 'Closed' }}
+            **Title**: ${{ github.event.pull_request.title }}
+            **Author**: ${{ github.actor }}
+            **Repository**: ${{ github.repository }}
+            **Branch**: ${{ github.ref_name }}
+            **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            **Link**: ${{ github.event.pull_request.html_url }}
+            ---
+            ⌚️ **Timestamp**: ${{ env.TIMESTAMP }}
