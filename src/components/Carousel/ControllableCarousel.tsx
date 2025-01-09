@@ -42,7 +42,7 @@ const ControlledCarousel = <T,>({
 
   return (
     <section className='relative flex flex-col gap-[90px]'>
-      <div className='absolute -top-[120px] right-0  hidden tablet:flex'>
+      <div className='absolute -top-[120px] right-0  hidden tablet:flex gap-[35px]'>
         <button
           type='button'
           className='touch-manipulation  cursor-pointer w-[60px] h-[60px] rounded-full  disabled:text-gray-800'
@@ -52,7 +52,7 @@ const ControlledCarousel = <T,>({
           <Icon
             name='ChevronLeft'
             size='xl'
-            className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
+            className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-500'}`}
           />
         </button>
         <button
@@ -64,7 +64,7 @@ const ControlledCarousel = <T,>({
           <Icon
             name='ChevronRight'
             size='xl'
-            className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
+            className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-500'}`}
           />
         </button>
       </div>
