@@ -21,16 +21,16 @@ jobs:
           **Action**: ${{ github.event.action }}
           **Repository**: ${{ github.repository }}
           **Actor**: ${{ github.actor }}
-          **Title**: ${{ github.event_name == 'pull_request' ? github.event.pull_request.title : (github.event_name == 'issues' ? github.event.issue.title : 'N/A') }}
-          **Link**: ${{ github.event_name == 'pull_request' ? github.event.pull_request.html_url : (github.event_name == 'issues' ? github.event.issue.html_url : 'N/A') }}
+          **Title**: ${{ github.event.pull_request && github.event.pull_request.title || github.event.issue && github.event.issue.title || 'N/A' }}
+          **Link**: ${{ github.event.pull_request && github.event.pull_request.html_url || github.event.issue && github.event.issue.html_url || 'N/A' }}
           ---
-          🕒 **Timestamp**: ${{ github.event_name == 'pull_request' ? github.event.pull_request.updated_at : (github.event_name == 'issues' ? github.event.issue.updated_at : 'N/A') }}
+          🕒 **Timestamp**: ${{ github.event.pull_request && github.event.pull_request.updated_at || github.event.issue && github.event.issue.updated_at || 'N/A' }}
 
     - name: Notify Discord on Conflict in Pull Requests
       if: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' }}
       run: |
         curl -X POST -H "Content-Type: application/json" \
           -d "{
-                \"content\": \"🚨 **PR Conflict 발생** 🚨\\n\\n**PR Title**: '${{ github.event.pull_request ? github.event.pull_request.title : 'N/A' }}'\n**Branch**: '${{ github.event.pull_request ? github.event.pull_request.head.ref : 'N/A' }}'\n**URL**: '${{ github.event.pull_request ? github.event.pull_request.html_url : 'N/A' }}'"
+                \"content\": \"🚨 **PR Conflict 발생** 🚨\\n\\n**PR Title**: '${{ github.event.pull_request && github.event.pull_request.title || 'N/A' }}'\n**Branch**: '${{ github.event.pull_request && github.event.pull_request.head.ref || 'N/A' }}'\n**URL**: '${{ github.event.pull_request && github.event.pull_request.html_url || 'N/A' }}'"
               }" \
           ${{ secrets.DISCORD_WEBHOOK }}
