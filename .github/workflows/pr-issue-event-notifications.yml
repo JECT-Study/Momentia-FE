@@ -27,8 +27,8 @@ jobs:
           **Author**: ${{ github.actor }}
           **Repository**: ${{ github.repository }}
           **Branch**: ${{ github.ref_name }}
+          **Title**: ${{ github.event.pull_request && github.event.pull_request.title }}
           **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
-          **Title**: ${{ github.event.pull_request && github.event.pull_request.title || github.event.issue && github.event.issue.title }}
-          **Link**: ${{ github.event.pull_request && github.event.pull_request.html_url || github.event.issue && github.event.issue.html_url }}
+          **Link**: ${{ github.event.pull_request && github.event.pull_request.html_url }}
           ---
           🕒 **Timestamp**: ${{ github.event.pull_request && github.event.pull_request.updated_at || github.event.issue && github.event.issue.updated_at }}
