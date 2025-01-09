@@ -11,23 +11,22 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-    - name: Debug GitHub Event
-      run: echo "${{ toJSON(github.event) }}"
+      - name: Debug GitHub Event
+        run: echo "${{ toJSON(github.event) }}"
 
-    - name: Notify Discord on PR/Issue Events
-      uses: johnnyhuy/actions-discord-git-webhook@main
-      with:
-        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-        args: |
-          👾 **GitHub 이벤트 발생** 👾
-          **Event**: ${{ github.event_name || 'N/A' }}
-          **Action**: ${{ github.event.action || 'N/A' }}
-          **Author**: ${{ github.actor }}
-          **Repository**: ${{ github.repository || 'N/A' }}
-          **Branch**: ${{ github.ref_name }}
-          **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
-          **Title**: ${{ github.event.pull_request ? github.event.pull_request.title : (github.event.issue ? github.event.issue.title : 'N/A') }}
-          **Link**: ${{ github.event.pull_request ? github.event.pull_request.html_url : (github.event.issue ? github.event.issue.html_url : 'N/A') }}
-          ---
-          🕒 **Timestamp**: ${{ github.event.pull_request ? github.event.pull_request.updated_at : (github.event.issue ? github.event.issue.updated_at : 'N/A') }}
-          
+      - name: Notify Discord on PR/Issue Events
+        uses: johnnyhuy/actions-discord-git-webhook@main
+        with:
+          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+          args: |
+            👾 **GitHub 이벤트 발생** 👾
+            **Event**: ${{ github.event_name }}
+            **Action**: ${{ github.event.action }}
+            **Author**: ${{ github.actor }}
+            **Repository**: ${{ github.repository }}
+            **Branch**: ${{ github.ref_name }}
+            **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            **Title**: ${{ github.event.pull_request && github.event.pull_request.title || github.event.issue && github.event.issue.title }}
+            **Link**: ${{ github.event.pull_request && github.event.pull_request.html_url || github.event.issue && github.event.issue.html_url }}
+            ---
+            🕒 **Timestamp**: ${{ github.event.pull_request && github.event.pull_request.updated_at || github.event.issue && github.event.issue.updated_at }}
