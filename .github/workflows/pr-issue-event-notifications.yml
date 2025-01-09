@@ -12,7 +12,9 @@ jobs:
 
     steps:
       - name: Debug GitHub Event
-        run: echo "${{ toJSON(github.event) }}"
+        run: |
+          echo "GitHub Event: "
+          echo '${{ toJSON(github.event) }}'
 
       - name: Notify Discord on PR/Issue Events
         uses: johnnyhuy/actions-discord-git-webhook@main
