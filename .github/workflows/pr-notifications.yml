@@ -9,10 +9,16 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
+    # PR 제목 출력 (디버깅용)
+    - name: Print Title of PR
+      run: echo "The PR title is ${{ github.event.pull_request.title }}"
+
+    # 타임스탬프 생성
     - name: Format Timestamp
       run: |
         echo "TIMESTAMP=$(TZ=Asia/Seoul date '+%Y.%m.%d(%a)')" >> $GITHUB_ENV
-    
+
+    # Discord 알림 전송
     - name: Notify Discord on PR
       uses: johnnyhuy/actions-discord-git-webhook@main
       with:
