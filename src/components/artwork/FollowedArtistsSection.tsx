@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import useFollowedArtists from '@/apis/artwork/getFollowedArtists';
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
+import useFollowedArtists from '@/hooks/serverStateHooks/useFollowedArtists';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
 
 import FollowButton from '../Button/FollowButton';
