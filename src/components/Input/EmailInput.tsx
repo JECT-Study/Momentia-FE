@@ -45,15 +45,15 @@ const EmailInput = ({ mode }: EmailInputProps) => {
         placeholder='이메일을 입력해주세요.'
         isInvalid={false}
         classNames={{
-          label: 'custom-label',
+          label: 'custom-label top-5 !text-gray-400',
           input: 'placeholder:text-gray-700',
-          inputWrapper: ['bg-gray-900', 'rounded-md'],
+          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15'],
         }}
         onClear={clearEmailField}
         onChange={handleEmailInputOnChange}
       />
 
-      <div className='flex items-center mt-2'>
+      <div className='flex items-center mt-[3px] h-[26px]'>
         {errors.email ? (
           <>
             <Icon

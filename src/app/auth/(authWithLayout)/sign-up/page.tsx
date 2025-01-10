@@ -97,7 +97,7 @@ const SignUpPage = () => {
           onSubmit={formHandlerMethods.handleSubmit(onValidForm)}
           className='w-full flex flex-col gap-[60px]'
         >
-          <div className='flex flex-col gap-[30px]'>
+          <div className='flex flex-col gap-[15px]'>
             <EmailInput mode={'sign-up'} />
             <PasswordInput mode={'sign-up'} />
             <NicknameInput />
