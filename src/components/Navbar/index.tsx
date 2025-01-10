@@ -69,7 +69,7 @@ const Navbar = () => {
       <nav className='fixed top-0 w-full bg-black text-white z-40'>
         <div
           className='max-w-[1640px] mx-auto tablet:grid tablet:grid-cols-3 flex justify-between items-center 
-        px-[32px] tablet:px-[140px]  h-[90px] tablet:h-[60px]'
+        px-[32px] tablet:px-[140px] h-[90px]'
         >
           <div className='justify-items-start'>
             <Link href={ROUTE.home}>
@@ -102,8 +102,9 @@ const Navbar = () => {
                     variant='primary'
                     buttonSize='s'
                     onClick={moveToArtworkList}
-                    children={<p className='placeholder'>작품 업로드</p>}
-                  />
+                  >
+                    <p className='placholder'>작품 업로드</p>
+                  </OvalButton>
                 </>
               ) : (
                 <button className='button-m text-white' onClick={moveToSignIn}>
