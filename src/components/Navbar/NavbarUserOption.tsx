@@ -23,7 +23,7 @@ const NavbarUserOption = () => {
     <div className='relative flex align-center' ref={targetRef}>
       <button
         type='button'
-        className='rounded-full bg-white w-8 h-8 flex-shrink-0'
+        className='rounded-full bg-white w-[50px] h-[50px] flex-shrink-0'
         onClick={() => setToggleOptionArea((prev) => !prev)}
       />
       {toggleOptionArea && (

@@ -9,6 +9,7 @@ import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
 
 import logo from '../../../public/images/momentiaLogoSymbol.png';
+import OvalButton from '../Button/OvalButton';
 import Icon from '../Icon/Icon';
 import NavbarNoticeDetail from './NavbarNoticeDetail';
 import NavbarUserOption from './NavbarUserOption';
@@ -62,7 +63,7 @@ const Navbar = () => {
       <nav className='fixed top-0 w-full bg-black text-white z-40'>
         <div
           className='max-w-[1640px] mx-auto tablet:grid tablet:grid-cols-3 flex justify-between items-center 
-        px-[32px] tablet:px-[140px]  h-[90px] tablet:h-[60px]'
+        px-[32px] tablet:px-[140px] h-[90px]'
         >
           <div className='justify-items-start'>
             <Link href={ROUTE.home}>
@@ -85,9 +86,12 @@ const Navbar = () => {
               {isSignedIn ? (
                 <>
                   <NavbarUserOption />
-                  <button className='button-m bg-main px-6 py-2 rounded-full text-white flex-shrink-0'>
-                    작품 업로드
-                  </button>
+                  <OvalButton
+                    variant='primary'
+                    buttonSize='s'
+                    onClick={moveToArtworkList}
+                    children={<p>작품 업로드</p>}
+                  />
                 </>
               ) : (
                 <button className='button-m text-white' onClick={moveToSignIn}>
