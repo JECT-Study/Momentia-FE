@@ -1,6 +1,7 @@
 'use client';
 
 import useEmblaCarousel from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
 import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
@@ -19,9 +20,12 @@ const ControlledCarousel = <T,>({
   renderSlide,
   spaceSize = 'm',
 }: ControlledCarouselPropsType<T>) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    dragFree: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      dragFree: true,
+    },
+    [WheelGesturesPlugin()],
+  );
 
   const { selectedIndex, scrollSnaps, onIndicatorButtonClick } =
     useIndicatorButton(emblaApi);

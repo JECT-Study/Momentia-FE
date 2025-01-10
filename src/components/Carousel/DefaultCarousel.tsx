@@ -1,6 +1,7 @@
 'use client';
 
 import useEmblaCarousel from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
 interface DefaultCarouselPropsType<T> {
@@ -14,9 +15,12 @@ const DefaultCarousel = <T,>({
   renderSlide,
   spaceSize = 's',
 }: DefaultCarouselPropsType<T>) => {
-  const [emblaRef] = useEmblaCarousel({
-    dragFree: true,
-  });
+  const [emblaRef] = useEmblaCarousel(
+    {
+      dragFree: true,
+    },
+    [WheelGesturesPlugin()],
+  );
 
   const [gapSizeClassName, padddingSizeClassName] =
     spaceSize === 'l'
