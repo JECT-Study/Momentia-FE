@@ -4,6 +4,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
+import useIsCarouselOverflow from '@/hooks/clientStateHooks/useIsCarouselOverflow';
+
 interface DefaultCarouselPropsType<T> {
   slides: T[];
   renderSlide: (card: T) => ReactNode;
@@ -15,12 +17,14 @@ const DefaultCarousel = <T,>({
   renderSlide,
   spaceSize = 's',
 }: DefaultCarouselPropsType<T>) => {
-  const [emblaRef] = useEmblaCarousel(
+  const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       dragFree: true,
     },
     [WheelGesturesPlugin()],
   );
+
+  const isOverflowing = useIsCarouselOverflow(emblaApi);
 
   const [gapSizeClassName, padddingSizeClassName] =
     spaceSize === 'l'
@@ -31,7 +35,7 @@ const DefaultCarousel = <T,>({
 
   return (
     <section className='relative flex flex-col gap-[90px]'>
-      <div className='max-w-[1980px] overflow-hidden' ref={emblaRef}>
+      <div className='relative max-w-[1980px] overflow-hidden' ref={emblaRef}>
         <div
           className={`flex backface-hidden touch-pan-y pinch-zoom ${gapSizeClassName}`}
         >
@@ -44,6 +48,9 @@ const DefaultCarousel = <T,>({
             </div>
           ))}
         </div>
+        {isOverflowing && (
+          <div className='absolute top-0 right-0 bg-gradient-to-r from-background-base/0 to-background-base w-28 h-full' />
+        )}
       </div>
     </section>
   );

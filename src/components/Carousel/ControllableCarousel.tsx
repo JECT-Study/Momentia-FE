@@ -4,6 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
+import useIsCarouselOverflow from '@/hooks/clientStateHooks/useIsCarouselOverflow';
 import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
 
 import Icon from '../Icon/Icon';
@@ -26,6 +27,8 @@ const ControlledCarousel = <T,>({
     },
     [WheelGesturesPlugin()],
   );
+
+  const isOverflowing = useIsCarouselOverflow(emblaApi);
 
   const { selectedIndex, scrollSnaps, onIndicatorButtonClick } =
     useIndicatorButton(emblaApi);
@@ -73,7 +76,7 @@ const ControlledCarousel = <T,>({
         </button>
       </div>
 
-      <div className='max-w-[1980px] overflow-hidden' ref={emblaRef}>
+      <div className='relative max-w-[1980px] overflow-hidden' ref={emblaRef}>
         <div
           className={`flex backface-hidden touch-pan-y pinch-zoom ${gapSizeClassName}`}
         >
@@ -86,6 +89,9 @@ const ControlledCarousel = <T,>({
             </div>
           ))}
         </div>
+        {isOverflowing && (
+          <div className='absolute top-0 right-0 bg-gradient-to-r from-background-base/0 to-background-base w-28 h-full' />
+        )}
       </div>
 
       <div className='flex w-full h-[10px] bg-gray-900 rounded-[10px] overflow-hidden'>
