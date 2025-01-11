@@ -90,7 +90,7 @@ const Navbar = () => {
                     variant='primary'
                     buttonSize='s'
                     onClick={moveToArtworkList}
-                    children={<p>작품 업로드</p>}
+                    children={<p className='placeholder'>작품 업로드</p>}
                   />
                 </>
               ) : (
