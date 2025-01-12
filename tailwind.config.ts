@@ -29,6 +29,7 @@ const colors = {
   },
   background: {
     base: '#101010',
+    overlay: '#232225',
   },
 };
 
