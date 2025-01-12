@@ -6,6 +6,7 @@ import { useState } from 'react';
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import useFollowedArtists from '@/hooks/serverStateHooks/useFollowedArtists';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
+import TokenHandler from '@/utils/tokenHandler';
 
 import FollowButton from '../Button/FollowButton';
 import ArtworkCard from '../Card/ArtworkCard';
@@ -15,19 +16,13 @@ const FollowedArtistsSection = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
 
+  const accessToken = TokenHandler.getAccessToken();
+
   const {
     data: followedArtists,
     isLoading: followedArtistsLoading,
     error: followedArtistsError,
   } = useFollowedArtists();
-
-  if (!followedArtists || followedArtistsLoading) {
-    return <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>;
-  }
-
-  if (followedArtistsError) {
-    return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
-  }
 
   return (
     <>
@@ -45,53 +40,20 @@ const FollowedArtistsSection = () => {
 
       {showFollowedArtistsCards && (
         <div className='pb-[130px]'>
-          <DefaultCarousel
-            slides={followedArtists}
-            spaceSize='s'
-            renderSlide={(artist: FollowedArtist) => (
-              <div
-                key={artist.userId}
-                className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
-          flex flex-col justify-start items-start gap-[30px] self-stretch'
-              >
-                <div className='flex items-center justify-between w-full'>
-                  <div className='flex gap-[30px]'>
-                    <Image
-                      src={
-                        artist.userImage || '/images/defaultProfileImage.png'
-                      }
-                      alt={artist.nickname}
-                      width={100}
-                      height={100}
-                      priority
-                      className='w-[50px] h-[50px] bg-gray-700 rounded-full'
-                    />
-                    <div className='gap-[30px]'>
-                      <p className='subtitle2 text-white'>{artist.nickname}</p>
-                      <p className='placeholder text-gray-500'>
-                        {artist.userField || '\u00A0'}
-                      </p>
-                    </div>
-                  </div>
-                  <FollowButton
-                    initFollowState={artist.isFollow}
-                    followUserId={artist.userId}
-                  />
-                </div>
-                <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
-                  {artist.posts.map((post: ArtworkInfoType) => (
-                    <ArtworkCard
-                      key={post.postId}
-                      artworkInfo={post}
-                      mode='followed-artists'
-                    />
-                  ))}
-                </div>
+          {!accessToken ? (
+            <div
+              className='grid flex-col col-span-full items-center justify-center
+                  h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
+            >
+              <div className='subtitle2 text-gray-500 text-center'>
+                로그인한 유저만 이용할 수 있는 서비스입니다.
               </div>
-            )}
-          />
-
-          {!followedArtists.length && (
+            </div>
+          ) : followedArtistsLoading ? (
+            <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>
+          ) : followedArtistsError ? (
+            <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>
+          ) : !followedArtists.length ? (
             <div
               className='grid flex-col col-span-full items-center justify-center
                   h-[403px] bg-gray-900 border border-gray-800 rounded-[10px]'
@@ -101,6 +63,54 @@ const FollowedArtistsSection = () => {
                 팔로우해 보세요!
               </div>
             </div>
+          ) : (
+            <DefaultCarousel
+              slides={followedArtists}
+              spaceSize='s'
+              renderSlide={(artist: FollowedArtist) => (
+                <div
+                  key={artist.userId}
+                  className='bg-gray-900 rounded-[10px] border border-gray-800 p-[20px] w-[458px] h-[403px]
+          flex flex-col justify-start items-start gap-[30px] self-stretch'
+                >
+                  <div className='flex items-center justify-between w-full'>
+                    <div className='flex gap-[30px]'>
+                      <Image
+                        src={
+                          artist.userImage || '/images/defaultProfileImage.png'
+                        }
+                        alt={artist.nickname}
+                        width={100}
+                        height={100}
+                        priority
+                        className='w-[50px] h-[50px] bg-gray-700 rounded-full'
+                      />
+                      <div className='gap-[30px]'>
+                        <p className='subtitle2 text-white'>
+                          {artist.nickname}
+                        </p>
+                        <p className='placeholder text-gray-500'>
+                          {artist.userField || '\u00A0'}
+                        </p>
+                      </div>
+                    </div>
+                    <FollowButton
+                      initFollowState={artist.isFollow}
+                      followUserId={artist.userId}
+                    />
+                  </div>
+                  <div className='w-full h-[267px] flex flex-wrap gap-3.5 justify-self-stretch rounded-[10px]'>
+                    {artist.posts.map((post: ArtworkInfoType) => (
+                      <ArtworkCard
+                        key={post.postId}
+                        artworkInfo={post}
+                        mode='followed-artists'
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            />
           )}
         </div>
       )}
