@@ -34,6 +34,7 @@ const NavbarNoticeDetail = () => {
             <NoticeHeader noticeCount={4} closeAction={closeNotice} />
             <NoticeContent />
           </div>
+          <div className='absolute right-0 bottom-0 w-full h-[68px] bg-gradient-to-b from-background-base/0 to-background-base' />
         </div>
       )}
     </div>
