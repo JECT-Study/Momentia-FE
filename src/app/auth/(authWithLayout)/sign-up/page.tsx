@@ -104,7 +104,8 @@ const SignUpPage = () => {
           </div>
           <SquareButtonL
             type='submit'
-            variant={isFormDataValid ? 'primary' : 'tertiaty'}
+            disabled={!isFormDataValid}
+            variant={isFormDataValid ? 'primary' : 'tertiary'}
           >
             <p>회원가입</p>
           </SquareButtonL>

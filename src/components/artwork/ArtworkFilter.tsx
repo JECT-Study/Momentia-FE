@@ -60,7 +60,7 @@ const ArtworkFilter = ({
               variant={
                 selectedArtworkField === artworkField.value
                   ? 'primary'
-                  : 'tertiaty'
+                  : 'tertiary'
               }
               buttonSize='m'
               onClick={() => handleArtworkFieldClick(artworkField.value)}

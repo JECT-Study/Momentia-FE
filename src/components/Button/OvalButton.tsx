@@ -11,19 +11,19 @@ const OvalButton = ({
   const bgColorClasses = {
     primary: 'bg-main',
     secondary: buttonSize === 'm' ? '' : 'bg-gray-200',
-    tertiaty: buttonSize === 'm' ? 'bg-gray-800' : 'bg-gray-700',
+    tertiary: buttonSize === 'm' ? 'bg-gray-800' : 'bg-gray-700',
   };
 
   const hoverBgColorClasses = {
     primary: 'hover:bg-[#885DFF]',
     secondary: buttonSize === 'm' ? '' : 'hover:bg-gray-300',
-    tertiaty: '',
+    tertiary: '',
   };
 
   const textColorClasses = {
     primary: 'text-white',
     secondary: buttonSize === 'm' ? 'text-transparent' : 'text-gray-600',
-    tertiaty: buttonSize === 'm' ? 'text-white' : 'text-gray-300',
+    tertiary: buttonSize === 'm' ? 'text-white' : 'text-gray-300',
   };
 
   const buttonSizeClasses = {
