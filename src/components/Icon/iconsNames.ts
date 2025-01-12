@@ -32,6 +32,7 @@ import Lock from './icons/Lock';
 import Menu from './icons/Menu';
 import Message from './icons/Message';
 import MoreHorizontal from './icons/MoreHorizontal';
+import MoreVertical from './icons/MoreVertical';
 import Notification from './icons/Notification';
 import Pause from './icons/Pause';
 import Person from './icons/Person';
@@ -81,6 +82,7 @@ export const iconsNames: Record<
   Menu,
   Message,
   MoreHorizontal,
+  MoreVertical,
   Notification,
   Pause,
   Person,
