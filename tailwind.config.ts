@@ -43,12 +43,6 @@ export default {
         sans: ['var(--font-montserrat)'],
       },
       colors,
-      spacing: {
-        '4.5': '18px',
-        '7.5': '30px',
-        '15': '60px',
-        '78.25': '313px',
-      },
     },
     screens: {
       mobile: '677px',
