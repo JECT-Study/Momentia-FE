@@ -7,11 +7,11 @@ import { useFormContext } from 'react-hook-form';
 
 import Icon from '../Icon/Icon';
 
-interface EmailInputProps {
+interface BasicInputProps {
   mode: 'sign-up' | 'sign-in';
 }
 
-const EmailInput = ({ mode }: EmailInputProps) => {
+const BasicInput = ({ mode }: BasicInputProps) => {
   const [isEmailValidating, setIsEmailValidating] = useState(false);
 
   const {
@@ -96,4 +96,4 @@ const EmailInput = ({ mode }: EmailInputProps) => {
   );
 };
 
-export default EmailInput;
+export default BasicInput;
