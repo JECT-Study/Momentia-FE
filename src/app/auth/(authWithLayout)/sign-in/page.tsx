@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
 
 import SquareButtonL from '@/components/Button/SquareButtonL';
-import EmailInput from '@/components/Input/EmailInput';
+import BasicInput from '@/components/Input/BasicInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import SocialSignInSection from '@/components/SocialSignInSection';
 import ROUTE from '@/constants/routes';
@@ -47,7 +47,7 @@ const SignInPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <EmailInput mode={'sign-in'} />
+            <BasicInput mode={'sign-in'} />
             <PasswordInput mode={'sign-in'} />
           </div>
           <SquareButtonL

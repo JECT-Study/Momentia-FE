@@ -8,7 +8,7 @@ import { object, string, ZodIssueCode } from 'zod';
 import getValidateEmail from '@/apis/auth/validateEmail';
 import getValidateNickname from '@/apis/auth/validateNickname';
 import SquareButtonL from '@/components/Button/SquareButtonL';
-import EmailInput from '@/components/Input/EmailInput';
+import BasicInput from '@/components/Input/BasicInput';
 import NicknameInput from '@/components/Input/NicknameInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import {
@@ -98,7 +98,7 @@ const SignUpPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <EmailInput mode={'sign-up'} />
+            <BasicInput mode={'sign-up'} />
             <PasswordInput mode={'sign-up'} />
             <NicknameInput />
           </div>
