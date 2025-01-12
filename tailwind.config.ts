@@ -25,6 +25,7 @@ const colors = {
   subtitle: '#F5F5F5',
   background: {
     base: '#101010',
+    overlay: '#232225',
   },
 };
 
