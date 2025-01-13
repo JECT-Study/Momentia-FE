@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import getArtworkList, {
-  ArtworkListParams,
-} from '@/apis/artwork/getArtworkList';
+import getArtworkList from '@/apis/artwork/getArtworkList';
 import { ARTWORK } from '@/constants/API';
-import { ArtworkListResponse, PaginationType } from '@/types';
+import {
+  ArtworkListParams,
+  ArtworkListResponse,
+  PaginationType,
+} from '@/types';
 
 const useArtworkList = (params: ArtworkListParams) => {
   const { data, isLoading, error } = useQuery<ArtworkListResponse>({
