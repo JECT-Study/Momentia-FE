@@ -20,10 +20,11 @@ jobs:
     - name: Setup Qodana
       uses: JetBrains/qodana-action@v2023.3
       with:
-        results-dir: ./qodana-results  # 결과 저장 디렉토리
+        results-dir: ./qodana-results
         pr-mode: true  # PR에 분석 결과를 주석으로 추가
       env:
-        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+        QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_592621362 }}
+        QODANA_ENDPOINT: 'https://qodana.cloud'
 
     - name: Upload Qodana Results
       uses: actions/upload-artifact@v3
