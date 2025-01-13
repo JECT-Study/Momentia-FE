@@ -1,13 +1,14 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { debounce } from 'lodash';
 import Link from 'next/link';
+import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
 
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import BasicInput from '@/components/Input/BasicInput';
-import PasswordInput from '@/components/Input/PasswordInput';
 import SocialSignInSection from '@/components/SocialSignInSection';
 import ROUTE from '@/constants/routes';
 import usePostSignIn from '@/hooks/serverStateHooks/usePostSignIn';
@@ -19,6 +20,9 @@ const signInValidationSchema = object({
 });
 
 const SignInPage = () => {
+  const [isEmailValidating, setIsEmailValidating] = useState(false);
+  const [isPasswordValidating, setIsPasswordValidating] = useState(false);
+
   const { mutate: mutateSignIn } = usePostSignIn();
 
   const formHandlerMethods = useForm<SignInFormType>({
@@ -30,7 +34,33 @@ const SignInPage = () => {
     resolver: zodResolver(signInValidationSchema),
   });
 
-  const { isValid: isFormDataValid } = formHandlerMethods.formState;
+  const {
+    register,
+    resetField,
+    watch,
+    setValue,
+    trigger,
+    formState: { errors, isValid: isFormDataValid },
+  } = formHandlerMethods;
+
+  const email = watch('email');
+  const password = watch('password');
+
+  const handleEmailInputOnChange = debounce(async (e) => {
+    setValue('email', e.target.value);
+    setIsEmailValidating(true);
+    await trigger('email');
+    setIsEmailValidating(false);
+  }, 300);
+
+  const clearEmailField = () => resetField('email');
+
+  const handlePasswordInputOnChange = debounce(async (e) => {
+    setValue('password', e.target.value);
+    setIsPasswordValidating(true);
+    await trigger('password');
+    setIsPasswordValidating(false);
+  }, 300);
 
   const onValidForm = (signInData: SignInFormType) => {
     mutateSignIn(signInData);
@@ -47,12 +77,46 @@ const SignInPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <BasicInput mode={'sign-in'} />
-            <PasswordInput mode={'sign-in'} />
+            {/* TODO: 검증할 요소 더 있으면 BasicInput의 errorMessage,
+            successMessage에 추가 */}
+            <BasicInput
+              {...register('email')}
+              type='email'
+              label='이메일'
+              placeholder='이메일을 입력해주세요.'
+              value={email}
+              onChange={handleEmailInputOnChange}
+              showClear={true}
+              onClear={clearEmailField}
+              isInvalid={!!errors.email}
+              errorMessage={errors.email?.message as string}
+              successMessage={
+                email && !isEmailValidating && !errors.email
+                  ? '사용 가능한 이메일입니다.'
+                  : undefined
+              }
+            />
+            <BasicInput
+              {...register('password')}
+              type='password'
+              label='비밀번호'
+              placeholder='비밀번호를 입력해주세요.'
+              value={password}
+              onChange={handlePasswordInputOnChange}
+              showEyeIcon={true}
+              isInvalid={!!errors.password}
+              errorMessage={errors.password?.message as string}
+              successMessage={
+                password && !isPasswordValidating && !errors.password
+                  ? '비밀번호 검증 중...'
+                  : undefined
+              }
+            />
           </div>
           <SquareButtonL
             type='submit'
-            variant={isFormDataValid ? 'primary' : 'tertiaty'}
+            disabled={!isFormDataValid}
+            variant={isFormDataValid ? 'primary' : 'tertiary'}
           >
             로그인
           </SquareButtonL>

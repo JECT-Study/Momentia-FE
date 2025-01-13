@@ -1,95 +1,133 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-import { debounce } from 'lodash';
-import { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { ChangeEvent, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 
 interface BasicInputProps {
-  mode: 'sign-up' | 'sign-in';
+  type?: string;
+  label?: string;
+  placeholder?: string;
+
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+
+  showClear?: boolean;
+  onClear?: () => void;
+  showEyeIcon?: boolean;
+  showTextLength?: boolean;
+  isInvalid?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  errorMessage?: string;
+  successMessage?: string;
 }
 
-const BasicInput = ({ mode }: BasicInputProps) => {
-  const [isEmailValidating, setIsEmailValidating] = useState(false);
+const BasicInput = ({
+  type,
+  label,
+  placeholder,
+  value,
+  onChange,
+  showClear = false,
+  onClear,
+  showEyeIcon = false,
+  showTextLength = false,
+  isInvalid = false,
+  minLength,
+  maxLength,
+  errorMessage,
+  successMessage,
+}: BasicInputProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const {
-    register,
-    resetField,
-    watch,
-    setValue,
-    trigger,
-    formState: { errors },
-  } = useFormContext();
+  const togglePasswordVisibility = () =>
+    setIsPasswordVisible(!isPasswordVisible);
 
-  const email = watch('email');
-
-  const clearEmailField = () => resetField('email');
-
-  const handleEmailInputOnChange = debounce(async (e) => {
-    setValue('email', e.target.value);
-
-    setIsEmailValidating(true);
-    await trigger('email');
-    setIsEmailValidating(false);
-  }, 300);
+  const currentTextLength = value.length;
+  const textLengthColor =
+    currentTextLength === 0
+      ? 'text-gray-700'
+      : maxLength && currentTextLength > maxLength
+        ? 'text-system-error'
+        : 'text-white';
 
   return (
     <div>
       <Input
-        {...register('email')}
-        type='email'
-        label='이메일'
+        type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
+        label={label}
         labelPlacement='outside'
-        placeholder='이메일을 입력해주세요.'
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onClear={showClear ? onClear : undefined}
         isInvalid={false}
+        minLength={minLength}
+        maxLength={maxLength}
+        endContent={
+          <>
+            {showEyeIcon && (
+              <button
+                type='button'
+                aria-label='toggle password visibility'
+                onClick={togglePasswordVisibility}
+                disabled={value === ''}
+              >
+                {isPasswordVisible ? (
+                  <Icon
+                    name='Eye'
+                    size='m'
+                    className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
+                  />
+                ) : (
+                  <Icon
+                    name='EyeOff'
+                    size='m'
+                    className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
+                  />
+                )}
+              </button>
+            )}
+
+            {showTextLength && maxLength && (
+              <div className='flex items-center'>
+                <span className={`placeholder ${textLengthColor}`}>
+                  {currentTextLength}
+                </span>
+                <span className='placeholder text-gray-700'>/{maxLength}</span>
+              </div>
+            )}
+          </>
+        }
         classNames={{
           label: 'custom-label top-5 !text-gray-400',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15'],
         }}
-        onClear={clearEmailField}
-        onChange={handleEmailInputOnChange}
       />
-
-      <div className='flex items-center mt-[3px] h-[26px]'>
-        {errors.email ? (
+      <div className='flex items-center mt-2'>
+        {isInvalid && errorMessage ? (
           <>
             <Icon
               name='CheckCircleFilled'
               size='s'
               className='text-system-error mr-2'
             />
-            <p className='button-s text-system-error'>
-              {errors.email.message as string}
-            </p>
+            <p className='button-s text-system-error'>{errorMessage}</p>
           </>
         ) : (
-          mode === 'sign-up' &&
-          (email && isEmailValidating ? (
+          successMessage && (
             <>
               <Icon
                 name='AlertCircle'
                 size='s'
                 className='text-gray-400 mr-2'
               />
-              <p className='button-s text-gray-400'>이메일 검증 중...</p>
+              <p className='button-s text-system-success'>{successMessage}</p>
             </>
-          ) : (
-            !!email && (
-              <>
-                <Icon
-                  name='AlertCircle'
-                  size='s'
-                  className='text-system-success mr-2'
-                />
-                <p className='button-s text-system-success'>
-                  사용가능한 이메일입니다.
-                </p>
-              </>
-            )
-          ))
+          )
         )}
       </div>
     </div>
