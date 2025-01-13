@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string, ZodIssueCode } from 'zod';
 
-import usePostSignUp from '@/apis/auth/signUp';
 import getValidateEmail from '@/apis/auth/validateEmail';
 import getValidateNickname from '@/apis/auth/validateNickname';
 import SquareButtonL from '@/components/Button/SquareButtonL';
@@ -17,6 +16,7 @@ import {
   SIGNIN_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
 import ROUTE from '@/constants/routes';
+import usePostSignUp from '@/hooks/serverStateHooks/usePostSignUp';
 import { SignUpFormType } from '@/types/auth';
 
 const PASSWORD_REGEX =
