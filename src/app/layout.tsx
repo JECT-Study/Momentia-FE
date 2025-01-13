@@ -14,17 +14,19 @@ export const metadata: Metadata = {
   description: '',
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
+interface LayoutProps {
   children: ReactNode;
-}>) => {
+  modal: ReactNode;
+}
+
+const RootLayout = ({ children, modal }: Readonly<LayoutProps>) => {
   return (
     <html lang='ko'>
       <body className={`${pretendard} ${montserrat.variable}`}>
         <MSWProvider>
           <ReactQueryProvider>
             <AppShell>{children}</AppShell>
+            {modal}
           </ReactQueryProvider>
         </MSWProvider>
         <KakaoProvider />
