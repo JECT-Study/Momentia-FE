@@ -70,7 +70,6 @@ const ArtworkCard = ({
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
         sizes={modeClasses[mode] || '402px'}
-        priority
         className={postImage ? 'object-contain' : 'object-cover'}
       />
 
