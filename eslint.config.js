@@ -67,6 +67,10 @@ export default [
     plugins: {
       storybook: storybookPlugin,
     },
-    extends: ['plugin:storybook/recommended'],
+    extends: [
+      'eslint:recommended',
+      'plugin:prettier/recommended',
+      'plugin:storybook/recommended',
+    ],
   },
 ];
