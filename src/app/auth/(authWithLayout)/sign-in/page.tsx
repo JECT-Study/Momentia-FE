@@ -37,7 +37,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center gap-[60px]'>
+    <div className='flex flex-col justify-center items-center max-w-[420px] w-full px-[20px] gap-[60px]'>
       <h4>로그인</h4>
 
       <FormProvider {...formHandlerMethods}>
