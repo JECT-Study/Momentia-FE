@@ -1,0 +1,54 @@
+name: Qodana Analysis
+
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches: ["main", "dev"]
+
+jobs:
+  qodana:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: write
+      
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }} # PR에서 실제 커밋 체크아웃
+          fetch-depth: 0 # 풀 히스토리 필요 (PR 분석을 위해)
+          
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8 # pnpm 버전
+          run_install: false # 의존성 설치 수동으로 실행
+          dest: ~/setup-pnpm # pnpm 파일을 저장할 경로
+          package_json_file: package.json # package.json 경로 (기본값 유지)
+          standalone: false # Node.js 없이 실행 가능하도록 standalone 설치 여부
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Qodana Scan
+        uses: JetBrains/qodana-action@v2024.2
+        with:
+          pr-mode: false # PR 모드 비활성화 (필요 시 활성화 가능)
+        env:
+          QODANA_TOKEN: ${{ secrets.QODANA_TOKEN_592621362 }}
+          QODANA_ENDPOINT: 'https://qodana.cloud'
+
+      - name: Notify Discord on Analysis Failure
+        if: failure()
+        uses: johnnyhuy/actions-discord-git-webhook@main
+        with:
+          webhook-url: ${{ secrets.DISCORD_WEBHOOK }}
+          content: |
+            🚨 Qodana 분석 실패!
+            - **Repository**: ${{ github.repository }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Commit**: [${{ github.sha }}](https://github.com/${{ github.repository }}/commit/${{ github.sha }})
+            - **Pull Request**: ${{ github.event.pull_request.html_url }}
