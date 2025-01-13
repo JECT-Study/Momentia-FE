@@ -1,13 +1,6 @@
 import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
-
-export interface ArtworkListParams {
-  sort: string;
-  artworkField?: string;
-  search: string;
-  page: number;
-  size: number;
-}
+import { ArtworkListParams } from '@/types';
 
 const getArtworkList = async ({
   sort,
