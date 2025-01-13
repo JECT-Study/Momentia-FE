@@ -56,6 +56,12 @@ const Navbar = () => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
     }
+
+    return () => {
+      if (isMenuOpen) {
+        document.body.style.overflow = 'auto';
+      }
+    };
   }, [isMenuOpen]);
 
   return (
