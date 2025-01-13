@@ -12,6 +12,14 @@ export interface ArtworkInfoType {
   isLiked: boolean;
 }
 
+export interface ArtworkListParams {
+  sort: string;
+  artworkField?: string;
+  search: string;
+  page: number;
+  size: number;
+}
+
 export interface ArtworkListResponse {
   data: ArtworkInfoType[];
   page: PaginationType;
