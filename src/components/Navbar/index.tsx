@@ -66,7 +66,13 @@ const Navbar = () => {
         >
           <div className='flex-shrink-0'>
             <Link href={ROUTE.home}>
-              <Image src={logo} alt='모멘티아 로고' width={45} priority />
+              <Image
+                src={logo}
+                alt='momentia logo'
+                width={64}
+                height={31}
+                priority
+              />
             </Link>
           </div>
 

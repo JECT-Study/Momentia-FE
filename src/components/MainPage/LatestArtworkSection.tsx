@@ -1,4 +1,4 @@
-import useArtworkList from '@/apis/artwork/getArtworkList';
+import useArtworkList from '@/hooks/serverStateHooks/useArtworkList';
 import { ArtworkInfoType } from '@/types';
 
 import ArtworkCard from '../Card/ArtworkCard';

@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className='bg-black text-white px-[32px] lg:px-[140px] py-24'>
       <Link href={ROUTE.home}>
-        <Image src={logo} alt='모멘티아 로고' width={45} priority />
+        <Image src={logo} alt='momentia logo' width={64} height={31} priority />
       </Link>
 
       <div className='flex flex-wrap wrap-reverse items-center mt-10'>

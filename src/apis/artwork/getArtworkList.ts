@@ -1,16 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
-
 import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
-import { ArtworkListResponse, PaginationType } from '@/types';
-
-interface ArtworkListParams {
-  sort: string;
-  artworkField?: string;
-  search: string;
-  page: number;
-  size: number;
-}
+import { ArtworkListParams } from '@/types';
 
 const getArtworkList = async ({
   sort,
@@ -43,18 +33,4 @@ const getArtworkList = async ({
   }
 };
 
-const useArtworkList = (params: ArtworkListParams) => {
-  const { data, isLoading, error } = useQuery<ArtworkListResponse>({
-    queryKey: [ARTWORK.artworkList, params],
-    queryFn: () => getArtworkList({ ...params }),
-    retry: 3,
-  });
-
-  return {
-    data: data || { data: [], page: {} as PaginationType },
-    isLoading,
-    error,
-  };
-};
-
-export default useArtworkList;
+export default getArtworkList;

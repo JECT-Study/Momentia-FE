@@ -3,8 +3,8 @@
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
-import useGetSocialSignIn from '@/apis/auth/socialSignIn';
 import ROUTE from '@/constants/routes';
+import useGetSocialSignIn from '@/hooks/serverStateHooks/useGetSocialSignIn';
 
 const RedirectPage = () => {
   const router = useRouter();

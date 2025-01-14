@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, KeyboardEvent } from 'react';
 
 import Icon from '../Icon/Icon';
 
@@ -21,6 +21,10 @@ const ArtworkSearchBar = ({
     setSubmittedKeyword(searchKeyword.trim());
   };
 
+  const handleEnterKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSearchSubmit();
+  };
+
   return (
     <div className='flex items-center justify-center'>
       <div className='flex items-center w-[760px] h-[78px] px-5 rounded-[10px] bg-gray-900 mb-[110px] self-stretch'>
@@ -29,6 +33,7 @@ const ArtworkSearchBar = ({
           placeholder={`'작품 제목 또는 작가 이름'으로 검색`}
           value={searchKeyword}
           onChange={handleSearchChange}
+          onKeyDown={handleEnterKeyDown}
         />
         <button onClick={handleSearchSubmit}>
           <Icon
