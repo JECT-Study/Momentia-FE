@@ -75,19 +75,11 @@ const BasicInput = ({
                 onClick={togglePasswordVisibility}
                 disabled={value === ''}
               >
-                {isPasswordVisible ? (
-                  <Icon
-                    name='Eye'
-                    size='m'
-                    className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
-                  />
-                ) : (
-                  <Icon
-                    name='EyeOff'
-                    size='m'
-                    className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
-                  />
-                )}
+                <Icon
+                  name={isPasswordVisible ? 'Eye' : 'EyeOff'}
+                  size='m'
+                  className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
+                />
               </button>
             )}
 
