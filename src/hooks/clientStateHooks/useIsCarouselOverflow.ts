@@ -1,10 +1,10 @@
 import { EmblaCarouselType } from 'embla-carousel';
-import { useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const useIsCarouselOverflow = (emblaApi: EmblaCarouselType | undefined) => {
   const [isOverflowing, setIsOverflowing] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!emblaApi) return;
 
     const checkOverflow = () => {
@@ -13,11 +13,11 @@ const useIsCarouselOverflow = (emblaApi: EmblaCarouselType | undefined) => {
       setIsOverflowing(canScroll);
     };
 
-    emblaApi.on('init', checkOverflow);
+    checkOverflow();
+
     emblaApi.on('resize', checkOverflow);
 
     return () => {
-      emblaApi.off('init', checkOverflow);
       emblaApi.off('resize', checkOverflow);
     };
   }, [emblaApi]);
