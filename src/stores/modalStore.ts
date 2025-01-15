@@ -24,8 +24,18 @@ const initialModalState: ModalState = {
 const modalStore = create<ModalState & ModalAction>((set) => ({
   ...initialModalState,
 
-  openModal: (props: OpenModalProps) => set(() => ({ isOpen: true, ...props })),
-  closeModal: () => set(() => ({ ...initialModalState })),
+  openModal: (props: OpenModalProps) =>
+    set((state) => {
+      if (state.isOpen) return state;
+
+      return { isOpen: true, ...props };
+    }),
+  closeModal: () =>
+    set((state) => {
+      if (!state.isOpen) return state;
+
+      return { ...initialModalState };
+    }),
 }));
 
 export default modalStore;
