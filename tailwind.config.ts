@@ -23,10 +23,6 @@ const colors = {
   },
   title: '#FFFFFF',
   subtitle: '#F5F5F5',
-  notice: {
-    base: '#232225',
-    selected: '#1B1A1D',
-  },
   background: {
     base: '#101010',
     overlay: '#232225',

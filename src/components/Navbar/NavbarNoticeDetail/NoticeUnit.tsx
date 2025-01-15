@@ -4,8 +4,8 @@ const NoticeUnit = () => {
   // TODO: 백그라운드 작업 필요
 
   const readNoticeClassName = false
-    ? ['bg-notice-base', 'text-white', 'text-gray-300']
-    : ['bg-notice-selected', 'text-gray-500', 'text-[#616161]'];
+    ? ['bg-background-overlay', 'text-white', 'text-gray-300']
+    : ['bg-[##1B1A1D]', 'text-gray-500', 'text-[#616161]'];
 
   return (
     <div
