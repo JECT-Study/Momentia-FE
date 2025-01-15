@@ -116,7 +116,7 @@ const Navbar = () => {
               name='Menu'
               size='l'
               onClick={toggleMenu}
-              className='tablet:hidden text-white focus:outline-none '
+              className='tablet:hidden text-white focus:outline-none'
             />
           </div>
         </div>
