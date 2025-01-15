@@ -7,11 +7,17 @@ import TokenHandler from '@/utils/tokenHandler';
 const useFollowedArtists = () => {
   const accessToken = TokenHandler.getAccessToken();
 
-  return useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: [ARTWORK.followedArtists],
     queryFn: getFollowedArtists,
     enabled: !!accessToken,
   });
+
+  return {
+    data: data ?? [],
+    isLoading,
+    error,
+  };
 };
 
 export default useFollowedArtists;

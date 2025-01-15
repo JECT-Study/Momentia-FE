@@ -9,24 +9,24 @@ jobs:
     runs-on: ubuntu-22.04
 
     steps:
-      # Merge 상태 및 PR 제목 출력 (디버깅용)
-      - name: Check PR Details
-        run: |
-          echo "github.event.pull_request.merged           : ${{ github.event.pull_request.merged }}"
-          echo "The PR title is ${{ github.event.pull_request.title }}"
+    # Merge 상태 및 PR 제목 출력 (디버깅용)
+    - name: Check PR Details
+      run: |
+        echo "github.event.pull_request.merged           : ${{ github.event.pull_request.merged }}"
+        echo "The PR title is ${{ github.event.pull_request.title }}"
 
-      # 타임스탬프 생성
-      - name: Format Timestamp
-        run: |
-          echo "TIMESTAMP=$(TZ=Asia/Seoul date '+%Y.%m.%d(%a)')" >> $GITHUB_ENV
+    # 타임스탬프 생성
+    - name: Format Timestamp
+      run: |
+        echo "TIMESTAMP=$(TZ=Asia/Seoul date '+%Y.%m.%d(%a)')" >> $GITHUB_ENV
 
-      # PR이 Merged 상태일 때 Discord 알림 전송
-      - name: Notify Discord for Merged PR
-        if: ${{ github.event.pull_request.merged == true }}
-        uses: johnnyhuy/actions-discord-git-webhook@main
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          args: |
+    # PR이 Merged 상태일 때 Discord 알림 전송
+    - name: Notify Discord for Merged PR
+      if: ${{ github.event.pull_request.merged == true }}
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        args: |
             👾 **GitHub PR 발생** 👾
             **Status**: Merged
             **Title**: ${{ github.event.pull_request.title }}
@@ -38,13 +38,13 @@ jobs:
             ---
             ⌚️ **Timestamp**: ${{ env.TIMESTAMP }}
 
-      # PR이 Merged 상태가 아닐 때 (Closed) Discord 알림 전송
-      - name: Notify Discord for Closed PR
-        if: ${{ github.event.pull_request.merged != true }}
-        uses: johnnyhuy/actions-discord-git-webhook@main
-        with:
-          webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
-          args: |
+    # PR이 Merged 상태가 아닐 때 (Closed) Discord 알림 전송
+    - name: Notify Discord for Closed PR
+      if: ${{ github.event.pull_request.merged != true }}
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.DISCORD_WEBHOOK }}
+        args: |
             👾 **GitHub PR 발생** 👾
             **Status**: Closed
             **Title**: ${{ github.event.pull_request.title }}
