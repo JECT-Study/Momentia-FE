@@ -10,7 +10,7 @@ const colors = {
   black: '#111111',
   white: '#FFFFFF',
   gray: {
-    900: '#222222',
+    900: '#1B1B1B',
     800: '#2B2B2B',
     700: '#616161',
     600: '#757575',
@@ -25,6 +25,7 @@ const colors = {
   subtitle: '#F5F5F5',
   background: {
     base: '#101010',
+    overlay: '#232225',
   },
 };
 
@@ -42,12 +43,6 @@ export default {
         sans: ['var(--font-montserrat)'],
       },
       colors,
-      spacing: {
-        '4.5': '18px',
-        '7.5': '30px',
-        '15': '60px',
-        '78.25': '313px',
-      },
     },
     screens: {
       mobile: '677px',

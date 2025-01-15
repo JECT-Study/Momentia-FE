@@ -62,7 +62,7 @@ const FilterDropdown = ({
                 className={`block w-[149px] h-[44px] px-[23px] py-[10px]
                   text-gray-400 cursor-pointer
                   ${option === selected && isDropdownOpen ? 'text-white' : 'text-gray-400'}
-                  hover:bg-gray-800`}
+                  hover:bg-background-overlay`}
               >
                 {option}
               </li>
