@@ -28,7 +28,7 @@ const OvalButton = ({
 
   const buttonSizeClasses = {
     m: 'h-[69px] px-[46px] py-[17px]',
-    s: 'w-[99px] h-[50px] px-[34px] py-[20px]',
+    s: 'h-[50px] px-[34px] py-[20px]',
   };
 
   return (
@@ -37,7 +37,7 @@ const OvalButton = ({
       aria-label={ariaLabel}
       className={`
         flex items-center justify-center rounded-full gap-[10px]
-        transition-all duration-300 ease-in-out active:scale-95
+        transition-all duration-300 ease-in-out active:scale-95 w-full
         ${bgColorClasses[variant]}
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}

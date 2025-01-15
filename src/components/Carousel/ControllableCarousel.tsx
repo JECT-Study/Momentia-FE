@@ -1,8 +1,10 @@
 'use client';
 
 import useEmblaCarousel from 'embla-carousel-react';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
+import useIsCarouselOverflow from '@/hooks/clientStateHooks/useIsCarouselOverflow';
 import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
 
 import Icon from '../Icon/Icon';
@@ -19,9 +21,14 @@ const ControlledCarousel = <T,>({
   renderSlide,
   spaceSize = 'm',
 }: ControlledCarouselPropsType<T>) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    dragFree: true,
-  });
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      dragFree: true,
+    },
+    [WheelGesturesPlugin()],
+  );
+
+  const isOverflowing = useIsCarouselOverflow(emblaApi);
 
   const { selectedIndex, scrollSnaps, onIndicatorButtonClick } =
     useIndicatorButton(emblaApi);
@@ -42,7 +49,7 @@ const ControlledCarousel = <T,>({
 
   return (
     <section className='relative flex flex-col gap-[90px]'>
-      <div className='absolute -top-[120px] right-0  hidden tablet:flex'>
+      <div className='absolute -top-[120px] right-0  hidden tablet:flex gap-[35px]'>
         <button
           type='button'
           className='touch-manipulation  cursor-pointer w-[60px] h-[60px] rounded-full  disabled:text-gray-800'
@@ -52,7 +59,7 @@ const ControlledCarousel = <T,>({
           <Icon
             name='ChevronLeft'
             size='xl'
-            className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
+            className={`${prevBtnDisabled ? 'text-gray-800' : 'text-gray-500'}`}
           />
         </button>
         <button
@@ -64,12 +71,12 @@ const ControlledCarousel = <T,>({
           <Icon
             name='ChevronRight'
             size='xl'
-            className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-200'}`}
+            className={`${nextBtnDisabled ? 'text-gray-800' : 'text-gray-500'}`}
           />
         </button>
       </div>
 
-      <div className='max-w-[1980px] overflow-hidden' ref={emblaRef}>
+      <div className='relative max-w-[1980px] overflow-hidden' ref={emblaRef}>
         <div
           className={`flex backface-hidden touch-pan-y pinch-zoom ${gapSizeClassName}`}
         >
@@ -82,6 +89,9 @@ const ControlledCarousel = <T,>({
             </div>
           ))}
         </div>
+        {isOverflowing && (
+          <div className='absolute top-0 right-0 bg-gradient-to-r from-background-base/0 to-background-base w-28 h-full' />
+        )}
       </div>
 
       <div className='flex w-full h-[10px] bg-gray-900 rounded-[10px] overflow-hidden'>
