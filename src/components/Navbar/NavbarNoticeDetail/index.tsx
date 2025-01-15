@@ -18,7 +18,7 @@ const NavbarNoticeDetail = () => {
   const targetRef = useClickOutside<HTMLDivElement>(closeNotice);
 
   return (
-    <div className='relative z-20' ref={targetRef}>
+    <div className='flex item-center relative z-20' ref={targetRef}>
       <button
         type='button'
         onClick={() => {
@@ -29,11 +29,12 @@ const NavbarNoticeDetail = () => {
       </button>
       {toggleDetailArea && (
         <div className='fixed tablet:absolute tablet:-left-[275px] tablet:top-[50px] left-0 top-0 tablet:w-[436px] tablet:h-[550px] w-full h-full text-white'>
-          <div className='tablet:block hidden tablet:absolute top-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[15px] border-b-gray-800' />
-          <div className='flex flex-col gap-[28px] w-full h-full py-[28px] bg-gray-800 rounded-md overflow-hidden'>
+          <div className='tablet:block hidden tablet:absolute top-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[15px] border-b-background-overlay' />
+          <div className='flex flex-col gap-[28px] w-full h-full pt-[28px] bg-background-overlay rounded-2xl overflow-hidden'>
             <NoticeHeader noticeCount={4} closeAction={closeNotice} />
             <NoticeContent />
           </div>
+          <div className='absolute right-0 bottom-0 w-full h-[68px] bg-gradient-to-b from-background-base/0 to-background-base' />
         </div>
       )}
     </div>
