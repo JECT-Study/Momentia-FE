@@ -22,8 +22,8 @@ const layout = ({ children }: LayoutProps) => {
   }, []);
 
   return (
-    <div className='h-full w-[420px] flex flex-col justify-center items-center gap-[25px] m-auto'>
-      <Image src={logo} alt='모멘티아 로고' width={64} height={31} priority />
+    <div className='h-full w-full flex flex-col justify-center items-center gap-[25px] m-auto overflow-y-scroll'>
+      <Image src={logo} alt='모멘티아 로고' width={45} priority />
       {children}
     </div>
   );
