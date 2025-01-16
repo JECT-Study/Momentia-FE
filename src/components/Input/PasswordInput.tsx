@@ -45,7 +45,7 @@ const PasswordInput = ({ mode }: PasswordnputProps) => {
         labelPlacement='outside'
         placeholder='비밀번호를 입력해주세요.'
         classNames={{
-          label: 'custom-label',
+          label: 'placeholder',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}
