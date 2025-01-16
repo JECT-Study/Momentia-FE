@@ -101,11 +101,9 @@ const Navbar = () => {
                   <OvalButton
                     variant='primary'
                     buttonSize='s'
-                    onClick={moveToArtworkList}
+                    onClick={moveToArtworkUpload}
                   >
-                    <p className='placholder' onClick={moveToArtworkUpload}>
-                      작품 업로드
-                    </p>
+                    <p className='placholder'>작품 업로드</p>
                   </OvalButton>
                 </>
               ) : (
