@@ -71,30 +71,32 @@ const BasicInput = ({
           <label className='placeholder block pb-[7px] text-gray-400'>
             {label}
           </label>
-          <textarea
-            ref={textareaRef}
-            value={value}
-            onChange={handleInputChange}
-            placeholder={placeholder}
-            maxLength={maxLength}
-            className={`placeholder bg-gray-900 rounded-md w-full h-auto resize-none
-              ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
-              ${isInvalid ? 'border border-system-error' : 'border border-transparent'} 
-              focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
-              `}
-            style={{
-              minHeight: '256px',
-              padding: '20px',
-            }}
-          />
-          {showTextLength && maxLength && (
-            <div className='flex justify-end items-center px-[10px]'>
-              <span className={`placeholder ${textLengthColor}`}>
-                {currentTextLength}
-              </span>
-              <span className='placeholder text-gray-700'>/{maxLength}</span>
-            </div>
-          )}
+          <div className='relative w-full h-auto'>
+            <textarea
+              ref={textareaRef}
+              value={value}
+              onChange={handleInputChange}
+              placeholder={placeholder}
+              maxLength={maxLength}
+              className={`placeholder bg-gray-900 rounded-md w-full h-auto resize-none
+      ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
+      ${isInvalid ? 'border border-system-error' : 'border border-transparent'} 
+      focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
+    `}
+              style={{
+                minHeight: '256px',
+                padding: '20px',
+              }}
+            />
+            {showTextLength && maxLength && (
+              <div className='absolute bottom-[20px] right-[20px]'>
+                <span className={`placeholder ${textLengthColor}`}>
+                  {currentTextLength}
+                </span>
+                <span className='placeholder text-gray-700'>/{maxLength}</span>
+              </div>
+            )}
+          </div>
         </>
       ) : (
         <Input
