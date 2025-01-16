@@ -3,6 +3,7 @@ import { OvalButtonProps } from '@/types';
 const OvalButton = ({
   variant = 'primary',
   buttonSize,
+  className,
   children,
 
   onClick,
@@ -27,8 +28,8 @@ const OvalButton = ({
   };
 
   const buttonSizeClasses = {
-    m: 'h-[69px] px-[46px] py-[17px]',
-    s: 'h-[50px] px-[34px] py-[20px]',
+    m: 'leading-[69px]',
+    s: 'leading-[50px]',
   };
 
   return (
@@ -42,6 +43,7 @@ const OvalButton = ({
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}
         ${buttonSizeClasses[buttonSize]}
+        ${className}
       `}
     >
       {buttonSize === 'm' ? (

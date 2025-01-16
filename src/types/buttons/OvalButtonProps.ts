@@ -6,4 +6,5 @@ export interface OvalButtonProps
     'disabled' | 'loading' | 'icon' | 'iconPosition' | 'type'
   > {
   buttonSize: 's' | 'm';
+  className?: string;
 }
