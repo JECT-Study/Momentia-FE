@@ -29,7 +29,7 @@ const OvalButton = ({
 
   const buttonSizeClasses = {
     m: 'px-[46px] leading-[69px]',
-    s: 'px-[20px] leading-[50px]',
+    s: 'px-[28px] leading-[50px]',
   };
 
   return (
