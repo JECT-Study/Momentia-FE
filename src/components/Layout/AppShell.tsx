@@ -4,6 +4,7 @@ import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
 import { ReactNode } from 'react';
 
+import ModalProvider from '@/app/providers/ModalProvider';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
@@ -25,6 +26,7 @@ const AppShell = ({ children }: { children: ReactNode }) => {
             </main>
             <Footer />
           </div>
+          <ModalProvider />
         </NextThemesProvider>
       </NextUIProvider>
     </>

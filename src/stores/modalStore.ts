@@ -28,7 +28,7 @@ const modalStore = create<ModalState & ModalAction>((set) => ({
     set((state) => {
       if (state.isOpen) return state;
 
-      return { isOpen: true, ...props };
+      return { ...state, isOpen: true, ...props };
     }),
   closeModal: () =>
     set((state) => {

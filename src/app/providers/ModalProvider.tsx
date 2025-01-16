@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useStore } from 'zustand';
 
 import modalStore from '@/stores/modalStore';
 
-const ModalPage = () => {
+const ModalProvider = () => {
   const { isOpen, modalSize, contents } = useStore(modalStore);
 
   useEffect(() => {
@@ -23,19 +24,18 @@ const ModalPage = () => {
     lg: 'tablet:w-[1011px] rounded-[20px]',
   };
 
-  return (
-    <>
-      {isOpen && (
-        <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50'>
-          <div
-            className={`${modalClassNames[modalSize]} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[366px] h-content bg-background-overlay text-black`}
-          >
-            {contents}
-          </div>
-        </div>
-      )}
-    </>
+  if (!isOpen) return null;
+
+  return createPortal(
+    <div className='fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 z-50'>
+      <div
+        className={`${modalClassNames[modalSize]} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[366px] h-content bg-background-overlay text-black`}
+      >
+        {contents}
+      </div>
+    </div>,
+    document.body,
   );
 };
 
-export default ModalPage;
+export default ModalProvider;
