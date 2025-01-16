@@ -13,6 +13,8 @@ interface FilterDropdownProps {
 
   label?: string;
   placeholder?: string;
+  isInvalid?: boolean;
+  errorMessage?: string;
   className?: string;
 }
 
@@ -22,6 +24,8 @@ const FilterDropdown = ({
   onChange,
   label,
   placeholder,
+  isInvalid = false,
+  errorMessage,
   className,
 }: FilterDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -90,6 +94,19 @@ const FilterDropdown = ({
           </ul>
         </div>
       )}
+
+      <div className='flex items-center mt-[3px] h-[26px]'>
+        {isInvalid && errorMessage && (
+          <>
+            <Icon
+              name='CheckCircleFilled'
+              size='s'
+              className='text-system-error mr-2'
+            />
+            <p className='button-s text-system-error'>{errorMessage}</p>
+          </>
+        )}
+      </div>
     </div>
   );
 };
