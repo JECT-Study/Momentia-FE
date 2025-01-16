@@ -102,7 +102,6 @@ const Navbar = () => {
                     variant='primary'
                     buttonSize='s'
                     onClick={moveToArtworkUpload}
-                    className='w-[124px]'
                   >
                     <p className='placholder'>작품 업로드</p>
                   </OvalButton>

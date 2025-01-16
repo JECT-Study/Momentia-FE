@@ -77,6 +77,7 @@ const ArtworkFilter = ({
           options={FILTER_OPTIONS}
           selected={selectedFilter}
           onChange={handleFilterChange}
+          className='w-[149px]'
         />
       </div>
     </>
