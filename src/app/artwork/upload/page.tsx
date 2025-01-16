@@ -123,7 +123,10 @@ const ArtworkUpload = () => {
     artworkTitle && selectedArtworkField && uploadedImage && !isSubmitting;
 
   const handleArtworkUpload = () => {
-    if (!validateArtworkUploadForm()) return;
+    if (!validateArtworkUploadForm()) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setIsSubmitting(true);
 
     // TODO: 업로드 성공 시, 작성한 글 상세 페이지로 이동
