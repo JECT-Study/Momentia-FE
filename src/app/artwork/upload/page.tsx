@@ -78,9 +78,9 @@ const ArtworkUpload = () => {
   };
 
   return (
-    <div className='max-w-[1920px] m-auto px-[36px] lg:px-[140px]'>
-      <h1 className='py-[70px]'>작품 업로드</h1>
-      <div className='pb-[40px]'>
+    <div className='max-w-[1920px] m-auto px-[36px] py-[70px] lg:px-[140px]'>
+      <h1>작품 업로드</h1>
+      <div className='pt-[70px] pb-[30px] md:pb-[40px]'>
         <BasicInput
           type='text'
           label='작품 제목'
@@ -93,7 +93,7 @@ const ArtworkUpload = () => {
           // errorMessage={errors.artworkTitle?.message as string}
         />
       </div>
-      <div className='flex items-start self-stretch gap-[50px] pb-[78px]'>
+      <div className='flex flex-col md:flex-row items-start self-stretch gap-[38px] md:gap-[50px] pb-[78px]'>
         <FilterDropdown
           label='작품 카테고리'
           placeholder='카테고리 선택'
@@ -110,9 +110,10 @@ const ArtworkUpload = () => {
           className='w-full'
         />
       </div>
-      <div className='relative'>
+
+      <div className='relative pb-[70px]'>
         <div
-          className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[853px]'
+          className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[511px] md:h-[853px]'
           style={{
             border: '2px dashed transparent',
             borderImage:
@@ -131,31 +132,40 @@ const ArtworkUpload = () => {
           <p className='button-s text-center text-gray-500'>
             작품 이미지는 1장만 업로드 가능합니다.
           </p>
+
+          <button
+            aria-label='Button to change artwork image'
+            className='flex justify-center items-center w-[57px] h-[57px] md:w-[77px] md:h-[77px]
+            absolute right-[30px] bottom-[30px] rounded-full
+            bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
+            shadow-lg hover:bg-[rgba(35,34,37,0.7)] transition'
+          >
+            <Icon name='Image' size='m' className='block md:hidden' />
+            <Icon name='Image' size='l' className='hidden md:block' />
+          </button>
         </div>
       </div>
 
-      <div className='py-[70px]'>
-        <BasicInput
-          type='textarea'
-          label='작품 설명'
-          placeholder='작품 설명을 입력하세요.'
-          value={artworkDescription}
-          onChange={handlertworkDescriptionOnChange}
-          showTextLength={true}
-          maxLength={MAX_DESCRIPTION_LENGTH}
-        />
-        <div className='pt-[30px] flex justify-end items-center gap-[20px]'>
-          <button
-            className='button-s text-gray-300 flex items-center justify-center rounded-full
+      <BasicInput
+        type='textarea'
+        label='작품 설명'
+        placeholder='작품 설명을 입력하세요.'
+        value={artworkDescription}
+        onChange={handlertworkDescriptionOnChange}
+        showTextLength={true}
+        maxLength={MAX_DESCRIPTION_LENGTH}
+      />
+      <div className='pt-[30px] flex justify-end items-center gap-[20px]'>
+        <button
+          className='button-s text-gray-300 flex items-center justify-center rounded-full
             gap-[10px] px-[28px] leading-[50px]
-            transition-all duration-300 ease-in-out active:scale-95'
-          >
-            취소
-          </button>
-          <OvalButton variant='primary' buttonSize='s'>
-            업로드
-          </OvalButton>
-        </div>
+            transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70'
+        >
+          취소
+        </button>
+        <OvalButton variant='primary' buttonSize='s'>
+          업로드
+        </OvalButton>
       </div>
     </div>
   );

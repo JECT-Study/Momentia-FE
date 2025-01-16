@@ -79,10 +79,10 @@ const BasicInput = ({
               placeholder={placeholder}
               maxLength={maxLength}
               className={`placeholder bg-gray-900 rounded-md w-full h-auto resize-none
-      ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
-      ${isInvalid ? 'border border-system-error' : 'border border-transparent'} 
-      focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
-    `}
+                ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
+                ${isInvalid ? 'border border-system-error' : 'border border-transparent'}
+                focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
+                `}
               style={{
                 minHeight: '256px',
                 padding: '20px',
