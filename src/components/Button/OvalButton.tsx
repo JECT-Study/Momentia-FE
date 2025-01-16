@@ -7,6 +7,7 @@ const OvalButton = ({
   onClick,
 
   className,
+  disabled,
   ariaLabel,
 }: OvalButtonProps) => {
   const bgColorClasses = {
@@ -35,6 +36,7 @@ const OvalButton = ({
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       aria-label={ariaLabel}
       className={`
         flex items-center justify-center rounded-full gap-[10px]
