@@ -3,10 +3,10 @@ import { OvalButtonProps } from '@/types';
 const OvalButton = ({
   variant = 'primary',
   buttonSize,
-  className,
   children,
-
   onClick,
+
+  className,
   ariaLabel,
 }: OvalButtonProps) => {
   const bgColorClasses = {
@@ -28,8 +28,8 @@ const OvalButton = ({
   };
 
   const buttonSizeClasses = {
-    m: 'leading-[69px]',
-    s: 'leading-[50px]',
+    m: 'px-[46px] leading-[69px]',
+    s: 'px-[20px] leading-[50px]',
   };
 
   return (
@@ -38,7 +38,7 @@ const OvalButton = ({
       aria-label={ariaLabel}
       className={`
         flex items-center justify-center rounded-full gap-[10px]
-        transition-all duration-300 ease-in-out active:scale-95 w-full
+        transition-all duration-300 ease-in-out active:scale-95
         ${bgColorClasses[variant]}
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}
