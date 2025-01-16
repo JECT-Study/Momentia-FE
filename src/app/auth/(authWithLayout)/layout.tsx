@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { ReactNode, useLayoutEffect } from 'react';
 
-import logo from '@/../public/images/momentiaLogoSymbol.png';
 import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
 
@@ -23,7 +22,12 @@ const layout = ({ children }: LayoutProps) => {
 
   return (
     <div className='h-full w-full flex flex-col justify-center items-center gap-[25px] m-auto overflow-y-scroll'>
-      <Image src={logo} alt='모멘티아 로고' width={45} priority />
+      <Image
+        src='/images/momentiaLogoSymbol.png'
+        alt='모멘티아 로고'
+        width={45}
+        priority
+      />
       {children}
     </div>
   );
