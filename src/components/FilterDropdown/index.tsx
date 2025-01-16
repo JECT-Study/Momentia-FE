@@ -99,7 +99,7 @@ const FilterDropdown = ({
         {isInvalid && errorMessage && (
           <>
             <Icon
-              name='CheckCircleFilled'
+              name='AlertCircle'
               size='s'
               className='text-system-error mr-2'
             />

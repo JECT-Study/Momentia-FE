@@ -155,7 +155,7 @@ const BasicInput = ({
         {isInvalid && errorMessage ? (
           <>
             <Icon
-              name='CheckCircleFilled'
+              name='AlertCircle'
               size='s'
               className='text-system-error mr-2'
             />
@@ -165,7 +165,7 @@ const BasicInput = ({
           successMessage && (
             <>
               <Icon
-                name='AlertCircle'
+                name='CheckCircleFilled'
                 size='s'
                 className='text-gray-400 mr-2'
               />
