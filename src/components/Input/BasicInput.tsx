@@ -1,7 +1,7 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 
@@ -11,7 +11,7 @@ interface BasicInputProps {
   placeholder?: string;
 
   value: string;
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 
   showClear?: boolean;
   onClear?: () => void;
@@ -41,6 +41,7 @@ const BasicInput = ({
   successMessage,
 }: BasicInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const togglePasswordVisibility = () =>
     setIsPasswordVisible(!isPasswordVisible);
@@ -53,53 +54,102 @@ const BasicInput = ({
         ? 'text-system-error'
         : 'text-white';
 
+  const handleInputChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    onChange(e);
+    if (type === 'textarea' && textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
+    }
+  };
+
   return (
     <div>
-      <Input
-        type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
-        label={label}
-        labelPlacement='outside'
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        onClear={showClear ? onClear : undefined}
-        isInvalid={false}
-        minLength={minLength}
-        maxLength={maxLength}
-        endContent={
-          <>
-            {showEyeIcon && (
-              <button
-                type='button'
-                aria-label='toggle password visibility'
-                onClick={togglePasswordVisibility}
-                disabled={value === ''}
-                className='px-[10px]'
-              >
-                <Icon
-                  name={isPasswordVisible ? 'Eye' : 'EyeOff'}
-                  size='m'
-                  className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
-                />
-              </button>
-            )}
+      {type === 'textarea' ? (
+        <>
+          <label className='placeholder block pb-[7px] text-gray-400'>
+            {label}
+          </label>
+          <textarea
+            ref={textareaRef}
+            value={value}
+            onChange={handleInputChange}
+            placeholder={placeholder}
+            maxLength={maxLength}
+            className={`placeholder bg-gray-900 rounded-md w-full h-auto resize-none
+              ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
+              ${isInvalid ? 'border border-system-error' : 'border border-transparent'} 
+              focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
+              `}
+            style={{
+              minHeight: '256px',
+              padding: '20px',
+            }}
+          />
+          {showTextLength && maxLength && (
+            <div className='flex justify-end items-center px-[10px]'>
+              <span className={`placeholder ${textLengthColor}`}>
+                {currentTextLength}
+              </span>
+              <span className='placeholder text-gray-700'>/{maxLength}</span>
+            </div>
+          )}
+        </>
+      ) : (
+        <Input
+          type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
+          label={label}
+          labelPlacement='outside'
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          onClear={showClear ? onClear : undefined}
+          isInvalid={false}
+          minLength={minLength}
+          maxLength={maxLength}
+          endContent={
+            <>
+              {showEyeIcon && (
+                <button
+                  type='button'
+                  aria-label='toggle password visibility'
+                  onClick={togglePasswordVisibility}
+                  disabled={value === ''}
+                  className='px-[10px]'
+                >
+                  <Icon
+                    name={isPasswordVisible ? 'Eye' : 'EyeOff'}
+                    size='m'
+                    className={`text-gray-200 ${value === '' ? 'text-gray-800' : ''}`}
+                  />
+                </button>
+              )}
 
-            {showTextLength && maxLength && (
-              <div className='flex items-center px-[10px]'>
-                <span className={`placeholder ${textLengthColor}`}>
-                  {currentTextLength}
-                </span>
-                <span className='placeholder text-gray-700'>/{maxLength}</span>
-              </div>
-            )}
-          </>
-        }
-        classNames={{
-          label: ['!placeholder', '!top-5', '!text-gray-400'],
-          input: ['!placeholder', 'text-gray-700', 'px-[10px]'],
-          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15', 'leading-[60px]'],
-        }}
-      />
+              {showTextLength && maxLength && (
+                <div className='flex items-center px-[10px]'>
+                  <span className={`placeholder ${textLengthColor}`}>
+                    {currentTextLength}
+                  </span>
+                  <span className='placeholder text-gray-700'>
+                    /{maxLength}
+                  </span>
+                </div>
+              )}
+            </>
+          }
+          classNames={{
+            label: ['!placeholder', '!top-5', '!text-gray-400'],
+            input: ['!placeholder', 'placeholder:text-gray-700', 'px-[10px]'],
+            inputWrapper: [
+              'bg-gray-900',
+              'rounded-md',
+              'h-15',
+              'leading-[60px]',
+            ],
+          }}
+        />
+      )}
       <div className='flex items-center mt-[3px] h-[26px]'>
         {isInvalid && errorMessage ? (
           <>
