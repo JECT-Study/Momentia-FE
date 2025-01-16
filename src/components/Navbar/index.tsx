@@ -8,7 +8,6 @@ import { useEffect, useState } from 'react';
 import ROUTE from '@/constants/routes';
 import TokenHandler from '@/utils/tokenHandler';
 
-import logo from '../../../public/images/momentiaLogoSymbol.png';
 import OvalButton from '../Button/OvalButton';
 import Icon from '../Icon/Icon';
 import NavbarNoticeDetail from './NavbarNoticeDetail';
@@ -27,6 +26,7 @@ const Navbar = () => {
     if (isMenuOpen) toggleMenu();
   };
   const moveToArtworkList = () => router.push(ROUTE.artworkList);
+  const moveToArtworkUpload = () => router.push(ROUTE.artworkUpload);
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -74,7 +74,7 @@ const Navbar = () => {
           <div className='justify-items-start'>
             <Link href={ROUTE.home}>
               <Image
-                src={logo}
+                src='/images/momentiaLogoSymbol.png'
                 alt='momentia logo'
                 width={64}
                 height={31}
@@ -103,7 +103,9 @@ const Navbar = () => {
                     buttonSize='s'
                     onClick={moveToArtworkList}
                   >
-                    <p className='placholder'>작품 업로드</p>
+                    <p className='placholder' onClick={moveToArtworkUpload}>
+                      작품 업로드
+                    </p>
                   </OvalButton>
                 </>
               ) : (
@@ -144,7 +146,10 @@ const Navbar = () => {
                   {isSignedIn ? (
                     <>
                       <p className='button-m text-white px-10 py-8'>닉네임</p>
-                      <button className='button-m text-main px-10 py-8'>
+                      <button
+                        className='button-m text-main px-10 py-8'
+                        onClick={moveToArtworkUpload}
+                      >
                         작품 업로드
                       </button>
                     </>

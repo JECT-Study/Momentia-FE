@@ -3,13 +3,17 @@ import Link from 'next/link';
 
 import ROUTE from '@/constants/routes';
 
-import logo from '../../../public/images/momentiaLogoSymbol.png';
-
 const Footer = () => {
   return (
     <footer className='bg-black text-white px-[32px] lg:px-[140px] py-24'>
       <Link href={ROUTE.home}>
-        <Image src={logo} alt='momentia logo' width={64} height={31} priority />
+        <Image
+          src='/images/momentiaLogoSymbol.png'
+          alt='momentia logo'
+          width={64}
+          height={31}
+          priority
+        />
       </Link>
 
       <div className='flex flex-wrap wrap-reverse items-center mt-10'>
