@@ -139,7 +139,7 @@ const ArtworkUpload = () => {
   return (
     <div className='max-w-[1920px] m-auto px-[36px] py-[70px] lg:px-[140px]'>
       <h1>작품 업로드</h1>
-      <div className='pt-[70px] pb-[30px] md:pb-[40px]'>
+      <div className='pt-[70px] pb-[58px] md:pb-[40px]'>
         <BasicInput
           type='text'
           label='작품 제목'
@@ -251,15 +251,23 @@ const ArtworkUpload = () => {
           취소
         </button>
 
-        {/* hover:cursor-not-allowed */}
-        <OvalButton
-          variant={`${!isSubmitting && isFormValid ? 'primary' : 'secondary'}`}
-          buttonSize='s'
-          disabled={isSubmitting && !isFormValid}
-          onClick={handleArtworkUpload}
-        >
-          업로드
-        </OvalButton>
+        {!isSubmitting && isFormValid ? (
+          <OvalButton
+            variant='primary'
+            buttonSize='s'
+            onClick={handleArtworkUpload}
+          >
+            업로드
+          </OvalButton>
+        ) : (
+          <button
+            className='button-s text-gray-300 bg-gray-700 px-[28px] leading-[50px]
+            flex items-center justify-center rounded-full gap-[10px]
+            transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70 hover:cursor-not-allowed'
+          >
+            업로드
+          </button>
+        )}
       </div>
     </div>
   );
