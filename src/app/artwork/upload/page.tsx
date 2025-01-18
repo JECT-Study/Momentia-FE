@@ -6,31 +6,28 @@ import OvalButton from '@/components/Button/OvalButton';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
+import ARTWORK_FIELDS from '@/constants/artworkFields';
 
-interface ArtworkField {
-  name: string;
-  value: string;
+import Textarea from '../../../components/Input/Textarea';
+
+interface ArtworkFieldsErrors {
+  artworkTitleError?: string;
+  selectedArtworkFieldError?: string;
+  uploadedImageError?: string;
 }
 
 const MAX_TITLE_LENGTH = 50;
 const MAX_DESCRIPTION_LENGTH = 1000;
+const REQUIRED_FIELDS_ERROR_MESSAGE = '필수 항목입니다.';
 
 const PRIVACY_SETTING_OPTIONS = [
   { name: '전체공개', value: 'PUBLIC' },
   { name: '비공개', value: 'PRIVATE' },
 ];
 
-const ARTWORK_FIELDS: ArtworkField[] = [
-  { name: '회화', value: 'PAINTING' },
-  { name: '공예/조각', value: 'CRAFTSCULPTURE' },
-  { name: '드로잉', value: 'DRAWING' },
-  { name: '판화', value: 'PRINTMAKING' },
-  { name: '서예', value: 'CALLIGRAPHY' },
-  { name: '일러스트', value: 'ILLUSTRATION' },
-  { name: '디지털아트', value: 'DIGITALART' },
-  { name: '사진', value: 'PHOTOGRAPHY' },
-  { name: '기타', value: 'OTHERS' },
-];
+const ARTWORK_FIELDS_NOT_INCLUDED_ALL = ARTWORK_FIELDS.filter(
+  (field) => field.value !== 'ALL',
+);
 
 const ArtworkUpload = () => {
   const [artworkTitle, setArtworkTitle] = useState('');
@@ -38,29 +35,27 @@ const ArtworkUpload = () => {
   const [privacySetting, setPrivacySetting] = useState<'전체공개' | '비공개'>(
     '전체공개',
   );
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string>('');
   const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState<{
-    artworkTitle?: string;
-    selectedArtworkField?: string;
-    uploadedImage?: string;
-  }>({
-    artworkTitle: '',
-    selectedArtworkField: '',
-    uploadedImage: '',
+  const [errors, setErrors] = useState<ArtworkFieldsErrors>({
+    artworkTitleError: '',
+    selectedArtworkFieldError: '',
+    uploadedImageError: '',
   });
 
-  const handleArtworkTitleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setArtworkTitle(e.target.value);
-
-    if (errors.artworkTitle) {
-      setErrors((prevErrors) => ({ ...prevErrors, artworkTitle: '' }));
-    }
+  const clearErrorMessage = (targetField: string) => {
+    setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
   };
 
-  const handlertworkDescriptionOnChange = (
-    e: ChangeEvent<HTMLInputElement>,
+  const handleArtworkTitleChanged = (e: ChangeEvent<HTMLInputElement>) => {
+    setArtworkTitle(e.target.value);
+
+    if (errors.artworkTitleError) clearErrorMessage('artworkTitleError');
+  };
+
+  const handleArtworkDescriptionOnChange = (
+    e: ChangeEvent<HTMLTextAreaElement>,
   ) => {
     setArtworkDescription(e.target.value);
   };
@@ -71,21 +66,14 @@ const ArtworkUpload = () => {
     if (!artworkTitle.trim()) {
       setErrors((prevErrors) => ({
         ...prevErrors,
-        artworkTitle: '필수 항목입니다.',
+        artworkTitleError: REQUIRED_FIELDS_ERROR_MESSAGE,
       }));
     } else {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        artworkTitle: '',
-      }));
+      clearErrorMessage('artworkTitleError');
     }
 
-    if (errors.selectedArtworkField) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        selectedArtworkField: '',
-      }));
-    }
+    if (errors.selectedArtworkFieldError)
+      clearErrorMessage('selectedArtworkFieldError');
   };
 
   const handlePrivacySettingChange = (
@@ -98,28 +86,24 @@ const ArtworkUpload = () => {
     // TODO: 실제 이미지 업로드 로직 구현
     setUploadedImage('uploaded-image-url'); // 테스트용
 
-    if (errors.uploadedImage) {
-      setErrors((prevErrors) => ({ ...prevErrors, uploadedImage: '' }));
-    }
+    if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
   };
 
   const validateArtworkUploadForm = () => {
-    const newErrors: {
-      artworkTitle?: string;
-      selectedArtworkField?: string;
-      uploadedImage?: string;
-    } = {};
+    const newErrors: ArtworkFieldsErrors = {};
 
-    if (!artworkTitle.trim()) newErrors.artworkTitle = '필수 항목입니다.';
+    if (!artworkTitle.trim())
+      newErrors.artworkTitleError = REQUIRED_FIELDS_ERROR_MESSAGE;
     if (!selectedArtworkField.trim())
-      newErrors.selectedArtworkField = '필수 항목입니다.';
-    if (!uploadedImage) newErrors.uploadedImage = '이미지를 업로드해주세요.';
+      newErrors.selectedArtworkFieldError = REQUIRED_FIELDS_ERROR_MESSAGE;
+    if (!uploadedImage)
+      newErrors.uploadedImageError = REQUIRED_FIELDS_ERROR_MESSAGE;
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
   };
 
-  const isFormValid =
+  const isRequiredFieldsValid =
     artworkTitle && selectedArtworkField && uploadedImage && !isSubmitting;
 
   const handleScrollToTop = () => {
@@ -134,11 +118,8 @@ const ArtworkUpload = () => {
   const handleArtworkUpload = () => {
     setIsSubmitting(true);
 
-    // TODO: 업로드 성공 시, 작성한 글 상세 페이지로 이동
-    // [테스트용] 업로드 처리 (API 호출)
-    setTimeout(() => {
-      console.log('업로드 완료');
-    }, 2000);
+    console.log('업로드 완료'); // [테스트용] 업로드 처리 (API 호출)
+    // TODO: 작성한 글 상세 페이지로 이동
   };
 
   return (
@@ -150,22 +131,23 @@ const ArtworkUpload = () => {
           label='작품 제목'
           placeholder='작품 제목을 입력하세요.'
           value={artworkTitle}
-          onChange={handleArtworkTitleOnChange}
+          onChange={handleArtworkTitleChanged}
           showTextLength={true}
           maxLength={MAX_TITLE_LENGTH}
-          isInvalid={!!errors.artworkTitle}
-          errorMessage={errors.artworkTitle}
+          isInvalid={!!errors.artworkTitleError}
+          errorMessage={errors.artworkTitleError}
         />
       </div>
+
       <div className='flex flex-col md:flex-row items-start self-stretch gap-[38px] md:gap-[50px] pb-[78px]'>
         <FilterDropdown
           label='작품 카테고리'
           placeholder='카테고리 선택'
-          options={ARTWORK_FIELDS.map((field) => field.name)}
+          options={ARTWORK_FIELDS_NOT_INCLUDED_ALL.map((field) => field.name)}
           selected={selectedArtworkField}
           onChange={(value) => handleArtworkFieldClick(value)}
-          isInvalid={!!errors.selectedArtworkField}
-          errorMessage={errors.selectedArtworkField}
+          isInvalid={!!errors.selectedArtworkFieldError}
+          errorMessage={errors.selectedArtworkFieldError}
           className='w-full'
         />
 
@@ -204,15 +186,15 @@ const ArtworkUpload = () => {
             작품 이미지는 1장만 업로드 가능합니다.
           </p>
 
-          {errors.uploadedImage && (
-            <div className='flex items-center mt-[3px] h-[26px]'>
+          {errors.uploadedImageError && (
+            <div className='flex items-center'>
               <Icon
                 name='AlertCircle'
                 size='s'
                 className='text-system-error mr-2'
               />
               <p className='button-s text-system-error'>
-                {errors.uploadedImage}
+                {errors.uploadedImageError}
               </p>
             </div>
           )}
@@ -238,15 +220,15 @@ const ArtworkUpload = () => {
         </div>
       </div>
 
-      <BasicInput
-        type='textarea'
+      <Textarea
         label='작품 설명'
         placeholder='작품 설명을 입력하세요.'
         value={artworkDescription}
-        onChange={handlertworkDescriptionOnChange}
+        onChange={handleArtworkDescriptionOnChange}
         showTextLength={true}
         maxLength={MAX_DESCRIPTION_LENGTH}
       />
+
       <div className='pt-[30px] flex justify-end items-center gap-[20px]'>
         <button
           className='button-s text-gray-300 flex items-center justify-center rounded-full
@@ -256,7 +238,7 @@ const ArtworkUpload = () => {
           취소
         </button>
 
-        {!isSubmitting && isFormValid ? (
+        {!isSubmitting && isRequiredFieldsValid ? (
           <OvalButton
             variant='primary'
             buttonSize='s'
