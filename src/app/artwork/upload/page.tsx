@@ -122,11 +122,16 @@ const ArtworkUpload = () => {
   const isFormValid =
     artworkTitle && selectedArtworkField && uploadedImage && !isSubmitting;
 
+  const handleScrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleRequiredFieldsNotFilledOut = () => {
+    validateArtworkUploadForm();
+    handleScrollToTop();
+  };
+
   const handleArtworkUpload = () => {
-    if (!validateArtworkUploadForm()) {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
     setIsSubmitting(true);
 
     // TODO: 업로드 성공 시, 작성한 글 상세 페이지로 이동
@@ -261,6 +266,7 @@ const ArtworkUpload = () => {
           </OvalButton>
         ) : (
           <button
+            onClick={handleRequiredFieldsNotFilledOut}
             className='button-s text-gray-300 bg-gray-700 px-[28px] leading-[50px]
             flex items-center justify-center rounded-full gap-[10px]
             transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70 hover:cursor-not-allowed'
