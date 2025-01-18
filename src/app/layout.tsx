@@ -26,7 +26,6 @@ const RootLayout = ({ children, modal }: Readonly<LayoutProps>) => {
         <MSWProvider>
           <TanStackQueryProvider>
             <AppShell>{children}</AppShell>
-            {modal}
           </TanStackQueryProvider>
         </MSWProvider>
         <KakaoProvider />
