@@ -54,7 +54,7 @@ const BasicInput = ({
         : 'text-white';
 
   return (
-    <>
+    <div>
       <Input
         type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
         label={label}
@@ -97,7 +97,7 @@ const BasicInput = ({
         classNames={{
           label: ['!placeholder', '!top-5', '!text-gray-400'],
           input: ['!placeholder', 'placeholder:text-gray-700', 'px-[10px]'],
-          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15', 'leading-[60px]'],
+          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-[60px]'],
         }}
       />
 
@@ -124,7 +124,7 @@ const BasicInput = ({
           )
         )}
       </div>
-    </>
+    </div>
   );
 };
 

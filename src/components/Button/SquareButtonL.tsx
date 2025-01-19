@@ -38,11 +38,11 @@ const SquareButtonL = ({
       aria-label={ariaLabel}
       className={`
         button-m flex items-center justify-center rounded-md
-        w-full h-[70px]  py-[20px] gap-[20px]
+        w-full max-h-[70px] h-full py-[20px] gap-[20px]
         transition-all duration-300 ease-in-out active:scale-95
-        ${disabled ? bgColorClasses['secondary'] : bgColorClasses[variant]} 
+        ${disabled ? bgColorClasses['tertiary'] : bgColorClasses[variant]} 
         ${disabled ? 'cursor-not-allowed' : hoverBgColorClasses[variant]}
-        ${disabled ? textColorClasses['secondary'] : textColorClasses[variant]} 
+        ${disabled ? textColorClasses['tertiary'] : textColorClasses[variant]} 
       `}
     >
       {loading && <span>로딩중...</span>}

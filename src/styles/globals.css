@@ -92,4 +92,13 @@
     vertical-align: middle;
     fill: currentColor; /* 텍스트 색상과 동일하게 적용 */
   }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scroll-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
