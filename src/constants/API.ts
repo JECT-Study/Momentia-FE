@@ -18,4 +18,12 @@ const ARTWORK = {
   followedArtists: '/artwork/followingUsers/posts',
 };
 
-export { ARTWORK, MONTHLY, USER };
+const COLLECTION = {
+  collection: '/collection',
+  allCollectionsList: '/collections/all',
+  collectionList: '/collections',
+  collectionAddArtwork: (collectionId: number, postId: number) =>
+    `/collection/${collectionId}/post/${postId}`,
+};
+
+export { ARTWORK, COLLECTION, MONTHLY, USER };
