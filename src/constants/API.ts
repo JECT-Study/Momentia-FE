@@ -16,6 +16,7 @@ const MONTHLY = {
 const ARTWORK = {
   artworkList: '/artwork/posts',
   followedArtists: '/artwork/followingUsers/posts',
+  uploadArtwork: '/artwork/post',
 };
 
 export { ARTWORK, MONTHLY, USER };
