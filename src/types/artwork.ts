@@ -24,3 +24,8 @@ export interface ArtworkListResponse {
   data: ArtworkInfoType[];
   page: PaginationType;
 }
+
+export interface ArtworkField {
+  name: string;
+  value: string;
+}

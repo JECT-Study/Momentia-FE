@@ -4,8 +4,10 @@ const OvalButton = ({
   variant = 'primary',
   buttonSize,
   children,
-
   onClick,
+
+  className,
+  disabled,
   ariaLabel,
 }: OvalButtonProps) => {
   const bgColorClasses = {
@@ -27,21 +29,23 @@ const OvalButton = ({
   };
 
   const buttonSizeClasses = {
-    m: 'h-[69px] px-[46px] py-[17px]',
-    s: 'h-[50px] px-[34px] py-[20px]',
+    m: 'px-[46px] leading-[69px]',
+    s: 'px-[28px] leading-[50px]',
   };
 
   return (
     <button
       onClick={onClick}
+      disabled={disabled}
       aria-label={ariaLabel}
       className={`
         flex items-center justify-center rounded-full gap-[10px]
-        transition-all duration-300 ease-in-out active:scale-95 w-full
+        transition-all duration-300 ease-in-out active:scale-95
         ${bgColorClasses[variant]}
         ${hoverBgColorClasses[variant]}
         ${textColorClasses[variant]}
         ${buttonSizeClasses[buttonSize]}
+        ${className}
       `}
     >
       {buttonSize === 'm' ? (

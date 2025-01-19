@@ -1,3 +1,6 @@
+import { ArtworkField } from '@/types';
+
+import ARTWORK_FIELDS from '../../constants/artworkFields';
 import OvalButton from '../Button/OvalButton';
 import DefaultCarousel from '../Carousel/DefaultCarousel';
 import FilterDropdown from '../FilterDropdown';
@@ -10,23 +13,11 @@ interface ArtworkFilterProps {
   setCurrentPage: (value: number | ((prev: number) => number)) => void;
 }
 
-interface ArtworkField {
-  name: string;
-  value: string;
-}
-
-const ARTWORK_FIELDS = [
+const ARTWORK_FIELDS_WITH_ALL_OPTION = [
   { name: '전체', value: 'ALL' },
-  { name: '회화', value: 'PAINTING' },
-  { name: '공예/조각', value: 'CRAFTSCULPTURE' },
-  { name: '드로잉', value: 'DRAWING' },
-  { name: '판화', value: 'PRINTMAKING' },
-  { name: '서예', value: 'CALLIGRAPHY' },
-  { name: '일러스트', value: 'ILLUSTRATION' },
-  { name: '디지털아트', value: 'DIGITALART' },
-  { name: '사진', value: 'PHOTOGRAPHY' },
-  { name: '기타', value: 'OTHERS' },
+  ...ARTWORK_FIELDS,
 ];
+
 const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
 
 const ArtworkFilter = ({
@@ -37,8 +28,9 @@ const ArtworkFilter = ({
   setCurrentPage,
 }: ArtworkFilterProps) => {
   const selectedArtworkFieldName =
-    ARTWORK_FIELDS.find((field) => field.value === selectedArtworkField)
-      ?.name || '전체';
+    ARTWORK_FIELDS_WITH_ALL_OPTION.find(
+      (field) => field.value === selectedArtworkField,
+    )?.name || '전체';
 
   const handleArtworkFieldClick = (artworkField: string) => {
     setSelectedArtworkField(artworkField);
@@ -53,7 +45,7 @@ const ArtworkFilter = ({
     <>
       <div className='flex w-full justify-between items-end pb-[59px] overflow-x-auto'>
         <DefaultCarousel
-          slides={ARTWORK_FIELDS}
+          slides={ARTWORK_FIELDS_WITH_ALL_OPTION}
           renderSlide={(artworkField: ArtworkField) => (
             <OvalButton
               key={artworkField.value}
@@ -77,6 +69,7 @@ const ArtworkFilter = ({
           options={FILTER_OPTIONS}
           selected={selectedFilter}
           onChange={handleFilterChange}
+          className='w-[149px]'
         />
       </div>
     </>

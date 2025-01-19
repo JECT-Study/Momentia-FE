@@ -54,7 +54,7 @@ const BasicInput = ({
         : 'text-white';
 
   return (
-    <div>
+    <>
       <Input
         type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
         label={label}
@@ -74,6 +74,7 @@ const BasicInput = ({
                 aria-label='toggle password visibility'
                 onClick={togglePasswordVisibility}
                 disabled={value === ''}
+                className='px-[10px]'
               >
                 <Icon
                   name={isPasswordVisible ? 'Eye' : 'EyeOff'}
@@ -84,7 +85,7 @@ const BasicInput = ({
             )}
 
             {showTextLength && maxLength && (
-              <div className='flex items-center'>
+              <div className='flex items-center px-[10px]'>
                 <span className={`placeholder ${textLengthColor}`}>
                   {currentTextLength}
                 </span>
@@ -94,16 +95,17 @@ const BasicInput = ({
           </>
         }
         classNames={{
-          label: ['custom-label', 'top-5', '!text-gray-400'],
-          input: 'placeholder:text-gray-700',
-          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15'],
+          label: ['!placeholder', '!top-5', '!text-gray-400'],
+          input: ['!placeholder', 'placeholder:text-gray-700', 'px-[10px]'],
+          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-15', 'leading-[60px]'],
         }}
       />
+
       <div className='flex items-center mt-[3px] h-[26px]'>
         {isInvalid && errorMessage ? (
           <>
             <Icon
-              name='CheckCircleFilled'
+              name='AlertCircle'
               size='s'
               className='text-system-error mr-2'
             />
@@ -113,7 +115,7 @@ const BasicInput = ({
           successMessage && (
             <>
               <Icon
-                name='AlertCircle'
+                name='CheckCircleFilled'
                 size='s'
                 className='text-gray-400 mr-2'
               />
@@ -122,7 +124,7 @@ const BasicInput = ({
           )
         )}
       </div>
-    </div>
+    </>
   );
 };
 
