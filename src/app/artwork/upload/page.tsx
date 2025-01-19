@@ -25,10 +25,6 @@ const PRIVACY_SETTING_OPTIONS = [
   { name: '비공개', value: 'PRIVATE' },
 ];
 
-const ARTWORK_FIELDS_NOT_INCLUDED_ALL = ARTWORK_FIELDS.filter(
-  (field) => field.value !== 'ALL',
-);
-
 const ArtworkUpload = () => {
   const [artworkTitle, setArtworkTitle] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('');
@@ -143,7 +139,7 @@ const ArtworkUpload = () => {
         <FilterDropdown
           label='작품 카테고리'
           placeholder='카테고리 선택'
-          options={ARTWORK_FIELDS_NOT_INCLUDED_ALL.map((field) => field.name)}
+          options={ARTWORK_FIELDS.map((field) => field.name)}
           selected={selectedArtworkField}
           onChange={(value) => handleArtworkFieldClick(value)}
           isInvalid={!!errors.selectedArtworkFieldError}

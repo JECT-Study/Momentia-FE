@@ -13,6 +13,11 @@ interface ArtworkFilterProps {
   setCurrentPage: (value: number | ((prev: number) => number)) => void;
 }
 
+const ARTWORK_FIELDS_WITH_ALL_OPTION = [
+  { name: '전체', value: 'ALL' },
+  ...ARTWORK_FIELDS,
+];
+
 const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
 
 const ArtworkFilter = ({
@@ -23,8 +28,9 @@ const ArtworkFilter = ({
   setCurrentPage,
 }: ArtworkFilterProps) => {
   const selectedArtworkFieldName =
-    ARTWORK_FIELDS.find((field) => field.value === selectedArtworkField)
-      ?.name || '전체';
+    ARTWORK_FIELDS_WITH_ALL_OPTION.find(
+      (field) => field.value === selectedArtworkField,
+    )?.name || '전체';
 
   const handleArtworkFieldClick = (artworkField: string) => {
     setSelectedArtworkField(artworkField);
@@ -39,7 +45,7 @@ const ArtworkFilter = ({
     <>
       <div className='flex w-full justify-between items-end pb-[59px] overflow-x-auto'>
         <DefaultCarousel
-          slides={ARTWORK_FIELDS}
+          slides={ARTWORK_FIELDS_WITH_ALL_OPTION}
           renderSlide={(artworkField: ArtworkField) => (
             <OvalButton
               key={artworkField.value}

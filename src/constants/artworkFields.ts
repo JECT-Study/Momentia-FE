@@ -1,5 +1,4 @@
 const ARTWORK_FIELDS = [
-  { name: '전체', value: 'ALL' },
   { name: '회화', value: 'PAINTING' },
   { name: '공예/조각', value: 'CRAFTSCULPTURE' },
   { name: '드로잉', value: 'DRAWING' },
