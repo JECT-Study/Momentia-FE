@@ -36,6 +36,13 @@ export const COMMON_ERROR_MESSAGE: MessageConstantType = {
   NETWORK_ERROR: '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.',
 };
 
+export const LIKE_ERROR_MESSAGE: MessageConstantType = {
+  ALREADY_LIKE: '이미 좋아요한 작품입니다.',
+  POST_NOT_FOUND: '요청한 리소스가 없습니다.',
+  LIKE_ALREADY_REMOVED:
+    '좋아요 하지 않은 작품이거나 이미 좋아요 취소된 작품입니다.',
+};
+
 export const COLLECTION_ADD_ARTWORK_ERROR_MESSAGE: MessageConstantType = {
   COLLECTION_NOT_FOUND: '컬랙션 리소스를 찾을 수 없습니다.',
   POST_NOT_FOUND: '작품 리소스를 찾을 수 없습니다.',
