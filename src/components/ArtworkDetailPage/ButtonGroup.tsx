@@ -16,7 +16,13 @@ interface ButtonGroupProps {
 }
 
 const ButtonGroup = ({
-  socialInfo: { postId, likeCount: initialLikeCount, isLiked: initialIsLiked },
+  socialInfo: {
+    postId,
+    nickname,
+    title,
+    likeCount: initialLikeCount,
+    isLiked: initialIsLiked,
+  },
 }: ButtonGroupProps) => {
   const { openModal } = useStore(modalStore);
   const [blockButton, setBlockButton] = useState(false);
@@ -41,7 +47,7 @@ const ButtonGroup = ({
   const openShareModal = () => {
     openModal({
       modalSize: 'md',
-      contents: <ShareModal />,
+      contents: <ShareModal nickname={nickname} title={title} />,
     });
   };
 

@@ -9,7 +9,12 @@ import BasicInput from '@/components/Input/BasicInput';
 import modalStore from '@/stores/modalStore';
 import copyClipboard from '@/utils/copyClipboard';
 
-const ShareModal = () => {
+interface ShareModalProps {
+  nickname: string;
+  title: string;
+}
+
+const ShareModal = ({ nickname, title }: ShareModalProps) => {
   const { closeModal } = useStore(modalStore);
   const [shareURL, setShareURL] = useState(window.location.href);
   const [copyStatus, setCopyStatus] = useState(false);
@@ -35,8 +40,8 @@ const ShareModal = () => {
         />
       </div>
       <div className='flex gap-5 items-center body1 mt-5'>
-        <p className='text-gray-200'>작품 이름</p>
-        <p className='text-gray-300'>작가 닉네임</p>
+        <p className='text-gray-200'>{title}</p>
+        <p className='text-gray-300'>{nickname}</p>
       </div>
       <div className='grid grid-cols-[1fr_100px] mt-[100px] mb-[75px] gap-2.5'>
         <BasicInput
