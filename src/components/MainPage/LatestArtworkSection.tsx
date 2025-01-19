@@ -1,4 +1,4 @@
-import useArtworkList from '@/hooks/serverStateHooks/useArtworkList';
+import useArtworkListGet from '@/hooks/serverStateHooks/useArtworkListGet';
 import { ArtworkInfoType } from '@/types';
 
 import ArtworkCard from '../Card/ArtworkCard';
@@ -8,7 +8,7 @@ const LatestArtworkSection = () => {
   const {
     data: { data: artwork },
     isLoading,
-  } = useArtworkList({
+  } = useArtworkListGet({
     sort: 'recent',
     search: '',
     page: 1,

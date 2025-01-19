@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
-import useFollowedArtists from '@/hooks/serverStateHooks/useFollowedArtists';
+import useFollowedArtistsGet from '@/hooks/serverStateHooks/useFollowedArtistsGet';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
 import TokenHandler from '@/utils/tokenHandler';
 
@@ -22,7 +22,7 @@ const FollowedArtistsSection = () => {
     data: followedArtists,
     isLoading: followedArtistsLoading,
     error: followedArtistsError,
-  } = useFollowedArtists();
+  } = useFollowedArtistsGet();
 
   return (
     <>

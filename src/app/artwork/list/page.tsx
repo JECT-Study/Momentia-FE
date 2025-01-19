@@ -6,7 +6,7 @@ import ArtworkFilter from '@/components/ArtworkPage/ArtworkFilter';
 import ArtworkSearchBar from '@/components/ArtworkPage/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/ArtworkPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkPage/FollowedArtistsSection';
-import useArtworkList from '@/hooks/serverStateHooks/useArtworkList';
+import useArtworkListGet from '@/hooks/serverStateHooks/useArtworkListGet';
 
 const SORT_MAPPING: Record<string, string> = {
   최신순: 'recent',
@@ -28,7 +28,7 @@ const ArtworkList = () => {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList({
+  } = useArtworkListGet({
     sort: sortValue,
     artworkField:
       selectedArtworkField === 'ALL' ? undefined : selectedArtworkField,

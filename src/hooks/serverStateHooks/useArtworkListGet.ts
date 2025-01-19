@@ -8,7 +8,7 @@ import {
   PaginationType,
 } from '@/types';
 
-const useArtworkList = (params: ArtworkListParams) => {
+const useArtworkListGet = (params: ArtworkListParams) => {
   const { data, isLoading, error } = useQuery<ArtworkListResponse>({
     queryKey: [ARTWORK.artworkList, params],
     queryFn: () => getArtworkList({ ...params }),
@@ -22,4 +22,4 @@ const useArtworkList = (params: ArtworkListParams) => {
   };
 };
 
-export default useArtworkList;
+export default useArtworkListGet;
