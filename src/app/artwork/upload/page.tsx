@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, DragEvent, useState } from 'react';
 
 import OvalButton from '@/components/Button/OvalButton';
 import FilterDropdown from '@/components/FilterDropdown';
@@ -92,6 +92,30 @@ const ArtworkUpload = () => {
   const selectedPrivacySettingName =
     PRIVACY_SETTING_OPTIONS.find((option) => option.value === privacySetting)
       ?.name || '전체공개';
+
+  const handleImageDragOver = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+  };
+
+  const handleImageDrop = (e: DragEvent<HTMLDivElement>) => {
+    e.preventDefault();
+
+    if (uploadedImage) {
+      setErrors((prevErrors) => ({
+        ...prevErrors,
+        uploadedImageError: '이미지는 1장만 업로드할 수 있습니다.',
+      }));
+      return;
+    }
+
+    const imageFile = e.dataTransfer.files[0];
+    if (imageFile) {
+      const imageFileURL = URL.createObjectURL(imageFile);
+      setUploadedImage(imageFileURL);
+
+      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+    }
+  };
 
   const handleImageUploadClick = () => {
     const fileInput = document.getElementById(
@@ -207,7 +231,11 @@ const ArtworkUpload = () => {
         />
       </div>
 
-      <div className='relative pb-[70px]'>
+      <div
+        onDragOver={handleImageDragOver}
+        onDrop={handleImageDrop}
+        className='relative pb-[70px]'
+      >
         <div
           className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[511px] md:h-[853px]'
           style={{
@@ -242,19 +270,6 @@ const ArtworkUpload = () => {
             작품 이미지는 1장만 업로드 가능합니다.
           </p>
 
-          {errors.uploadedImageError && (
-            <div className='flex items-center'>
-              <Icon
-                name='AlertCircle'
-                size='s'
-                className='text-system-error mr-2'
-              />
-              <p className='button-s text-system-error'>
-                {errors.uploadedImageError}
-              </p>
-            </div>
-          )}
-
           {uploadedImage && (
             <img
               src={uploadedImage}
@@ -274,6 +289,19 @@ const ArtworkUpload = () => {
             <Icon name='Image' size='l' className='hidden md:block' />
           </button>
         </div>
+
+        {errors.uploadedImageError && (
+          <div className='flex justify-center items-center pt-4'>
+            <Icon
+              name='AlertCircle'
+              size='s'
+              className='text-system-error mr-2'
+            />
+            <p className='button-s text-system-error'>
+              {errors.uploadedImageError}
+            </p>
+          </div>
+        )}
       </div>
 
       <Textarea
