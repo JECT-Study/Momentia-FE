@@ -56,7 +56,11 @@ const ArtworkUpload = () => {
   };
 
   const handleArtworkFieldClick = (artworkField: string) => {
-    setSelectedArtworkField(artworkField);
+    const selectedField = ARTWORK_FIELDS.find(
+      (field) => field.name === artworkField,
+    );
+
+    if (selectedField) setSelectedArtworkField(selectedField.value);
 
     if (!artworkTitle.trim()) {
       setErrors((prevErrors) => ({
@@ -72,12 +76,18 @@ const ArtworkUpload = () => {
   };
 
   const handlePrivacySettingChange = (selectedName: string) => {
-    const option = PRIVACY_SETTING_OPTIONS.find(
+    const privacySettingOption = PRIVACY_SETTING_OPTIONS.find(
       (option) => option.name === selectedName,
     );
 
-    if (option) setPrivacySetting(option.value);
+    if (privacySettingOption) {
+      setPrivacySetting(privacySettingOption.value);
+    }
   };
+
+  const selectedArtworkFieldName =
+    ARTWORK_FIELDS.find((field) => field.value === selectedArtworkField)
+      ?.name || '';
 
   const selectedPrivacySettingName =
     PRIVACY_SETTING_OPTIONS.find((option) => option.value === privacySetting)
@@ -162,7 +172,7 @@ const ArtworkUpload = () => {
           label='작품 카테고리'
           placeholder='카테고리 선택'
           options={ARTWORK_FIELDS.map((field) => field.name)}
-          selected={selectedArtworkField}
+          selected={selectedArtworkFieldName}
           onChange={(value) => handleArtworkFieldClick(value)}
           isInvalid={!!errors.selectedArtworkFieldError}
           errorMessage={errors.selectedArtworkFieldError}
