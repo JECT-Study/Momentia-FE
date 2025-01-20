@@ -7,6 +7,7 @@ import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
+import useArtworkPost from '@/hooks/serverStateHooks/useArtworkPost';
 
 import Textarea from '../../../components/Input/Textarea';
 
@@ -28,9 +29,7 @@ const PRIVACY_SETTING_OPTIONS = [
 const ArtworkUpload = () => {
   const [artworkTitle, setArtworkTitle] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('');
-  const [privacySetting, setPrivacySetting] = useState<'전체공개' | '비공개'>(
-    '전체공개',
-  );
+  const [privacySetting, setPrivacySetting] = useState('PUBLIC');
   const [uploadedImage, setUploadedImage] = useState<string>('');
   const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -72,15 +71,21 @@ const ArtworkUpload = () => {
       clearErrorMessage('selectedArtworkFieldError');
   };
 
-  const handlePrivacySettingChange = (
-    newPrivacySetting: '전체공개' | '비공개',
-  ) => {
-    setPrivacySetting(newPrivacySetting);
+  const handlePrivacySettingChange = (selectedName: string) => {
+    const option = PRIVACY_SETTING_OPTIONS.find(
+      (option) => option.name === selectedName,
+    );
+
+    if (option) setPrivacySetting(option.value);
   };
+
+  const selectedPrivacySettingName =
+    PRIVACY_SETTING_OPTIONS.find((option) => option.value === privacySetting)
+      ?.name || '전체공개';
 
   const handleImageUpload = () => {
     // TODO: 실제 이미지 업로드 로직 구현
-    setUploadedImage('uploaded-image-url'); // 테스트용
+    setUploadedImage('/images/defaultArtworkImage.png'); // 테스트용
 
     if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
   };
@@ -111,10 +116,27 @@ const ArtworkUpload = () => {
     handleScrollToTop();
   };
 
-  const handleArtworkUpload = () => {
-    setIsSubmitting(true);
+  const { mutate: uploadArtwork, isSuccess, isError } = useArtworkPost();
 
-    console.log('업로드 완료'); // [테스트용] 업로드 처리 (API 호출)
+  const handleArtworkUpload = () => {
+    if (!uploadedImage) {
+      console.error('이미지가 업로드되지 않았습니다.');
+      return;
+    }
+
+    const artworkData = {
+      title: artworkTitle,
+      artworkField: selectedArtworkField,
+      postImage: uploadedImage,
+      explanation: artworkDescription,
+      status: privacySetting,
+    };
+
+    console.log('업로드 요청한 작품 데이터: ', artworkData);
+
+    setIsSubmitting(true);
+    uploadArtwork(artworkData);
+
     // TODO: 작성한 글 상세 페이지로 이동
   };
 
@@ -150,8 +172,8 @@ const ArtworkUpload = () => {
         <FilterDropdown
           label='공개범위'
           options={PRIVACY_SETTING_OPTIONS.map((option) => option.name)}
-          selected={privacySetting}
-          onChange={() => handlePrivacySettingChange(privacySetting)}
+          selected={selectedPrivacySettingName}
+          onChange={handlePrivacySettingChange}
           className='w-full'
         />
       </div>
@@ -252,6 +274,8 @@ const ArtworkUpload = () => {
             업로드
           </button>
         )}
+
+        {isError && <p>업로드 실패. 다시 시도해 주세요.</p>}
       </div>
     </div>
   );
