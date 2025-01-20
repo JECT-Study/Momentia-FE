@@ -236,59 +236,61 @@ const ArtworkUpload = () => {
         onDrop={handleImageDrop}
         className='relative pb-[70px]'
       >
-        <div
-          className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[511px] md:h-[853px]'
-          style={{
-            border: '2px dashed transparent',
-            borderImage:
-              'repeating-linear-gradient(45deg, gray 0, gray 10px, transparent 10px, transparent 20px) 1',
-          }}
-        >
-          <p className='body2 text-center text-gray-500 self-stretch'>
-            첨부할 작품 이미지를 끌어오거나,
-            <br />
-            작품 업로드 버튼을 눌러 이미지를 선택하세요.
-          </p>
-          <label htmlFor='image-upload' className='hidden'>
-            <input
-              type='file'
-              id='image-upload'
-              accept='image/*'
-              onChange={handleImageUpload}
-              className='hidden'
-            />
-          </label>
-          <OvalButton
-            variant='primary'
-            buttonSize='s'
-            onClick={handleImageUploadClick}
-          >
-            <Icon name='UploadShare' size='m' className='mr-2.5' />
-            이미지 업로드
-          </OvalButton>
-          <p className='button-s text-center text-gray-500'>
-            작품 이미지는 1장만 업로드 가능합니다.
-          </p>
-
-          {uploadedImage && (
+        {uploadedImage ? (
+          <div className='relative w-full h-[511px] md:h-[853px] bg-transparent'>
             <img
               src={uploadedImage}
               alt='Uploaded Artwork'
-              className='mt-4 max-h-[200px] object-contain'
+              className='w-full h-full object-contain'
             />
-          )}
-
-          <button
-            aria-label='Button to change artwork image'
-            className='flex justify-center items-center w-[57px] h-[57px] md:w-[77px] md:h-[77px]
-            absolute right-[30px] bottom-[30px] rounded-full
-            bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
+            <button
+              aria-label='Button to change artwork image'
+              onClick={() => setUploadedImage('')}
+              className='absolute flex items-center justify-center w-[57px] h-[57px] md:w-[77px] md:h-[77px] 
+            right-[30px] bottom-[30px] rounded-full
+          bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
             shadow-lg hover:bg-[rgba(35,34,37,0.7)] transition'
+            >
+              <Icon name='Image' size='m' className='block md:hidden' />
+              <Icon name='Image' size='l' className='hidden md:block' />
+            </button>
+          </div>
+        ) : (
+          <div
+            className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[511px] md:h-[853px]'
+            style={{
+              border: '2px dashed transparent',
+              borderImage:
+                'repeating-linear-gradient(45deg, gray 0, gray 10px, transparent 10px, transparent 20px) 1',
+            }}
           >
-            <Icon name='Image' size='m' className='block md:hidden' />
-            <Icon name='Image' size='l' className='hidden md:block' />
-          </button>
-        </div>
+            <p className='body2 text-center text-gray-500 self-stretch'>
+              첨부할 작품 이미지를 끌어오거나,
+              <br />
+              작품 업로드 버튼을 눌러 이미지를 선택하세요.
+            </p>
+            <label htmlFor='image-upload' className='hidden'>
+              <input
+                type='file'
+                id='image-upload'
+                accept='image/*'
+                onChange={handleImageUpload}
+                className='hidden'
+              />
+            </label>
+            <OvalButton
+              variant='primary'
+              buttonSize='s'
+              onClick={handleImageUploadClick}
+            >
+              <Icon name='UploadShare' size='m' className='mr-2.5' />
+              이미지 업로드
+            </OvalButton>
+            <p className='button-s text-center text-gray-500'>
+              작품 이미지는 1장만 업로드 가능합니다.
+            </p>
+          </div>
+        )}
 
         {errors.uploadedImageError && (
           <div className='flex justify-center items-center pt-4'>
