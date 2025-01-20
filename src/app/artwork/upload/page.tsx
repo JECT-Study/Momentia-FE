@@ -93,11 +93,30 @@ const ArtworkUpload = () => {
     PRIVACY_SETTING_OPTIONS.find((option) => option.value === privacySetting)
       ?.name || '전체공개';
 
-  const handleImageUpload = () => {
-    // TODO: 실제 이미지 업로드 로직 구현
-    setUploadedImage('/images/defaultArtworkImage.png'); // 테스트용
+  const handleImageUploadClick = () => {
+    const fileInput = document.getElementById(
+      'image-upload',
+    ) as HTMLInputElement;
 
-    if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+    if (fileInput) fileInput.click();
+  };
+
+  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      if (uploadedImage) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          uploadedImageError: '이미지는 1장만 업로드할 수 있습니다.',
+        }));
+        return;
+      }
+
+      const imageFile = e.target.files[0];
+      const imageFileURL = URL.createObjectURL(imageFile);
+      setUploadedImage(imageFileURL);
+
+      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+    }
   };
 
   const validateArtworkUploadForm = () => {
@@ -202,10 +221,19 @@ const ArtworkUpload = () => {
             <br />
             작품 업로드 버튼을 눌러 이미지를 선택하세요.
           </p>
+          <label htmlFor='image-upload' className='hidden'>
+            <input
+              type='file'
+              id='image-upload'
+              accept='image/*'
+              onChange={handleImageUpload}
+              className='hidden'
+            />
+          </label>
           <OvalButton
             variant='primary'
             buttonSize='s'
-            onClick={handleImageUpload}
+            onClick={handleImageUploadClick}
           >
             <Icon name='UploadShare' size='m' className='mr-2.5' />
             이미지 업로드
@@ -285,7 +313,7 @@ const ArtworkUpload = () => {
           </button>
         )}
 
-        {isError && <p>업로드 실패. 다시 시도해 주세요.</p>}
+        {isError && <p>[업로드 실패] 다시 시도해 주세요.</p>}
       </div>
     </div>
   );
