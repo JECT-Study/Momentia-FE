@@ -19,4 +19,8 @@ const ARTWORK = {
   uploadArtwork: '/artwork/post',
 };
 
-export { ARTWORK, MONTHLY, USER };
+const IMAGE = {
+  image: '/image',
+};
+
+export { ARTWORK, IMAGE, MONTHLY, USER };
