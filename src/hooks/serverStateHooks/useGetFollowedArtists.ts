@@ -4,7 +4,7 @@ import getFollowedArtists from '@/apis/artwork/getFollowedArtists';
 import { ARTWORK } from '@/constants/API';
 import TokenHandler from '@/utils/tokenHandler';
 
-const useFollowedArtistsGet = () => {
+const useGetFollowedArtists = () => {
   const accessToken = TokenHandler.getAccessToken();
 
   const { data, isLoading, error } = useQuery({
@@ -20,4 +20,4 @@ const useFollowedArtistsGet = () => {
   };
 };
 
-export default useFollowedArtistsGet;
+export default useGetFollowedArtists;
