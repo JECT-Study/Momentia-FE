@@ -25,7 +25,8 @@ const layout = ({ children }: LayoutProps) => {
       <Image
         src='/images/momentiaLogoSymbol.png'
         alt='모멘티아 로고'
-        width={45}
+        width={64}
+        height={31}
         priority
       />
       {children}
