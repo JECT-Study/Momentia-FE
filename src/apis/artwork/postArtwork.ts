@@ -4,7 +4,7 @@ import { ARTWORK } from '@/constants/API';
 interface uploadArtworkData {
   title: string;
   artworkField: string;
-  postImage: string;
+  postImage: File;
   explanation: string;
   status: string;
 }
