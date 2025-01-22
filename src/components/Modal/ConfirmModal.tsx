@@ -18,6 +18,11 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { closeModal } = useStore(modalStore);
 
+  const handleConfirm = () => {
+    closeModal();
+    window.history.back();
+  };
+
   const buttonOrderClassName = isButtonOnRow
     ? reverseButtonOrder
       ? 'flex-row-reverse'
@@ -30,7 +35,7 @@ const ConfirmModal = ({
     <div className='px-[40px] py-[50px] text-center'>
       <div className='body1 text-white mb-[50px]'>{children}</div>
       <div className={`flex ${buttonOrderClassName} gap-[20px]`}>
-        <SquareButtonL variant='primary'>
+        <SquareButtonL variant='primary' onClick={handleConfirm}>
           <p>확인</p>
         </SquareButtonL>
         <SquareButtonL variant='tertiary' onClick={closeModal}>
