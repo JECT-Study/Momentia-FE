@@ -19,7 +19,7 @@ const ShareModal = ({ nickname, title }: ShareModalProps) => {
   const [shareURL, setShareURL] = useState(window.location.href);
   const [copyStatus, setCopyStatus] = useState(false);
 
-  const handlOnChangeShareURL = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChangeShareURL = (event: ChangeEvent<HTMLInputElement>) => {
     setShareURL(event.target.value);
   };
 
@@ -47,11 +47,11 @@ const ShareModal = ({ nickname, title }: ShareModalProps) => {
         <BasicInput
           type='text'
           value={shareURL}
-          onChange={handlOnChangeShareURL}
+          onChange={handleOnChangeShareURL}
         />
         <span className='h-[60px]'>
           <SquareButtonL
-            variant={'tertiary'}
+            variant='tertiary'
             children={copyStatus ? '복사 완료' : 'URL 복사'}
             onClick={clickCopyButton}
           />

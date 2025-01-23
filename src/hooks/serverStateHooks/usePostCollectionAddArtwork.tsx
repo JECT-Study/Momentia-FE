@@ -30,7 +30,7 @@ const usePostCollectionAddArtwork = ({
         modalSize: 'sm',
         contents: (
           <ConfirmModal
-            otherButtonText='컬렉션으로 이돋'
+            otherButtonText='컬렉션으로 이동'
             onClickOtherButton={() => {
               router.push('/collections');
             }}

@@ -18,7 +18,7 @@ const CreateCollectionModal = () => {
 
   const { mutate: submitCreateCollection } = usePostCreateCollection();
 
-  const handlOnChangeCollectionName = (
+  const handleOnChangeCollectionName = (
     event: ChangeEvent<HTMLInputElement>,
   ) => {
     setCollectionName(event.target.value);
@@ -46,7 +46,7 @@ const CreateCollectionModal = () => {
       <div className='grid grid-cols-[1fr_100px] mt-[100px] mb-[75px] gap-x-2.5'>
         <BasicInput
           value={collectionName}
-          onChange={handlOnChangeCollectionName}
+          onChange={handleOnChangeCollectionName}
           label='컬렉션 이름'
           placeholder='컬렉션 이름을 입력하세요.'
           showTextLength={true}
