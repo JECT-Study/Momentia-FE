@@ -1,20 +1,31 @@
 'use client';
 
-import { ChangeEvent, DragEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
+import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
 import FilterDropdown from '@/components/FilterDropdown';
-import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
+import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
-import useArtworkPost from '@/hooks/serverStateHooks/useArtworkPost';
+import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
+import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
+import modalStore from '@/stores/modalStore';
+import { ArtworkUploadData } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
 
-interface ArtworkFieldsErrors {
+export interface ArtworkFieldsErrors {
   artworkTitleError?: string;
   selectedArtworkFieldError?: string;
   uploadedImageError?: string;
+}
+
+interface ArtworkUploadProps {
+  initialData: Omit<ArtworkUploadData, 'postImage' | 'status'> & {
+    status: 'PUBLIC' | 'PRIVATE';
+  };
+  postId: number;
 }
 
 const MAX_TITLE_LENGTH = 50;
@@ -26,12 +37,19 @@ const PRIVACY_SETTING_OPTIONS = [
   { name: '비공개', value: 'PRIVATE' },
 ];
 
-const ArtworkUpload = () => {
-  const [artworkTitle, setArtworkTitle] = useState('');
-  const [selectedArtworkField, setSelectedArtworkField] = useState('');
-  const [privacySetting, setPrivacySetting] = useState('PUBLIC');
-  const [uploadedImage, setUploadedImage] = useState<string>('');
-  const [artworkDescription, setArtworkDescription] = useState('');
+const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
+  const [artworkTitle, setArtworkTitle] = useState(initialData?.title || '');
+  const [selectedArtworkField, setSelectedArtworkField] = useState(
+    initialData?.artworkField || '',
+  );
+  const [privacySetting, setPrivacySetting] = useState(
+    initialData?.status || 'PUBLIC',
+  );
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [artworkDescription, setArtworkDescription] = useState(
+    initialData?.explanation || '',
+  );
+  const [isEditMode, setIsEditMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
     artworkTitleError: '',
@@ -43,7 +61,7 @@ const ArtworkUpload = () => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
   };
 
-  const handleArtworkTitleChanged = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleArtworkTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setArtworkTitle(e.target.value);
 
     if (errors.artworkTitleError) clearErrorMessage('artworkTitleError');
@@ -81,7 +99,7 @@ const ArtworkUpload = () => {
     );
 
     if (privacySettingOption) {
-      setPrivacySetting(privacySettingOption.value);
+      setPrivacySetting(privacySettingOption.value as 'PUBLIC' | 'PRIVATE');
     }
   };
 
@@ -93,56 +111,6 @@ const ArtworkUpload = () => {
     PRIVACY_SETTING_OPTIONS.find((option) => option.value === privacySetting)
       ?.name || '전체공개';
 
-  const handleImageDragOver = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const handleImageDrop = (e: DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-
-    if (uploadedImage) {
-      setErrors((prevErrors) => ({
-        ...prevErrors,
-        uploadedImageError: '이미지는 1장만 업로드할 수 있습니다.',
-      }));
-      return;
-    }
-
-    const imageFile = e.dataTransfer.files[0];
-    if (imageFile) {
-      const imageFileURL = URL.createObjectURL(imageFile);
-      setUploadedImage(imageFileURL);
-
-      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
-    }
-  };
-
-  const handleImageUploadClick = () => {
-    const fileInput = document.getElementById(
-      'image-upload',
-    ) as HTMLInputElement;
-
-    if (fileInput) fileInput.click();
-  };
-
-  const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      if (uploadedImage) {
-        setErrors((prevErrors) => ({
-          ...prevErrors,
-          uploadedImageError: '이미지는 1장만 업로드할 수 있습니다.',
-        }));
-        return;
-      }
-
-      const imageFile = e.target.files[0];
-      const imageFileURL = URL.createObjectURL(imageFile);
-      setUploadedImage(imageFileURL);
-
-      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
-    }
-  };
-
   const validateArtworkUploadForm = () => {
     const newErrors: ArtworkFieldsErrors = {};
 
@@ -150,11 +118,59 @@ const ArtworkUpload = () => {
       newErrors.artworkTitleError = REQUIRED_FIELDS_ERROR_MESSAGE;
     if (!selectedArtworkField.trim())
       newErrors.selectedArtworkFieldError = REQUIRED_FIELDS_ERROR_MESSAGE;
-    if (!uploadedImage)
+    if (!(isEditMode && uploadedImage))
       newErrors.uploadedImageError = REQUIRED_FIELDS_ERROR_MESSAGE;
     setErrors(newErrors);
 
     return Object.keys(newErrors).length === 0;
+  };
+
+  const {
+    mutate: postArtwork,
+    isSuccess: postArtworkSuccess,
+    isError: postArtworkError,
+  } = usePostArtwork();
+
+  const handleArtworkUpload = async () => {
+    if (!(uploadedImage && isEditMode)) {
+      console.error('이미지가 업로드되지 않았습니다.');
+      return;
+    }
+
+    const uploadedArtworkData = {
+      title: artworkTitle,
+      artworkField: selectedArtworkField,
+      ...(uploadedImage && { postImage: uploadedImage }),
+      explanation: artworkDescription,
+      status: privacySetting,
+    };
+
+    console.log('업로드 요청한 작품 데이터: ', uploadedArtworkData);
+    setIsSubmitting(true);
+    postArtwork(uploadedArtworkData);
+  };
+
+  const {
+    mutate: patchArtwork,
+    isSuccess: patchArtworkSuccess,
+    isError: patchArtworkError,
+  } = usePatchArtwork();
+
+  const handleArtworkUpdate = async () => {
+    const editedArtworkData = {
+      title: artworkTitle,
+      artworkField: selectedArtworkField,
+      explanation: artworkDescription,
+      status: privacySetting,
+    };
+
+    console.log('수정 요청한 작품 데이터: ', editedArtworkData);
+    setIsSubmitting(true);
+
+    patchArtwork({
+      postId,
+      data: editedArtworkData,
+    });
   };
 
   const isRequiredFieldsValid =
@@ -169,32 +185,32 @@ const ArtworkUpload = () => {
     handleScrollToTop();
   };
 
-  const { mutate: uploadArtwork, isSuccess, isError } = useArtworkPost();
+  const handleSubmit = () => {
+    isEditMode ? handleArtworkUpdate() : handleArtworkUpload();
+  };
 
-  const handleArtworkUpload = () => {
-    if (!uploadedImage) {
-      console.error('이미지가 업로드되지 않았습니다.');
-      return;
-    }
+  const handleCancelClick = () => {
+    const { openModal } = modalStore.getState();
 
-    const artworkData = {
-      title: artworkTitle,
-      artworkField: selectedArtworkField,
-      postImage: uploadedImage,
-      explanation: artworkDescription,
-      status: privacySetting,
-    };
-
-    console.log('업로드 요청한 작품 데이터: ', artworkData);
-
-    setIsSubmitting(true);
-    uploadArtwork(artworkData);
-
-    // TODO: 작성한 글 상세 페이지로 이동
+    openModal({
+      contents: (
+        <ConfirmModal>
+          작성 중인 내용을 저장하지 않고 나가시겠습니까?
+        </ConfirmModal>
+      ),
+      modalSize: 'md',
+    });
   };
 
   return (
     <div className='max-w-[1920px] m-auto px-[36px] py-[70px] lg:px-[140px]'>
+      {/* {toastMessage && (
+          <ToastPopup
+            message={toastMessage}
+            onClose={() => setToastMessage(null)}
+          />
+        )} */}
+
       <h1>작품 업로드</h1>
       <div className='pt-[70px] pb-[58px] md:pb-[40px]'>
         <BasicInput
@@ -202,7 +218,7 @@ const ArtworkUpload = () => {
           label='작품 제목'
           placeholder='작품 제목을 입력하세요.'
           value={artworkTitle}
-          onChange={handleArtworkTitleChanged}
+          onChange={handleArtworkTitleChange}
           showTextLength={true}
           maxLength={MAX_TITLE_LENGTH}
           isInvalid={!!errors.artworkTitleError}
@@ -231,88 +247,13 @@ const ArtworkUpload = () => {
         />
       </div>
 
-      <div
-        onDragOver={handleImageDragOver}
-        onDrop={handleImageDrop}
-        className='relative pb-[70px]'
-      >
-        {uploadedImage ? (
-          <div className='relative w-full h-[511px] md:h-[853px] bg-transparent'>
-            <img
-              src={uploadedImage}
-              alt='Uploaded Artwork'
-              className='w-full h-full object-contain'
-            />
-            <button
-              aria-label='Button to change artwork image'
-              onClick={() => setUploadedImage('')}
-              className='absolute group flex items-center justify-center w-[57px] h-[57px] md:w-[77px] md:h-[77px] 
-            right-[30px] bottom-[30px] rounded-full
-          bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
-            shadow-lg hover:bg-[rgba(35,34,37,0.7)] transition'
-            >
-              <Icon name='Image' size='m' className='block md:hidden' />
-              <Icon name='Image' size='l' className='hidden md:block' />
-
-              <span
-                className='absolute -top-12 bottom-[122px] flex items-center justify-center h-[35px] px-[14px] gap-[10px]
-                text-white text-xs font-medium bg-background-overlay rounded-[5px] leading-[35px] whitespace-nowrap
-                opacity-0 group-hover:opacity-100 transition-opacity duration-300'
-              >
-                이미지 변경
-              </span>
-            </button>
-          </div>
-        ) : (
-          <div
-            className='flex flex-col justify-center items-center gap-[15px] p-[140px] h-[511px] md:h-[853px]'
-            style={{
-              border: '2px dashed transparent',
-              borderImage:
-                'repeating-linear-gradient(45deg, gray 0, gray 10px, transparent 10px, transparent 20px) 1',
-            }}
-          >
-            <p className='body2 text-center text-gray-500 self-stretch'>
-              첨부할 작품 이미지를 끌어오거나,
-              <br />
-              작품 업로드 버튼을 눌러 이미지를 선택하세요.
-            </p>
-            <label htmlFor='image-upload' className='hidden'>
-              <input
-                type='file'
-                id='image-upload'
-                accept='image/*'
-                onChange={handleImageUpload}
-                className='hidden'
-              />
-            </label>
-            <OvalButton
-              variant='primary'
-              buttonSize='s'
-              onClick={handleImageUploadClick}
-            >
-              <Icon name='UploadShare' size='m' className='mr-2.5' />
-              이미지 업로드
-            </OvalButton>
-            <p className='button-s text-center text-gray-500'>
-              작품 이미지는 1장만 업로드 가능합니다.
-            </p>
-          </div>
-        )}
-
-        {errors.uploadedImageError && (
-          <div className='flex justify-center items-center pt-4'>
-            <Icon
-              name='AlertCircle'
-              size='s'
-              className='text-system-error mr-2'
-            />
-            <p className='button-s text-system-error'>
-              {errors.uploadedImageError}
-            </p>
-          </div>
-        )}
-      </div>
+      <ImageUploadSection
+        uploadedImage={uploadedImage}
+        errors={errors}
+        setErrors={setErrors}
+        setUploadedImage={setUploadedImage}
+        clearErrorMessage={clearErrorMessage}
+      />
 
       <Textarea
         label='작품 설명'
@@ -325,6 +266,7 @@ const ArtworkUpload = () => {
 
       <div className='pt-[30px] flex justify-end items-center gap-[20px]'>
         <button
+          onClick={handleCancelClick}
           className='button-s text-gray-300 flex items-center justify-center rounded-full
             gap-[10px] px-[28px] leading-[50px]
             transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70'
@@ -333,12 +275,8 @@ const ArtworkUpload = () => {
         </button>
 
         {!isSubmitting && isRequiredFieldsValid ? (
-          <OvalButton
-            variant='primary'
-            buttonSize='s'
-            onClick={handleArtworkUpload}
-          >
-            업로드
+          <OvalButton variant='primary' buttonSize='s' onClick={handleSubmit}>
+            {isEditMode ? '수정' : '업로드'}
           </OvalButton>
         ) : (
           <button
@@ -351,7 +289,8 @@ const ArtworkUpload = () => {
           </button>
         )}
 
-        {isError && <p>[업로드 실패] 다시 시도해 주세요.</p>}
+        {postArtworkError && <p>[업로드 실패] 다시 시도해 주세요.</p>}
+        {patchArtworkError && <p>[수정 실패] 다시 시도해 주세요.</p>}
       </div>
     </div>
   );
