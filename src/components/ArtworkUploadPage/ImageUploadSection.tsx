@@ -31,6 +31,42 @@ const ImageUploadSection = ({
     e.preventDefault();
   };
 
+  const uploadImage = async (imageFile: File) => {
+    try {
+      const presignedData = await getPresignedUrl({
+        fileSize: imageFile.size,
+        fileType: imageFile.type,
+      });
+      console.log('Presigned URL 결과: ', presignedData);
+
+      if (!presignedData) {
+        setErrors((prevErrors) => ({
+          ...prevErrors,
+          uploadedImageError: 'Presigned URL 요청에 실패했습니다.',
+        }));
+        return false;
+      }
+
+      const { presignedUrl, imageId } = presignedData;
+      console.log('imageFileURL: ', presignedUrl, 'imageId: ', imageId);
+
+      const uploadSuccess = await uploadImageToS3({
+        file: imageFile,
+        uploadUrl: presignedUrl,
+      });
+
+      if (uploadSuccess) {
+        await notifyServerOfUploadCompletion(imageId);
+        setUploadedImage(imageFile);
+        console.log('이미지 업로드 성공');
+      } else {
+        console.error('업로드 실패');
+      }
+    } catch (error) {
+      console.error('이미지 업로드 중 오류 발생: ', error);
+    }
+  };
+
   const handleImageDrop = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
 
@@ -45,17 +81,9 @@ const ImageUploadSection = ({
     const imageFile = e.dataTransfer.files[0];
     if (imageFile) {
       setUploadedImage(imageFile);
-
+      uploadImage(imageFile);
       if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
     }
-  };
-
-  const handleImageUploadClick = () => {
-    const fileInput = document.getElementById(
-      'image-upload',
-    ) as HTMLInputElement;
-
-    if (fileInput) fileInput.click();
   };
 
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -68,45 +96,20 @@ const ImageUploadSection = ({
         return;
       }
 
-      const imageFile = e.target.files[0];
-      console.log('imageFile: ', imageFile);
-
-      try {
-        const presignedData = await getPresignedUrl({
-          fileSize: imageFile.size,
-          fileType: imageFile.type,
-        });
-        console.log('Presigned URL 결과: ', presignedData);
-
-        if (!presignedData) {
-          setErrors((prevErrors) => ({
-            ...prevErrors,
-            uploadedImageError: 'Presigned URL 요청에 실패했습니다.',
-          }));
-          return;
-        }
-
-        const { presignedUrl, imageId } = presignedData;
-        console.log('imageFileURL: ', presignedUrl, 'imageId: ', imageId);
-
-        const uploadSuccess = await uploadImageToS3({
-          file: imageFile,
-          uploadUrl: presignedUrl,
-        });
-
-        if (uploadSuccess) {
-          await notifyServerOfUploadCompletion(imageId);
-          setUploadedImage(imageFile);
-          console.log('이미지 업로드 성공');
-        } else {
-          console.error('업로드 실패');
-        }
-      } catch (error) {
-        console.error('이미지 업로드 중 오류 발생: ', error);
-      }
-
       if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+
+      const imageFile = e.target.files[0];
+      uploadImage(imageFile);
+      console.log('imageFile: ', imageFile);
     }
+  };
+
+  const handleImageUploadClick = () => {
+    const fileInput = document.getElementById(
+      'image-upload',
+    ) as HTMLInputElement;
+
+    if (fileInput) fileInput.click();
   };
 
   return (
