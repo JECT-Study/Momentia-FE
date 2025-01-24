@@ -1,7 +1,7 @@
 import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
 
-interface uploadArtworkData {
+interface ArtworkUploadData {
   title: string;
   artworkField: string;
   postImage: File;
@@ -9,7 +9,7 @@ interface uploadArtworkData {
   status: string;
 }
 
-const postArtwork = async (artworkData: uploadArtworkData) => {
+const postArtwork = async (artworkData: ArtworkUploadData) => {
   try {
     const response = await defaultClient.post(
       ARTWORK.uploadArtwork,
