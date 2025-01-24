@@ -17,10 +17,12 @@ const ARTWORK = {
   artworkList: '/artwork/posts',
   followedArtists: '/artwork/followingUsers/posts',
   uploadArtwork: '/artwork/post',
+  patchArtwork: (postId: number) => `/artwork/post/${postId}`,
 };
 
 const IMAGE = {
-  image: '/image',
+  imageUploadRequest: '/image',
+  imageUploadComplete: (imageId: number) => `/image/${imageId}`,
 };
 
 export { ARTWORK, IMAGE, MONTHLY, USER };
