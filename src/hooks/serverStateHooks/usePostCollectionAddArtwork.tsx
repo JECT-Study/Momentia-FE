@@ -5,6 +5,7 @@ import { useStore } from 'zustand';
 import postCollectionAddArtwork from '@/apis/collection/postCollectionAddArtwork';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import { COLLECTION } from '@/constants/API';
+import ROUTE from '@/constants/routes';
 import modalStore from '@/stores/modalStore';
 
 const usePostCollectionAddArtwork = ({
@@ -32,7 +33,7 @@ const usePostCollectionAddArtwork = ({
           <ConfirmModal
             otherButtonText='컬렉션으로 이동'
             onClickOtherButton={() => {
-              router.push('/collections');
+              router.push(ROUTE.collections);
             }}
           >
             <p className='body1'>작품이 컬렉션에 저장되었습니다.</p>
