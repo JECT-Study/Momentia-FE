@@ -42,14 +42,14 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
   const [artworkDescription, setArtworkDescription] = useState(
     initialData?.explanation || '',
   );
-  const [isEditMode, setIsEditMode] = useState(false);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
     artworkTitleError: '',
     selectedArtworkFieldError: '',
     uploadedImageError: '',
   });
+
+  const isEditMode = Boolean(postId);
 
   const clearErrorMessage = useCallback((targetField: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
