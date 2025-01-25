@@ -2,10 +2,10 @@
 
 import { useState } from 'react';
 
-import ArtworkFilter from '@/components/ArtworkPage/ArtworkFilter';
-import ArtworkSearchBar from '@/components/ArtworkPage/ArtworkSearchBar';
-import ArtworkShowcase from '@/components/ArtworkPage/ArtworkShowcase';
-import FollowedArtistsSection from '@/components/ArtworkPage/FollowedArtistsSection';
+import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
+import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
+import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
+import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const SORT_MAPPING: Record<string, string> = {
