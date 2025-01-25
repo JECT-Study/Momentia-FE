@@ -1,6 +1,6 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
@@ -42,8 +42,8 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
   const [artworkDescription, setArtworkDescription] = useState(
     initialData?.explanation || '',
   );
-
   const [isEditMode, setIsEditMode] = useState(false);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
     artworkTitleError: '',
@@ -51,9 +51,9 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
     uploadedImageError: '',
   });
 
-  const clearErrorMessage = (targetField: string) => {
+  const clearErrorMessage = useCallback((targetField: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
-  };
+  }, []);
 
   const handleArtworkTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setArtworkTitle(e.target.value);
@@ -114,8 +114,8 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
       newErrors.selectedArtworkFieldError = REQUIRED_FIELDS_ERROR_MESSAGE;
     if (!(isEditMode && uploadedImage))
       newErrors.uploadedImageError = REQUIRED_FIELDS_ERROR_MESSAGE;
-    setErrors(newErrors);
 
+    setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
@@ -134,7 +134,7 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
     const uploadedArtworkData = {
       title: artworkTitle,
       artworkField: selectedArtworkField,
-      ...(uploadedImage && { postImage: uploadedImage }),
+      postImage: uploadedImage,
       explanation: artworkDescription,
       status: privacySetting,
     };
