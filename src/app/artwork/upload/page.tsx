@@ -139,7 +139,6 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
       status: privacySetting,
     };
 
-    console.log('업로드 요청한 작품 데이터: ', uploadedArtworkData);
     setIsSubmitting(true);
     postArtwork(uploadedArtworkData);
   };
@@ -158,7 +157,6 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
       status: privacySetting,
     };
 
-    console.log('수정 요청한 작품 데이터: ', editedArtworkData);
     setIsSubmitting(true);
     patchArtwork({
       postId,
