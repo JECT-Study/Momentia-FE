@@ -44,3 +44,9 @@ export interface PatchArtworkData {
   explanation?: string;
   status?: 'PUBLIC' | 'PRIVATE';
 }
+
+export interface ArtworkFieldsErrors {
+  artworkTitleError?: string;
+  selectedArtworkFieldError?: string;
+  uploadedImageError?: string;
+}

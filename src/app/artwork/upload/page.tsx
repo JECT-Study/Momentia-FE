@@ -11,15 +11,9 @@ import ARTWORK_FIELDS from '@/constants/artworkFields';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
-import { ArtworkUploadData } from '@/types';
+import { ArtworkFieldsErrors, ArtworkUploadData } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
-
-export interface ArtworkFieldsErrors {
-  artworkTitleError?: string;
-  selectedArtworkFieldError?: string;
-  uploadedImageError?: string;
-}
 
 interface ArtworkUploadProps {
   initialData: Omit<ArtworkUploadData, 'postImage' | 'status'> & {
@@ -31,7 +25,6 @@ interface ArtworkUploadProps {
 const MAX_TITLE_LENGTH = 50;
 const MAX_DESCRIPTION_LENGTH = 1000;
 const REQUIRED_FIELDS_ERROR_MESSAGE = '필수 항목입니다.';
-
 const PRIVACY_SETTING_OPTIONS = [
   { name: '전체공개', value: 'PUBLIC' },
   { name: '비공개', value: 'PRIVATE' },
@@ -49,6 +42,7 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
   const [artworkDescription, setArtworkDescription] = useState(
     initialData?.explanation || '',
   );
+
   const [isEditMode, setIsEditMode] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({

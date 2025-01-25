@@ -5,7 +5,7 @@ import {
   notifyServerOfUploadCompletion,
   uploadImageToS3,
 } from '@/apis/image/postImage';
-import { ArtworkFieldsErrors } from '@/app/artwork/upload/page';
+import { ArtworkFieldsErrors } from '@/types';
 
 import OvalButton from '../Button/OvalButton';
 import Icon from '../Icon/Icon';
