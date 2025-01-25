@@ -33,10 +33,10 @@ const PRIVACY_SETTING_OPTIONS = [
 const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
   const [artworkTitle, setArtworkTitle] = useState(initialData?.title || '');
   const [selectedArtworkField, setSelectedArtworkField] = useState(
-    initialData?.artworkField || '',
+    initialData.artworkField || '',
   );
   const [privacySetting, setPrivacySetting] = useState(
-    initialData?.status || 'PUBLIC',
+    initialData.status || 'PUBLIC',
   );
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [artworkDescription, setArtworkDescription] = useState(
