@@ -51,20 +51,20 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
 
   const isEditMode = Boolean(postId);
 
+  const handleArtworkDescriptionOnChange = (
+    e: ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setArtworkDescription(e.target.value);
+  };
+
   const clearErrorMessage = useCallback((targetField: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
   }, []);
 
   const handleArtworkTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setArtworkTitle(e.target.value);
-
     if (errors.artworkTitleError) clearErrorMessage('artworkTitleError');
-  };
 
-  const handleArtworkDescriptionOnChange = (
-    e: ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setArtworkDescription(e.target.value);
+    setArtworkTitle(e.target.value);
   };
 
   const handleArtworkFieldClick = (artworkField: string) => {
@@ -160,7 +160,6 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
 
     console.log('수정 요청한 작품 데이터: ', editedArtworkData);
     setIsSubmitting(true);
-
     patchArtwork({
       postId,
       data: editedArtworkData,
