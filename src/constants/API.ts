@@ -16,6 +16,7 @@ const MONTHLY = {
 const ARTWORK = {
   artworkList: '/artwork/posts',
   followedArtists: '/artwork/followingUsers/posts',
+  artworkPost: '/artwork/post',
   artworkLike: (postId: number) => `/artwork/post/${postId}/like`,
 };
 

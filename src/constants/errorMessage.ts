@@ -43,6 +43,11 @@ export const LIKE_ERROR_MESSAGE: MessageConstantType = {
     '좋아요 하지 않은 작품이거나 이미 좋아요 취소된 작품입니다.',
 };
 
+export const ARTWORK_POST_ERROR_MESSAGE: MessageConstantType = {
+  NO_PERMISSION: '본인 게시글이 아닙니다.',
+  ARTWORK_POST_NOT_FOUND: '리소스를 찾을 수 없습니다.',
+};
+
 export const COLLECTION_ADD_ARTWORK_ERROR_MESSAGE: MessageConstantType = {
   COLLECTION_NOT_FOUND: '컬랙션 리소스를 찾을 수 없습니다.',
   POST_NOT_FOUND: '작품 리소스를 찾을 수 없습니다.',
