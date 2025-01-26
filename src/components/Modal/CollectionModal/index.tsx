@@ -1,5 +1,7 @@
 'use client';
 
+import '@/styles/scroll.css';
+
 import { useStore } from 'zustand';
 
 import Icon from '@/components/Icon/Icon';
@@ -26,7 +28,7 @@ const CollectionModal = () => {
           onClick={closeModal}
         />
       </div>
-      <div className='grid tablet:grid-cols-4 grid-cols-1 gap-x-[33px] gap-y-[30px] max-h-[555px] tablet:pr-[34px] overflow-y-auto'>
+      <div className='grid tablet:grid-cols-4 grid-cols-1 gap-x-[33px] gap-y-[30px] max-h-[555px] tablet:pr-[34px] overflow-y-auto scroll-hide'>
         <CreateCollectionUnit />
         {collections.map((collection) => (
           <CollectionUnit
