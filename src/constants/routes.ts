@@ -4,6 +4,7 @@ const ROUTE = {
   signUp: '/auth/sign-up',
   artworkList: '/artwork/list',
   artworkUpload: '/artwork/upload',
+  collections: '/collections',
 };
 
 export default ROUTE;
