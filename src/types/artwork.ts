@@ -30,14 +30,6 @@ export interface ArtworkField {
   value: string;
 }
 
-export interface ArtworkUploadData {
-  title: string;
-  artworkField: string;
-  postImage: File;
-  explanation: string;
-  status: string;
-}
-
 export interface PatchArtworkData {
   title?: string;
   artworkField?: string;

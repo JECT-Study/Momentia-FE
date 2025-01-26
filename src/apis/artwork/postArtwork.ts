@@ -1,6 +1,13 @@
 import defaultClient from '@/apis';
 import { ARTWORK } from '@/constants/API';
-import { ArtworkUploadData } from '@/types';
+
+interface ArtworkUploadData {
+  title: string;
+  artworkField: string;
+  postImage: File;
+  explanation: string;
+  status: string;
+}
 
 const postArtwork = async (artworkData: ArtworkUploadData) => {
   try {
