@@ -1,5 +1,6 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import { ChangeEvent, useCallback, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
@@ -11,16 +12,9 @@ import ARTWORK_FIELDS from '@/constants/artworkFields';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
-import { ArtworkFieldsErrors, ArtworkUploadData } from '@/types';
+import { ArtworkFieldsErrors } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
-
-interface ArtworkUploadProps {
-  initialData: Omit<ArtworkUploadData, 'postImage' | 'status'> & {
-    status: 'PUBLIC' | 'PRIVATE';
-  };
-  postId: number;
-}
 
 const MAX_TITLE_LENGTH = 50;
 const MAX_DESCRIPTION_LENGTH = 1000;
@@ -30,24 +24,29 @@ const PRIVACY_SETTING_OPTIONS = [
   { name: '비공개', value: 'PRIVATE' },
 ];
 
-const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
-  const [artworkTitle, setArtworkTitle] = useState(initialData?.title || '');
-  const [selectedArtworkField, setSelectedArtworkField] = useState(
-    initialData?.artworkField || '',
-  );
-  const [privacySetting, setPrivacySetting] = useState(
-    initialData?.status || 'PUBLIC',
-  );
+const ArtworkUpload = () => {
+  const [artworkTitle, setArtworkTitle] = useState('');
+  const [selectedArtworkField, setSelectedArtworkField] = useState('');
+  const [privacySetting, setPrivacySetting] = useState('PUBLIC');
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
-  const [artworkDescription, setArtworkDescription] = useState(
-    initialData?.explanation || '',
-  );
+  const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
     artworkTitleError: '',
     selectedArtworkFieldError: '',
     uploadedImageError: '',
   });
+
+  const pathname = usePathname();
+
+  const postId = (() => {
+    const match = pathname.match(/\/artwork\/upload\/(\d+)/);
+
+    if (!match) {
+      throw new Error('postId 감지 실패');
+    }
+    return parseInt(match[1], 10);
+  })();
 
   const isEditMode = Boolean(postId);
 
@@ -158,10 +157,6 @@ const ArtworkUpload = ({ initialData, postId }: ArtworkUploadProps) => {
     };
 
     setIsSubmitting(true);
-    patchArtwork({
-      postId,
-      data: editedArtworkData,
-    });
   };
 
   const isRequiredFieldsValid =
