@@ -57,3 +57,9 @@ export interface ArtworkPostHeaderInfoType
     | 'nickname'
     | 'createdTime'
   > {}
+
+export interface ArtworkPostdetailInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'userId' | 'postImage' | 'explanation' | 'isMine'
+  > {}
