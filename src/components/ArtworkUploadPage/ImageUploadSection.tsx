@@ -37,7 +37,6 @@ const ImageUploadSection = ({
         fileSize: imageFile.size,
         fileType: imageFile.type,
       });
-      console.log('Presigned URL 결과: ', presignedData);
 
       if (!presignedData) {
         setErrors((prevErrors) => ({
@@ -48,7 +47,6 @@ const ImageUploadSection = ({
       }
 
       const { presignedUrl, imageId } = presignedData;
-      console.log('imageFileURL: ', presignedUrl, 'imageId: ', imageId);
 
       const uploadSuccess = await uploadImageToS3({
         file: imageFile,
@@ -58,7 +56,6 @@ const ImageUploadSection = ({
       if (uploadSuccess) {
         await notifyServerOfUploadCompletion(imageId);
         setUploadedImage(imageFile);
-        console.log('이미지 업로드 성공');
       } else {
         console.error('업로드 실패');
       }
@@ -100,7 +97,6 @@ const ImageUploadSection = ({
 
       const imageFile = e.target.files[0];
       uploadImage(imageFile);
-      console.log('imageFile: ', imageFile);
     }
   };
 

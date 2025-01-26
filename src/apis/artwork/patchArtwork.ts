@@ -9,8 +9,7 @@ const patchArtwork = async (postId: number, data: PatchArtworkData) => {
       ARTWORK.patchArtwork(postId),
       data,
     );
-    console.log('요청 파라미터:', postId);
-    console.log('응답 데이터: ', response.data);
+
     return response.data;
   } catch (error) {
     console.error('작품 수정 중 에러 발생: ', error);

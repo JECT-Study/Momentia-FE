@@ -14,7 +14,6 @@ const usePatchArtwork = () => {
       return patchArtwork(postId, data);
     },
     onSuccess: (data, postId) => {
-      console.log('작품 수정 성공: ', data);
       window.location.href = `/artwork/detail/${postId}`; // 상세 페이지 경로 상수와 겹칠 듯하여 상수화 보류
     },
     onError: (error) => {

@@ -9,7 +9,6 @@ const usePostArtwork = () => {
       console.error('작품 업로드 중 에러 발생: ', error);
     },
     onSuccess: (data, postId) => {
-      console.log('작품 업로드 성공: ', data);
       window.location.href = `/artwork/detail/${postId}`; // 상세 페이지 경로 상수와 겹칠 듯하여 상수화 보류
     },
   });
