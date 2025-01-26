@@ -63,3 +63,14 @@ export interface ArtworkPostdetailInfoType
     ArtworkPostType,
     'postId' | 'userId' | 'postImage' | 'explanation' | 'isMine'
   > {}
+
+export interface ArtworkPostArtistInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'userId'
+    | 'profileImage'
+    | 'nickname'
+    | 'userField'
+    | 'isFollow'
+    | 'introduction'
+  > {}
