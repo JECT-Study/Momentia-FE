@@ -12,7 +12,7 @@ interface ImageToS3Params {
   uploadUrl: string;
 }
 
-export const getPresignedUrl = async ({
+export const postPresignedUrl = async ({
   fileSize,
   fileType,
 }: PresignedUrlParams) => {
@@ -36,7 +36,10 @@ export const getPresignedUrl = async ({
   }
 };
 
-export const uploadImageToS3 = async ({ file, uploadUrl }: ImageToS3Params) => {
+export const putUploadImageToS3 = async ({
+  file,
+  uploadUrl,
+}: ImageToS3Params) => {
   const options = {
     body: file,
     headers: {
@@ -54,7 +57,7 @@ export const uploadImageToS3 = async ({ file, uploadUrl }: ImageToS3Params) => {
   }
 };
 
-export const notifyServerOfUploadCompletion = async (imageId: number) => {
+export const postNotifyServerOfUploadCompletion = async (imageId: number) => {
   try {
     const response = await authorizedClient.post(
       IMAGE.imageUploadComplete(imageId),

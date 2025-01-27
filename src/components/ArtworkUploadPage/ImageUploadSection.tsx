@@ -3,9 +3,9 @@
 import { ChangeEvent, DragEvent, useRef } from 'react';
 
 import {
-  getPresignedUrl,
-  notifyServerOfUploadCompletion,
-  uploadImageToS3,
+  postNotifyServerOfUploadCompletion,
+  postPresignedUrl,
+  putUploadImageToS3,
 } from '@/apis/image/postImage';
 import { ArtworkFieldsErrors } from '@/types';
 
@@ -37,7 +37,7 @@ const ImageUploadSection = ({
 
   const uploadImage = async (imageFile: File) => {
     try {
-      const presignedData = await getPresignedUrl({
+      const presignedData = await postPresignedUrl({
         fileSize: imageFile.size,
         fileType: imageFile.type,
       });
@@ -52,13 +52,13 @@ const ImageUploadSection = ({
 
       const { presignedUrl, imageId } = presignedData;
 
-      const uploadSuccess = await uploadImageToS3({
+      const uploadSuccess = await putUploadImageToS3({
         file: imageFile,
         uploadUrl: presignedUrl,
       });
 
       if (uploadSuccess) {
-        await notifyServerOfUploadCompletion(imageId);
+        await postNotifyServerOfUploadCompletion(imageId);
         setUploadedImage(imageFile);
       } else {
         console.error('업로드 실패');
