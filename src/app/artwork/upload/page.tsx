@@ -48,6 +48,7 @@ const ArtworkUpload = () => {
     const match = pathname.match(/\/artwork\/upload\/(\d+)/);
 
     if (!match) {
+      return;
       throw new Error('postId 감지 실패');
     }
     return parseInt(match[1], 10);
