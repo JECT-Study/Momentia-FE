@@ -23,7 +23,6 @@ export const getPresignedUrl = async ({
       IMAGE.imageUploadRequest,
       requestData,
     );
-
     const { presignedUrl, imageId } = response.data;
 
     if (!(presignedUrl || imageId)) {
@@ -39,7 +38,6 @@ export const getPresignedUrl = async ({
 
 export const uploadImageToS3 = async ({ file, uploadUrl }: ImageToS3Params) => {
   const options = {
-    method: 'PUT',
     body: file,
     headers: {
       'Content-Type': file.type,
