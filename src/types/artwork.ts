@@ -12,6 +12,17 @@ export interface ArtworkInfoType {
   isLiked: boolean;
 }
 
+export interface ArtworkPostType extends ArtworkInfoType {
+  artworkField: string;
+  createdTime: string;
+  explanation: string;
+  profileImage: string | null;
+  userField: string | null;
+  isFollow: boolean;
+  introduction: string;
+  isMine: boolean;
+}
+
 export interface ArtworkListParams {
   sort: string;
   artworkField?: string;
@@ -29,6 +40,12 @@ export interface ArtworkField {
   name: string;
   value: string;
 }
+
+export interface ArtworkPostSocialInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'nickname' | 'title' | 'likeCount' | 'isLiked'
+  > {}
 
 export interface PatchArtworkData {
   title?: string;

@@ -9,12 +9,20 @@ interface ConfirmModalProps {
   isButtonOnRow?: boolean;
   reverseButtonOrder?: boolean;
   children: ReactNode;
+  confirmButtonText?: string;
+  otherButtonText?: string;
+  onClickConfirmButton?: () => void;
+  onClickOtherButton?: () => void;
 }
 
 const ConfirmModal = ({
   isButtonOnRow = false,
   reverseButtonOrder = false,
   children,
+  confirmButtonText = '확인',
+  otherButtonText = '취소',
+  onClickConfirmButton,
+  onClickOtherButton,
 }: ConfirmModalProps) => {
   const { closeModal } = useStore(modalStore);
 
@@ -35,11 +43,17 @@ const ConfirmModal = ({
     <div className='px-[40px] py-[50px] text-center'>
       <div className='body1 text-white mb-[50px]'>{children}</div>
       <div className={`flex ${buttonOrderClassName} gap-[20px]`}>
-        <SquareButtonL variant='primary' onClick={handleConfirm}>
-          <p>확인</p>
+        <SquareButtonL
+          variant='primary'
+          onClick={onClickConfirmButton || closeModal}
+        >
+          <p>{confirmButtonText}</p>
         </SquareButtonL>
-        <SquareButtonL variant='tertiary' onClick={closeModal}>
-          <p>취소</p>
+        <SquareButtonL
+          variant='tertiary'
+          onClick={onClickOtherButton || closeModal}
+        >
+          <p>{otherButtonText}</p>
         </SquareButtonL>
       </div>
     </div>
