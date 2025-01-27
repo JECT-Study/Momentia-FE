@@ -1,4 +1,6 @@
-import { ChangeEvent, DragEvent } from 'react';
+'use client';
+
+import { ChangeEvent, DragEvent, useRef } from 'react';
 
 import {
   getPresignedUrl,
@@ -27,6 +29,8 @@ const ImageUploadSection = ({
   setUploadedImage,
   clearErrorMessage,
 }: ImageUploadSectionProps) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
   const handleImageDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
   };
@@ -101,11 +105,9 @@ const ImageUploadSection = ({
   };
 
   const handleImageUploadClick = () => {
-    const fileInput = document.getElementById(
-      'image-upload',
-    ) as HTMLInputElement;
-
-    if (fileInput) fileInput.click();
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
   };
 
   return (
@@ -155,23 +157,23 @@ const ImageUploadSection = ({
             <br />
             작품 업로드 버튼을 눌러 이미지를 선택하세요.
           </p>
-          <label htmlFor='image-upload' className='hidden'>
-            <input
-              type='file'
-              id='image-upload'
-              accept='image/*'
-              onChange={handleImageUpload}
-              className='hidden'
-            />
+          <input
+            type='file'
+            id='image-upload'
+            ref={fileInputRef}
+            onChange={handleImageUpload}
+            className='hidden'
+          />
+          <label htmlFor='image-upload'>
+            <OvalButton
+              variant='primary'
+              buttonSize='s'
+              onClick={handleImageUploadClick}
+            >
+              <Icon name='UploadShare' size='m' className='mr-2.5' />
+              이미지 업로드
+            </OvalButton>
           </label>
-          <OvalButton
-            variant='primary'
-            buttonSize='s'
-            onClick={handleImageUploadClick}
-          >
-            <Icon name='UploadShare' size='m' className='mr-2.5' />
-            이미지 업로드
-          </OvalButton>
           <p className='button-s text-center text-gray-500'>
             작품 이미지는 1장만 업로드 가능합니다.
           </p>
