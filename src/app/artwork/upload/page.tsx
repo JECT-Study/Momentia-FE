@@ -16,10 +16,15 @@ import { ArtworkFieldsErrors } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
 
+interface PrivacySettingOption {
+  name: '전체공개' | '비공개';
+  value: 'PUBLIC' | 'PRIVATE';
+}
+
 const MAX_TITLE_LENGTH = 50;
 const MAX_DESCRIPTION_LENGTH = 1000;
 const REQUIRED_FIELDS_ERROR_MESSAGE = '필수 항목입니다.';
-const PRIVACY_SETTING_OPTIONS = [
+const PRIVACY_SETTING_OPTIONS: PrivacySettingOption[] = [
   { name: '전체공개', value: 'PUBLIC' },
   { name: '비공개', value: 'PRIVATE' },
 ];
@@ -92,7 +97,7 @@ const ArtworkUpload = () => {
     );
 
     if (privacySettingOption) {
-      setPrivacySetting(privacySettingOption.value as 'PUBLIC' | 'PRIVATE');
+      setPrivacySetting(privacySettingOption.value);
     }
   };
 
