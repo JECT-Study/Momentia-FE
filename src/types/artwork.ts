@@ -46,3 +46,31 @@ export interface ArtworkPostSocialInfoType
     ArtworkPostType,
     'postId' | 'nickname' | 'title' | 'likeCount' | 'isLiked'
   > {}
+
+export interface ArtworkPostHeaderInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'title'
+    | 'artworkField'
+    | 'viewCount'
+    | 'profileImage'
+    | 'nickname'
+    | 'createdTime'
+  > {}
+
+export interface ArtworkPostdetailInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'userId' | 'postImage' | 'explanation' | 'isMine'
+  > {}
+
+export interface ArtworkPostArtistInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'userId'
+    | 'profileImage'
+    | 'nickname'
+    | 'userField'
+    | 'isFollow'
+    | 'introduction'
+  > {}
