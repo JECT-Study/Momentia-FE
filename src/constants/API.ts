@@ -19,6 +19,7 @@ const ARTWORK = {
   artworkPost: '/artwork/post',
   artworkLike: (postId: number) => `/artwork/post/${postId}/like`,
   artworkPostComment: (postId: number) => `/artwork/post/${postId}/comment`,
+  artworkComment: (commentId: number) => `/artwork/comment/${commentId}`,
 };
 
 const COLLECTION = {

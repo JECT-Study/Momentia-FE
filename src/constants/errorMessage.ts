@@ -54,3 +54,11 @@ export const COLLECTION_ADD_ARTWORK_ERROR_MESSAGE: MessageConstantType = {
   DUPLICATE_COLLECTION_ARTWORK: '컬랙션에 이미 저장된 작품입니다.',
   NO_PERMISSION: '컬렉션에 대한 권한이 없습니다.',
 };
+
+export const COMMENT_ERROR_MESSAGE: MessageConstantType = {
+  NOT_OWNER: '본인 댓글이 아닙니다.',
+  COMMENT_NOT_FOUND: '리소스를 찾을 수 없습니다.',
+  INVALID_COMMENT_CONTENT: '입력 정보가 올바르지 않습니다.',
+  POST_NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
+  NOT_AUTHORIZED: '댓글에 대한 권한이 없습니다.',
+};
