@@ -17,7 +17,7 @@ const usePostCollectionAddArtwork = ({
   const { openModal, closeModal } = useStore(modalStore);
 
   const searchParams = useSearchParams();
-  const artworkId = Number(searchParams.get('artworkId'));
+  const artworkId = Number(searchParams.get('postId'));
 
   const { mutate } = useMutation({
     mutationKey: [COLLECTION.collectionAddArtwork(collectionId, artworkId)],
