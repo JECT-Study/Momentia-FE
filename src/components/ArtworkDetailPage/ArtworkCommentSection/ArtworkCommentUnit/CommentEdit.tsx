@@ -37,7 +37,11 @@ const CommentEdit = ({
 
   return (
     <>
-      <Textarea value={commentText} onChange={changeCommentText} />
+      <Textarea
+        value={commentText}
+        onChange={changeCommentText}
+        fadedBackground={true}
+      />
       <div className='flex justify-end gap-2.5'>
         <OvalButton
           disabled={commentText.length === 0}
