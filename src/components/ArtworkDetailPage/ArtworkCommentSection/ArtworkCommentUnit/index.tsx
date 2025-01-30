@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { forwardRef, Ref, useState } from 'react';
+import { Ref, useState } from 'react';
 
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import { CommonCommentProps } from '@/types/comment';
@@ -8,54 +8,56 @@ import timeFormatter from '@/utils/timeFormatter';
 import CommentDefault from './CommentDefault';
 import CommentEdit from './CommentEdit';
 
-const ArtworkCommentUnit = forwardRef(
-  (
-    { comment, postId }: CommonCommentProps,
-    ref: Ref<HTMLDivElement> | undefined,
-  ) => {
-    const { profileImage, nickname, createdTime, isMine } = comment;
+interface ArtworkCommentUnitProps extends CommonCommentProps {
+  ref: Ref<HTMLDivElement | null>;
+}
 
-    const [isEditMode, setIsEditMode] = useState(false);
+const ArtworkCommentUnit = ({
+  comment,
+  postId,
+  ref,
+}: ArtworkCommentUnitProps) => {
+  const { profileImage, nickname, createdTime, isMine } = comment;
 
-    return (
-      <div className={`flex items-start gap-[29px]`} ref={ref}>
-        <Image
-          src={profileImage || DefaultProfileImage}
-          alt={'artwork default image'}
-          className='rounded-full'
-          width={56}
-          height={56}
-        />
-        <div className='w-full'>
-          <div className='flex justify-between items-center mb-2.5'>
-            <div className='flex items-center gap-2.5'>
-              <p className='button-m'>{nickname}</p>
-              {isMine && (
-                <p className='button-s px-2.5 py-1 bg-gray-800 rounded-[5px]'>
-                  MY
-                </p>
-              )}
-            </div>
-            <p>{timeFormatter(createdTime)}</p>
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  return (
+    <div className='flex items-start gap-[29px]' ref={ref}>
+      <Image
+        src={profileImage || DefaultProfileImage}
+        alt={'artwork default image'}
+        className='rounded-full'
+        width={56}
+        height={56}
+      />
+      <div className='w-full'>
+        <div className='flex justify-between items-center mb-2.5'>
+          <div className='flex items-center gap-2.5'>
+            <p className='button-m'>{nickname}</p>
+            {isMine && (
+              <p className='button-s px-2.5 py-1 bg-gray-800 rounded-[5px]'>
+                MY
+              </p>
+            )}
           </div>
-
-          {isEditMode ? (
-            <CommentEdit
-              comment={comment}
-              postId={postId}
-              setIsEditMode={setIsEditMode}
-            />
-          ) : (
-            <CommentDefault
-              comment={comment}
-              postId={postId}
-              setIsEditMode={setIsEditMode}
-            />
-          )}
+          <p>{timeFormatter(createdTime)}</p>
         </div>
-      </div>
-    );
-  },
-);
 
+        {isEditMode ? (
+          <CommentEdit
+            comment={comment}
+            postId={postId}
+            setIsEditMode={setIsEditMode}
+          />
+        ) : (
+          <CommentDefault
+            comment={comment}
+            postId={postId}
+            setIsEditMode={setIsEditMode}
+          />
+        )}
+      </div>
+    </div>
+  );
+};
 export default ArtworkCommentUnit;
