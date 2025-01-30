@@ -22,6 +22,10 @@ const ArtworkCommentSection = ({ postId }: { postId: number }) => {
     skip: 0,
   });
 
+  const isCommentEmpty =
+    commentData === undefined ||
+    commentData?.pages.flatMap((page) => page.comments).length === 0;
+
   if (isLoading) return <div>Loading...</div>;
 
   return (
@@ -30,7 +34,7 @@ const ArtworkCommentSection = ({ postId }: { postId: number }) => {
       <div className='flex flex-col gap-[30px] tablet:px-[60px] px-[10px] py-[60px] rounded-[10px] bg-gray-900'>
         <ArtworkWriteCommentSection postId={postId} />
         <div className='flex flex-col gap-[70px]'>
-          {commentData === undefined ? (
+          {isCommentEmpty ? (
             <p>작성된 댓글이 없습니다.</p>
           ) : (
             commentData.pages.map((page, pageIndex) => (
