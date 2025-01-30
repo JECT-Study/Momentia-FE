@@ -14,14 +14,14 @@ const CommentDefault = ({
 
   const { content, commentId, isMine } = comment;
 
-  const { mutate: deleteComment } = useDeleteComments(commentId);
+  const { mutate: deleteComment } = useDeleteComments();
 
   const clickEditButton = () => {
     setIsEditMode(true);
   };
 
   const clickDeleteButton = () => {
-    deleteComment(undefined, {
+    deleteComment(commentId, {
       onSuccess: () => {
         queryClient.invalidateQueries({
           predicate: (query) =>

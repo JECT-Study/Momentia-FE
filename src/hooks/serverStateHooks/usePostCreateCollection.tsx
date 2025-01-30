@@ -5,13 +5,12 @@ import postCreateCollection, {
   PostCreateColleactionProps,
 } from '@/apis/collection/postCreateCollection';
 import CollectionModal from '@/components/Modal/CollectionModal';
-import { COLLECTION } from '@/constants/API';
 import modalStore from '@/stores/modalStore';
 
 const usePostCreateCollection = () => {
   const { openModal, closeModal } = useStore(modalStore);
+
   const { mutate } = useMutation({
-    mutationKey: [COLLECTION.collection],
     mutationFn: ({ name, isPrivate }: PostCreateColleactionProps) =>
       postCreateCollection({ name, isPrivate }),
     onSuccess: () => {

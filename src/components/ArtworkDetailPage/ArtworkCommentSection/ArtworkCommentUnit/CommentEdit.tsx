@@ -12,7 +12,7 @@ const CommentEdit = ({
 }: CommentControllerProps) => {
   const { content, commentId } = comment;
 
-  const { mutate: editComment } = usePatchArtworkComment(commentId, postId);
+  const { mutate: editComment } = usePatchArtworkComment();
 
   const [commentText, setCommentText] = useState(content);
 
@@ -25,14 +25,20 @@ const CommentEdit = ({
   };
 
   const clickEditButton = () => {
-    editComment(commentText, {
-      onSuccess: () => {
-        setIsEditMode(false);
-
-        // 토스트 메세지 적용
-        alert('댓글 수정 성공');
+    editComment(
+      {
+        content: commentText,
+        commentId,
       },
-    });
+      {
+        onSuccess: () => {
+          setIsEditMode(false);
+
+          // 토스트 메세지 적용
+          alert('댓글 수정 성공');
+        },
+      },
+    );
   };
 
   return (

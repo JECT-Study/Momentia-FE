@@ -4,15 +4,10 @@ import { useStore } from 'zustand';
 
 import postCollectionAddArtwork from '@/apis/collection/postCollectionAddArtwork';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
-import { COLLECTION } from '@/constants/API';
 import ROUTE from '@/constants/routes';
 import modalStore from '@/stores/modalStore';
 
-const usePostCollectionAddArtwork = ({
-  collectionId,
-}: {
-  collectionId: number;
-}) => {
+const usePostCollectionAddArtwork = () => {
   const router = useRouter();
   const { openModal, closeModal } = useStore(modalStore);
 
@@ -20,8 +15,7 @@ const usePostCollectionAddArtwork = ({
   const artworkId = Number(searchParams.get('postId'));
 
   const { mutate } = useMutation({
-    mutationKey: [COLLECTION.collectionAddArtwork(collectionId, artworkId)],
-    mutationFn: () =>
+    mutationFn: (collectionId: number) =>
       postCollectionAddArtwork({ collectionId, postId: artworkId }),
     onSuccess: () => {
       console.log(111);

@@ -25,14 +25,14 @@ const ArtworkDetailInfoSection = ({
   const { openModal, closeModal } = useStore(modalStore);
   const [showWiderArtwork, setShowWideArtwork] = useState(false);
 
-  const { mutate: deleteArtwork } = useDeleteArtworkPost(postId);
+  const { mutate: deleteArtwork } = useDeleteArtworkPost();
 
   const clickEditButton = () => {
     router.push(`${ROUTE.artworkUpload}?postId=${postId}&userId=${userId}`);
   };
 
   const comfirmDelete = () => {
-    deleteArtwork(undefined, {
+    deleteArtwork(postId, {
       onSuccess: () => {
         router.replace(ROUTE.artworkList);
         closeModal();

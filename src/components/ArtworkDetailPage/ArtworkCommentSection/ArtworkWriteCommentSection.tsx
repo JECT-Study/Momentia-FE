@@ -5,7 +5,7 @@ import BasicInput from '@/components/Input/BasicInput';
 import usePostCreateComment from '@/hooks/serverStateHooks/usePostCreateComment';
 
 const ArtworkWriteCommentSection = ({ postId }: { postId: number }) => {
-  const { mutate: createComment } = usePostCreateComment(postId);
+  const { mutate: createComment } = usePostCreateComment();
 
   const [comment, setComment] = useState('');
 
@@ -14,7 +14,7 @@ const ArtworkWriteCommentSection = ({ postId }: { postId: number }) => {
   };
 
   const submitComment = () => {
-    createComment(comment);
+    createComment({ postId, content: comment });
   };
 
   return (

@@ -1,12 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
 
 import patchArtworkComment from '@/apis/artwork/patchArtwokrComment';
-import { ARTWORK } from '@/constants/API';
 
-const usePatchArtworkComment = (commentId: number, postId: number) => {
+interface MutateProps {
+  content: string;
+  commentId: number;
+}
+
+const usePatchArtworkComment = () => {
   const { mutate } = useMutation({
-    mutationKey: [ARTWORK.artworkComment(commentId)],
-    mutationFn: (content: string) => patchArtworkComment(commentId, content),
+    mutationFn: ({ content, commentId }: MutateProps) =>
+      patchArtworkComment(commentId, content),
   });
 
   return { mutate };
