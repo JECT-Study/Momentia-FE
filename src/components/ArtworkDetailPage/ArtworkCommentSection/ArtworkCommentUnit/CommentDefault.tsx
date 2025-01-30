@@ -1,4 +1,4 @@
-import { QueryClient } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { ARTWORK } from '@/constants/API';
 import { CommentControllerProps } from '@/types/comment';
@@ -10,7 +10,7 @@ const CommentDefault = ({
   postId,
   setIsEditMode,
 }: CommentControllerProps) => {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
 
   const { content, commentId, isMine } = comment;
 
