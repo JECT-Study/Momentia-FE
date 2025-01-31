@@ -2,10 +2,10 @@ import { ChangeEvent, useState } from 'react';
 
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import BasicInput from '@/components/Input/BasicInput';
-import usePostCreateComment from '@/hooks/serverStateHooks/usePostCreateComment';
+import usePostComment from '@/hooks/serverStateHooks/usePostComment';
 
 const ArtworkWriteCommentSection = ({ postId }: { postId: number }) => {
-  const { mutate: createComment } = usePostCreateComment();
+  const { mutate: createComment } = usePostComment();
 
   const [comment, setComment] = useState('');
 

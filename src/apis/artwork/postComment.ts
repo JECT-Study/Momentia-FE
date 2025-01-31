@@ -9,15 +9,12 @@ import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
 
-interface PostCreateCommentProps {
+interface PostCommentProps {
   postId: number;
   content: string;
 }
 
-const postCreateComment = async ({
-  postId,
-  content,
-}: PostCreateCommentProps) => {
+const postComment = async ({ postId, content }: PostCommentProps) => {
   try {
     const response = await authorizedClient.post<{ commentId: number }>(
       ARTWORK.artworkPostComment(postId),
@@ -49,4 +46,4 @@ const postCreateComment = async ({
   }
 };
 
-export default postCreateComment;
+export default postComment;
