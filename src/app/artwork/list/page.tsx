@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 
-import ArtworkFilter from '@/components/ArtworkPage/ArtworkFilter';
-import ArtworkSearchBar from '@/components/ArtworkPage/ArtworkSearchBar';
-import ArtworkShowcase from '@/components/ArtworkPage/ArtworkShowcase';
-import FollowedArtistsSection from '@/components/ArtworkPage/FollowedArtistsSection';
-import useArtworkList from '@/hooks/serverStateHooks/useArtworkList';
+import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
+import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
+import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
+import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
+import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const SORT_MAPPING: Record<string, string> = {
   최신순: 'recent',
@@ -28,7 +28,7 @@ const ArtworkList = () => {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList({
+  } = useGetArtworkList({
     sort: sortValue,
     artworkField:
       selectedArtworkField === 'ALL' ? undefined : selectedArtworkField,
