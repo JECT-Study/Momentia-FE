@@ -12,7 +12,7 @@ import { authorizedClient } from '..';
 const deleteArtworkPost = async (postId: number) => {
   try {
     const response = await authorizedClient.delete<null>(
-      `${ARTWORK.artworkPost}/${postId}`,
+      ARTWORK.patchArtwork(postId),
     );
 
     if (response.status === 204) {

@@ -7,7 +7,7 @@ import { ARTWORK } from '@/constants/API';
 
 const useGetArtworkPost = (postId: number | null) => {
   const { data, isLoading } = useQuery({
-    queryKey: [ARTWORK.artworkPost, postId],
+    queryKey: [ARTWORK.patchArtwork(postId as number)],
     queryFn: () => getArtworkPost(postId as number),
     enabled: !!postId,
     retry: 3,

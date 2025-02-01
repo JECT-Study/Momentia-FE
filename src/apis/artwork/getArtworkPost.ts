@@ -8,7 +8,7 @@ const getArtworkPost = async (postId: number) => {
     TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
 
   const { data } = await currentClient.get<ArtworkPostType>(
-    `${ARTWORK.artworkPost}/${postId}`,
+    ARTWORK.patchArtwork(postId),
   );
 
   return data;
