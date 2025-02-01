@@ -97,5 +97,3 @@ export interface ArtworkComment {
   createdTime: string;
   isMine: boolean;
 }
-  > {}
-
