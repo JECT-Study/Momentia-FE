@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useStore } from 'zustand';
 
 import postCollection, {
-  PostCreateColleactionProps,
+  PostCollectionProps,
 } from '@/apis/collection/postCollection';
 import CollectionModal from '@/components/Modal/CollectionModal';
 import modalStore from '@/stores/modalStore';
@@ -11,7 +11,7 @@ const usePostCollection = () => {
   const { openModal, closeModal } = useStore(modalStore);
 
   const { mutate } = useMutation({
-    mutationFn: ({ name, isPrivate }: PostCreateColleactionProps) =>
+    mutationFn: ({ name, isPrivate }: PostCollectionProps) =>
       postCollection({ name, isPrivate }),
     onSuccess: () => {
       closeModal();
