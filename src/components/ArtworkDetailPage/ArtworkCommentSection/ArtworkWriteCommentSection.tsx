@@ -23,7 +23,7 @@ const ArtworkWriteCommentSection = ({ postId }: { postId: number }) => {
         value={comment}
         onChange={changeComment}
         placeholder='작품에 대한 댓글을 남겨주세요.'
-        faededBackground={true}
+        commentBackground={true}
       />
       <span className='h-[60px]'>
         <SquareButtonL variant={'tertiary'} onClick={submitComment}>

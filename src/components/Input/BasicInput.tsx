@@ -9,7 +9,7 @@ interface BasicInputProps {
   type?: string;
   label?: string;
   placeholder?: string;
-  faededBackground?: boolean;
+  commentBackground?: boolean;
 
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -36,7 +36,7 @@ const BasicInput = ({
   showEyeIcon = false,
   showTextLength = false,
   isInvalid = false,
-  faededBackground = false,
+  commentBackground = false,
   minLength,
   maxLength,
   errorMessage,
@@ -100,7 +100,7 @@ const BasicInput = ({
           label: ['!placeholder', '!top-5', '!text-gray-400'],
           input: ['!placeholder', 'placeholder:text-gray-700', 'px-[10px]'],
           inputWrapper: [
-            faededBackground ? 'bg-gray-800' : 'bg-gray-900',
+            commentBackground ? 'bg-gray-800' : 'bg-gray-900',
             'rounded-md',
             'h-[60px]',
           ],
