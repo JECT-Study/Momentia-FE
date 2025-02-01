@@ -16,11 +16,12 @@ const MONTHLY = {
 const ARTWORK = {
   artworkList: '/artwork/posts',
   followedArtists: '/artwork/followingUsers/posts',
-  artworkPost: '/artwork/post',
+  uploadArtwork: '/artwork/post',
   artworkLike: (postId: number) => `/artwork/post/${postId}/like`,
   artworkPostComment: (postId: number) => `/artwork/post/${postId}/comment`,
   artworkComment: (commentId: number) => `/artwork/comment/${commentId}`,
   artworkPostComments: (postId: number) => `/artwork/post/${postId}/comments`,
+  patchArtwork: (postId: number) => `/artwork/post/${postId}`,
 };
 
 const COLLECTION = {
@@ -31,4 +32,9 @@ const COLLECTION = {
     `/collection/${collectionId}/post/${postId}`,
 };
 
-export { ARTWORK, COLLECTION, MONTHLY, USER };
+const IMAGE = {
+  imageUploadRequest: '/image',
+  imageUploadComplete: (imageId: number) => `/image/${imageId}`,
+};
+
+export { ARTWORK, COLLECTION, IMAGE, MONTHLY, USER };

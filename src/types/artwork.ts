@@ -47,6 +47,19 @@ export interface ArtworkPostSocialInfoType
     'postId' | 'nickname' | 'title' | 'likeCount' | 'isLiked'
   > {}
 
+export interface PatchArtworkData {
+  title?: string;
+  artworkField?: string;
+  explanation?: string;
+  status?: 'PUBLIC' | 'PRIVATE';
+}
+
+export interface ArtworkFieldsErrors {
+  artworkTitleError?: string;
+  selectedArtworkFieldError?: string;
+  uploadedImageError?: string;
+}
+
 export interface ArtworkPostHeaderInfoType
   extends Pick<
     ArtworkPostType,
@@ -84,3 +97,5 @@ export interface ArtworkComment {
   createdTime: string;
   isMine: boolean;
 }
+  > {}
+
