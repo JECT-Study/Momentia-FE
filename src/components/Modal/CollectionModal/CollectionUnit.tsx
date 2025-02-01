@@ -16,13 +16,11 @@ const CollectionUnit = ({
   const { collectionId, collectionImage, name, status } = collectionInfo;
   const [blockButton, setBlockButton] = useState(false);
 
-  const { mutate: addCollectionArtwork } = usePostCollectionAddArtwork({
-    collectionId,
-  });
+  const { mutate: addCollectionArtwork } = usePostCollectionAddArtwork();
 
   const selectCollectionUnit = () => {
     setBlockButton(true);
-    addCollectionArtwork();
+    addCollectionArtwork(collectionId);
     setBlockButton(false);
   };
 

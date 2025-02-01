@@ -18,6 +18,9 @@ const ARTWORK = {
   followedArtists: '/artwork/followingUsers/posts',
   uploadArtwork: '/artwork/post',
   artworkLike: (postId: number) => `/artwork/post/${postId}/like`,
+  artworkPostComment: (postId: number) => `/artwork/post/${postId}/comment`,
+  artworkComment: (commentId: number) => `/artwork/comment/${commentId}`,
+  artworkPostComments: (postId: number) => `/artwork/post/${postId}/comments`,
   patchArtwork: (postId: number) => `/artwork/post/${postId}`,
 };
 

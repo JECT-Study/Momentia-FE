@@ -2,15 +2,12 @@ import { COLLECTION } from '@/constants/API';
 
 import { authorizedClient } from '..';
 
-export interface PostCreateColleactionProps {
+export interface PostCollectionProps {
   name: string;
   isPrivate: boolean;
 }
 
-const postCreateCollection = async ({
-  name,
-  isPrivate,
-}: PostCreateColleactionProps) => {
+const postCollection = async ({ name, isPrivate }: PostCollectionProps) => {
   const response = await authorizedClient.post(COLLECTION.collection, {
     name,
     status: isPrivate ? 'PRIVATE' : 'PUBLIC',
@@ -19,4 +16,4 @@ const postCreateCollection = async ({
   return response.status === 201;
 };
 
-export default postCreateCollection;
+export default postCollection;

@@ -1,12 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
 import deleteArtworkPost from '@/apis/artwork/deleteArtworkPost';
-import { ARTWORK } from '@/constants/API';
 
-const useDeleteArtworkPost = (postId: number) => {
+const useDeleteArtworkPost = () => {
   const { mutate } = useMutation({
-    mutationKey: [ARTWORK.artworkPost, postId],
-    mutationFn: () => deleteArtworkPost(postId),
+    mutationFn: (postId: number) => deleteArtworkPost(postId),
   });
 
   return { mutate };

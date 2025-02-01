@@ -87,3 +87,13 @@ export interface ArtworkPostArtistInfoType
     | 'isFollow'
     | 'introduction'
   > {}
+
+export interface ArtworkComment {
+  commentId: number;
+  userId: number;
+  profileImage: string;
+  nickname: string;
+  content: string;
+  createdTime: string;
+  isMine: boolean;
+}

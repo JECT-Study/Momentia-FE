@@ -9,6 +9,7 @@ interface BasicInputProps {
   type?: string;
   label?: string;
   placeholder?: string;
+  commentBackground?: boolean;
 
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -35,6 +36,7 @@ const BasicInput = ({
   showEyeIcon = false,
   showTextLength = false,
   isInvalid = false,
+  commentBackground = false,
   minLength,
   maxLength,
   errorMessage,
@@ -97,7 +99,11 @@ const BasicInput = ({
         classNames={{
           label: ['!placeholder', '!top-5', '!text-gray-400'],
           input: ['!placeholder', 'placeholder:text-gray-700', 'px-[10px]'],
-          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-[60px]'],
+          inputWrapper: [
+            commentBackground ? 'bg-gray-800' : 'bg-gray-900',
+            'rounded-md',
+            'h-[60px]',
+          ],
         }}
       />
 
