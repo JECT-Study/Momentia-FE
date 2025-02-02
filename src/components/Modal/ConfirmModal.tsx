@@ -26,11 +26,6 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { closeModal } = useStore(modalStore);
 
-  const handleConfirm = () => {
-    closeModal();
-    window.history.back();
-  };
-
   const buttonOrderClassName = isButtonOnRow
     ? reverseButtonOrder
       ? 'flex-row-reverse'
