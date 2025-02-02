@@ -13,4 +13,5 @@ export interface FollowButtonProps
   > {
   initFollowState: boolean;
   followUserId: number;
+  isFull?: boolean;
 }

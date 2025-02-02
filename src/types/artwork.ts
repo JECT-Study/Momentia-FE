@@ -59,3 +59,41 @@ export interface ArtworkFieldsErrors {
   selectedArtworkFieldError?: string;
   uploadedImageError?: string;
 }
+
+export interface ArtworkPostHeaderInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'title'
+    | 'artworkField'
+    | 'viewCount'
+    | 'profileImage'
+    | 'nickname'
+    | 'createdTime'
+  > {}
+
+export interface ArtworkPostdetailInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'userId' | 'postImage' | 'explanation' | 'isMine'
+  > {}
+
+export interface ArtworkPostArtistInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'userId'
+    | 'profileImage'
+    | 'nickname'
+    | 'userField'
+    | 'isFollow'
+    | 'introduction'
+  > {}
+
+export interface ArtworkComment {
+  commentId: number;
+  userId: number;
+  profileImage: string;
+  nickname: string;
+  content: string;
+  createdTime: string;
+  isMine: boolean;
+}

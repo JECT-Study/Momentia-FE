@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useStore } from 'zustand';
 
-import usePostCreateCollection from '@/hooks/serverStateHooks/usePostCreateCollection';
+import usePostCollection from '@/hooks/serverStateHooks/usePostCollection';
 import modalStore from '@/stores/modalStore';
 
 import SquareButtonL from '../Button/SquareButtonL';
@@ -16,7 +16,7 @@ const CreateCollectionModal = () => {
   const [collectionName, setCollectionName] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
 
-  const { mutate: submitCreateCollection } = usePostCreateCollection();
+  const { mutate: submitCreateCollection } = usePostCollection();
 
   const handleOnChangeCollectionName = (
     event: ChangeEvent<HTMLInputElement>,

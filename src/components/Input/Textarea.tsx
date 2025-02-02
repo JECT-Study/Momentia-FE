@@ -3,6 +3,7 @@ import { ChangeEvent, useRef } from 'react';
 interface TextareaProps {
   label?: string;
   placeholder?: string;
+  fadedBackground?: boolean;
 
   value: string;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
@@ -20,6 +21,7 @@ const Textarea = ({
   onChange,
   maxLength,
   showTextLength,
+  fadedBackground = false,
 }: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
@@ -52,9 +54,10 @@ const Textarea = ({
           onChange={handleInputChange}
           placeholder={placeholder}
           maxLength={maxLength}
-          className={`placeholder bg-gray-900 rounded-md w-full h-auto resize-none
+          className={`placeholder rounded-md w-full h-auto resize-none
                 ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
-                focus:outline-none focus:ring-0 bg-gray-900 hover:bg-[#18181b] focus:bg-[#18181b]
+                ${fadedBackground ? 'bg-gray-800' : 'bg-gray-900'}
+                focus:outline-none focus:ring-0  hover:bg-[#18181b] focus:bg-[#18181b]
                 `}
           style={{
             minHeight: '256px',
