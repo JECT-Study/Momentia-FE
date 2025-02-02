@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
 import postArtwork from '@/apis/artwork/postArtwork';
+import ROUTE from '@/constants/routes';
 
 const usePostArtwork = () => {
   const router = useRouter();
@@ -12,7 +13,7 @@ const usePostArtwork = () => {
       console.error('작품 업로드 중 에러 발생: ', error);
     },
     onSuccess: (data) => {
-      router.push(`/artwork/detail?postId=${data.postId}`); // 상세 페이지 경로 상수와 겹칠 듯하여 상수화 보류
+      router.push(`${ROUTE.artworkDetail}?postId=${data.postId}`);
     },
   });
 };
