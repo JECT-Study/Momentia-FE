@@ -3,8 +3,8 @@
 import { ChangeEvent, DragEvent, useRef } from 'react';
 
 import {
-  postNotifyServerOfUploadCompletion,
   postPresignedUrl,
+  putNotifyImageUploadComplete,
   putUploadImageToS3,
 } from '@/apis/image/postImage';
 import { ArtworkFieldsErrors } from '@/types';
@@ -58,7 +58,7 @@ const ImageUploadSection = ({
       });
 
       if (uploadSuccess) {
-        await postNotifyServerOfUploadCompletion(imageId);
+        await putNotifyImageUploadComplete(imageId);
         setUploadedImage(imageFile);
       } else {
         console.error('업로드 실패');
@@ -80,6 +80,7 @@ const ImageUploadSection = ({
     }
 
     const imageFile = e.dataTransfer.files[0];
+
     if (imageFile) {
       setUploadedImage(imageFile);
       uploadImage(imageFile);

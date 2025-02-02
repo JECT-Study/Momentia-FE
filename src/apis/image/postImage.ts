@@ -1,6 +1,6 @@
 import { IMAGE } from '@/constants/API';
 
-import { authorizedClient } from '..';
+import { authorizedClient, imageClient } from '..';
 
 interface PresignedUrlParams {
   fileSize: number;
@@ -23,6 +23,7 @@ export const postPresignedUrl = async ({
       IMAGE.imageUploadRequest,
       requestData,
     );
+
     const { presignedUrl, imageId } = response.data;
 
     if (!(presignedUrl || imageId)) {
@@ -41,15 +42,14 @@ export const putUploadImageToS3 = async ({
   uploadUrl,
 }: ImageToS3Params) => {
   const options = {
-    body: file,
     headers: {
       'Content-Type': file.type,
+      'x-amz-acl': 'public-read',
     },
   };
 
   try {
-    await authorizedClient.put(uploadUrl, options);
-
+    await imageClient.put(uploadUrl, file, options);
     return true;
   } catch (error) {
     console.error('S3로의 이미지 업로드 실패: ', error);
@@ -57,14 +57,17 @@ export const putUploadImageToS3 = async ({
   }
 };
 
-export const postNotifyServerOfUploadCompletion = async (imageId: number) => {
+export const putNotifyImageUploadComplete = async (imageId: number) => {
   try {
-    const response = await authorizedClient.post(
+    const requestBody = { imageId };
+
+    const response = await authorizedClient.put(
       IMAGE.imageUploadComplete(imageId),
+      requestBody,
     );
 
-    if (!response.data) {
-      throw new Error('서버 알림 실패');
+    if (response.status !== 204 && !response.data) {
+      throw new Error('이미지 업로드 완료에 실패하였습니다.');
     }
   } catch (error) {
     console.error('서버에 업로드 완료 알림 실패: ', error);
