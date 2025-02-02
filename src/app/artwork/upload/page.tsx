@@ -34,6 +34,7 @@ const ArtworkUpload = () => {
   const [selectedArtworkField, setSelectedArtworkField] = useState('');
   const [privacySetting, setPrivacySetting] = useState('PUBLIC');
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [uploadedImageId, setUploadedImageId] = useState<number | null>(null);
   const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
@@ -131,7 +132,7 @@ const ArtworkUpload = () => {
   } = usePostArtwork();
 
   const handleArtworkUpload = async () => {
-    if (!(uploadedImage && isEditMode)) {
+    if (!uploadedImage) {
       console.error('이미지가 업로드되지 않았습니다.');
       return;
     }
@@ -139,11 +140,10 @@ const ArtworkUpload = () => {
     const uploadedArtworkData = {
       title: artworkTitle,
       artworkField: selectedArtworkField,
-      postImage: uploadedImage,
+      postImage: uploadedImageId,
       explanation: artworkDescription,
       status: privacySetting,
     };
-
     setIsSubmitting(true);
     postArtwork(uploadedArtworkData);
   };
@@ -245,6 +245,7 @@ const ArtworkUpload = () => {
         setErrors={setErrors}
         setUploadedImage={setUploadedImage}
         clearErrorMessage={clearErrorMessage}
+        setUploadedImageId={setUploadedImageId}
       />
 
       <Textarea

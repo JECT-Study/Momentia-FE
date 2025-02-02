@@ -20,6 +20,7 @@ interface ImageUploadSectionProps {
   ) => void;
   setUploadedImage: (image: File | null) => void;
   clearErrorMessage: (field: string) => void;
+  setUploadedImageId: (imageId: number | null) => void;
 }
 
 const ImageUploadSection = ({
@@ -28,6 +29,7 @@ const ImageUploadSection = ({
   setErrors,
   setUploadedImage,
   clearErrorMessage,
+  setUploadedImageId,
 }: ImageUploadSectionProps) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -60,6 +62,7 @@ const ImageUploadSection = ({
       if (uploadSuccess) {
         await putNotifyImageUploadComplete(imageId);
         setUploadedImage(imageFile);
+        setUploadedImageId(imageId);
       } else {
         console.error('업로드 실패');
       }
