@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 
+import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
 import { ArtistInfoType } from '@/types/artist';
@@ -43,7 +44,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       </div>
 
       <Image
-        src={profileImage ?? DefaultProfileImage}
+        src={artworkImage ?? DefaultImage}
         alt={profileImage ? 'artwork image' : 'artwork default image'}
         className={profileImage ? 'object-contain' : ''}
         fill={true}
@@ -55,7 +56,13 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
         {/* profile thumbnail */}
         <div className='absolute left-[30px] -top-[34px] w-[69px] h-[69px] rounded-full overflow-hidden'>
-          <Image src={profileImage ?? DefaultProfileImage} alt='user-profile' />
+          <Image
+            src={profileImage ?? DefaultProfileImage}
+            alt={
+              profileImage ? 'profile image' : 'artist default profile image'
+            }
+            fill={true}
+          />
         </div>
         {/* profile info */}
         <div className='flex flex-col gap-[10px]'>

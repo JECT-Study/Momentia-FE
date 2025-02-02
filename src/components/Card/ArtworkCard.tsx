@@ -1,9 +1,10 @@
 'use client';
-
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
+import ROUTE from '@/constants/routes';
 import { ArtworkInfoType } from '@/types';
 
 import Icon from '../Icon/Icon';
@@ -25,6 +26,8 @@ const ArtworkCard = ({
   rank,
   artworkInfo,
 }: ArtworkCardProps) => {
+  const router = useRouter();
+
   const {
     postId,
     title,
@@ -61,9 +64,14 @@ const ArtworkCard = ({
     'artwork-list': 'gap-[70px]',
   };
 
+  const clickArtworkCard = () => {
+    router.push(ROUTE.artworkDetail + `?postId=${postId}`);
+  };
+
   return (
     <div
-      className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]}`}
+      className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]} cursor-pointer`}
+      onClick={clickArtworkCard}
     >
       <Image
         src={postImage || DefaultImage}
