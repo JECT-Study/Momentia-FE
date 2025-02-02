@@ -55,6 +55,7 @@ const useGetArtworkPost = (postId: number | null) => {
     userField: data.userField,
     isFollow: data.isFollow,
     introduction: data.introduction,
+    isMine: data.isMine,
   };
 
   return { headerInfo, socialInfo, detailInfo, artistInfo, isLoading };
