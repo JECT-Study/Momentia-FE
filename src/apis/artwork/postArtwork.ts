@@ -5,7 +5,7 @@ interface ArtworkUploadData {
   title: string;
   artworkField: string;
   postImage: number | null;
-  explanation: string;
+  explanation: string | null;
   status: string;
 }
 

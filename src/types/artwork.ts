@@ -50,7 +50,7 @@ export interface ArtworkPostSocialInfoType
 export interface PatchArtworkData {
   title?: string;
   artworkField?: string;
-  explanation?: string;
+  explanation?: string | null;
   status?: 'PUBLIC' | 'PRIVATE';
 }
 
