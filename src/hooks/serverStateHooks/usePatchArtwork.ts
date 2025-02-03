@@ -17,8 +17,8 @@ const usePatchArtwork = () => {
     mutationFn: ({ postId, data }: PatchArtworkParams) => {
       return patchArtwork(postId, data);
     },
-    onSuccess: (data) => {
-      router.push(`${ROUTE.artworkDetail}?postId=${data.postId}`);
+    onSuccess: (postId) => {
+      router.push(`${ROUTE.artworkDetail}?postId=${postId}`);
     },
     onError: (error) => {
       console.error('작품 수정 실패: ', error);
