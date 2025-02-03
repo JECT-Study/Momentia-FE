@@ -228,7 +228,7 @@ const ArtworkUpload = () => {
           작성 중인 내용을 저장하지 않고 나가시겠습니까?
         </ConfirmModal>
       ),
-      modalSize: 'md',
+      modalSize: 'sm',
     });
   };
 
