@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import getExistingArtwork from '@/apis/artwork/getExistingArtwork';
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
@@ -52,6 +52,7 @@ const ArtworkUpload = () => {
   const postId = searchParams.get('postId');
   const parsedPostId = postId ? parseInt(postId, 10) : null;
   const isEditMode = Boolean(postId);
+  const existingArtworkRef = useRef<PatchArtworkData | null>(null);
 
   const handleArtworkDescriptionOnChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -152,6 +153,8 @@ const ArtworkUpload = () => {
       if (parsedPostId) {
         try {
           const existingArtwork = await getExistingArtwork(parsedPostId);
+          existingArtworkRef.current = existingArtwork;
+
           setArtworkTitle(existingArtwork.title);
           setSelectedArtworkField(existingArtwork.artworkField);
           setPrivacySetting(existingArtwork.status);
@@ -187,9 +190,6 @@ const ArtworkUpload = () => {
     });
   };
 
-  const isRequiredFieldsValid =
-    artworkTitle && selectedArtworkField && uploadedImage && !isSubmitting;
-
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -198,6 +198,21 @@ const ArtworkUpload = () => {
     validateArtworkUploadForm();
     handleScrollToTop();
   };
+
+  const isModified =
+    isEditMode &&
+    existingArtworkRef.current &&
+    (artworkTitle !== existingArtworkRef.current.title ||
+      selectedArtworkField !== existingArtworkRef.current.artworkField ||
+      artworkDescription !== existingArtworkRef.current.explanation ||
+      privacySetting !== existingArtworkRef.current.status);
+
+  const isRequiredFieldsValid =
+    (isEditMode ? isModified : true) &&
+    artworkTitle &&
+    selectedArtworkField &&
+    uploadedImage &&
+    !isSubmitting;
 
   const handleSubmit = () => {
     isEditMode ? handleArtworkUpdate() : handleArtworkUpload();
@@ -303,7 +318,7 @@ const ArtworkUpload = () => {
             flex items-center justify-center rounded-full gap-[10px]
             transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70 hover:cursor-not-allowed'
           >
-            업로드
+            {isEditMode ? '수정' : '업로드'}
           </button>
         )}
 
