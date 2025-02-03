@@ -1,8 +1,9 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
+import getExistingArtwork from '@/apis/artwork/getExistingArtwork';
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
 import FilterDropdown from '@/components/FilterDropdown';
@@ -32,8 +33,12 @@ const PRIVACY_SETTING_OPTIONS: PrivacySettingOption[] = [
 const ArtworkUpload = () => {
   const [artworkTitle, setArtworkTitle] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('');
-  const [privacySetting, setPrivacySetting] = useState('PUBLIC');
-  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [privacySetting, setPrivacySetting] = useState<'PUBLIC' | 'PRIVATE'>(
+    'PUBLIC',
+  );
+  const [uploadedImage, setUploadedImage] = useState<File | string | null>(
+    null,
+  );
   const [uploadedImageId, setUploadedImageId] = useState<number | null>(null);
   const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -43,18 +48,9 @@ const ArtworkUpload = () => {
     uploadedImageError: '',
   });
 
-  const pathname = usePathname();
-
-  const postId = (() => {
-    const match = pathname.match(/\/artwork\/upload\/(\d+)/);
-
-    if (!match) {
-      return;
-      throw new Error('postId 감지 실패');
-    }
-    return parseInt(match[1], 10);
-  })();
-
+  const searchParams = useSearchParams();
+  const postId = searchParams.get('postId');
+  const parsedPostId = postId ? parseInt(postId, 10) : null;
   const isEditMode = Boolean(postId);
 
   const handleArtworkDescriptionOnChange = (
@@ -154,7 +150,28 @@ const ArtworkUpload = () => {
     isError: patchArtworkError,
   } = usePatchArtwork();
 
+  useEffect(() => {
+    const fetchArtworkData = async () => {
+      if (parsedPostId) {
+        try {
+          const existingArtwork = await getExistingArtwork(parsedPostId);
+          setArtworkTitle(existingArtwork.title);
+          setSelectedArtworkField(existingArtwork.artworkField);
+          setPrivacySetting(existingArtwork.status);
+          setUploadedImage(existingArtwork.postImage);
+          setArtworkDescription(existingArtwork.explanation);
+        } catch (error) {
+          console.error('작품 데이터를 불러오는 중 오류 발생: ', error);
+        }
+      }
+    };
+
+    fetchArtworkData();
+  }, [parsedPostId]);
+
   const handleArtworkUpdate = async () => {
+    if (!parsedPostId) return;
+
     const editedArtworkData = {
       title: artworkTitle,
       artworkField: selectedArtworkField,
@@ -163,6 +180,10 @@ const ArtworkUpload = () => {
     };
 
     setIsSubmitting(true);
+    patchArtwork({
+      postId: parsedPostId,
+      data: editedArtworkData,
+    });
   };
 
   const isRequiredFieldsValid =
@@ -223,7 +244,9 @@ const ArtworkUpload = () => {
           label='작품 카테고리'
           placeholder='카테고리 선택'
           options={ARTWORK_FIELDS.map((field) => field.name)}
-          selected={selectedArtworkFieldName}
+          selected={
+            isEditMode ? selectedArtworkField : selectedArtworkFieldName
+          }
           onChange={(value) => handleArtworkFieldClick(value)}
           isInvalid={!!errors.selectedArtworkFieldError}
           errorMessage={errors.selectedArtworkFieldError}

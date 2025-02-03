@@ -13,7 +13,7 @@ import OvalButton from '../Button/OvalButton';
 import Icon from '../Icon/Icon';
 
 interface ImageUploadSectionProps {
-  uploadedImage: File | null;
+  uploadedImage: File | string | null;
   errors: ArtworkFieldsErrors;
   setErrors: (
     callback: (prevErrors: ArtworkFieldsErrors) => ArtworkFieldsErrors,
@@ -104,7 +104,7 @@ const ImageUploadSection = ({
       if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
 
       const imageFile = e.target.files[0];
-      uploadImage(imageFile);
+      setUploadedImage(imageFile);
     }
   };
 
@@ -123,7 +123,11 @@ const ImageUploadSection = ({
       {uploadedImage ? (
         <div className='relative w-full h-[511px] md:h-[853px] bg-transparent'>
           <img
-            src={URL.createObjectURL(uploadedImage)}
+            src={
+              typeof uploadedImage === 'string'
+                ? uploadedImage
+                : URL.createObjectURL(uploadedImage)
+            }
             alt='Uploaded Artwork'
             className='w-full h-full object-contain'
           />
