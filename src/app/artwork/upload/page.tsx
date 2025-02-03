@@ -13,7 +13,7 @@ import ARTWORK_FIELDS from '@/constants/artworkFields';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
-import { ArtworkFieldsErrors } from '@/types';
+import { ArtworkFieldsErrors, PatchArtworkData } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
 
@@ -144,11 +144,8 @@ const ArtworkUpload = () => {
     postArtwork(uploadedArtworkData);
   };
 
-  const {
-    mutate: patchArtwork,
-    isSuccess: patchArtworkSuccess,
-    isError: patchArtworkError,
-  } = usePatchArtwork();
+  const { mutate: patchArtwork, isError: patchArtworkError } =
+    usePatchArtwork();
 
   useEffect(() => {
     const fetchArtworkData = async () => {
@@ -172,9 +169,13 @@ const ArtworkUpload = () => {
   const handleArtworkUpdate = async () => {
     if (!parsedPostId) return;
 
-    const editedArtworkData = {
+    const artworkFieldValue = ARTWORK_FIELDS.find(
+      (field) => field.name === selectedArtworkField,
+    )?.value;
+
+    const editedArtworkData: PatchArtworkData = {
       title: artworkTitle,
-      artworkField: selectedArtworkField,
+      artworkField: artworkFieldValue,
       explanation: artworkDescription,
       status: privacySetting,
     };
