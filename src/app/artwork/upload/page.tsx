@@ -75,7 +75,11 @@ const ArtworkUpload = () => {
       (field) => field.name === artworkField,
     );
 
-    if (selectedField) setSelectedArtworkField(selectedField.value);
+    if (selectedField) {
+      isEditMode
+        ? setSelectedArtworkField(selectedField.name)
+        : setSelectedArtworkField(selectedField.value);
+    }
 
     if (!artworkTitle.trim()) {
       setErrors((prevErrors) => ({
@@ -122,13 +126,9 @@ const ArtworkUpload = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const {
-    mutate: postArtwork,
-    isSuccess: postArtworkSuccess,
-    isError: postArtworkError,
-  } = usePostArtwork();
+  const { mutate: postArtwork, isError: postArtworkError } = usePostArtwork();
 
-  const handleArtworkUpload = async () => {
+  const handleArtworkUpload = () => {
     if (!uploadedImage) {
       console.error('이미지가 업로드되지 않았습니다.');
       return;
@@ -141,6 +141,7 @@ const ArtworkUpload = () => {
       explanation: artworkDescription,
       status: privacySetting,
     };
+
     setIsSubmitting(true);
     postArtwork(uploadedArtworkData);
   };
