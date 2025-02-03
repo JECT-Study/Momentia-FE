@@ -45,7 +45,7 @@ const ConfirmModal = ({
       <div className={`flex ${buttonOrderClassName} gap-[20px]`}>
         <SquareButtonL
           variant='primary'
-          onClick={onClickConfirmButton || closeModal}
+          onClick={onClickConfirmButton || handleConfirm}
         >
           <p>{confirmButtonText}</p>
         </SquareButtonL>
