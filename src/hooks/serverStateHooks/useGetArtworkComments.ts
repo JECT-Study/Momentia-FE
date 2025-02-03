@@ -22,7 +22,7 @@ const useGetArtworkComments = ({
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery({
-    queryKey: [ARTWORK.artworkPostComments, postId],
+    queryKey: [ARTWORK.artworkPostComments(postId)],
     queryFn: ({ pageParam = 0 }) =>
       getArtworkComments({ postId, size, skip: pageParam }),
     initialPageParam: skip,
