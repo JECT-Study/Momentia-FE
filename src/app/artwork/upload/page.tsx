@@ -269,6 +269,7 @@ const ArtworkUpload = () => {
         setUploadedImage={setUploadedImage}
         clearErrorMessage={clearErrorMessage}
         setUploadedImageId={setUploadedImageId}
+        isEditMode={isEditMode}
       />
 
       <Textarea
