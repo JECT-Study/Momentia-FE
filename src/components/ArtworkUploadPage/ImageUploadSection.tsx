@@ -107,6 +107,7 @@ const ImageUploadSection = ({
 
       const imageFile = e.target.files[0];
       setUploadedImage(imageFile);
+      uploadImage(imageFile);
     }
   };
 
