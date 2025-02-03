@@ -58,7 +58,14 @@ const useGetArtworkPost = (postId: number | null) => {
     isMine: data.isMine,
   };
 
-  return { headerInfo, socialInfo, detailInfo, artistInfo, isLoading };
+  return {
+    headerInfo,
+    socialInfo,
+    detailInfo,
+    artistInfo,
+    isLoading,
+    commentCount: data.commentCount,
+  };
 };
 
 export default useGetArtworkPost;

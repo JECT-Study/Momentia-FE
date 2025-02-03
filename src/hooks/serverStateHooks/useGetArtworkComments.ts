@@ -1,9 +1,8 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import getArtworkComments from '@/apis/artwork/getArtworkComments';
 import { ARTWORK } from '@/constants/API';
-import { ArtworkComment } from '@/types';
 
 interface UseGetArtworkComments {
   postId: number;
@@ -37,16 +36,6 @@ const useGetArtworkComments = ({
 
   const lastCommentRef = useRef<HTMLDivElement | null>(null);
 
-  const allCommentCount = useMemo(
-    () =>
-      commentData?.pages.reduce(
-        (acc: number, cur: { comments: ArtworkComment[] }) =>
-          cur.comments.length + acc,
-        0,
-      ) || 0,
-    [commentData],
-  );
-
   const [observerActive, setObserverActive] = useState(false);
 
   const activeObserver = () => setObserverActive(true);
@@ -78,7 +67,6 @@ const useGetArtworkComments = ({
 
   return {
     commentData,
-    allCommentCount,
     isLoading,
     hasNextPage,
     lastCommentRef,

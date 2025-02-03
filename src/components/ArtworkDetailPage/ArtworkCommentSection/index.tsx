@@ -8,10 +8,17 @@ import useGetArtworkComments from '@/hooks/serverStateHooks/useGetArtworkComment
 import ArtworkCommentUnit from './ArtworkCommentUnit';
 import ArtworkWriteCommentSection from './ArtworkWriteCommentSection';
 
-const ArtworkCommentSection = ({ postId }: { postId: number }) => {
+interface ArtworkCommentSectionProps {
+  postId: number;
+  commentCount: number;
+}
+
+const ArtworkCommentSection = ({
+  postId,
+  commentCount,
+}: ArtworkCommentSectionProps) => {
   const {
     commentData,
-    allCommentCount,
     isLoading,
     hasNextPage,
     lastCommentRef,
@@ -30,7 +37,7 @@ const ArtworkCommentSection = ({ postId }: { postId: number }) => {
 
   return (
     <div className='flex-1 flex flex-col gap-5'>
-      <h2>댓글 ({allCommentCount})</h2>
+      <h2>댓글 ({commentCount})</h2>
       <div className='flex flex-col gap-[30px] tablet:px-[60px] px-[10px] py-[60px] rounded-[10px] bg-gray-900'>
         <ArtworkWriteCommentSection postId={postId} />
         <div className='flex flex-col gap-[70px]'>
