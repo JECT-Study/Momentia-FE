@@ -123,7 +123,7 @@ const ImageUploadSection = ({
       className='relative pb-[70px]'
     >
       {uploadedImage ? (
-        <div className='relative w-full h-[511px] md:h-[853px] bg-transparent'>
+        <div className='group relative w-full h-[511px] md:h-[853px] bg-transparent'>
           <img
             src={
               typeof uploadedImage === 'string'
@@ -133,21 +133,32 @@ const ImageUploadSection = ({
             alt='Uploaded Artwork'
             className='w-full h-full object-contain'
           />
+          {isEditMode && (
+            <div
+              className='button-s absolute flex items-center justify-center
+              text-white bg-background-overlay h-[35px] rounded-[5px] px-4 py-2
+              top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
+              opacity-0 group-hover:opacity-100 transition-opacity duration-300'
+            >
+              작품 이미지는 변경할 수 없어요.
+            </div>
+          )}
+
           {isEditMode ? null : (
             <button
               aria-label='Button to change artwork image'
               onClick={() => setUploadedImage(null)}
-              className='absolute group flex items-center justify-center w-[57px] h-[57px] md:w-[77px] md:h-[77px] 
-            right-[30px] bottom-[30px] rounded-full
-          bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
-            shadow-lg hover:bg-[rgba(35,34,37,0.7)] transition'
+              className='absolute group flex items-center justify-center w-[57px] h-[57px] md:w-[77px] md:h-[77px]
+              right-[30px] bottom-[30px] rounded-full
+              bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
+              shadow-lg hover:bg-[rgba(35,34,37,0.7)] transition'
             >
               <Icon name='Image' size='m' className='block md:hidden' />
               <Icon name='Image' size='l' className='hidden md:block' />
 
               <span
-                className='absolute -top-12 bottom-[122px] flex items-center justify-center h-[35px] px-[14px] gap-[10px]
-                text-white text-xs font-medium bg-background-overlay rounded-[5px] leading-[35px] whitespace-nowrap
+                className='button-s absolute -top-12 bottom-[122px] flex items-center justify-center h-[35px] px-[14px] gap-[10px]
+                text-white bg-background-overlay rounded-[5px] leading-[35px] whitespace-nowrap
                 opacity-0 group-hover:opacity-100 transition-opacity duration-300'
               >
                 이미지 변경
