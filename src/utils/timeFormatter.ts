@@ -14,11 +14,15 @@ const timeFormatter = (timeString: string) => {
   const nowSeconds = now.getUTCSeconds();
 
   if (nowYear !== year || nowMonth !== month || nowDate !== date)
-    return [
-      year,
-      month > 10 ? month : `0${month}`,
-      date > 10 ? date : `0${date}`,
-    ].join('.');
+    return new Date(timeString + 'Z').toLocaleString('ko-KR', {
+      timeZone: 'Asia/Seoul', // 한국 시간대 설정
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+    });
 
   if (nowHour !== hour) return `${nowHour - hour}시간 전`;
 
