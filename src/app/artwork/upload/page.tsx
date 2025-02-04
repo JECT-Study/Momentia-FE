@@ -3,13 +3,13 @@
 import { useSearchParams } from 'next/navigation';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
-import getExistingArtwork from '@/apis/artwork/getExistingArtwork';
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
 import FilterDropdown from '@/components/FilterDropdown';
 import BasicInput from '@/components/Input/BasicInput';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
+import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
@@ -149,26 +149,18 @@ const ArtworkUpload = () => {
   const { mutate: patchArtwork, isError: patchArtworkError } =
     usePatchArtwork();
 
+  const { existingArtwork } = useGetArtworkPost(parsedPostId);
+
   useEffect(() => {
-    const fetchArtworkData = async () => {
-      if (parsedPostId) {
-        try {
-          const existingArtwork = await getExistingArtwork(parsedPostId);
-          existingArtworkRef.current = existingArtwork;
-
-          setArtworkTitle(existingArtwork.title);
-          setSelectedArtworkField(existingArtwork.artworkField);
-          setPrivacySetting(existingArtwork.status);
-          setUploadedImage(existingArtwork.postImage);
-          setArtworkDescription(existingArtwork.explanation);
-        } catch (error) {
-          console.error('작품 데이터를 불러오는 중 오류 발생: ', error);
-        }
-      }
-    };
-
-    fetchArtworkData();
-  }, [parsedPostId]);
+    if (existingArtwork && !existingArtworkRef.current) {
+      existingArtworkRef.current = existingArtwork;
+      setArtworkTitle(existingArtwork.title);
+      setSelectedArtworkField(existingArtwork.artworkField);
+      setPrivacySetting(existingArtwork.status);
+      setUploadedImage(existingArtwork.postImage);
+      setArtworkDescription(existingArtwork.explanation);
+    }
+  }, [existingArtwork]);
 
   const handleArtworkUpdate = () => {
     if (!parsedPostId) return;
