@@ -138,7 +138,7 @@ const ArtworkUpload = () => {
       title: artworkTitle,
       artworkField: selectedArtworkField,
       postImage: uploadedImageId,
-      explanation: artworkDescription.trim() === '' ? null : artworkDescription,
+      explanation: artworkDescription,
       status: privacySetting,
     };
 
@@ -180,7 +180,7 @@ const ArtworkUpload = () => {
     const editedArtworkData: PatchArtworkData = {
       title: artworkTitle,
       artworkField: artworkFieldValue,
-      explanation: artworkDescription.trim() === '' ? null : artworkDescription,
+      explanation: artworkDescription,
       status: privacySetting,
     };
 

@@ -7,7 +7,7 @@ const patchArtwork = async (postId: number, data: PatchArtworkData) => {
   try {
     const updatedData: Partial<PatchArtworkData> = Object.entries(data).reduce(
       (acc: Partial<PatchArtworkData>, [key, value]) => {
-        if (value !== undefined && value !== '') {
+        if (value !== undefined) {
           acc[key as keyof PatchArtworkData] = value;
         }
         return acc;
