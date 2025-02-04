@@ -8,14 +8,9 @@ const getExistingArtwork = async (postId: number | null) => {
 
   try {
     const { data } = await authorizedClient.get(ARTWORK.patchArtwork(postId));
+    const { title, artworkField, status, postImage, explanation } = data;
 
-    return {
-      title: data.title,
-      artworkField: data.artworkField,
-      status: data.status,
-      postImage: data.postImage,
-      explanation: data.explanation,
-    };
+    return { title, artworkField, status, postImage, explanation };
   } catch (error) {
     console.error('작품 데이터를 불러오는 중 오류 발생: ', error);
     throw new Error('작품 데이터를 가져오는 데 실패했습니다.');
