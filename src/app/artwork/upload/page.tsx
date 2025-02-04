@@ -170,7 +170,7 @@ const ArtworkUpload = () => {
     fetchArtworkData();
   }, [parsedPostId]);
 
-  const handleArtworkUpdate = async () => {
+  const handleArtworkUpdate = () => {
     if (!parsedPostId) return;
 
     const artworkFieldValue = ARTWORK_FIELDS.find(
