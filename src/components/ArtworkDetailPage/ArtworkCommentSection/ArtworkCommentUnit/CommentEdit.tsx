@@ -1,7 +1,9 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { ChangeEvent, useState } from 'react';
 
 import OvalButton from '@/components/Button/OvalButton';
 import Textarea from '@/components/Input/Textarea';
+import { ARTWORK } from '@/constants/API';
 import usePatchArtworkComment from '@/hooks/serverStateHooks/usePatchArtworkComment';
 import { CommentControllerProps } from '@/types/comment';
 
@@ -10,6 +12,8 @@ const CommentEdit = ({
   postId,
   setIsEditMode,
 }: CommentControllerProps) => {
+  const queryClient = useQueryClient();
+
   const { content, commentId } = comment;
 
   const { mutate: editComment } = usePatchArtworkComment();
@@ -32,6 +36,9 @@ const CommentEdit = ({
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [ARTWORK.artworkPostComments(postId)],
+          });
           setIsEditMode(false);
 
           // 토스트 메세지 적용

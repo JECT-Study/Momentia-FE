@@ -87,6 +87,7 @@ export interface ArtworkPostArtistInfoType
     | 'userField'
     | 'isFollow'
     | 'introduction'
+    | 'isMine'
   > {}
 
 export interface ArtworkComment {

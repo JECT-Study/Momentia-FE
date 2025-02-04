@@ -17,6 +17,7 @@ const ArtistInfoSection = ({
     userField,
     isFollow,
     introduction,
+    isMine,
   },
 }: ArtistInfoSectionProps) => {
   return (
@@ -39,11 +40,13 @@ const ArtistInfoSection = ({
         <p className='subtitle2 mt-[30px] mb-[40px]'>
           {introduction || '작가 소개가 비어있습니다.'}
         </p>
-        <FollowButton
-          initFollowState={isFollow}
-          followUserId={userId}
-          isFull={true}
-        />
+        {!isMine && (
+          <FollowButton
+            initFollowState={isFollow}
+            followUserId={userId}
+            isFull={true}
+          />
+        )}
       </div>
     </div>
   );
