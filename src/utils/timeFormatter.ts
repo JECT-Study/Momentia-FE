@@ -15,7 +15,7 @@ const timeFormatter = (timeString: string) => {
 
   if (nowYear !== year || nowMonth !== month || nowDate !== date)
     return new Date(timeString + 'Z').toLocaleString('ko-KR', {
-      timeZone: 'Asia/Seoul', // 한국 시간대 설정
+      timeZone: 'Asia/Seoul',
       year: 'numeric',
       month: '2-digit',
       day: '2-digit',
