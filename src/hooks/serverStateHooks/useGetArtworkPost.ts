@@ -41,6 +41,7 @@ const useGetArtworkPost = (postId: number | null) => {
     userField,
     isFollow,
     introduction,
+    commentCount,
   } = data;
 
   const headerInfo = {
@@ -75,6 +76,7 @@ const useGetArtworkPost = (postId: number | null) => {
     userField,
     isFollow,
     introduction,
+    isMine,
   };
 
   const existingArtwork = {
@@ -92,6 +94,7 @@ const useGetArtworkPost = (postId: number | null) => {
     artistInfo,
     isLoading,
     existingArtwork,
+    commentCount,
   };
 };
 

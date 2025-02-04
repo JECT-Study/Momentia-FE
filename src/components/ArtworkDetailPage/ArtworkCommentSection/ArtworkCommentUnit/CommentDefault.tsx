@@ -24,8 +24,7 @@ const CommentDefault = ({
     deleteComment(commentId, {
       onSuccess: () => {
         queryClient.invalidateQueries({
-          predicate: (query) =>
-            query.queryKey[0] === ARTWORK.artworkPostComments(postId),
+          queryKey: [ARTWORK.artworkPostComments(postId)],
         });
 
         // 토스트 메세지로 수정

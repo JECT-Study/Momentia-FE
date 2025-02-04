@@ -15,8 +15,14 @@ const ArtworkDetailPage = () => {
   const searchParams = useSearchParams();
   const postId = Number(searchParams.get('postId'));
 
-  const { headerInfo, socialInfo, detailInfo, artistInfo, isLoading } =
-    useGetArtworkPost(postId);
+  const {
+    headerInfo,
+    socialInfo,
+    detailInfo,
+    artistInfo,
+    isLoading,
+    commentCount,
+  } = useGetArtworkPost(postId);
 
   useEffect(() => {
     if (!postId) router.back();
@@ -32,7 +38,7 @@ const ArtworkDetailPage = () => {
         <ButtonGroup socialInfo={socialInfo} />
         <div className='flex tablet:flex-row flex-col tablet:gap-10 gap-[70px] mt-10'>
           <ArtistInfoSection artistInfo={artistInfo} />
-          <ArtworkCommentSection postId={postId} />
+          <ArtworkCommentSection postId={postId} commentCount={commentCount} />
         </div>
       </div>
     </div>
