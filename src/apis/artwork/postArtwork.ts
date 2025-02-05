@@ -1,17 +1,17 @@
-import defaultClient from '@/apis';
+import { authorizedClient } from '@/apis';
 import { ARTWORK } from '@/constants/API';
 
 interface ArtworkUploadData {
   title: string;
   artworkField: string;
-  postImage: File;
+  postImage: number | null;
   explanation: string;
   status: string;
 }
 
 const postArtwork = async (artworkData: ArtworkUploadData) => {
   try {
-    const response = await defaultClient.post(
+    const response = await authorizedClient.post(
       ARTWORK.uploadArtwork,
       artworkData,
     );

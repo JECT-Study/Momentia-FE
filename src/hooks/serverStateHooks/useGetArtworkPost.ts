@@ -19,43 +19,72 @@ const useGetArtworkPost = (postId: number | null) => {
       socialInfo: null,
       detailInfo: null,
       artistInfo: null,
+      existingArtwork: null,
       isLoading,
     };
   }
 
+  const {
+    title,
+    artworkField,
+    viewCount,
+    profileImage,
+    status,
+    postImage,
+    explanation,
+    nickname,
+    createdTime,
+    likeCount,
+    isLiked,
+    userId,
+    isMine,
+    userField,
+    isFollow,
+    introduction,
+    commentCount,
+  } = data;
+
   const headerInfo = {
-    title: data.title,
-    artworkField: data.artworkField,
-    viewCount: data.viewCount,
-    profileImage: data.profileImage,
-    nickname: data.nickname,
-    createdTime: data.createdTime,
+    title,
+    artworkField,
+    viewCount,
+    profileImage,
+    nickname,
+    createdTime,
   };
 
   const socialInfo = {
-    title: data.title,
-    nickname: data.nickname,
+    title,
+    nickname,
     postId: data.postId,
-    likeCount: data.likeCount,
-    isLiked: data.isLiked,
+    likeCount,
+    isLiked,
   };
 
   const detailInfo = {
     postId: data.postId,
-    userId: data.userId,
-    postImage: data.postImage,
-    explanation: data.explanation,
-    isMine: data.isMine,
+    userId,
+    postImage,
+    explanation,
+    isMine,
   };
 
   const artistInfo = {
-    userId: data.userId,
-    profileImage: data.profileImage,
-    nickname: data.nickname,
-    userField: data.userField,
-    isFollow: data.isFollow,
-    introduction: data.introduction,
-    isMine: data.isMine,
+    userId,
+    profileImage,
+    nickname,
+    userField,
+    isFollow,
+    introduction,
+    isMine,
+  };
+
+  const existingArtwork = {
+    title,
+    artworkField,
+    status,
+    postImage,
+    explanation,
   };
 
   return {
@@ -64,7 +93,8 @@ const useGetArtworkPost = (postId: number | null) => {
     detailInfo,
     artistInfo,
     isLoading,
-    commentCount: data.commentCount,
+    existingArtwork,
+    commentCount,
   };
 };
 

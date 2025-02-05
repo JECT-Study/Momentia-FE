@@ -28,7 +28,7 @@ const ArtworkDetailInfoSection = ({
   const { mutate: deleteArtwork } = useDeleteArtworkPost();
 
   const clickEditButton = () => {
-    router.push(`${ROUTE.artworkUpload}?postId=${postId}&userId=${userId}`);
+    router.push(`${ROUTE.artworkUpload}?postId=${postId}`);
   };
 
   const comfirmDelete = () => {

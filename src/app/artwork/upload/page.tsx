@@ -1,7 +1,7 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
@@ -9,10 +9,11 @@ import FilterDropdown from '@/components/FilterDropdown';
 import BasicInput from '@/components/Input/BasicInput';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
+import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
-import { ArtworkFieldsErrors } from '@/types';
+import { ArtworkFieldsErrors, PatchArtworkData } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
 
@@ -32,8 +33,13 @@ const PRIVACY_SETTING_OPTIONS: PrivacySettingOption[] = [
 const ArtworkUpload = () => {
   const [artworkTitle, setArtworkTitle] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('');
-  const [privacySetting, setPrivacySetting] = useState('PUBLIC');
-  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
+  const [privacySetting, setPrivacySetting] = useState<'PUBLIC' | 'PRIVATE'>(
+    'PUBLIC',
+  );
+  const [uploadedImage, setUploadedImage] = useState<File | string | null>(
+    null,
+  );
+  const [uploadedImageId, setUploadedImageId] = useState<number | null>(null);
   const [artworkDescription, setArtworkDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<ArtworkFieldsErrors>({
@@ -42,19 +48,11 @@ const ArtworkUpload = () => {
     uploadedImageError: '',
   });
 
-  const pathname = usePathname();
-
-  const postId = (() => {
-    const match = pathname.match(/\/artwork\/upload\/(\d+)/);
-
-    if (!match) {
-      return;
-      throw new Error('postId 감지 실패');
-    }
-    return parseInt(match[1], 10);
-  })();
-
+  const searchParams = useSearchParams();
+  const postId = searchParams.get('postId');
+  const parsedPostId = postId ? parseInt(postId, 10) : null;
   const isEditMode = Boolean(postId);
+  const existingArtworkRef = useRef<PatchArtworkData | null>(null);
 
   const handleArtworkDescriptionOnChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -77,7 +75,11 @@ const ArtworkUpload = () => {
       (field) => field.name === artworkField,
     );
 
-    if (selectedField) setSelectedArtworkField(selectedField.value);
+    if (selectedField) {
+      isEditMode
+        ? setSelectedArtworkField(selectedField.name)
+        : setSelectedArtworkField(selectedField.value);
+    }
 
     if (!artworkTitle.trim()) {
       setErrors((prevErrors) => ({
@@ -124,14 +126,10 @@ const ArtworkUpload = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const {
-    mutate: postArtwork,
-    isSuccess: postArtworkSuccess,
-    isError: postArtworkError,
-  } = usePostArtwork();
+  const { mutate: postArtwork, isError: postArtworkError } = usePostArtwork();
 
-  const handleArtworkUpload = async () => {
-    if (!(uploadedImage && isEditMode)) {
+  const handleArtworkUpload = () => {
+    if (!uploadedImage) {
       console.error('이미지가 업로드되지 않았습니다.');
       return;
     }
@@ -139,7 +137,7 @@ const ArtworkUpload = () => {
     const uploadedArtworkData = {
       title: artworkTitle,
       artworkField: selectedArtworkField,
-      postImage: uploadedImage,
+      postImage: uploadedImageId,
       explanation: artworkDescription,
       status: privacySetting,
     };
@@ -148,25 +146,42 @@ const ArtworkUpload = () => {
     postArtwork(uploadedArtworkData);
   };
 
-  const {
-    mutate: patchArtwork,
-    isSuccess: patchArtworkSuccess,
-    isError: patchArtworkError,
-  } = usePatchArtwork();
+  const { mutate: patchArtwork, isError: patchArtworkError } =
+    usePatchArtwork();
 
-  const handleArtworkUpdate = async () => {
-    const editedArtworkData = {
+  const { existingArtwork } = useGetArtworkPost(parsedPostId);
+
+  useEffect(() => {
+    if (existingArtwork && !existingArtworkRef.current) {
+      existingArtworkRef.current = existingArtwork;
+      setArtworkTitle(existingArtwork.title);
+      setSelectedArtworkField(existingArtwork.artworkField);
+      setPrivacySetting(existingArtwork.status);
+      setUploadedImage(existingArtwork.postImage);
+      setArtworkDescription(existingArtwork.explanation);
+    }
+  }, [existingArtwork]);
+
+  const handleArtworkUpdate = () => {
+    if (!parsedPostId) return;
+
+    const artworkFieldValue = ARTWORK_FIELDS.find(
+      (field) => field.name === selectedArtworkField,
+    )?.value;
+
+    const editedArtworkData: PatchArtworkData = {
       title: artworkTitle,
-      artworkField: selectedArtworkField,
+      artworkField: artworkFieldValue,
       explanation: artworkDescription,
       status: privacySetting,
     };
 
     setIsSubmitting(true);
+    patchArtwork({
+      postId: parsedPostId,
+      data: editedArtworkData,
+    });
   };
-
-  const isRequiredFieldsValid =
-    artworkTitle && selectedArtworkField && uploadedImage && !isSubmitting;
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -176,6 +191,21 @@ const ArtworkUpload = () => {
     validateArtworkUploadForm();
     handleScrollToTop();
   };
+
+  const isModified =
+    isEditMode &&
+    existingArtworkRef.current &&
+    (artworkTitle !== existingArtworkRef.current.title ||
+      selectedArtworkField !== existingArtworkRef.current.artworkField ||
+      artworkDescription !== existingArtworkRef.current.explanation ||
+      privacySetting !== existingArtworkRef.current.status);
+
+  const isRequiredFieldsValid =
+    (isEditMode ? isModified : true) &&
+    artworkTitle &&
+    selectedArtworkField &&
+    uploadedImage &&
+    !isSubmitting;
 
   const handleSubmit = () => {
     isEditMode ? handleArtworkUpdate() : handleArtworkUpload();
@@ -190,7 +220,7 @@ const ArtworkUpload = () => {
           작성 중인 내용을 저장하지 않고 나가시겠습니까?
         </ConfirmModal>
       ),
-      modalSize: 'md',
+      modalSize: 'sm',
     });
   };
 
@@ -223,7 +253,9 @@ const ArtworkUpload = () => {
           label='작품 카테고리'
           placeholder='카테고리 선택'
           options={ARTWORK_FIELDS.map((field) => field.name)}
-          selected={selectedArtworkFieldName}
+          selected={
+            isEditMode ? selectedArtworkField : selectedArtworkFieldName
+          }
           onChange={(value) => handleArtworkFieldClick(value)}
           isInvalid={!!errors.selectedArtworkFieldError}
           errorMessage={errors.selectedArtworkFieldError}
@@ -245,6 +277,8 @@ const ArtworkUpload = () => {
         setErrors={setErrors}
         setUploadedImage={setUploadedImage}
         clearErrorMessage={clearErrorMessage}
+        setUploadedImageId={setUploadedImageId}
+        isEditMode={isEditMode}
       />
 
       <Textarea
@@ -277,7 +311,7 @@ const ArtworkUpload = () => {
             flex items-center justify-center rounded-full gap-[10px]
             transition-all duration-300 ease-in-out active:scale-95 hover:opacity-70 hover:cursor-not-allowed'
           >
-            업로드
+            {isEditMode ? '수정' : '업로드'}
           </button>
         )}
 

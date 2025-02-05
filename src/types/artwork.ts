@@ -21,6 +21,7 @@ export interface ArtworkPostType extends ArtworkInfoType {
   isFollow: boolean;
   introduction: string;
   isMine: boolean;
+  status: 'PUBLIC' | 'PRIVATE';
 }
 
 export interface ArtworkListParams {
@@ -50,7 +51,7 @@ export interface ArtworkPostSocialInfoType
 export interface PatchArtworkData {
   title?: string;
   artworkField?: string;
-  explanation?: string;
+  explanation?: string | null;
   status?: 'PUBLIC' | 'PRIVATE';
 }
 

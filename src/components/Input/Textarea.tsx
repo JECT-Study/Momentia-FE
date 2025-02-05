@@ -5,7 +5,7 @@ interface TextareaProps {
   placeholder?: string;
   fadedBackground?: boolean;
 
-  value: string;
+  value: string | null;
   onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
 
   showTextLength?: boolean;
@@ -25,7 +25,7 @@ const Textarea = ({
 }: TextareaProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
-  const currentTextLength = value.length;
+  const currentTextLength = (value ?? '').length;
   const textLengthColor =
     currentTextLength === 0
       ? 'text-gray-700'
@@ -50,12 +50,12 @@ const Textarea = ({
       <div className='relative w-full h-auto'>
         <textarea
           ref={textareaRef}
-          value={value}
+          value={value ?? ''}
           onChange={handleInputChange}
           placeholder={placeholder}
           maxLength={maxLength}
           className={`placeholder rounded-md w-full h-auto resize-none
-                ${value.length ? 'text-white' : 'placeholder:text-gray-700'}
+                ${(value ?? '').length ? 'text-white' : 'placeholder:text-gray-700'}
                 ${fadedBackground ? 'bg-gray-800' : 'bg-gray-900'}
                 focus:outline-none focus:ring-0  hover:bg-[#18181b] focus:bg-[#18181b]
                 `}
