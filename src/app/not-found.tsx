@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import Icon from '@/components/Icon/Icon';
+import ROUTE from '@/constants/routes';
 
 const NotFound = () => {
   return (
@@ -14,7 +15,7 @@ const NotFound = () => {
       </div>
       <hr className='w-full h-[1px] bg-white border-none' />
       <Link
-        href='/'
+        href={ROUTE.home}
         className='flex items-center justify-end gap-5 pt-[82px] pb-[223px] pr-6 tablet:pr-[190px] hover:underline'
       >
         <Icon name='ArrowRight' size='l' className='text-white' />
