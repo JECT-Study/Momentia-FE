@@ -12,11 +12,19 @@ const getLikedArtworkList = async ({
   page,
   size,
 }: GetLikedArtworkListProps) => {
-  const { data } = await authorizedClient.get<ArtworkListResponse>(
-    `${USER.likedArtworkList}?sort=${sort}&page=${page}&size=${size}`,
-  );
+  try {
+    const { data } = await authorizedClient.get<ArtworkListResponse>(
+      `${USER.likedArtworkList}?sort=${sort}&page=${page}&size=${size}`,
+    );
 
-  return data;
+    return data;
+  } catch (error) {
+    console.error(
+      '프로필 페이지 내 좋아요 작품 리스트 조회 중 에러 발생: ',
+      error,
+    );
+    throw new Error('프로필 페이지 내 좋아요 작품 리스트 조회 실패');
+  }
 };
 
 export default getLikedArtworkList;
