@@ -95,18 +95,16 @@ const FilterDropdown = ({
         </div>
       )}
 
-      <div className='flex items-center mt-[3px] h-[26px]'>
-        {isInvalid && errorMessage && (
-          <>
-            <Icon
-              name='AlertCircle'
-              size='s'
-              className='text-system-error mr-2'
-            />
-            <p className='button-s text-system-error'>{errorMessage}</p>
-          </>
-        )}
-      </div>
+      {isInvalid && errorMessage && (
+        <div className='flex items-center mt-[3px] h-[26px]'>
+          <Icon
+            name='AlertCircle'
+            size='s'
+            className='text-system-error mr-2'
+          />
+          <p className='button-s text-system-error'>{errorMessage}</p>
+        </div>
+      )}
     </div>
   );
 };
