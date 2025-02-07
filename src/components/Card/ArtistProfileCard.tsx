@@ -1,10 +1,12 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
+import ROUTE from '@/constants/routes';
 import { ArtistInfoType } from '@/types/artist';
 
 import FollowButton from '../Button/FollowButton';
@@ -15,6 +17,8 @@ interface ArtistProfileCardProps {
 }
 
 const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
+  const router = useRouter();
+
   const {
     userId,
     profileImage,
@@ -27,9 +31,12 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
 
   const formattedRank = rank < 10 ? `0${rank}` : rank;
 
+  const clickArtsitName = () => {
+    router.push(`${ROUTE.profile}?userId=${userId}`);
+  };
+
   return (
     <div className='relative w-[346px] h-[330px] rounded-[10px] overflow-hidden'>
-      {/* badge */}
       <div className='absolute left-[30px] top-0 z-10 w-[33px] h-[48px]'>
         <Image
           src={RankingLabel}
@@ -52,9 +59,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
         priority
       />
 
-      {/* info */}
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
-        {/* profile thumbnail */}
         <div className='absolute left-[30px] -top-[34px] w-[69px] h-[69px] rounded-full overflow-hidden'>
           <Image
             src={profileImage ?? DefaultProfileImage}
@@ -64,10 +69,14 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
             fill={true}
           />
         </div>
-        {/* profile info */}
         <div className='flex flex-col gap-[10px]'>
           <div className='flex justify-between'>
-            <p className='subtitle2 text-gray-900'>{nickname}</p>
+            <p
+              className='subtitle2 text-gray-900 cursor-pointer hover:underline'
+              onClick={clickArtsitName}
+            >
+              {nickname}
+            </p>
             <FollowButton initFollowState={isFollow} followUserId={userId} />
           </div>
           <p className='placeholder text-gray-500'>{userField}</p>

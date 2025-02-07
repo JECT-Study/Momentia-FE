@@ -6,6 +6,7 @@ const ROUTE = {
   artworkDetail: '/artwork/detail',
   artworkUpload: '/artwork/upload',
   collections: '/collections',
+  profile: '/profile',
 };
 
 export default ROUTE;

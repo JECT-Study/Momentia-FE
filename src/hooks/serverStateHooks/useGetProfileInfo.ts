@@ -1,13 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
 
 import getProfileInfo from '@/apis/user/getProfileInfo';
 import { UserType } from '@/types/user';
 
-const useGetProfileInfo = () => {
-  const searchParams = useSearchParams();
-  const userId = Number(searchParams.get('userId') || 0);
-
+const useGetProfileInfo = (userId: number) => {
   const { data, isLoading } = useQuery({
     queryKey: [],
     queryFn: () => getProfileInfo(userId),
@@ -23,6 +19,7 @@ const useGetProfileInfo = () => {
       isFollow: false,
       field: '',
     } as UserType,
+    enabled: userId !== 0,
   });
 
   return { userInfo: data, isLoading };

@@ -1,6 +1,8 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
+import ROUTE from '@/constants/routes';
 import { ArtworkPostHeaderInfoType } from '@/types';
 import timeFormatter from '@/utils/timeFormatter';
 
@@ -18,6 +20,7 @@ const ArtworkDetailHeader = ({
     profileImage,
     nickname,
     createdTime,
+    userId,
   },
 }: ArtworkDetailHeaderProps) => {
   return (
@@ -28,7 +31,10 @@ const ArtworkDetailHeader = ({
           {artworkField}
         </p>
       </div>
-      <div className='flex items-center gap-[22px]'>
+      <Link
+        href={`${ROUTE.profile}?userId=${userId}`}
+        className='flex items-center gap-[22px] hover:underline'
+      >
         <Image
           src={profileImage || DefaultProfileImage}
           alt={profileImage ? 'artwork image' : 'artwork default image'}
@@ -37,7 +43,7 @@ const ArtworkDetailHeader = ({
           height={67}
         />
         <p>{nickname}</p>
-      </div>
+      </Link>
       <div className='flex tablet:flex-row flex-col tablet:gap-[22px] justify-end tablet:items-center items-end'>
         <div className='flex gap-[13px] justify-end items-center'>
           <Icon name='Eye' size='s' />

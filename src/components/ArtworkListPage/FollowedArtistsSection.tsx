@@ -1,9 +1,11 @@
 'use Client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
+import ROUTE from '@/constants/routes';
 import useGetFollowedArtists from '@/hooks/serverStateHooks/useGetFollowedArtists';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
 import TokenHandler from '@/utils/tokenHandler';
@@ -13,6 +15,7 @@ import ArtworkCard from '../Card/ArtworkCard';
 import Icon from '../Icon/Icon';
 
 const FollowedArtistsSection = () => {
+  const router = useRouter();
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
 
@@ -23,6 +26,10 @@ const FollowedArtistsSection = () => {
     isLoading: followedArtistsLoading,
     error: followedArtistsError,
   } = useGetFollowedArtists();
+
+  const clickUserInfo = (userId: number) => {
+    router.push(`${ROUTE.profile}?userId=${userId}`);
+  };
 
   return (
     <>
@@ -74,7 +81,11 @@ const FollowedArtistsSection = () => {
           flex flex-col justify-start items-start gap-[30px] self-stretch'
                 >
                   <div className='flex items-center justify-between w-full'>
-                    <div className='flex gap-[30px]'>
+                    <button
+                      type='button'
+                      className='group flex gap-[30px] text-start'
+                      onClick={() => clickUserInfo(artist.userId)}
+                    >
                       <Image
                         src={
                           artist.userImage || '/images/defaultProfileImage.png'
@@ -86,14 +97,14 @@ const FollowedArtistsSection = () => {
                         className='w-[50px] h-[50px] bg-gray-700 rounded-full'
                       />
                       <div className='gap-[30px]'>
-                        <p className='subtitle2 text-white'>
+                        <p className='subtitle2 text-white group-hover:underline'>
                           {artist.nickname}
                         </p>
                         <p className='placeholder text-gray-500'>
                           {artist.userField || '\u00A0'}
                         </p>
                       </div>
-                    </div>
+                    </button>
                     <FollowButton
                       initFollowState={artist.isFollow}
                       followUserId={artist.userId}
