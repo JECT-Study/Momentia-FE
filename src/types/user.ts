@@ -1,4 +1,8 @@
-import { ArtworkListParams } from './artwork';
+import {
+  ArtworkInfoType,
+  ArtworkListParams,
+  ArtworkListResponse,
+} from './artwork';
 
 export interface UserType {
   isMine: boolean;
