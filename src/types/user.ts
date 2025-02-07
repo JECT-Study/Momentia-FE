@@ -17,3 +17,12 @@ export interface UserArtworkListParams
   extends Pick<ArtworkListParams, 'sort' | 'page' | 'size'> {
   userId: number;
 }
+
+export interface UserArtworkInfoType extends ArtworkInfoType {
+  status?: 'PUBLIC' | 'PRIVATE' | null;
+}
+
+export interface UserArtworkResponse extends ArtworkListResponse {
+  data: UserArtworkInfoType[];
+  isMine: boolean;
+}
