@@ -8,6 +8,7 @@ const USER = {
   follow: '/user/follow',
   userProfile: '/user',
   artworkList: '/artwork/user/posts',
+  likedArtworkList: '/artwork/like/posts',
 };
 
 const MONTHLY = {
