@@ -7,6 +7,7 @@ const USER = {
   refresh: '/user/refresh',
   follow: '/user/follow',
   userProfile: '/user',
+  artworkList: '/artwork/user/posts',
 };
 
 const MONTHLY = {

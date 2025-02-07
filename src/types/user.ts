@@ -1,3 +1,5 @@
+import { ArtworkListParams } from './artwork';
+
 export interface UserType {
   isMine: boolean;
   email: string;
@@ -9,4 +11,9 @@ export interface UserType {
   introduction: string;
   isFollow: boolean;
   field: string;
+}
+
+export interface UserArtworkListParams
+  extends Pick<ArtworkListParams, 'sort' | 'page' | 'size'> {
+  userId: number;
 }
