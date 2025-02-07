@@ -6,6 +6,7 @@ const USER = {
   validateNickname: '/user/validation/nickname',
   refresh: '/user/refresh',
   follow: '/user/follow',
+  userProfile: '/user',
 };
 
 const MONTHLY = {
