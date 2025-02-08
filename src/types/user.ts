@@ -14,7 +14,7 @@ export interface UserType {
   nickname: string;
   introduction: string;
   isFollow: boolean;
-  field: string;
+  userField: string;
 }
 
 export interface UserArtworkListParams
