@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import getUserArtworkList from '@/apis/user/getUserArtworkList';
+import getProfileArtworkList from '@/apis/user/getProfileArtworkList';
 import { USER } from '@/constants/API';
 import { PaginationType } from '@/types';
 import { UserArtworkListParams } from '@/types/user';
@@ -8,7 +8,7 @@ import { UserArtworkListParams } from '@/types/user';
 const useGetUserArtworkList = (params: UserArtworkListParams) => {
   const { data, isLoading } = useQuery({
     queryKey: [USER.artworkList, params],
-    queryFn: () => getUserArtworkList({ ...params }),
+    queryFn: () => getProfileArtworkList({ ...params }),
   });
 
   const result = data || {

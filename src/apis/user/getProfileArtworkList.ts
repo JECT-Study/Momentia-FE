@@ -4,7 +4,7 @@ import TokenHandler from '@/utils/tokenHandler';
 
 import defaultClient, { authorizedClient } from '..';
 
-const getUserArtworkList = async ({
+const getProfileArtworkList = async ({
   sort,
   page,
   size,
@@ -25,4 +25,4 @@ const getUserArtworkList = async ({
   }
 };
 
-export default getUserArtworkList;
+export default getProfileArtworkList;
