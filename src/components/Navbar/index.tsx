@@ -5,7 +5,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
+import { USER } from '@/constants/API';
 import ROUTE from '@/constants/routes';
+import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
 import TokenHandler from '@/utils/tokenHandler';
 
 import OvalButton from '../Button/OvalButton';
@@ -19,6 +21,11 @@ const Navbar = () => {
     TokenHandler.getAccessToken() !== '',
   );
   const router = useRouter();
+
+  const userId = TokenHandler.getUserIdFromToken();
+  const {
+    userInfo: { nickname },
+  } = useGetProfileInfo(userId);
 
   const moveToSignIn = () => {
     router.push(ROUTE.signIn);
@@ -142,15 +149,20 @@ const Navbar = () => {
               <div className='flex-1'>
                 <div className=' space-y-1 bg-black'>
                   {isSignedIn ? (
-                    <>
-                      <p className='button-m text-white px-10 py-8'>닉네임</p>
+                    <div className='flex flex-col items-start'>
+                      <Link
+                        href={`${USER.userProfile}?userId=${userId}`}
+                        className='button-m text-white px-10 py-8 hover:underline'
+                      >
+                        {nickname}
+                      </Link>
                       <button
                         className='button-m text-main px-10 py-8'
                         onClick={moveToArtworkUpload}
                       >
                         작품 업로드
                       </button>
-                    </>
+                    </div>
                   ) : (
                     <button
                       className='button-m text-white px-10 py-8'

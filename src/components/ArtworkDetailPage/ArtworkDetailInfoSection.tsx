@@ -31,7 +31,7 @@ const ArtworkDetailInfoSection = ({
     router.push(`${ROUTE.artworkUpload}?postId=${postId}`);
   };
 
-  const comfirmDelete = () => {
+  const confirmDelete = () => {
     deleteArtwork(postId, {
       onSuccess: () => {
         router.replace(ROUTE.artworkList);
@@ -45,7 +45,7 @@ const ArtworkDetailInfoSection = ({
       modalSize: 'sm',
       contents: (
         <ConfirmModal
-          onClickConfirmButton={comfirmDelete}
+          onClickConfirmButton={confirmDelete}
           onClickOtherButton={closeModal}
           isButtonOnRow={false}
           reverseButtonOrder={true}

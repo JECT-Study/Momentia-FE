@@ -18,7 +18,6 @@ const usePostCollectionAddArtwork = () => {
     mutationFn: (collectionId: number) =>
       postCollectionAddArtwork({ collectionId, postId: artworkId }),
     onSuccess: () => {
-      console.log(111);
       closeModal();
 
       openModal({

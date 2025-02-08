@@ -1,6 +1,7 @@
-import defaultClient from '@/apis';
+import defaultClient, { authorizedClient } from '@/apis';
 import { ARTWORK } from '@/constants/API';
 import { ArtworkListParams } from '@/types';
+import TokenHandler from '@/utils/tokenHandler';
 
 const getArtworkList = async ({
   sort,
@@ -19,7 +20,10 @@ const getArtworkList = async ({
     if (artworkField) params.artworkField = artworkField;
     if (search) params.search = search;
 
-    const response = await defaultClient.get(ARTWORK.artworkList, {
+    const currentClient =
+      TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
+
+    const response = await currentClient.get(ARTWORK.artworkList, {
       params,
     });
 

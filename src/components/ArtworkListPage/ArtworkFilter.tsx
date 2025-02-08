@@ -1,3 +1,4 @@
+import { SORT_OPTIONS } from '@/constants/sortOptions';
 import { ArtworkField } from '@/types';
 
 import ARTWORK_FIELDS from '../../constants/artworkFields';
@@ -17,8 +18,6 @@ const ARTWORK_FIELDS_WITH_ALL_OPTION = [
   { name: '전체', value: 'ALL' },
   ...ARTWORK_FIELDS,
 ];
-
-const FILTER_OPTIONS = ['최신순', '인기순', '조회순'];
 
 const ArtworkFilter = ({
   selectedArtworkField,
@@ -66,7 +65,7 @@ const ArtworkFilter = ({
       <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
         <h1>{selectedArtworkFieldName}</h1>
         <FilterDropdown
-          options={FILTER_OPTIONS}
+          options={SORT_OPTIONS}
           selected={selectedFilter}
           onChange={handleFilterChange}
           className='w-[149px]'
