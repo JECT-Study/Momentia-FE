@@ -35,7 +35,7 @@ const CreateCollectionModal = () => {
   return (
     <div className='flex flex-col tablet:px-[56px] px-[18px] py-[50px]'>
       <div className='flex justify-between items-center'>
-        <h2 className='text-white'>컬렉션에 저장</h2>
+        <h2 className='text-white'>컬렉션 생성</h2>
         <Icon
           name='Close'
           size='l'
