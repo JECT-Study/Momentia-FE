@@ -31,7 +31,7 @@ const LikedTab = () => {
     setCurrentSort(sort);
   };
 
-  const clickMoveButton = () => {
+  const goToArtworkList = () => {
     router.push(ROUTE.artworkList);
   };
 
@@ -72,7 +72,7 @@ const LikedTab = () => {
           <OvalButton
             buttonSize='s'
             variant='primary'
-            onClick={clickMoveButton}
+            onClick={goToArtworkList}
           >
             작품 구경하러 가기
           </OvalButton>

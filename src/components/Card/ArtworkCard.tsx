@@ -70,7 +70,7 @@ const ArtworkCard = ({
     router.push(ROUTE.artworkDetail + `?postId=${postId}`);
   };
 
-  const clickMoveProfile = (event: MouseEvent<HTMLButtonElement>) => {
+  const goToUserProfile = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     router.push(`${ROUTE.profile}?userId=${userId}`);
   };
@@ -114,7 +114,7 @@ const ArtworkCard = ({
           <button
             type='button'
             className='w-fit placeholder hover:underline'
-            onClick={clickMoveProfile}
+            onClick={goToUserProfile}
           >
             {nickname}
           </button>
