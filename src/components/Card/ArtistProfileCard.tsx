@@ -31,7 +31,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
 
   const formattedRank = rank < 10 ? `0${rank}` : rank;
 
-  const clickArtsitName = () => {
+  const clickArtistName = () => {
     router.push(`${ROUTE.profile}?userId=${userId}`);
   };
 
@@ -73,7 +73,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
           <div className='flex justify-between'>
             <p
               className='subtitle2 text-gray-900 cursor-pointer hover:underline'
-              onClick={clickArtsitName}
+              onClick={clickArtistName}
             >
               {nickname}
             </p>

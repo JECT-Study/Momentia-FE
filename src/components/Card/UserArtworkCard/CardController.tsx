@@ -39,7 +39,7 @@ const CardController = ({
     setShowOption((state) => !state);
   };
 
-  const comfirmDelete = () => {
+  const confirmDelete = () => {
     deleteArtwork(postId, {
       onSuccess: () => {
         queryClient.invalidateQueries({
@@ -81,7 +81,7 @@ const CardController = ({
       modalSize: 'sm',
       contents: (
         <ConfirmModal
-          onClickConfirmButton={comfirmDelete}
+          onClickConfirmButton={confirmDelete}
           onClickOtherButton={closeModal}
           isButtonOnRow={false}
           reverseButtonOrder={true}
