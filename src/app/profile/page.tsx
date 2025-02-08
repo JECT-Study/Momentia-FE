@@ -2,7 +2,6 @@
 
 import { useSearchParams } from 'next/navigation';
 
-import UserInfoSection from '@/components/ProfilePage/UserInfoSection';
 import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
 
 import UserArtworkSection from '../../components/ProfilePage/UserArtworkSection';
