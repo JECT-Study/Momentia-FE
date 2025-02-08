@@ -70,6 +70,7 @@ export interface ArtworkPostHeaderInfoType
     | 'profileImage'
     | 'nickname'
     | 'createdTime'
+    | 'userId'
   > {}
 
 export interface ArtworkPostdetailInfoType

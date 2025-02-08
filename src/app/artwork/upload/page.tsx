@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
@@ -9,6 +9,7 @@ import FilterDropdown from '@/components/FilterDropdown';
 import BasicInput from '@/components/Input/BasicInput';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
+import ROUTE from '@/constants/routes';
 import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
@@ -48,6 +49,7 @@ const ArtworkUpload = () => {
     uploadedImageError: '',
   });
 
+  const router = useRouter();
   const searchParams = useSearchParams();
   const postId = searchParams.get('postId');
   const parsedPostId = postId ? parseInt(postId, 10) : null;
@@ -177,10 +179,17 @@ const ArtworkUpload = () => {
     };
 
     setIsSubmitting(true);
-    patchArtwork({
-      postId: parsedPostId,
-      data: editedArtworkData,
-    });
+    patchArtwork(
+      {
+        postId: parsedPostId,
+        data: editedArtworkData,
+      },
+      {
+        onSuccess: (postId) => {
+          router.push(`${ROUTE.artworkDetail}?postId=${postId}`);
+        },
+      },
+    );
   };
 
   const handleScrollToTop = () => {

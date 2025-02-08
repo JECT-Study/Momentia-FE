@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 
 import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import RankingLabel from '@/../public/images/rankingLabel.png';
@@ -29,6 +30,7 @@ const ArtworkCard = ({
   const router = useRouter();
 
   const {
+    userId,
     postId,
     title,
     postImage,
@@ -68,6 +70,11 @@ const ArtworkCard = ({
     router.push(ROUTE.artworkDetail + `?postId=${postId}`);
   };
 
+  const goToUserProfile = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    router.push(ROUTE.profile(userId));
+  };
+
   return (
     <div
       className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]} cursor-pointer`}
@@ -104,7 +111,13 @@ const ArtworkCard = ({
       >
         <div className={`flex flex-col ${artworkInfoGapClass[mode]}`}>
           <p className='subtitle1'>{title}</p>
-          <p className='placeholder'>{nickname}</p>
+          <button
+            type='button'
+            className='w-fit placeholder hover:underline'
+            onClick={goToUserProfile}
+          >
+            {nickname}
+          </button>
         </div>
         <div
           className={`button-s flex

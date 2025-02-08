@@ -6,14 +6,8 @@ import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
 import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
+import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
-
-const SORT_MAPPING: Record<string, string> = {
-  최신순: 'recent',
-  인기순: 'popular',
-  조회순: 'view',
-};
-const ITEMS_PER_PAGE = 12;
 
 const ArtworkList = () => {
   const [searchKeyword, setSearchKeyword] = useState('');

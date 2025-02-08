@@ -45,6 +45,7 @@ const useGetArtworkPost = (postId: number | null) => {
   } = data;
 
   const headerInfo = {
+    userId,
     title,
     artworkField,
     viewCount,
