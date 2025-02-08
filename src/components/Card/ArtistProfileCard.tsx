@@ -32,7 +32,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
   const formattedRank = rank < 10 ? `0${rank}` : rank;
 
   const clickArtistName = () => {
-    router.push(`${ROUTE.profile}?userId=${userId}`);
+    router.push(ROUTE.profile(userId));
   };
 
   return (

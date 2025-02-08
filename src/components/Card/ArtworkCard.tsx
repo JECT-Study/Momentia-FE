@@ -72,7 +72,7 @@ const ArtworkCard = ({
 
   const goToUserProfile = (event: MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
-    router.push(`${ROUTE.profile}?userId=${userId}`);
+    router.push(ROUTE.profile(userId));
   };
 
   return (

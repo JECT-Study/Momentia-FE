@@ -28,7 +28,7 @@ const FollowedArtistsSection = () => {
   } = useGetFollowedArtists();
 
   const clickUserInfo = (userId: number) => {
-    router.push(`${ROUTE.profile}?userId=${userId}`);
+    router.push(ROUTE.profile(userId));
   };
 
   return (

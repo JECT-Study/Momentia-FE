@@ -32,7 +32,7 @@ const ArtworkDetailHeader = ({
         </p>
       </div>
       <Link
-        href={`${ROUTE.profile}?userId=${userId}`}
+        href={ROUTE.profile(userId)}
         className='flex items-center gap-[22px] hover:underline'
       >
         <Image

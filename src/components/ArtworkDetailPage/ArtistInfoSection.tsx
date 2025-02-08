@@ -27,7 +27,7 @@ const ArtistInfoSection = ({
       <h2>작가 정보</h2>
       <div className='tablet:px-[60px] px-[10px] py-9 rounded-[10px] bg-gray-900'>
         <Link
-          href={`${ROUTE.profile}?userId=${userId}`}
+          href={ROUTE.profile(userId)}
           className='group flex gap-[42px] justify-center items-center'
         >
           <Image

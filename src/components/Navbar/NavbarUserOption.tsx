@@ -24,7 +24,7 @@ const NavbarUserOption = () => {
   };
 
   const clickProfileButton = () => {
-    router.push(`${ROUTE.profile}?userId=${userId}`);
+    router.push(ROUTE.profile(userId));
     setToggleOptionArea(false);
   };
 
