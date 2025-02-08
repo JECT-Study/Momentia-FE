@@ -5,7 +5,7 @@ import { USER } from '@/constants/API';
 import { PaginationType } from '@/types';
 import { UserArtworkListParams } from '@/types/user';
 
-const useGetUserArtworkList = (params: UserArtworkListParams) => {
+const useGetProfileArtworkList = (params: UserArtworkListParams) => {
   const { data, isLoading } = useQuery({
     queryKey: [USER.artworkList, params],
     queryFn: () => getProfileArtworkList({ ...params }),
@@ -25,4 +25,4 @@ const useGetUserArtworkList = (params: UserArtworkListParams) => {
   };
 };
 
-export default useGetUserArtworkList;
+export default useGetProfileArtworkList;

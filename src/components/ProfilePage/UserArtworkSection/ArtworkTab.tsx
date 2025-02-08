@@ -10,7 +10,7 @@ import Pagination from '@/components/Pagination';
 import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
-import useGetUserArtworkList from '@/hooks/serverStateHooks/useGetUserArtworkList';
+import useGetProfileArtworkList from '@/hooks/serverStateHooks/useGetProfileArtworkList';
 
 const ArtworkTab = () => {
   const router = useRouter();
@@ -21,7 +21,7 @@ const ArtworkTab = () => {
   const [currentSort, setCurrentSort] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isMine, artworkList, pageInfo } = useGetUserArtworkList({
+  const { isMine, artworkList, pageInfo } = useGetProfileArtworkList({
     sort: SORT_MAPPING[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
