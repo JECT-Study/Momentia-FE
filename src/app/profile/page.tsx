@@ -2,13 +2,15 @@
 
 import { useSearchParams } from 'next/navigation';
 
+import UserInfoSection from '@/components/ProfilePage/UserInfoSection';
 import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
 
 import UserArtworkSection from '../../components/ProfilePage/UserArtworkSection';
 
 const ProfilePage = () => {
   const searchParams = useSearchParams();
-  const userId = Number(searchParams.get('userId') || 0);
+  const userIdParam = searchParams.get('userId');
+  const userId = userIdParam ? Number(userIdParam) : null;
   const { userInfo, isLoading } = useGetProfileInfo(userId);
 
   if (isLoading) return <div>Loading</div>;

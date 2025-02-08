@@ -1,12 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
 
 import getProfileInfo from '@/apis/user/getProfileInfo';
+import { USER } from '@/constants/API';
 import { UserType } from '@/types/user';
 
-const useGetProfileInfo = (userId: number) => {
+const useGetProfileInfo = (userId: number | null) => {
   const { data, isLoading } = useQuery({
-    queryKey: [],
-    queryFn: () => getProfileInfo(userId),
+    queryKey: [USER.userProfile, userId],
+    queryFn: () => {
+      if (userId === null) {
+        throw new Error('userId is required');
+      }
+      return getProfileInfo(userId);
+    },
     initialData: {
       isMine: false,
       email: '',
@@ -17,9 +23,9 @@ const useGetProfileInfo = (userId: number) => {
       nickname: '',
       introduction: '',
       isFollow: false,
-      field: '',
+      userField: '',
     } as UserType,
-    enabled: userId !== 0,
+    enabled: !!userId,
   });
 
   return { userInfo: data, isLoading };
