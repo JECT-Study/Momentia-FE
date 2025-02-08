@@ -63,7 +63,7 @@ const ContentTabs = ({
     >
       {TAB_OPTIONS.map(
         (option) =>
-          (isMine || option !== '컬렉션') && (
+          (isMine || option !== '좋아요') && (
             <button
               key={option}
               type='button'
