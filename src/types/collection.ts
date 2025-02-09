@@ -12,3 +12,13 @@ export interface ProfileCollectionListResponse {
   data: CollectionType[];
   page: PaginationType;
 }
+
+export interface PatchCollectionData {
+  name?: string;
+  status?: 'PUBLIC' | 'PRIVATE';
+}
+
+export interface PatchCollectionProps {
+  collectionId: number;
+  data: PatchCollectionData;
+}
