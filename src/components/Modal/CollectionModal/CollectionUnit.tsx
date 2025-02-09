@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import Icon from '@/components/Icon/Icon';
 import usePostCollectionAddArtwork from '@/hooks/serverStateHooks/usePostCollectionAddArtwork';
 import { CollectionType } from '@/types/collection';
@@ -32,7 +31,7 @@ const CollectionUnit = ({
     >
       <div className='relative tablet:w-full tablet:h-[200px] w-[70px] h-[70px] rounded-[5px] overflow-hidden'>
         <Image
-          src={collectionImage || DefaultImage}
+          src={collectionImage || '/images/defaultArtworkImage.png'}
           alt={collectionImage ? 'collection-image' : 'default-image'}
           fill={true}
         />

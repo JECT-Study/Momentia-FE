@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import ROUTE from '@/constants/routes';
 import { ArtworkPostArtistInfoType } from '@/types';
 
@@ -31,7 +30,7 @@ const ArtistInfoSection = ({
           className='group flex gap-[42px] justify-center items-center'
         >
           <Image
-            src={profileImage || DefaultProfileImage}
+            src={profileImage || '/images/defaultProfileImage.png'}
             alt='profile-image'
             className='object-contain rounded-full'
             width={141}

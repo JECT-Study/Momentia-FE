@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import Icon from '@/components/Icon/Icon';
 import ROUTE from '@/constants/routes';
 import { CollectionType } from '@/types/collection';
@@ -53,7 +52,7 @@ const ArtworkAndCollectionCard = ({
     >
       {artworkInfo && (
         <Image
-          src={postImage || DefaultImage}
+          src={postImage || '/images/defaultArtworkImage.png'}
           alt={postImage ? `artwork-${postId}` : 'default_image'}
           fill={true}
           className={postImage ? 'object-contain' : 'object-cover'}
@@ -63,7 +62,7 @@ const ArtworkAndCollectionCard = ({
 
       {collection && (
         <Image
-          src={collectionImage || DefaultImage}
+          src={collectionImage || '/images/defaultArtworkImage.png'}
           alt={collectionImage ? `collection-${collectionId}` : 'default_image'}
           fill={true}
           className={collectionImage ? 'object-contain' : 'object-cover'}

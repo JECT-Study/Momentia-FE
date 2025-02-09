@@ -3,9 +3,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
-import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
-import RankingLabel from '@/../public/images/rankingLabel.png';
 import ROUTE from '@/constants/routes';
 import { ArtistInfoType } from '@/types/artist';
 
@@ -39,7 +36,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
     <div className='relative w-[346px] h-[330px] rounded-[10px] overflow-hidden'>
       <div className='absolute left-[30px] top-0 z-10 w-[33px] h-[48px]'>
         <Image
-          src={RankingLabel}
+          src='/images/rankingLabel.png'
           alt='ranking label'
           width={68}
           height={97}
@@ -51,7 +48,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       </div>
 
       <Image
-        src={artworkImage ?? DefaultImage}
+        src={artworkImage ?? '/images/defaultArtworkImage.png'}
         alt={profileImage ? 'artwork image' : 'artwork default image'}
         className={profileImage ? 'object-contain' : ''}
         fill={true}
@@ -62,7 +59,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
         <div className='absolute left-[30px] -top-[34px] w-[69px] h-[69px] rounded-full overflow-hidden'>
           <Image
-            src={profileImage ?? DefaultProfileImage}
+            src={profileImage ?? '/images/defaultProfileImage.png'}
             alt={
               profileImage ? 'profile image' : 'artist default profile image'
             }
