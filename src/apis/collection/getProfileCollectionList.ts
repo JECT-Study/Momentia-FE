@@ -1,5 +1,12 @@
+import { isAxiosError } from 'axios';
+
 import { COLLECTION } from '@/constants/API';
+import {
+  COMMON_ERROR_MESSAGE,
+  PROFILE_COLLECTION_GET_ERROR_MESSAGE,
+} from '@/constants/errorMessage';
 import { ProfileCollectionListResponse } from '@/types/collection';
+import { ErrorResponseType } from '@/types/errorResponse';
 import { UserArtworkListParams } from '@/types/user';
 
 import { authorizedClient } from '..';
@@ -17,8 +24,20 @@ const getProfileCollectionList = async ({
 
     return data;
   } catch (error) {
-    console.error('프로필 페이지 내 컬렉션 리스트 조회 중 에러 발생: ', error);
-    throw new Error('프로필 페이지 내 컬렉션 리스트 조회 실패');
+    if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
+      const { code } = error;
+
+      if (code) {
+        console.error(PROFILE_COLLECTION_GET_ERROR_MESSAGE[code]);
+        throw new Error(PROFILE_COLLECTION_GET_ERROR_MESSAGE[code]);
+      } else {
+        console.error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
+        throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
+      }
+    } else {
+      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
+      throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
+    }
   }
 };
 
