@@ -44,12 +44,12 @@ export const LIKE_ERROR_MESSAGE: MessageConstantType = {
 };
 
 export const ARTWORK_POST_ERROR_MESSAGE: MessageConstantType = {
-  NO_PERMISSION: '본인 게시글이 아닙니다.',
+  NO_PERMISSION: '본인의 게시글이 아닙니다.',
   ARTWORK_POST_NOT_FOUND: '리소스를 찾을 수 없습니다.',
 };
 
 export const COMMENT_ERROR_MESSAGE: MessageConstantType = {
-  NOT_OWNER: '본인 댓글이 아닙니다.',
+  NOT_OWNER: '본인의 댓글이 아닙니다.',
   COMMENT_NOT_FOUND: '리소스를 찾을 수 없습니다.',
   INVALID_COMMENT_CONTENT: '입력 정보가 올바르지 않습니다.',
   POST_NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
@@ -69,6 +69,13 @@ export const PROFILE_COLLECTION_GET_ERROR_MESSAGE: MessageConstantType = {
 };
 
 export const COLLECTION_DELETE_ERROR_MESSAGE: MessageConstantType = {
-  NO_PERMISSION: '본인 컬렉션이 아닙니다.',
+  NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
+  COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+};
+
+export const COLLECTION_PATCH_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_STATUS: '요청한 status가 잘못되었거나 유효하지 않습니다.',
+  INVALID_COLLECTION_NAME: 'name이 비어 있거나 글자 수 제한이 위반되었습니다.',
+  NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
   COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
 };
