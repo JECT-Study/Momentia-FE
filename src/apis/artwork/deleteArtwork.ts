@@ -9,7 +9,7 @@ import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
 
-const deleteArtworkPost = async (postId: number) => {
+const deleteArtwork = async (postId: number) => {
   try {
     const response = await authorizedClient.delete<null>(
       ARTWORK.patchArtwork(postId),
@@ -38,4 +38,4 @@ const deleteArtworkPost = async (postId: number) => {
   }
 };
 
-export default deleteArtworkPost;
+export default deleteArtwork;

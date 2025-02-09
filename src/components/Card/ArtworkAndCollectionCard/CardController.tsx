@@ -5,7 +5,7 @@ import { useStore } from 'zustand';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import { USER } from '@/constants/API';
-import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
+import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import modalStore from '@/stores/modalStore';
 
@@ -29,7 +29,7 @@ const CardController = ({
 }: CardControllerProps) => {
   const queryClient = useQueryClient();
   const { openModal, closeModal } = useStore(modalStore);
-  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+  const { mutate: deleteArtwork } = useDeleteArtwork();
   const { mutate: changeAccessStatus } = usePatchArtwork();
 
   const wrapperRef = useRef<HTMLDivElement>(null);

@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 
 import ROUTE from '@/constants/routes';
-import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
+import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
 import modalStore from '@/stores/modalStore';
 import { ArtworkPostdetailInfoType } from '@/types';
 
@@ -25,7 +25,7 @@ const ArtworkDetailInfoSection = ({
   const { openModal, closeModal } = useStore(modalStore);
   const [showWiderArtwork, setShowWideArtwork] = useState(false);
 
-  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+  const { mutate: deleteArtwork } = useDeleteArtwork();
 
   const clickEditButton = () => {
     router.push(`${ROUTE.artworkUpload}?postId=${postId}`);
