@@ -7,7 +7,6 @@ import { useStore } from 'zustand';
 import UserArtworkCard from '@/components/Card/UserArtworkCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
-import CollectionUnit from '@/components/Modal/CollectionModal/CollectionUnit';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
@@ -41,7 +40,7 @@ const CollectionTab = () => {
   };
 
   // NOTE: 컬렉션 조회 (GET) - getProfileCollectionList & useGetProfileCollectionList
-  // TODO: 컬렉션 카드 구현
+  // NOTE: 컬렉션 카드 구현
   // TODO: 컬렉션 삭제 구현
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
@@ -105,15 +104,6 @@ const CollectionTab = () => {
       <Icon name='Lock' size='l' className='text-white' />
       <Icon name='Unlock' size='l' className='text-white mt-[2.5px]' />
 
-      <div className='grid tablet:grid-cols-4 grid-cols-1 gap-x-[33px] gap-y-[30px] max-h-[555px] tablet:pr-[34px] overflow-y-auto scroll-hide'>
-        {collections.map((collection) => (
-          <CollectionUnit
-            key={collection.collectionId}
-            collectionInfo={collection}
-          />
-        ))}
-      </div>
-
       <button onClick={clickDeleteButton}>삭제</button>
 
       <>
@@ -121,7 +111,6 @@ const CollectionTab = () => {
           {collections.map((collection) => (
             <UserArtworkCard
               key={collection.collectionId}
-              artworkInfo={collection}
               collection={collection}
               isMine={isMine}
             />
