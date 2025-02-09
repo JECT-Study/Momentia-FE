@@ -1,27 +1,33 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
-import FilterDropdown from '@/components/FilterDropdown';
-import CollectionUnit from '@/components/Modal/CollectionModal/CollectionUnit';
+import ConfirmModal from '@/components/Modal/ConfirmModal';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
+import CollectionTab from '@/components/ProfilePage/UserArtworkSection/CollectionTab';
+import ROUTE from '@/constants/routes';
+import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
 import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetCollectionList';
 import modalStore from '@/stores/modalStore';
 
-import Icon from '../../../components/Icon/Icon';
-
 const FILTER_OPTIONS = ['최신순', '가나다순'];
 
-const Profile = () => {
+// TODO: 작품 삭제 API 및 로직 사용
+
+const Collection = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const { openModal, closeModal } = useStore(modalStore);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const postId = Number(searchParams.get('postId'));
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
   };
 
-  const handleCreateCollecion = () => {
+  const handleCreateCollection = () => {
     closeModal();
 
     openModal({
@@ -30,16 +36,49 @@ const Profile = () => {
     });
   };
 
+  // TODO: 컬렉션 삭제 구현
+  // TODO: 작품 삭제 API 및 로직 분리 (컬렉션 페이지에서 사용 예정)
+  // TODO: 컬렉션 불러오기 (GET)
   const { collections } = useGetAllCollectionList();
+  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+
+  const confirmDelete = () => {
+    deleteArtwork(postId, {
+      onSuccess: () => {
+        router.replace(ROUTE.artworkList);
+        closeModal();
+      },
+    });
+  };
+
+  const clickDeleteButton = () => {
+    openModal({
+      modalSize: 'sm',
+      contents: (
+        <ConfirmModal
+          onClickConfirmButton={confirmDelete}
+          onClickOtherButton={closeModal}
+          isButtonOnRow={false}
+          reverseButtonOrder={true}
+        >
+          <p>
+            작품을 삭제하시겠습니까?
+            <br />
+            삭제한 작품은 복구할 수 없습니다.
+          </p>
+        </ConfirmModal>
+      ),
+    });
+  };
 
   // const handlePageChange = (page: number) => {
   //   setCurrentPage(page);
   // };
 
   return (
-    <div className='pt-[50px] md:px-[140px]'>
-      <div className='flex justify-between items-center pb-[70px]'>
-        <button className='button-m' onClick={handleCreateCollecion}>
+    <div>
+      {/* <div className='flex justify-between items-center pb-[70px]'>
+        <button className='button-m' onClick={handleCreateCollection}>
           <Icon name='Plus' size='m' className='mr-[10px]' />
           컬렉션 생성
         </button>
@@ -63,13 +102,17 @@ const Profile = () => {
         ))}
       </div>
 
+      <button onClick={clickDeleteButton}>작품 삭제</button> */}
+
       {/* <Pagination
         currentPage={artworkListPage.requestPage}
         totalPages={artworkListPage.totalPages}
         onPageChange={handlePageChange}
       /> */}
+
+      <CollectionTab />
     </div>
   );
 };
 
-export default Profile;
+export default Collection;
