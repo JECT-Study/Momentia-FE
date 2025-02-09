@@ -8,6 +8,7 @@ import { COLLECTION, USER } from '@/constants/API';
 import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
 import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
+import usePatchCollection from '@/hooks/serverStateHooks/usePatchCollection';
 import modalStore from '@/stores/modalStore';
 
 interface CardControllerProps {
@@ -35,6 +36,7 @@ const CardController = ({
   const { mutate: deleteArtwork } = useDeleteArtwork();
   const { mutate: deleteCollection } = useDeleteCollection();
   const { mutate: changeAccessStatus } = usePatchArtwork();
+  const { mutate: patchCollectionStatus } = usePatchCollection();
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -85,6 +87,25 @@ const CardController = ({
           onSuccess: () => {
             queryClient.invalidateQueries({
               queryKey: [USER.artworkList],
+            });
+            setShowOption((state) => !state);
+          },
+        },
+      );
+    }
+
+    if (currentStatus != status && collectionId) {
+      patchCollectionStatus(
+        {
+          collectionId,
+          data: {
+            status,
+          },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [COLLECTION.collectionList],
             });
             setShowOption((state) => !state);
           },

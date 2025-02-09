@@ -35,7 +35,6 @@ const CollectionTab = () => {
     });
   };
 
-  // TODO: 공개 여부 변경
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
       sort: FILTER_OPTIONS[selectedFilter] || 'recent',
