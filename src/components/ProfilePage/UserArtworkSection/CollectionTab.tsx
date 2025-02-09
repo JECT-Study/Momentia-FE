@@ -4,7 +4,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
-import UserArtworkCard from '@/components/Card/UserArtworkCard';
+import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
@@ -109,7 +109,7 @@ const CollectionTab = () => {
       <>
         <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4  gap-x-[20px] gap-y-10'>
           {collections.map((collection) => (
-            <UserArtworkCard
+            <ArtworkAndCollectionCard
               key={collection.collectionId}
               collection={collection}
               isMine={isMine}

@@ -12,17 +12,17 @@ import { UserArtworkInfoType } from '@/types/user';
 
 import CardController from './CardController';
 
-interface UserArtworkCardProps {
+interface ArtworkAndCollectionCardProps {
   artworkInfo?: UserArtworkInfoType;
   collection?: CollectionType;
   isMine?: boolean;
 }
 
-const UserArtworkCard = ({
+const ArtworkAndCollectionCard = ({
   artworkInfo,
   collection,
   isMine = false,
-}: UserArtworkCardProps) => {
+}: ArtworkAndCollectionCardProps) => {
   const router = useRouter();
 
   const {
@@ -122,4 +122,4 @@ const UserArtworkCard = ({
   );
 };
 
-export default UserArtworkCard;
+export default ArtworkAndCollectionCard;

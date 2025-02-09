@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import OvalButton from '@/components/Button/OvalButton';
-import UserArtworkCard from '@/components/Card/UserArtworkCard';
+import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Pagination from '@/components/Pagination';
 import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
@@ -47,7 +47,7 @@ const LikedTab = () => {
         <>
           <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10'>
             {artworkList.map((artwork) => (
-              <UserArtworkCard
+              <ArtworkAndCollectionCard
                 key={artwork.postId}
                 artworkInfo={{ ...artwork, status: null }}
               />
