@@ -8,13 +8,11 @@ import ConfirmModal from '@/components/Modal/ConfirmModal';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import CollectionTab from '@/components/ProfilePage/UserArtworkSection/CollectionTab';
 import ROUTE from '@/constants/routes';
-import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
+import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
 import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetCollectionList';
 import modalStore from '@/stores/modalStore';
 
 const FILTER_OPTIONS = ['최신순', '가나다순'];
-
-// TODO: 작품 삭제 API 및 로직 사용
 
 const Collection = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
@@ -36,11 +34,10 @@ const Collection = () => {
     });
   };
 
-  // TODO: 컬렉션 삭제 구현
-  // TODO: 작품 삭제 API 및 로직 분리 (컬렉션 페이지에서 사용 예정)
-  // TODO: 컬렉션 불러오기 (GET)
+  // TODO: 작품 삭제 API 및 로직 사용
+
   const { collections } = useGetAllCollectionList();
-  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+  const { mutate: deleteArtwork } = useDeleteArtwork();
 
   const confirmDelete = () => {
     deleteArtwork(postId, {
