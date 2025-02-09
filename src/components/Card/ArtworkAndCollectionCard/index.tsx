@@ -80,7 +80,8 @@ const ArtworkAndCollectionCard = ({
           <div className='flex justify-between'>
             <Icon name={status === 'PRIVATE' ? 'Lock' : 'Unlock'} />
             <CardController
-              postId={postId ?? 0}
+              postId={postId}
+              collectionId={collectionId}
               currentStatus={status}
               showOption={showOption}
               setShowOption={setShowOption}

@@ -7,11 +7,9 @@ import { useStore } from 'zustand';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
-import ConfirmModal from '@/components/Modal/ConfirmModal';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
 import { FILTER_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
-import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
 import TokenHandler from '@/utils/tokenHandler';
@@ -37,9 +35,7 @@ const CollectionTab = () => {
     });
   };
 
-  // NOTE: 컬렉션 조회 (GET) - getProfileCollectionList & useGetProfileCollectionList
   // TODO: 공개 여부 변경
-  // TODO: 컬렉션 삭제 구현
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
       sort: FILTER_OPTIONS[selectedFilter] || 'recent',
@@ -47,36 +43,6 @@ const CollectionTab = () => {
       size: ITEMS_PER_PAGE,
       userId,
     });
-
-  const { mutate: deleteCollection } = useDeleteCollection();
-
-  const confirmDelete = () => {
-    deleteCollection(postId, {
-      onSuccess: () => {
-        closeModal();
-      },
-    });
-  };
-
-  const clickDeleteButton = () => {
-    openModal({
-      modalSize: 'sm',
-      contents: (
-        <ConfirmModal
-          onClickConfirmButton={confirmDelete}
-          onClickOtherButton={closeModal}
-          isButtonOnRow={false}
-          reverseButtonOrder={true}
-        >
-          <p>
-            컬렉션을 삭제하시겠습니까?
-            <br />
-            삭제한 컬렉션은 복구할 수 없습니다.
-          </p>
-        </ConfirmModal>
-      ),
-    });
-  };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -96,33 +62,30 @@ const CollectionTab = () => {
           className='w-[155px]'
         />
       </div>
-      <div>컬렉션 카드</div>
-      <Icon name='Lock' size='l' className='text-white' />
-      <Icon name='Unlock' size='l' className='text-white mt-[2.5px]' />
 
-      <button onClick={clickDeleteButton}>삭제</button>
+      {collections.length !== 0 && (
+        <>
+          <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4  gap-x-[20px] gap-y-10'>
+            {collections.map((collection) => (
+              <ArtworkAndCollectionCard
+                key={collection.collectionId}
+                collection={collection}
+                isMine={isMine}
+              />
+            ))}
+          </div>
 
-      <>
-        <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4  gap-x-[20px] gap-y-10'>
-          {collections.map((collection) => (
-            <ArtworkAndCollectionCard
-              key={collection.collectionId}
-              collection={collection}
-              isMine={isMine}
+          <div className='m-auto w-fit py-[70px]'>
+            <Pagination
+              currentPage={pageInfo.requestPage}
+              totalPages={pageInfo.totalPages}
+              onPageChange={handlePageChange}
             />
-          ))}
-        </div>
+          </div>
+        </>
+      )}
 
-        <div className='m-auto w-fit pt-[70px]'>
-          <Pagination
-            currentPage={pageInfo.requestPage}
-            totalPages={pageInfo.totalPages}
-            onPageChange={handlePageChange}
-          />
-        </div>
-      </>
-
-      {!collections.length && (
+      {collections.length === 0 && (
         <div className='body1 text-gray-500 py-[620px] text-center'>
           아직 컬렉션이 비어있어요.
         </div>
