@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
@@ -11,8 +11,7 @@ import ConfirmModal from '@/components/Modal/ConfirmModal';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
 import { FILTER_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
-import ROUTE from '@/constants/routes';
-import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
+import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
 import TokenHandler from '@/utils/tokenHandler';
@@ -20,7 +19,6 @@ import TokenHandler from '@/utils/tokenHandler';
 const CollectionTab = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const { openModal, closeModal } = useStore(modalStore);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const postId = Number(searchParams.get('postId'));
   const userId = TokenHandler.getUserIdFromToken();
@@ -40,7 +38,7 @@ const CollectionTab = () => {
   };
 
   // NOTE: 컬렉션 조회 (GET) - getProfileCollectionList & useGetProfileCollectionList
-  // NOTE: 컬렉션 카드 구현
+  // TODO: 공개 여부 변경
   // TODO: 컬렉션 삭제 구현
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
@@ -50,12 +48,11 @@ const CollectionTab = () => {
       userId,
     });
 
-  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+  const { mutate: deleteCollection } = useDeleteCollection();
 
   const confirmDelete = () => {
-    deleteArtwork(postId, {
+    deleteCollection(postId, {
       onSuccess: () => {
-        router.replace(ROUTE.artworkList);
         closeModal();
       },
     });
@@ -72,9 +69,9 @@ const CollectionTab = () => {
           reverseButtonOrder={true}
         >
           <p>
-            작품을 삭제하시겠습니까?
+            컬렉션을 삭제하시겠습니까?
             <br />
-            삭제한 작품은 복구할 수 없습니다.
+            삭제한 컬렉션은 복구할 수 없습니다.
           </p>
         </ConfirmModal>
       ),
@@ -87,7 +84,6 @@ const CollectionTab = () => {
 
   return (
     <div className='pt-[50px] md:px-[140px]'>
-      {/* <UserArtworkSection /> */}
       <div className='flex justify-between items-center pb-[70px]'>
         <button className='button-m' onClick={handleCreateCollection}>
           <Icon name='Plus' size='m' className='mr-[10px]' />
