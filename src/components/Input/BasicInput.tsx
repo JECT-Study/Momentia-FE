@@ -23,6 +23,7 @@ interface BasicInputProps {
   maxLength?: number;
   errorMessage?: string;
   successMessage?: string;
+  className?: string;
 }
 
 const BasicInput = ({
@@ -41,6 +42,7 @@ const BasicInput = ({
   maxLength,
   errorMessage,
   successMessage,
+  className,
 }: BasicInputProps) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
@@ -56,7 +58,7 @@ const BasicInput = ({
         : 'text-white';
 
   return (
-    <div>
+    <div className={className}>
       <Input
         type={showEyeIcon && isPasswordVisible ? 'text' : type || 'text'}
         label={label}
