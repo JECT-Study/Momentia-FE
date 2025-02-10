@@ -83,3 +83,10 @@ export const COLLECTION_PATCH_ERROR_MESSAGE: MessageConstantType = {
 export const COLLECTION_ARTWORKS_ERROR_MESSAGE: MessageConstantType = {
   COLLECTION_NOT_FOUND: '요청한 컬렉션 id에 해당하는 컬렉션이 없습니다.',
 };
+
+export const EDIT_USER_PROFILE_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_FIELD: '작업 분야에 해당하는 형식이 아닙니다.',
+  INVALID_NICKNAME: '사용할 수 없는 닉네임 입니다.',
+  INVALID_INTRODUCTION: '잘못된 형태의 자기소개 입니다.',
+  DUPLICATE_NICKNAME: '이미 사용중인 닉네임 입니다.',
+};
