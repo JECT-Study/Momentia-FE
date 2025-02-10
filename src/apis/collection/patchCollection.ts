@@ -5,7 +5,7 @@ import {
   COLLECTION_PATCH_ERROR_MESSAGE,
   COMMON_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
-import { PatchCollectionProps } from '@/types/collection';
+import { PatchCollectionParams } from '@/types/collection';
 import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
@@ -13,7 +13,7 @@ import { authorizedClient } from '..';
 const patchCollection = async ({
   collectionId,
   data,
-}: PatchCollectionProps) => {
+}: PatchCollectionParams) => {
   try {
     const response = await authorizedClient.patch(
       COLLECTION.patchAndDeleteCollection(collectionId),

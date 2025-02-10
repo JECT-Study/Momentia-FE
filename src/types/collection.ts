@@ -18,7 +18,7 @@ export interface PatchCollectionData {
   status?: 'PUBLIC' | 'PRIVATE';
 }
 
-export interface PatchCollectionProps {
+export interface PatchCollectionParams {
   collectionId: number;
   data: PatchCollectionData;
 }

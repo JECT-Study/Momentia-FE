@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 
 import patchCollection from '@/apis/collection/patchCollection';
-import { PatchCollectionProps } from '@/types/collection';
+import { PatchCollectionParams } from '@/types/collection';
 
 const usePatchCollection = () => {
   return useMutation({
-    mutationFn: ({ collectionId, data }: PatchCollectionProps) => {
+    mutationFn: ({ collectionId, data }: PatchCollectionParams) => {
       return patchCollection({ collectionId, data });
     },
     onError: (error) => {
