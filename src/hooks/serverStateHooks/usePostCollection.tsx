@@ -22,7 +22,7 @@ const usePostCollection = () => {
       closeModal();
 
       openModal({
-        modalSize: 'lg',
+        modalSize: isProfile ? 'md' : 'lg',
         contents: isProfile ? <CreateCollectionModal /> : <CollectionModal />,
       });
 
