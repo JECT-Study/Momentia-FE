@@ -46,7 +46,7 @@ const CollectionTab = () => {
 
   return (
     <div className='pt-[50px] md:px-[140px]'>
-      <div className='flex justify-between items-center pb-[70px]'>
+      <div className='flex justify-between items-center'>
         <button className='button-m' onClick={handleCreateCollection}>
           <Icon name='Plus' size='m' className='mr-[10px]' />
           컬렉션 생성
@@ -63,7 +63,7 @@ const CollectionTab = () => {
 
       {collections.length !== 0 && (
         <>
-          <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10'>
+          <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10 pt-[70px]'>
             {collections.map((collection) => (
               <ArtworkAndCollectionCard
                 key={collection.collectionId}
@@ -84,8 +84,10 @@ const CollectionTab = () => {
       )}
 
       {collections.length === 0 && (
-        <div className='body1 text-gray-500 py-[620px] text-center'>
-          아직 컬렉션이 비어있어요.
+        <div className='py-[70px]'>
+          <div className='body1 text-gray-500 py-[185px] md:py-[620px] text-center'>
+            아직 컬렉션이 비어있어요.
+          </div>
         </div>
       )}
     </div>
