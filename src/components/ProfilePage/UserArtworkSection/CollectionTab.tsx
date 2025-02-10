@@ -1,6 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
@@ -16,11 +15,10 @@ import TokenHandler from '@/utils/tokenHandler';
 
 const CollectionTab = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
-  const { openModal, closeModal } = useStore(modalStore);
-  const searchParams = useSearchParams();
-  const postId = Number(searchParams.get('postId'));
-  const userId = TokenHandler.getUserIdFromToken();
   const [currentPage, setCurrentPage] = useState(1);
+  const { openModal, closeModal } = useStore(modalStore);
+
+  const userId = TokenHandler.getUserIdFromToken();
 
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
@@ -28,7 +26,6 @@ const CollectionTab = () => {
 
   const handleCreateCollection = () => {
     closeModal();
-
     openModal({
       modalSize: 'md',
       contents: <CreateCollectionModal />,
@@ -61,6 +58,8 @@ const CollectionTab = () => {
           className='w-[155px]'
         />
       </div>
+
+      {isLoading && <div className='body1'>로딩 중...</div>}
 
       {collections.length !== 0 && (
         <>
