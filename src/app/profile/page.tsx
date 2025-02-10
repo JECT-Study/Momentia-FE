@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 
+import UserInfoSection from '@/components/ProfilePage/UserInfoSection';
 import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
 
 import UserArtworkSection from '../../components/ProfilePage/UserArtworkSection';
@@ -16,6 +17,7 @@ const ProfilePage = () => {
 
   return (
     <div className='flex flex-col flex-grow gap-[70px] w-full max-w-[1920px] m-auto py-[70px] tablet:px-[140px] px-[32px]'>
+      <UserInfoSection userInfo={userInfo} />
       <UserArtworkSection isMine={userInfo.isMine} />
     </div>
   );
