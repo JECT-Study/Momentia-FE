@@ -62,3 +62,10 @@ export const COMMENT_ERROR_MESSAGE: MessageConstantType = {
   POST_NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
   NOT_AUTHORIZED: '댓글에 대한 권한이 없습니다.',
 };
+
+export const EDIT_USER_PROFILE_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_FIELD: '작업 분야에 해당하는 형식이 아닙니다.',
+  INVALID_NICKNAME: '사용할 수 없는 닉네임 입니다.',
+  INVALID_INTRODUCTION: '잘못된 형태의 자기소개 입니다.',
+  DUPLICATE_NICKNAME: '이미 사용중인 닉네임 입니다.',
+};
