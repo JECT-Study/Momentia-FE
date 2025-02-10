@@ -78,7 +78,16 @@ const ArtworkAndCollectionCard = ({
       >
         {status && isMine && (
           <div className='flex justify-between'>
-            <Icon name={status === 'PRIVATE' ? 'Lock' : 'Unlock'} />
+            <Icon
+              name={status === 'PRIVATE' ? 'Lock' : 'Unlock'}
+              size='s'
+              className='text-white block md:hidden'
+            />
+            <Icon
+              name={status === 'PRIVATE' ? 'Lock' : 'Unlock'}
+              size='l'
+              className='text-white hidden md:block'
+            />
             <CardController
               postId={postId}
               collectionId={collectionId}
@@ -89,8 +98,8 @@ const ArtworkAndCollectionCard = ({
           </div>
         )}
         <div className='flex flex-col gap-[35px]'>
-          {artworkInfo && <p className='subtitle1'>{title}</p>}
-          {collection && <p className='subtitle1'>{name}</p>}
+          {artworkInfo && <p className='button-s md:subtitle1'>{title}</p>}
+          {collection && <p className='button-s md:subtitle2'>{name}</p>}
 
           {artworkInfo && (
             <div className='button-s flex gap-5 items-center'>

@@ -185,7 +185,16 @@ const CardController = ({
 
   return (
     <div ref={wrapperRef} onClick={toggleShowOption} className='cursor-pointer'>
-      <Icon name='MoreVertical' size='l' />
+      <Icon
+        name='MoreVertical'
+        size='s'
+        className='text-white block md:hidden'
+      />
+      <Icon
+        name='MoreVertical'
+        size='l'
+        className='text-white hidden md:block'
+      />
       {
         <div
           className={`absolute top-0 left-0 w-full ${showOption ? 'h-full' : 'h-0'} transition-all duration-700 ease-in-out overflow-hidden`}
