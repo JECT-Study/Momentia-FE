@@ -26,6 +26,7 @@ const CreateCollectionModal = () => {
 
   const clickCreateButton = () => {
     submitCreateCollection({ name: collectionName, isPrivate });
+    setCollectionName('');
   };
 
   const clickSetPrivateCheck = () => {
