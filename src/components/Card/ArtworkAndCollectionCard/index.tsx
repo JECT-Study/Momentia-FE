@@ -32,10 +32,11 @@ const ArtworkAndCollectionCard = ({
     likeCount,
     commentCount,
     isLiked,
-    // status,
+    status,
   } = artworkInfo ?? {};
 
-  const { collectionId, collectionImage, name, status } = collection ?? {};
+  const { collectionId, collectionImage, name, collectionStatus } =
+    collection ?? {};
 
   const [showOption, setShowOption] = useState(false);
 
@@ -75,7 +76,7 @@ const ArtworkAndCollectionCard = ({
       )}
 
       <div
-        className={`absolute top-0 left-0 flex flex-col ${status && isMine ? 'justify-between' : 'justify-end'}
+        className={`absolute top-0 left-0 flex flex-col ${(collectionStatus && isMine) || (status && isMine) ? 'justify-between' : 'justify-end'}
           w-full h-full px-[15px] py-[19px] mobile:px-[32px] mobile:py-[23px]
           text-white bg-gradient-to-b from-[#00000000] to-[#000000]
           ${showOption || 'opacity-0 group-hover:opacity-100'} transition-opacity duration-300 z-5`}
@@ -101,6 +102,29 @@ const ArtworkAndCollectionCard = ({
             />
           </div>
         )}
+
+        {collectionStatus && isMine && (
+          <div className='flex justify-between'>
+            <Icon
+              name={collectionStatus === 'PRIVATE' ? 'Lock' : 'Unlock'}
+              size='s'
+              className='text-white block md:hidden'
+            />
+            <Icon
+              name={collectionStatus === 'PRIVATE' ? 'Lock' : 'Unlock'}
+              size='l'
+              className='text-white hidden md:block'
+            />
+            <CardController
+              postId={postId}
+              collectionId={collectionId}
+              currentStatus={collectionStatus}
+              showOption={showOption}
+              setShowOption={setShowOption}
+            />
+          </div>
+        )}
+
         <div className='flex flex-col gap-[35px]'>
           {artworkInfo && <p className='button-s md:subtitle1'>{title}</p>}
           {collection && <p className='button-s md:subtitle2'>{name}</p>}

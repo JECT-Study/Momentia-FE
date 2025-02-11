@@ -12,7 +12,8 @@ const CollectionUnit = ({
 }: {
   collectionInfo: CollectionType;
 }) => {
-  const { collectionId, collectionImage, name, status } = collectionInfo;
+  const { collectionId, collectionImage, name, collectionStatus } =
+    collectionInfo;
   const [blockButton, setBlockButton] = useState(false);
 
   const { mutate: addCollectionArtwork } = usePostCollectionAddArtwork();
@@ -41,8 +42,11 @@ const CollectionUnit = ({
           {name}
         </p>
         <div className='flex items-center gap-0.5 tablet:body2 button-s text-gray-500'>
-          <Icon name={status === 'PRIVATE' ? 'Lock' : 'Unlock'} size='s' />
-          <p>{status === 'PRIVATE' ? '비공개' : '전체 공개'}</p>
+          <Icon
+            name={collectionStatus === 'PRIVATE' ? 'Lock' : 'Unlock'}
+            size='s'
+          />
+          <p>{collectionStatus === 'PRIVATE' ? '비공개' : '전체 공개'}</p>
         </div>
       </div>
     </button>
