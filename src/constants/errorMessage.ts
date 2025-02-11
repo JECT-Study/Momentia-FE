@@ -79,3 +79,7 @@ export const COLLECTION_PATCH_ERROR_MESSAGE: MessageConstantType = {
   NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
   COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
 };
+
+export const COLLECTION_ARTWORKS_ERROR_MESSAGE: MessageConstantType = {
+  COLLECTION_NOT_FOUND: '요청한 컬렉션 id에 해당하는 컬렉션이 없습니다.',
+};
