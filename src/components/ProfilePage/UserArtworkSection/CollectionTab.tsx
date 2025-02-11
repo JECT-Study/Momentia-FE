@@ -8,7 +8,7 @@ import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
-import { FILTER_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
 import TokenHandler from '@/utils/tokenHandler';
@@ -34,7 +34,7 @@ const CollectionTab = () => {
 
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
-      sort: FILTER_OPTIONS[selectedFilter] || 'recent',
+      sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
       page: currentPage - 1,
       size: ITEMS_PER_PAGE,
       userId,
@@ -52,7 +52,7 @@ const CollectionTab = () => {
           컬렉션 생성
         </button>
         <FilterDropdown
-          options={Object.keys(FILTER_OPTIONS)}
+          options={Object.keys(ARTWORK_SORT_OPTIONS)}
           selected={selectedFilter}
           onChange={handleFilterChange}
           className='w-[155px]'

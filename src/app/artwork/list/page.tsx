@@ -6,7 +6,10 @@ import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
 import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
-import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
+import {
+  COLLECTION_SORT_OPTIONS,
+  ITEMS_PER_PAGE,
+} from '@/constants/pagination';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const ArtworkList = () => {
@@ -16,7 +19,7 @@ const ArtworkList = () => {
   const [selectedFilter, setSelectedFilter] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const sortValue = SORT_MAPPING[selectedFilter] || 'recent';
+  const sortValue = COLLECTION_SORT_OPTIONS[selectedFilter] || 'recent';
 
   const {
     data: artworkList,

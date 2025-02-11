@@ -7,7 +7,10 @@ import OvalButton from '@/components/Button/OvalButton';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Pagination from '@/components/Pagination';
-import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
+import {
+  COLLECTION_SORT_OPTIONS,
+  ITEMS_PER_PAGE,
+} from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetProfileArtworkList from '@/hooks/serverStateHooks/useGetProfileArtworkList';
@@ -22,7 +25,7 @@ const ArtworkTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { isMine, artworkList, pageInfo } = useGetProfileArtworkList({
-    sort: SORT_MAPPING[currentSort] || 'recent',
+    sort: COLLECTION_SORT_OPTIONS[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     userId,

@@ -7,7 +7,10 @@ import OvalButton from '@/components/Button/OvalButton';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import FilterDropdown from '@/components/FilterDropdown';
 import Pagination from '@/components/Pagination';
-import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
+import {
+  COLLECTION_SORT_OPTIONS,
+  ITEMS_PER_PAGE,
+} from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetLikedArtworkList from '@/hooks/serverStateHooks/useGetLikedArtworkList';
@@ -18,7 +21,7 @@ const LikedTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { artworkList, pageInfo } = useGetLikedArtworkList({
-    sort: SORT_MAPPING[currentSort] || 'recent',
+    sort: COLLECTION_SORT_OPTIONS[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
   });
