@@ -12,15 +12,17 @@ import { UserArtworkInfoType } from '@/types/user';
 import CardController from './CardController';
 
 interface ArtworkAndCollectionCardProps {
+  isMine?: boolean;
+  isCollectionPage?: boolean;
   artworkInfo?: UserArtworkInfoType;
   collection?: CollectionType;
-  isMine?: boolean;
 }
 
 const ArtworkAndCollectionCard = ({
+  isMine = false,
+  isCollectionPage = false,
   artworkInfo,
   collection,
-  isMine = false,
 }: ArtworkAndCollectionCardProps) => {
   const router = useRouter();
 
@@ -99,6 +101,7 @@ const ArtworkAndCollectionCard = ({
               currentStatus={status}
               showOption={showOption}
               setShowOption={setShowOption}
+              isCollectionPage={isCollectionPage}
             />
           </div>
         )}

@@ -23,6 +23,8 @@ const Collection = () => {
     setSelectedFilter(newFilter);
   };
 
+  const isCollectionPage = true;
+
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
     page: currentPage - 1,
@@ -79,6 +81,7 @@ const Collection = () => {
               <ArtworkAndCollectionCard
                 key={artwork.postId}
                 isMine={isMine}
+                isCollectionPage={isCollectionPage}
                 artworkInfo={artwork}
               />
             ))}
