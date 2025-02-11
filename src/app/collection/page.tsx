@@ -108,14 +108,17 @@ const Collection = () => {
         <button
           className='button-m flex items-center mb-[20px]'
           onClick={openEditModal}
+          disabled={!isMine}
         >
           <h1 className='hidden md:block'>{collectionName}</h1>
           <h3 className='block md:hidden'>{collectionName}</h3>
-          <Icon
-            name='EditPencil'
-            size='m'
-            className='ml-[20px] text-gray-500'
-          />
+          {isMine && (
+            <Icon
+              name='EditPencil'
+              size='m'
+              className='ml-[20px] text-gray-500'
+            />
+          )}
         </button>
       </div>
 
@@ -126,9 +129,11 @@ const Collection = () => {
           <button onClick={openShareModal}>
             <Icon name='UploadShare' size='m' className='text-white' />
           </button>
-          <button onClick={clickCollectionDeleteButton}>
-            <Icon name='Trash' size='m' className='text-white' />
-          </button>
+          {isMine && (
+            <button onClick={clickCollectionDeleteButton}>
+              <Icon name='Trash' size='m' className='text-white' />
+            </button>
+          )}
         </div>
       </div>
 
