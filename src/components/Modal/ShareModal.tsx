@@ -53,6 +53,7 @@ const ShareModal = ({ title, nickname, artworksLength }: ShareModalProps) => {
       <div className='grid grid-cols-[1fr_100px] mt-[100px] mb-[75px] gap-2.5'>
         <BasicInput
           type='text'
+          placeholder={nickname ? '작품 URL' : '컬렉션 URL'}
           value={shareURL}
           onChange={handleOnChangeShareURL}
         />
