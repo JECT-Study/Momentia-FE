@@ -4,13 +4,16 @@ import { useStore } from 'zustand';
 
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
-import { USER } from '@/constants/API';
-import useDeleteArtworkPost from '@/hooks/serverStateHooks/useDeleteArtworkPost';
+import { COLLECTION, USER } from '@/constants/API';
+import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
+import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
+import usePatchCollection from '@/hooks/serverStateHooks/usePatchCollection';
 import modalStore from '@/stores/modalStore';
 
 interface CardControllerProps {
-  postId: number;
+  postId?: number;
+  collectionId?: number;
   currentStatus: 'PRIVATE' | 'PUBLIC';
   showOption: boolean;
   setShowOption: Dispatch<SetStateAction<boolean>>;
@@ -23,14 +26,17 @@ interface ClickAccessStatusButtonProps {
 
 const CardController = ({
   postId,
+  collectionId,
   currentStatus,
   showOption,
   setShowOption,
 }: CardControllerProps) => {
   const queryClient = useQueryClient();
   const { openModal, closeModal } = useStore(modalStore);
-  const { mutate: deleteArtwork } = useDeleteArtworkPost();
+  const { mutate: deleteArtwork } = useDeleteArtwork();
+  const { mutate: deleteCollection } = useDeleteCollection();
   const { mutate: changeAccessStatus } = usePatchArtwork();
+  const { mutate: patchCollectionStatus } = usePatchCollection();
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -40,14 +46,27 @@ const CardController = ({
   };
 
   const confirmDelete = () => {
-    deleteArtwork(postId, {
-      onSuccess: () => {
-        queryClient.invalidateQueries({
-          queryKey: [USER.artworkList],
-        });
-        closeModal();
-      },
-    });
+    if (postId) {
+      deleteArtwork(postId, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [USER.artworkList],
+          });
+          closeModal();
+        },
+      });
+    }
+
+    if (collectionId) {
+      deleteCollection(collectionId, {
+        onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: [COLLECTION.collectionList],
+          });
+          closeModal();
+        },
+      });
+    }
   };
 
   const clickAccessStatusButton = ({
@@ -56,7 +75,7 @@ const CardController = ({
   }: ClickAccessStatusButtonProps) => {
     event.stopPropagation();
 
-    if (currentStatus != status) {
+    if (currentStatus != status && postId) {
       changeAccessStatus(
         {
           postId,
@@ -74,26 +93,67 @@ const CardController = ({
         },
       );
     }
+
+    if (currentStatus != status && collectionId) {
+      patchCollectionStatus(
+        {
+          collectionId,
+          data: {
+            status,
+          },
+        },
+        {
+          onSuccess: () => {
+            queryClient.invalidateQueries({
+              queryKey: [COLLECTION.collectionList],
+            });
+            setShowOption((state) => !state);
+          },
+        },
+      );
+    }
   };
 
   const clickDeleteButton = () => {
-    openModal({
-      modalSize: 'sm',
-      contents: (
-        <ConfirmModal
-          onClickConfirmButton={confirmDelete}
-          onClickOtherButton={closeModal}
-          isButtonOnRow={false}
-          reverseButtonOrder={true}
-        >
-          <p>
-            작품을 삭제하시겠습니까?
-            <br />
-            삭제한 작품은 복구할 수 없습니다.
-          </p>
-        </ConfirmModal>
-      ),
-    });
+    if (postId) {
+      openModal({
+        modalSize: 'sm',
+        contents: (
+          <ConfirmModal
+            onClickConfirmButton={confirmDelete}
+            onClickOtherButton={closeModal}
+            isButtonOnRow={false}
+            reverseButtonOrder={true}
+          >
+            <p>
+              작품을 삭제하시겠습니까?
+              <br />
+              삭제한 작품은 복구할 수 없습니다.
+            </p>
+          </ConfirmModal>
+        ),
+      });
+    }
+
+    if (collectionId) {
+      openModal({
+        modalSize: 'sm',
+        contents: (
+          <ConfirmModal
+            onClickConfirmButton={confirmDelete}
+            onClickOtherButton={closeModal}
+            isButtonOnRow={false}
+            reverseButtonOrder={true}
+          >
+            <p>
+              컬렉션을 삭제하시겠습니까?
+              <br />
+              삭제한 컬렉션은 복구할 수 없습니다.
+            </p>
+          </ConfirmModal>
+        ),
+      });
+    }
   };
 
   useEffect(() => {
@@ -125,7 +185,16 @@ const CardController = ({
 
   return (
     <div ref={wrapperRef} onClick={toggleShowOption} className='cursor-pointer'>
-      <Icon name='MoreVertical' size='l' />
+      <Icon
+        name='MoreVertical'
+        size='s'
+        className='text-white block md:hidden'
+      />
+      <Icon
+        name='MoreVertical'
+        size='l'
+        className='text-white hidden md:block'
+      />
       {
         <div
           className={`absolute top-0 left-0 w-full ${showOption ? 'h-full' : 'h-0'} transition-all duration-700 ease-in-out overflow-hidden`}

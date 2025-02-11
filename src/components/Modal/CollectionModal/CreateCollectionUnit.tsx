@@ -10,7 +10,7 @@ import CreateCollectionModal from '../CreateCollectionModal';
 const CreateCollectionUnit = () => {
   const { openModal, closeModal } = useStore(modalStore);
 
-  const handleCreateCollecion = () => {
+  const handleCreateCollection = () => {
     closeModal();
 
     openModal({
@@ -22,7 +22,7 @@ const CreateCollectionUnit = () => {
   return (
     <button
       className='flex tablet:flex-col items-center gap-[8px] tablet:p-0 p-[9px]'
-      onClick={handleCreateCollecion}
+      onClick={handleCreateCollection}
     >
       <div
         className='flex justify-center items-center tablet:w-full tablet:h-[200px] w-[70px] h-[70px] rounded-[5px] overflow-hidden'

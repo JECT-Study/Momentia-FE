@@ -3,8 +3,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { MouseEvent } from 'react';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
-import RankingLabel from '@/../public/images/rankingLabel.png';
 import ROUTE from '@/constants/routes';
 import { ArtworkInfoType } from '@/types';
 
@@ -81,7 +79,7 @@ const ArtworkCard = ({
       onClick={clickArtworkCard}
     >
       <Image
-        src={postImage || DefaultImage}
+        src={postImage || '/images/defaultArtworkImage.png'}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
         sizes={modeClasses[mode] || '402px'}
@@ -91,7 +89,7 @@ const ArtworkCard = ({
       {rank && (
         <div className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px] absolute top-0 left-[44px] mobile:left-[63px] z-10'>
           <Image
-            src={RankingLabel}
+            src='/images/rankingLabel.png'
             alt='ranking-label'
             width={68}
             height={97}

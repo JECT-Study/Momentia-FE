@@ -40,6 +40,7 @@ import Plus from './icons/Plus';
 import Search from './icons/Search';
 import Settings from './icons/Settings';
 import Star from './icons/Star';
+import Trash from './icons/Trash';
 import Unlock from './icons/Unlock';
 import UploadShare from './icons/UploadShare';
 
@@ -95,4 +96,5 @@ export const iconsNames: Record<
   Dropdown,
   Lock,
   Unlock,
+  Trash,
 };

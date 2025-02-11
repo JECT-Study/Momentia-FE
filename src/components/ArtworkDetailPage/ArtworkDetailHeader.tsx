@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import ROUTE from '@/constants/routes';
 import { ArtworkPostHeaderInfoType } from '@/types';
 import timeFormatter from '@/utils/timeFormatter';
@@ -36,7 +35,7 @@ const ArtworkDetailHeader = ({
         className='flex items-center gap-[22px] hover:underline'
       >
         <Image
-          src={profileImage || DefaultProfileImage}
+          src={profileImage || '/images/defaultProfileImage.png'}
           alt={profileImage ? 'artwork image' : 'artwork default image'}
           className='object-contain rounded-full'
           width={67}

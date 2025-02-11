@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { Ref, useState } from 'react';
 
-import DefaultProfileImage from '@/../public/images/defaultProfileImage.png';
 import { CommonCommentProps } from '@/types/comment';
 import timeFormatter from '@/utils/timeFormatter';
 
@@ -24,7 +23,7 @@ const ArtworkCommentUnit = ({
   return (
     <div className='flex items-start gap-[29px]' ref={ref}>
       <Image
-        src={profileImage || DefaultProfileImage}
+        src={profileImage || '/images/defaultProfileImage.png'}
         alt={'artwork default image'}
         className='rounded-full'
         width={56}

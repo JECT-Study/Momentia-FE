@@ -4,10 +4,13 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import OvalButton from '@/components/Button/OvalButton';
-import UserArtworkCard from '@/components/Card/UserArtworkCard';
-import FilterDropdown from '@/components/FilterDropdown';
+import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Pagination from '@/components/Pagination';
-import { ITEMS_PER_PAGE, SORT_MAPPING } from '@/constants/pagination';
+import SortDropdown from '@/components/SortDropdown';
+import {
+  COLLECTION_SORT_OPTIONS,
+  ITEMS_PER_PAGE,
+} from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetLikedArtworkList from '@/hooks/serverStateHooks/useGetLikedArtworkList';
@@ -18,7 +21,7 @@ const LikedTab = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const { artworkList, pageInfo } = useGetLikedArtworkList({
-    sort: SORT_MAPPING[currentSort] || 'recent',
+    sort: COLLECTION_SORT_OPTIONS[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
   });
@@ -37,7 +40,7 @@ const LikedTab = () => {
 
   return (
     <div className='flex-1 flex flex-col items-end'>
-      <FilterDropdown
+      <SortDropdown
         options={SORT_OPTIONS}
         selected={currentSort}
         onChange={handleFilterChange}
@@ -47,7 +50,7 @@ const LikedTab = () => {
         <>
           <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10'>
             {artworkList.map((artwork) => (
-              <UserArtworkCard
+              <ArtworkAndCollectionCard
                 key={artwork.postId}
                 artworkInfo={{ ...artwork, status: null }}
               />

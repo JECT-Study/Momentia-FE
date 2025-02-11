@@ -5,7 +5,7 @@ const ROUTE = {
   artworkList: '/artwork/list',
   artworkDetail: '/artwork/detail',
   artworkUpload: '/artwork/upload',
-  collections: '/collections',
+  collection: '/collection',
   profile: (userId: number) => `/profile?userId=${userId}`,
 };
 

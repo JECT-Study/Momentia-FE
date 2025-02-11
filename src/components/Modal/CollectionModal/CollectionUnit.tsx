@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
 import Icon from '@/components/Icon/Icon';
 import usePostCollectionAddArtwork from '@/hooks/serverStateHooks/usePostCollectionAddArtwork';
 import { CollectionType } from '@/types/collection';
@@ -13,7 +12,8 @@ const CollectionUnit = ({
 }: {
   collectionInfo: CollectionType;
 }) => {
-  const { collectionId, collectionImage, name, status } = collectionInfo;
+  const { collectionId, collectionImage, name, collectionStatus } =
+    collectionInfo;
   const [blockButton, setBlockButton] = useState(false);
 
   const { mutate: addCollectionArtwork } = usePostCollectionAddArtwork();
@@ -32,7 +32,7 @@ const CollectionUnit = ({
     >
       <div className='relative tablet:w-full tablet:h-[200px] w-[70px] h-[70px] rounded-[5px] overflow-hidden'>
         <Image
-          src={collectionImage || DefaultImage}
+          src={collectionImage || '/images/defaultArtworkImage.png'}
           alt={collectionImage ? 'collection-image' : 'default-image'}
           fill={true}
         />
@@ -42,8 +42,11 @@ const CollectionUnit = ({
           {name}
         </p>
         <div className='flex items-center gap-0.5 tablet:body2 button-s text-gray-500'>
-          <Icon name={status === 'PRIVATE' ? 'Lock' : 'Unlock'} size='s' />
-          <p>{status === 'PRIVATE' ? '비공개' : '전체 공개'}</p>
+          <Icon
+            name={collectionStatus === 'PRIVATE' ? 'Lock' : 'Unlock'}
+            size='s'
+          />
+          <p>{collectionStatus === 'PRIVATE' ? '비공개' : '전체 공개'}</p>
         </div>
       </div>
     </button>
