@@ -6,6 +6,7 @@ import { useStore } from 'zustand';
 
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Icon from '@/components/Icon/Icon';
+import ShareModal from '@/components/Modal/ShareModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
@@ -40,6 +41,15 @@ const Collection = () => {
 
   const artworksLength = artworks.length;
 
+  const openShareModal = () => {
+    openModal({
+      modalSize: 'md',
+      contents: (
+        <ShareModal title={collectionName} artworksLength={artworksLength} />
+      ),
+    });
+  };
+
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -62,7 +72,7 @@ const Collection = () => {
         <h3 className='hidden md:block'>{artworksLength}개의 작품</h3>
         <h4 className='block md:hidden'>{artworksLength}개의 작품</h4>
         <div className='flex gap-[30px]'>
-          <button>
+          <button onClick={openShareModal}>
             <Icon name='UploadShare' size='m' className='text-white' />
           </button>
           <button>
