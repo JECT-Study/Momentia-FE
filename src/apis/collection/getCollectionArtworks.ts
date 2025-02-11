@@ -7,7 +7,7 @@ import {
 } from '@/constants/errorMessage';
 import {
   CollectionArtworksParams,
-  ProfileCollectionListResponse,
+  CollectionArtworksResponse,
 } from '@/types/collection';
 import { ErrorResponseType } from '@/types/errorResponse';
 import TokenHandler from '@/utils/tokenHandler';
@@ -24,7 +24,7 @@ const getCollectionArtworks = async ({
     const currentClient =
       TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
 
-    const { data } = await currentClient.get<ProfileCollectionListResponse>(
+    const { data } = await currentClient.get<CollectionArtworksResponse>(
       `${COLLECTION.collection}/${collectionId}/posts?page=${page}&size=${size}&sort=${sort}`,
     );
 

@@ -1,3 +1,4 @@
+import { ArtworkInfoType } from './artwork';
 import { PaginationType } from './pagination';
 
 export interface CollectionType {
@@ -10,6 +11,12 @@ export interface CollectionType {
 export interface ProfileCollectionListResponse {
   isMine: boolean;
   data: CollectionType[];
+  page: PaginationType;
+}
+
+export interface CollectionArtworksResponse {
+  isMine: boolean;
+  data: ArtworkInfoType[];
   page: PaginationType;
 }
 
