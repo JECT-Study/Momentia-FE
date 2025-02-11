@@ -1,15 +1,19 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Icon from '@/components/Icon/Icon';
+import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ShareModal from '@/components/Modal/ShareModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
+import { COLLECTION } from '@/constants/API';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetAllCollectionList';
 import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
@@ -27,6 +31,7 @@ const Collection = () => {
 
   const isCollectionPage = true;
 
+  const queryClient = useQueryClient();
   const { collections = [] } = useGetAllCollectionList();
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
@@ -46,6 +51,39 @@ const Collection = () => {
       modalSize: 'md',
       contents: (
         <ShareModal title={collectionName} artworksLength={artworksLength} />
+      ),
+    });
+  };
+
+  const { mutate: deleteCollection } = useDeleteCollection();
+
+  const confirmCollectionDelete = () => {
+    deleteCollection(collectionId, {
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: [COLLECTION.collectionList],
+        });
+        closeModal();
+      },
+    });
+  };
+
+  const clickCollectionDeleteButton = () => {
+    openModal({
+      modalSize: 'sm',
+      contents: (
+        <ConfirmModal
+          onClickConfirmButton={confirmCollectionDelete}
+          onClickOtherButton={closeModal}
+          isButtonOnRow={false}
+          reverseButtonOrder={true}
+        >
+          <p>
+            컬렉션을 삭제하시겠습니까?
+            <br />
+            삭제한 컬렉션은 복구할 수 없습니다.
+          </p>
+        </ConfirmModal>
       ),
     });
   };
@@ -75,7 +113,7 @@ const Collection = () => {
           <button onClick={openShareModal}>
             <Icon name='UploadShare' size='m' className='text-white' />
           </button>
-          <button>
+          <button onClick={clickCollectionDeleteButton}>
             <Icon name='Trash' size='m' className='text-white' />
           </button>
         </div>
