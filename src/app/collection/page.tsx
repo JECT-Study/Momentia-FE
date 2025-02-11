@@ -6,7 +6,8 @@ import { useStore } from 'zustand';
 
 import Icon from '@/components/Icon/Icon';
 import SortDropdown from '@/components/SortDropdown';
-import { ARTWORK_SORT_OPTIONS } from '@/constants/pagination';
+import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
 
 const Collection = () => {
@@ -19,6 +20,13 @@ const Collection = () => {
   const handleFilterChange = (newFilter: string) => {
     setSelectedFilter(newFilter);
   };
+
+  const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
+    sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
+    page: currentPage - 1,
+    size: ITEMS_PER_PAGE,
+    collectionId,
+  });
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
