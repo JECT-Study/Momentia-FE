@@ -5,9 +5,9 @@ import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
-import FilterDropdown from '@/components/FilterDropdown';
 import BasicInput from '@/components/Input/BasicInput';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
+import SortDropdown from '@/components/SortDropdown';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
 import ROUTE from '@/constants/routes';
 import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
@@ -258,7 +258,7 @@ const ArtworkUpload = () => {
       </div>
 
       <div className='flex flex-col md:flex-row items-start self-stretch gap-[38px] md:gap-[50px] pb-[78px]'>
-        <FilterDropdown
+        <SortDropdown
           label='작품 카테고리'
           placeholder='카테고리 선택'
           options={ARTWORK_FIELDS.map((field) => field.name)}
@@ -271,7 +271,7 @@ const ArtworkUpload = () => {
           className='w-full'
         />
 
-        <FilterDropdown
+        <SortDropdown
           label='공개범위'
           options={PRIVACY_SETTING_OPTIONS.map((option) => option.name)}
           selected={selectedPrivacySettingName}

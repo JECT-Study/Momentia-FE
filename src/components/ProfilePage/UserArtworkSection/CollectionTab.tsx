@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { useStore } from 'zustand';
 
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
-import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
+import SortDropdown from '@/components/SortDropdown';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
@@ -51,7 +51,7 @@ const CollectionTab = () => {
           <Icon name='Plus' size='m' className='mr-[10px]' />
           컬렉션 생성
         </button>
-        <FilterDropdown
+        <SortDropdown
           options={Object.keys(ARTWORK_SORT_OPTIONS)}
           selected={selectedFilter}
           onChange={handleFilterChange}

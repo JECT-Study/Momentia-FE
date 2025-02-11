@@ -5,8 +5,8 @@ import { useState } from 'react';
 
 import OvalButton from '@/components/Button/OvalButton';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
-import FilterDropdown from '@/components/FilterDropdown';
 import Pagination from '@/components/Pagination';
+import SortDropdown from '@/components/SortDropdown';
 import {
   COLLECTION_SORT_OPTIONS,
   ITEMS_PER_PAGE,
@@ -40,7 +40,7 @@ const LikedTab = () => {
 
   return (
     <div className='flex-1 flex flex-col items-end'>
-      <FilterDropdown
+      <SortDropdown
         options={SORT_OPTIONS}
         selected={currentSort}
         onChange={handleFilterChange}

@@ -4,7 +4,7 @@ import { ArtworkField } from '@/types';
 import ARTWORK_FIELDS from '../../constants/artworkFields';
 import OvalButton from '../Button/OvalButton';
 import DefaultCarousel from '../Carousel/DefaultCarousel';
-import FilterDropdown from '../FilterDropdown';
+import SortDropdown from '../SortDropdown';
 
 interface ArtworkFilterProps {
   selectedArtworkField: string;
@@ -64,7 +64,7 @@ const ArtworkFilter = ({
 
       <div className='max-w-[1920px] py-[73px] flex justify-between items-center self-stretch'>
         <h1>{selectedArtworkFieldName}</h1>
-        <FilterDropdown
+        <SortDropdown
           options={SORT_OPTIONS}
           selected={selectedFilter}
           onChange={handleFilterChange}

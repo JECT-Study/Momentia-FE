@@ -6,7 +6,7 @@ import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
 
 import Icon from '../Icon/Icon';
 
-interface FilterDropdownProps {
+interface SortDropdownProps {
   options: string[];
   selected: string;
   onChange: (value: string) => void;
@@ -18,7 +18,7 @@ interface FilterDropdownProps {
   className?: string;
 }
 
-const FilterDropdown = ({
+const SortDropdown = ({
   options,
   selected,
   onChange,
@@ -27,7 +27,7 @@ const FilterDropdown = ({
   isInvalid = false,
   errorMessage,
   className,
-}: FilterDropdownProps) => {
+}: SortDropdownProps) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const dropdownRef = useClickOutside<HTMLDivElement>(() =>
@@ -109,4 +109,4 @@ const FilterDropdown = ({
   );
 };
 
-export default FilterDropdown;
+export default SortDropdown;
