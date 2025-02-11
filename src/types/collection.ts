@@ -22,3 +22,10 @@ export interface PatchCollectionParams {
   collectionId: number;
   data: PatchCollectionData;
 }
+
+export interface CollectionArtworksParams {
+  collectionId: number;
+  sort: string;
+  page: number;
+  size: number;
+}
