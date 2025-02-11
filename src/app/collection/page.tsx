@@ -8,6 +8,7 @@ import { useStore } from 'zustand';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
+import EditModal from '@/components/Modal/EditModal';
 import ShareModal from '@/components/Modal/ShareModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
@@ -55,6 +56,15 @@ const Collection = () => {
     });
   };
 
+  const openEditModal = () => {
+    openModal({
+      modalSize: 'md',
+      contents: (
+        <EditModal title={collectionName} collectionId={collectionId} />
+      ),
+    });
+  };
+
   const { mutate: deleteCollection } = useDeleteCollection();
 
   const confirmCollectionDelete = () => {
@@ -95,7 +105,10 @@ const Collection = () => {
   return (
     <div className='pt-[50px] px-[32px] md:px-[140px]'>
       <div className='flex justify-start'>
-        <button className='button-m flex items-center mb-[20px]'>
+        <button
+          className='button-m flex items-center mb-[20px]'
+          onClick={openEditModal}
+        >
           <h1 className='hidden md:block'>{collectionName}</h1>
           <h3 className='block md:hidden'>{collectionName}</h3>
           <Icon
