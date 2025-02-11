@@ -20,14 +20,14 @@ import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionA
 import modalStore from '@/stores/modalStore';
 
 const Collection = () => {
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
   const { openModal, closeModal } = useStore(modalStore);
 
   const collectionIdParams = useSearchParams().get('collectionId');
   const collectionId = collectionIdParams ? Number(collectionIdParams) : 0;
-  const handleFilterChange = (newFilter: string) => {
-    setSelectedFilter(newFilter);
+  const handleSortChange = (newOption: string) => {
+    setSelectedOption(newOption);
   };
 
   const isCollectionPage = true;
@@ -35,7 +35,7 @@ const Collection = () => {
   const queryClient = useQueryClient();
   const { collections = [] } = useGetAllCollectionList();
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
-    sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
+    sort: ARTWORK_SORT_OPTIONS[selectedOption] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     collectionId,
@@ -140,8 +140,8 @@ const Collection = () => {
       <div className='flex justify-end pt-[70px]'>
         <SortDropdown
           options={Object.keys(ARTWORK_SORT_OPTIONS)}
-          selected={selectedFilter}
-          onChange={handleFilterChange}
+          selected={selectedOption}
+          onChange={handleSortChange}
           className='w-[155px]'
         />
       </div>

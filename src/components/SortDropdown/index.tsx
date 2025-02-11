@@ -52,7 +52,7 @@ const SortDropdown = ({
 
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-        aria-label={`Currently selected filter: ${selected || placeholder}`}
+        aria-label={`Currently selected sort: ${selected || placeholder}`}
         aria-expanded={isDropdownOpen}
         className={`flex items-center justify-between px-[20px] leading-[60px]
         text-white bg-gray-900 rounded-[5px] gap-[36px] shadow-sm
