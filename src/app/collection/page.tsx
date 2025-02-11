@@ -6,6 +6,7 @@ import { useStore } from 'zustand';
 
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Icon from '@/components/Icon/Icon';
+import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
@@ -81,6 +82,14 @@ const Collection = () => {
                 isMine={isMine}
               />
             ))}
+          </div>
+
+          <div className='m-auto w-fit py-[70px]'>
+            <Pagination
+              currentPage={pageInfo.requestPage}
+              totalPages={pageInfo.totalPages}
+              onPageChange={handlePageChange}
+            />
           </div>
         </>
       )}
