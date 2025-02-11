@@ -5,22 +5,18 @@ import {
   COLLECTION_ADD_ARTWORK_ERROR_MESSAGE,
   COMMON_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import { CollectionAddAndRemoveArtworkParams } from '@/types/collection';
 import { ErrorResponseType } from '@/types/errorResponse';
 
 import { authorizedClient } from '..';
 
-interface PostCollectionAddArtworkProps {
-  collectionId: number;
-  postId: number;
-}
-
 const postCollectionAddArtwork = async ({
   collectionId,
   postId,
-}: PostCollectionAddArtworkProps) => {
+}: CollectionAddAndRemoveArtworkParams) => {
   try {
     const response = await authorizedClient.post<null>(
-      COLLECTION.collectionAddArtwork(collectionId, postId),
+      COLLECTION.collectionAddAndRemoveArtwork(collectionId, postId),
     );
 
     if (response.status === 201) {

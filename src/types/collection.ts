@@ -36,3 +36,8 @@ export interface CollectionArtworksParams {
   page: number;
   size: number;
 }
+
+export interface CollectionAddAndRemoveArtworkParams {
+  collectionId: number;
+  postId: number;
+}
