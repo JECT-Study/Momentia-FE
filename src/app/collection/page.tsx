@@ -26,17 +26,19 @@ const Collection = () => {
 
   const isCollectionPage = true;
 
-  const { collections } = useGetAllCollectionList();
-  const collectionName = collections.filter(
-    (collection) => collection.collectionId === collectionId,
-  )[0].name;
-
+  const { collections = [] } = useGetAllCollectionList();
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     collectionId,
   });
+
+  const collectionName =
+    collections.find((collection) => collection.collectionId === collectionId)
+      ?.name ?? '';
+
+  const artworksLength = artworks.length;
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -57,8 +59,8 @@ const Collection = () => {
       </div>
 
       <div className='flex justify-between items-center'>
-        <h3 className='hidden md:block'>{artworks.length}개의 작품</h3>
-        <h4 className='block md:hidden'>{artworks.length}개의 작품</h4>
+        <h3 className='hidden md:block'>{artworksLength}개의 작품</h3>
+        <h4 className='block md:hidden'>{artworksLength}개의 작품</h4>
         <div className='flex gap-[30px]'>
           <button>
             <Icon name='UploadShare' size='m' className='text-white' />
