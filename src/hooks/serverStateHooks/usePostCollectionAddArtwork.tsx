@@ -26,7 +26,7 @@ const usePostCollectionAddArtwork = () => {
           <ConfirmModal
             otherButtonText='컬렉션으로 이동'
             onClickOtherButton={() => {
-              router.push(ROUTE.collections);
+              router.push(ROUTE.collection);
             }}
           >
             <p className='body1'>작품이 컬렉션에 저장되었습니다.</p>

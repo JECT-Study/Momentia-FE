@@ -43,6 +43,10 @@ const ArtworkAndCollectionCard = ({
     if (postId) {
       router.push(`${ROUTE.artworkDetail}?postId=${postId}`);
     }
+
+    if (collectionId) {
+      router.push(`${ROUTE.collection}?collectionId=${collectionId}`);
+    }
   };
 
   return (
