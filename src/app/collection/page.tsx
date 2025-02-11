@@ -9,6 +9,7 @@ import Icon from '@/components/Icon/Icon';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetAllCollectionList';
 import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
 
@@ -25,6 +26,11 @@ const Collection = () => {
 
   const isCollectionPage = true;
 
+  const { collections } = useGetAllCollectionList();
+  const collectionName = collections.filter(
+    (collection) => collection.collectionId === collectionId,
+  )[0].name;
+
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
     page: currentPage - 1,
@@ -40,8 +46,8 @@ const Collection = () => {
     <div className='pt-[50px] px-[32px] md:px-[140px]'>
       <div className='flex justify-start'>
         <button className='button-m flex items-center mb-[20px]'>
-          <h1 className='hidden md:block'>컬렉션 이름</h1>
-          <h3 className='block md:hidden'>컬렉션 이름</h3>
+          <h1 className='hidden md:block'>{collectionName}</h1>
+          <h3 className='block md:hidden'>{collectionName}</h3>
           <Icon
             name='EditPencil'
             size='m'
@@ -51,8 +57,8 @@ const Collection = () => {
       </div>
 
       <div className='flex justify-between items-center'>
-        <h3 className='hidden md:block'>0개의 작품</h3>
-        <h4 className='block md:hidden'>0개의 작품</h4>
+        <h3 className='hidden md:block'>{artworks.length}개의 작품</h3>
+        <h4 className='block md:hidden'>{artworks.length}개의 작품</h4>
         <div className='flex gap-[30px]'>
           <button>
             <Icon name='UploadShare' size='m' className='text-white' />
