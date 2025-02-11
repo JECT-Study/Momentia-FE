@@ -67,8 +67,8 @@ const CollectionTab = () => {
             {collections.map((collection) => (
               <ArtworkAndCollectionCard
                 key={collection.collectionId}
-                collection={collection}
                 isMine={isMine}
+                collection={collection}
               />
             ))}
           </div>
