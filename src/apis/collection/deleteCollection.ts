@@ -12,7 +12,7 @@ import { authorizedClient } from '..';
 const deleteCollection = async (collectionId: number) => {
   try {
     const response = await authorizedClient.delete<null>(
-      COLLECTION.patchAndDeleteCollection(collectionId),
+      COLLECTION.modifyCollection(collectionId),
     );
 
     if (response.status === 204) {

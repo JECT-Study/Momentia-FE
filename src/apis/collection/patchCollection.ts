@@ -16,7 +16,7 @@ const patchCollection = async ({
 }: PatchCollectionParams) => {
   try {
     const response = await authorizedClient.patch(
-      COLLECTION.patchAndDeleteCollection(collectionId),
+      COLLECTION.modifyCollection(collectionId),
       data,
     );
 

@@ -33,8 +33,7 @@ const COLLECTION = {
   collectionList: '/collections',
   collectionAddArtwork: (collectionId: number, postId: number) =>
     `/collection/${collectionId}/post/${postId}`,
-  patchAndDeleteCollection: (collectionId: number) =>
-    `/collection/${collectionId}`,
+  modifyCollection: (collectionId: number) => `/collection/${collectionId}`,
 };
 
 const IMAGE = {
