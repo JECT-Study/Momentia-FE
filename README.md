@@ -6,7 +6,7 @@
 
 ## 배포 주소
 
-https://momentia-fe-62do.vercel.app (향후 변경 예정)
+https://momentia.site
 
 
 ## 목차
@@ -22,7 +22,7 @@ https://momentia-fe-62do.vercel.app (향후 변경 예정)
 ## 0. 프로젝트 소개
 > 개발 기간: 2024. 12. 5 ~
 
-모멘티아(Momentia)는 '**무명 예술가를 위한 작품 전시 온라인 플랫폼**'입니다. <br />
+모멘티아(Momentia)는 '**무명 예술가를 위한 온라인 작품 전시 플랫폼**'입니다. <br />
 순간을 뜻하는 'Moment'와 공간을 뜻하는 접미사 '-ia'를 결합하여 ‘예술가들의 순간을 위한 공간’이라는 의미를 지니고 있습니다.
 
 
@@ -32,7 +32,7 @@ https://momentia-fe-62do.vercel.app (향후 변경 예정)
 | :----------------------------: | :----------------------------: |
 | <img width="230" src="https://avatars.githubusercontent.com/u/154739298?s=400&u=ffcac1e1be1165a48832c6f33c04f9b617c70802&v=4" /> | <img width="230" src="https://avatars.githubusercontent.com/u/49917043?v=4"/> |
 | [@dahyeo-n](https://github.com/dahyeo-n) | [@SangWoo9734](https://github.com/SangWoo9734) |
-| 디자인 시스템, 작품 목록 페이지, `README` 작성 | 로그인/회원가입 페이지, 메인 페이지 |
+| 디자인 시스템, 작품 목록 페이지, 컬렉션 페이지, `README` 작성 | 로그인/회원가입 페이지, 메인 페이지, 프로필 페이지 |
 
 
 ## 2. 기술 스택
