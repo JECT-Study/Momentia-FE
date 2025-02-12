@@ -68,7 +68,6 @@ export const putNotifyImageUploadComplete = async (imageId: number) => {
 
     if (response.status !== 204) {
       throw new Error('이미지 업로드 완료에 실패하였습니다.');
-      return false;
     } else {
       return true;
     }
