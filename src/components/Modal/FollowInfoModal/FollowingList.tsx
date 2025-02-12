@@ -27,7 +27,7 @@ const FollowingList = ({ nickname }: { nickname: string }) => {
             {followingList.map((following) => (
               <FollowUserUnit
                 key={following.userId}
-                followStatus={false}
+                followStatus={following.isFollow}
                 {...following}
               />
             ))}

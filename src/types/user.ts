@@ -34,7 +34,7 @@ export interface UserArtworkResponse extends ArtworkListResponse {
 export interface FollowUserType
   extends Pick<
     UserType,
-    'userId' | 'profileImage' | 'nickname' | 'introduction'
+    'userId' | 'profileImage' | 'nickname' | 'introduction' | 'isFollow'
   > {}
 
 export interface UserStringProfileType
