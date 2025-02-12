@@ -1,5 +1,5 @@
 import { USER } from '@/constants/API';
-import { FollowUser } from '@/types/user';
+import { FollowUserType } from '@/types/user';
 import TokenHandler from '@/utils/tokenHandler';
 
 import defaultClient, { authorizedClient } from '..';
@@ -8,7 +8,7 @@ const getFollowingList = async (userId: number) => {
   const currentClient =
     TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
 
-  const { data } = await currentClient.get<{ users: FollowUser[] }>(
+  const { data } = await currentClient.get<{ users: FollowUserType[] }>(
     USER.followingList(userId),
   );
 

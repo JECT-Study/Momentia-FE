@@ -31,7 +31,7 @@ export interface UserArtworkResponse extends ArtworkListResponse {
   isMine: boolean;
 }
 
-export interface FollowUser
+export interface FollowUserType
   extends Pick<
     UserType,
     'userId' | 'profileImage' | 'nickname' | 'introduction'
