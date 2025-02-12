@@ -6,14 +6,13 @@ import { ChangeEvent, useMemo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
+import { UpdateProfileInfoProps } from '@/apis/user/updateProfileInfo';
 import OvalButton from '@/components/Button/OvalButton';
 import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
 import SortDropdown from '@/components/SortDropdown';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
-import usePatchProfileInfo, {
-  UsePatchProfileInfoProps,
-} from '@/hooks/serverStateHooks/usePatchProfileInfo';
+import usePatchProfileInfo from '@/hooks/serverStateHooks/usePatchProfileInfo';
 import { UserStringProfileType, UserType } from '@/types/user';
 
 const USER_INFO_SCHEMA = z.object({
@@ -88,7 +87,7 @@ const EditUserInfo = ({
   const onSubmit = (data: UserInfoFormData) => {
     const newProfileData = {
       updateInfo: {} as UserStringProfileType,
-    } as UsePatchProfileInfoProps;
+    } as UpdateProfileInfoProps;
 
     if (data.nickname !== nickname)
       newProfileData.updateInfo.nickname = data.nickname;
