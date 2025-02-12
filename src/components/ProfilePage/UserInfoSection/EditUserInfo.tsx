@@ -131,7 +131,7 @@ const EditUserInfo = ({
           height={141}
         />
         <div className='absolute right-[3px] bottom-[-6px] w-fit p-4 bg-background-overlay/50 rounded-full backdrop-blur-md'>
-          <Icon name='EditPencil' className='text-transparent stroke-white' />
+          <Icon name='EditPencil' className='text-white' />
         </div>
         <input
           type='file'
