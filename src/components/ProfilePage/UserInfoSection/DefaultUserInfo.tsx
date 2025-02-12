@@ -8,11 +8,11 @@ import modalStore from '@/stores/modalStore';
 import { UserType } from '@/types/user';
 
 interface DefaultUserInfoProps extends UserType {
-  changeMode: () => void;
+  toggleEditMode: () => void;
 }
 
 const DefaultUserInfo = ({
-  changeMode,
+  toggleEditMode,
   userId,
   profileImage,
   nickname,
@@ -49,7 +49,7 @@ const DefaultUserInfo = ({
             <OvalButton
               buttonSize='s'
               variant='primary'
-              onClick={changeMode}
+              onClick={toggleEditMode}
               className='w-full mobile:block hidden'
             >
               프로필 수정
@@ -75,7 +75,7 @@ const DefaultUserInfo = ({
               <OvalButton
                 buttonSize='s'
                 variant='primary'
-                onClick={changeMode}
+                onClick={toggleEditMode}
                 className='w-full mobile:hidden mt-[30px]'
               >
                 프로필 수정

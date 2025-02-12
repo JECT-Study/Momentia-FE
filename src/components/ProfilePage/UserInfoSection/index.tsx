@@ -10,7 +10,7 @@ import EditUserInfo from './EditUserInfo';
 const UserInfoSection = ({ userInfo }: { userInfo: UserType }) => {
   const [isEditing, setIsEditing] = useState(false);
 
-  const changeMode = () => setIsEditing((state) => !state);
+  const toggleEditMode = () => setIsEditing((state) => !state);
 
   const userNameText = userInfo.isMine ? '나' : userInfo.nickname;
 
@@ -18,9 +18,9 @@ const UserInfoSection = ({ userInfo }: { userInfo: UserType }) => {
     <div>
       <h2 className='mb-[70px] mobile:mb-[50px]'>{userNameText}의 모멘티아</h2>
       {isEditing ? (
-        <EditUserInfo changeMode={changeMode} {...userInfo} />
+        <EditUserInfo toggleEditMode={toggleEditMode} {...userInfo} />
       ) : (
-        <DefaultUserInfo changeMode={changeMode} {...userInfo} />
+        <DefaultUserInfo toggleEditMode={toggleEditMode} {...userInfo} />
       )}
     </div>
   );

@@ -29,11 +29,11 @@ const MAX_INTRODUCTION_LENGTH = 60;
 type UserInfoFormData = z.infer<typeof USER_INFO_SCHEMA>;
 
 interface EditUserInfoProps extends UserType {
-  changeMode: () => void;
+  toggleEditMode: () => void;
 }
 
 const EditUserInfo = ({
-  changeMode,
+  toggleEditMode,
   profileImage,
   nickname,
   introduction,
@@ -108,7 +108,7 @@ const EditUserInfo = ({
     updateUserProfile(newProfileData, {
       onSuccess: () => {
         alert('프로필이 성공적으로 업데이트되었습니다!');
-        changeMode();
+        toggleEditMode();
       },
     });
   };
@@ -185,7 +185,7 @@ const EditUserInfo = ({
             buttonSize='s'
             variant='tertiary'
             className='bg-transparent py-[20px] px-[34px] leading-none'
-            onClick={changeMode}
+            onClick={toggleEditMode}
           >
             취소
           </OvalButton>
