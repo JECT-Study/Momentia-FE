@@ -12,9 +12,10 @@ import { authorizedClient } from '..';
 
 const patchProfileInfo = async (updateInfo: UpdateProfileType) => {
   try {
-    const response = await authorizedClient.patch<null>(USER.userProfile, {
-      ...updateInfo,
-    });
+    const response = await authorizedClient.patch<null>(
+      USER.userProfile,
+      updateInfo,
+    );
 
     if (response.status !== 204) {
       throw new Error('프로필 수정 실패');
