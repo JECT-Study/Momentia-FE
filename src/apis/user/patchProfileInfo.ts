@@ -16,12 +16,11 @@ const patchProfileInfo = async (updateInfo: UpdateProfileType) => {
       ...updateInfo,
     });
 
-    if (response.status === 204) {
-      return true;
-    } else {
+    if (response.status !== 204) {
       throw new Error('프로필 수정 실패');
     }
-    return false;
+
+    return true;
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;
