@@ -63,12 +63,14 @@ const DefaultUserInfo = ({
           )}
         </div>
         <div className='relative flex-1 flex flex-col items-center mobile:items-start'>
-          <h3 className='mb-[43px] mobile:mb-[29px]'>{nickname}</h3>
+          <h3 className='mb-[43px] mobile:mb-[29px] text-[22px] mobile:text-2xl'>
+            {nickname}
+          </h3>
           <div className='mb-10'>
-            <p className='subtitle1 mb-[15px] mobile:mb-[25px] text-center mobile:text-start'>
+            <p className='subtitle2 mobile:subtitle1 mb-[15px] mobile:mb-[25px] text-center mobile:text-start'>
               {userField || '없음'}
             </p>
-            <p className='subtitle2'>{introduction}</p>
+            <p className='placeholder tablet:subtitle2'>{introduction}</p>
             {isMine && (
               <OvalButton
                 buttonSize='s'
@@ -80,7 +82,7 @@ const DefaultUserInfo = ({
               </OvalButton>
             )}
           </div>
-          <div className='static tablet:absolute top-0 right-0 flex gap-10'>
+          <div className='button-s tablet:button-m static tablet:absolute top-0 right-0 flex gap-10'>
             <button
               type='button'
               className={
