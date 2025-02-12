@@ -8,7 +8,7 @@ import { useStore } from 'zustand';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
-import EditModal from '@/components/Modal/EditModal';
+import RenameCollectionModal from '@/components/Modal/RenameCollectionModal';
 import ShareModal from '@/components/Modal/ShareModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
@@ -54,11 +54,14 @@ const Collection = () => {
     });
   };
 
-  const openEditModal = () => {
+  const openRenameCollectionModal = () => {
     openModal({
       modalSize: 'md',
       contents: (
-        <EditModal title={collectionName} collectionId={collectionId} />
+        <RenameCollectionModal
+          title={collectionName}
+          collectionId={collectionId}
+        />
       ),
     });
   };
@@ -105,7 +108,7 @@ const Collection = () => {
       <div className='flex justify-start'>
         <button
           className='button-m flex items-center mb-[20px]'
-          onClick={openEditModal}
+          onClick={openRenameCollectionModal}
           disabled={!isMine}
         >
           <h1 className='hidden md:block'>{collectionName}</h1>

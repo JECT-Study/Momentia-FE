@@ -11,14 +11,17 @@ import { COLLECTION } from '@/constants/API';
 import usePatchCollection from '@/hooks/serverStateHooks/usePatchCollection';
 import modalStore from '@/stores/modalStore';
 
-interface EditModalProps {
+interface RenameCollectionModalProps {
   title: string;
   collectionId: number;
 }
 
 const MAX_TITLE_LENGTH = 10;
 
-const EditModal = ({ title, collectionId }: EditModalProps) => {
+const RenameCollectionModal = ({
+  title,
+  collectionId,
+}: RenameCollectionModalProps) => {
   const [collectionTitle, setCollectionTitle] = useState(title);
   const { closeModal } = useStore(modalStore);
 
@@ -88,4 +91,4 @@ const EditModal = ({ title, collectionId }: EditModalProps) => {
   );
 };
 
-export default EditModal;
+export default RenameCollectionModal;
