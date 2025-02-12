@@ -16,14 +16,14 @@ interface EditModalProps {
   collectionId: number;
 }
 
+const MAX_TITLE_LENGTH = 10;
+
 const EditModal = ({ title, collectionId }: EditModalProps) => {
   const [collectionTitle, setCollectionTitle] = useState(title);
   const { closeModal } = useStore(modalStore);
 
   const queryClient = useQueryClient();
   const { mutate: patchCollectionStatus } = usePatchCollection();
-
-  const MAX_TITLE_LENGTH = 10;
 
   const handleCollectionTitleOnChange = (
     event: ChangeEvent<HTMLInputElement>,
