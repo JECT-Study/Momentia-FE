@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { useStore } from 'zustand';
 
-import DefaultProfile from '@/../public/images/defaultProfileImage.png';
 import FollowButton from '@/components/Button/FollowButton';
 import OvalButton from '@/components/Button/OvalButton';
 import FollowInfoModal from '@/components/Modal/FollowInfoModal';
@@ -38,7 +37,7 @@ const DefaultUserInfo = ({
       <div className='relative flex flex-col mobile:flex-row mobile:gap-[95px] gap-[30px] items-center mobile:items-start'>
         <div className='w-[141px]'>
           <Image
-            src={profileImage || DefaultProfile}
+            src={profileImage || '/images/defaultProfileImage.png'}
             alt={profileImage ? 'user-profile-image' : 'default-profile'}
             className={'rounded-full mb-[30px] mobile:mb-[40px]'}
             width={141}
@@ -67,13 +66,7 @@ const DefaultUserInfo = ({
             <p className='subtitle1 mb-[15px] mobile:mb-[25px] text-center mobile:text-start'>
               {userField || '없음'}
             </p>
-            <p className='subtitle2'>
-              {introduction}
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
-              cumque, alias voluptatem quos repellat rem aliquam reprehenderit
-              quam ullam provident placeat veniam! Praesentium consequatur
-              doloribus nostrum. Illum asperiores similique doloribus!
-            </p>
+            <p className='subtitle2'>{introduction}</p>
             {isMine && (
               <OvalButton
                 buttonSize='s'

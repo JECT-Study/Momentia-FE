@@ -6,11 +6,10 @@ import { ChangeEvent, useMemo, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
-import DefaultProfile from '@/../public/images/defaultProfileImage.png';
 import OvalButton from '@/components/Button/OvalButton';
-import FilterDropdown from '@/components/FilterDropdown';
 import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
+import SortDropdown from '@/components/SortDropdown';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
 import usePatchProfileInfo, {
   UsePatchProfileInfoProps,
@@ -80,11 +79,10 @@ const EditUserInfo = ({
   };
 
   const convertedProfileImage = useMemo(() => {
-    console.log(currentProfileImage);
     if (currentProfileImage instanceof File)
       return URL.createObjectURL(currentProfileImage);
     if (typeof currentProfileImage === 'string') return currentProfileImage;
-    return DefaultProfile;
+    return '/images/defaultProfileImage.png';
   }, [currentProfileImage]);
 
   const onSubmit = (data: UserInfoFormData) => {
@@ -158,7 +156,7 @@ const EditUserInfo = ({
             maxLength={MAX_NICKNAME_LENGTH}
           />
 
-          <FilterDropdown
+          <SortDropdown
             label='작품 카테고리'
             placeholder='카테고리 선택'
             options={ARTWORK_FIELDS.map((field) => field.name)}
