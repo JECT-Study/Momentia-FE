@@ -58,8 +58,8 @@ const CommentEdit = ({
       <div className='flex justify-end gap-2.5'>
         <OvalButton
           disabled={commentText.length === 0}
-          buttonSize={'s'}
-          variant={'primary'}
+          buttonSize='s'
+          variant='primary'
           className='!bg-gray-900'
           onClick={cancelEditMode}
         >
@@ -67,8 +67,8 @@ const CommentEdit = ({
         </OvalButton>
         <OvalButton
           disabled={commentText.length === 0}
-          buttonSize={'s'}
-          variant={'primary'}
+          buttonSize='s'
+          variant='primary'
           onClick={clickEditButton}
         >
           <p className='button-s'>완료</p>

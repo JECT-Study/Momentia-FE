@@ -24,7 +24,7 @@ const ArtworkCommentUnit = ({
     <div className='flex items-start gap-[29px]' ref={ref}>
       <Image
         src={profileImage || '/images/defaultProfileImage.png'}
-        alt={'artwork default image'}
+        alt='artwork default image'
         className='rounded-full'
         width={56}
         height={56}

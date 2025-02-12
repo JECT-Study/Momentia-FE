@@ -26,7 +26,7 @@ const ArtworkWriteCommentSection = ({ postId }: { postId: number }) => {
         commentBackground={true}
       />
       <span className='h-[60px]'>
-        <SquareButtonL variant={'tertiary'} onClick={submitComment}>
+        <SquareButtonL variant='tertiary' onClick={submitComment}>
           댓글 작성
         </SquareButtonL>
       </span>

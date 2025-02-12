@@ -55,7 +55,7 @@ const CreateCollectionModal = () => {
         />
         <span className='h-[60px] mt-[23px]'>
           <SquareButtonL
-            variant={'primary'}
+            variant='primary'
             onClick={clickCreateButton}
             disabled={collectionName.length === 0}
           >
