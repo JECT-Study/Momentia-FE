@@ -18,7 +18,7 @@ import { UserStringProfileType, UserType } from '@/types/user';
 const USER_INFO_SCHEMA = z.object({
   nickname: z.string().min(1, '닉네임을 입력해주세요.'),
   introduction: z.string().min(1, '자기 소개를 입력해주세요.'),
-  userField: z.string().optional(),
+  field: z.string().optional(),
   profileImage: z.union([z.string(), z.instanceof(File)]).optional(),
 });
 
@@ -53,7 +53,7 @@ const EditUserInfo = ({
     defaultValues: {
       nickname,
       introduction,
-      userField,
+      field: userField,
       profileImage,
     },
   });
@@ -93,11 +93,11 @@ const EditUserInfo = ({
       newProfileData.updateInfo.nickname = data.nickname;
     if (data.introduction !== introduction)
       newProfileData.updateInfo.introduction = data.introduction;
-    if (data.userField !== userField) {
+    if (data.field !== userField) {
       const selectedField = ARTWORK_FIELDS.find(
-        (field) => field.name === data.userField,
+        (field) => field.name === data.field,
       );
-      newProfileData.updateInfo.userField = selectedField?.value;
+      newProfileData.updateInfo.field = selectedField?.value;
     }
 
     if (data.profileImage instanceof File) {
@@ -160,8 +160,8 @@ const EditUserInfo = ({
               label='작품 카테고리'
               placeholder='카테고리 선택'
               options={ARTWORK_FIELDS.map((field) => field.name)}
-              selected={watch('userField') || 'OTHERS'}
-              onChange={(value) => setValue('userField', value)}
+              selected={watch('field') || 'OTHERS'}
+              onChange={(value) => setValue('field', value)}
               className='w-full'
             />
           </span>

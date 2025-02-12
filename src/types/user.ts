@@ -38,7 +38,9 @@ export interface FollowUserType
   > {}
 
 export interface UserStringProfileType
-  extends Partial<Pick<UserType, 'nickname' | 'userField' | 'introduction'>> {}
+  extends Partial<Pick<UserType, 'nickname' | 'introduction'>> {
+  field?: string;
+}
 
 export interface UpdateProfileType extends Partial<UserStringProfileType> {
   profileImage?: number;
