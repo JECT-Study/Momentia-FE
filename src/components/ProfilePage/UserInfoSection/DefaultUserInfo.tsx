@@ -68,7 +68,7 @@ const DefaultUserInfo = ({
           </h3>
           <div className='mb-10'>
             <p className='subtitle2 mobile:subtitle1 mb-[15px] mobile:mb-[25px] text-center mobile:text-start'>
-              {userField || '없음'}
+              {userField || '\u00A0'}
             </p>
             <p className='placeholder tablet:subtitle2'>{introduction}</p>
             {isMine && (
