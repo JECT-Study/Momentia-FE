@@ -3,7 +3,6 @@ import { useSearchParams } from 'next/navigation';
 
 import getFollowerList from '@/apis/follow/getFollowerList';
 import { USER } from '@/constants/API';
-import { FollowUser } from '@/types/user';
 
 const useGetFollowerList = () => {
   const searchParams = useSearchParams();
@@ -16,7 +15,7 @@ const useGetFollowerList = () => {
   });
 
   return {
-    followerList: data !== undefined ? data.users : ([] as FollowUser[]),
+    followerList: data?.users ?? [],
     isLoading,
   };
 };
