@@ -51,6 +51,7 @@ const SortDropdown = ({
       )}
 
       <button
+        type='button'
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         aria-label={`Currently selected filter: ${selected || placeholder}`}
         aria-expanded={isDropdownOpen}
