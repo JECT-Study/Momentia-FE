@@ -16,6 +16,7 @@ export interface ProfileCollectionListResponse {
 
 export interface CollectionArtworksResponse {
   isMine: boolean;
+  name: string;
   data: ArtworkInfoType[];
   page: PaginationType;
 }

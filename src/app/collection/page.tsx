@@ -15,7 +15,6 @@ import SortDropdown from '@/components/SortDropdown';
 import { COLLECTION } from '@/constants/API';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
-import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetAllCollectionList';
 import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
 
@@ -31,17 +30,18 @@ const Collection = () => {
   };
 
   const queryClient = useQueryClient();
-  const { collections = [] } = useGetAllCollectionList();
-  const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
+  const {
+    isMine,
+    name: collectionName,
+    artworks,
+    pageInfo,
+    isLoading,
+  } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedOption] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     collectionId,
   });
-
-  const collectionName =
-    collections.find((collection) => collection.collectionId === collectionId)
-      ?.name ?? '';
 
   const artworksLength = artworks.length;
 

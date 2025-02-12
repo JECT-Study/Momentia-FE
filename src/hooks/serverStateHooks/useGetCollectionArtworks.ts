@@ -13,12 +13,14 @@ const useGetCollectionArtworks = (params: CollectionArtworksParams) => {
 
   const response = data || {
     isMine: false,
+    name: '',
     data: [],
     page: {} as PaginationType,
   };
 
   return {
     isMine: response.isMine,
+    name: response.name,
     artworks: response.data,
     pageInfo: response.page,
     isLoading,
