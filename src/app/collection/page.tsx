@@ -6,9 +6,9 @@ import { useState } from 'react';
 import { useStore } from 'zustand';
 
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
+import RenameCollectionModal from '@/components/CollectionPage/RenameCollectionModal';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
-import RenameCollectionModal from '@/components/Modal/RenameCollectionModal';
 import ShareModal from '@/components/Modal/ShareModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
