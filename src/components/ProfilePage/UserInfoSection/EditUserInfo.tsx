@@ -143,7 +143,7 @@ const EditUserInfo = ({
       </button>
 
       <div className='flex-1 w-full'>
-        <div className='flex flex-col mobile:flex-row items-end mobile:gap-[70px] gap-[15px] pb-[15px]'>
+        <div className='flex flex-col mobile:flex-row mobile:items-center items-end mobile:gap-[70px] gap-[15px] pb-[15px]'>
           <BasicInput
             onChange={changeNickname}
             value={watch('nickname') || ''}
@@ -156,14 +156,16 @@ const EditUserInfo = ({
             maxLength={MAX_NICKNAME_LENGTH}
           />
 
-          <SortDropdown
-            label='작품 카테고리'
-            placeholder='카테고리 선택'
-            options={ARTWORK_FIELDS.map((field) => field.name)}
-            selected={watch('userField') || 'OTHERS'}
-            onChange={(value) => setValue('userField', value)}
-            className='w-full'
-          />
+          <span className='w-full mb-[38px]'>
+            <SortDropdown
+              label='작품 카테고리'
+              placeholder='카테고리 선택'
+              options={ARTWORK_FIELDS.map((field) => field.name)}
+              selected={watch('userField') || 'OTHERS'}
+              onChange={(value) => setValue('userField', value)}
+              className='w-full'
+            />
+          </span>
         </div>
 
         <BasicInput
