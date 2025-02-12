@@ -30,8 +30,6 @@ const Collection = () => {
     setSelectedOption(newOption);
   };
 
-  const isCollectionPage = true;
-
   const queryClient = useQueryClient();
   const { collections = [] } = useGetAllCollectionList();
   const { isMine, artworks, pageInfo, isLoading } = useGetCollectionArtworks({
@@ -155,7 +153,7 @@ const Collection = () => {
               <ArtworkAndCollectionCard
                 key={artwork.postId}
                 isMine={isMine}
-                isCollectionPage={isCollectionPage}
+                isCollectionPage={true}
                 artworkInfo={artwork}
               />
             ))}
