@@ -45,7 +45,7 @@ const CollectionTab = () => {
   };
 
   return (
-    <div className='pt-[50px] px-[32px] md:px-[140px]'>
+    <div className='pt-[50px]'>
       <div className='flex justify-between items-center'>
         <button className='button-m' onClick={handleCreateCollection}>
           <Icon name='Plus' size='m' className='mr-[10px]' />
