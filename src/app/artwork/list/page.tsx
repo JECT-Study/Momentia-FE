@@ -6,20 +6,17 @@ import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
 import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
-import {
-  COLLECTION_SORT_OPTIONS,
-  ITEMS_PER_PAGE,
-} from '@/constants/pagination';
+import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const ArtworkList = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const sortValue = COLLECTION_SORT_OPTIONS[selectedFilter] || 'recent';
+  const sortValue = ARTWORK_SORT_OPTIONS[selectedOption] || 'recent';
 
   const {
     data: artworkList,
@@ -56,8 +53,8 @@ const ArtworkList = () => {
         <ArtworkFilter
           selectedArtworkField={selectedArtworkField}
           setSelectedArtworkField={setSelectedArtworkField}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
           setCurrentPage={setCurrentPage}
         />
         <ArtworkShowcase

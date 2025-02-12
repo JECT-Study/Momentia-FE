@@ -2,7 +2,7 @@ import { isAxiosError } from 'axios';
 
 import { ARTWORK } from '@/constants/API';
 import {
-  ARTWORK_POST_ERROR_MESSAGE,
+  ARTWORK_ERROR_MESSAGE,
   COMMON_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
 import { ErrorResponseType } from '@/types/errorResponse';
@@ -25,8 +25,8 @@ const deleteArtwork = async (postId: number) => {
       const { code } = error;
 
       if (code) {
-        console.error(ARTWORK_POST_ERROR_MESSAGE[code]);
-        throw new Error(ARTWORK_POST_ERROR_MESSAGE[code]);
+        console.error(ARTWORK_ERROR_MESSAGE[code]);
+        throw new Error(ARTWORK_ERROR_MESSAGE[code]);
       } else {
         console.error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);

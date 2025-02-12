@@ -9,8 +9,8 @@ import SortDropdown from '../SortDropdown';
 interface ArtworkFilterProps {
   selectedArtworkField: string;
   setSelectedArtworkField: (value: string | ((prev: string) => string)) => void;
-  selectedFilter: string;
-  setSelectedFilter: (value: string | ((prev: string) => string)) => void;
+  selectedOption: string;
+  setSelectedOption: (value: string | ((prev: string) => string)) => void;
   setCurrentPage: (value: number | ((prev: number) => number)) => void;
 }
 
@@ -22,8 +22,8 @@ const ARTWORK_FIELDS_WITH_ALL_OPTION = [
 const ArtworkFilter = ({
   selectedArtworkField,
   setSelectedArtworkField,
-  selectedFilter,
-  setSelectedFilter,
+  selectedOption,
+  setSelectedOption,
   setCurrentPage,
 }: ArtworkFilterProps) => {
   const selectedArtworkFieldName =
@@ -36,8 +36,8 @@ const ArtworkFilter = ({
     setCurrentPage(1);
   };
 
-  const handleFilterChange = (newFilter: string) => {
-    setSelectedFilter(newFilter);
+  const handleSortChange = (newOption: string) => {
+    setSelectedOption(newOption);
   };
 
   return (
@@ -66,8 +66,8 @@ const ArtworkFilter = ({
         <h1>{selectedArtworkFieldName}</h1>
         <SortDropdown
           options={SORT_OPTIONS}
-          selected={selectedFilter}
-          onChange={handleFilterChange}
+          selected={selectedOption}
+          onChange={handleSortChange}
           className='w-[149px]'
         />
       </div>

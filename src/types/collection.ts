@@ -1,3 +1,4 @@
+import { ArtworkInfoType } from './artwork';
 import { PaginationType } from './pagination';
 
 export interface CollectionType {
@@ -10,6 +11,13 @@ export interface CollectionType {
 export interface ProfileCollectionListResponse {
   isMine: boolean;
   data: CollectionType[];
+  page: PaginationType;
+}
+
+export interface CollectionArtworksResponse {
+  isMine: boolean;
+  name: string;
+  data: ArtworkInfoType[];
   page: PaginationType;
 }
 
@@ -28,4 +36,9 @@ export interface CollectionArtworksParams {
   sort: string;
   page: number;
   size: number;
+}
+
+export interface CollectionAddAndRemoveArtworkParams {
+  collectionId: number;
+  postId: number;
 }

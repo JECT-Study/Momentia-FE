@@ -8,20 +8,23 @@ import Icon from '@/components/Icon/Icon';
 import CreateCollectionModal from '@/components/Modal/CreateCollectionModal';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
-import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import {
+  COLLECTION_SORT_OPTIONS,
+  ITEMS_PER_PAGE,
+} from '@/constants/pagination';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
 import TokenHandler from '@/utils/tokenHandler';
 
 const CollectionTab = () => {
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
   const { openModal, closeModal } = useStore(modalStore);
 
   const userId = TokenHandler.getUserIdFromToken();
 
-  const handleFilterChange = (newFilter: string) => {
-    setSelectedFilter(newFilter);
+  const handleSortChange = (newOption: string) => {
+    setSelectedOption(newOption);
   };
 
   const handleCreateCollection = () => {
@@ -34,7 +37,7 @@ const CollectionTab = () => {
 
   const { isMine, collections, pageInfo, isLoading } =
     useGetProfileCollectionList({
-      sort: ARTWORK_SORT_OPTIONS[selectedFilter] || 'recent',
+      sort: COLLECTION_SORT_OPTIONS[selectedOption] || 'recent',
       page: currentPage - 1,
       size: ITEMS_PER_PAGE,
       userId,
@@ -52,9 +55,9 @@ const CollectionTab = () => {
           컬렉션 생성
         </button>
         <SortDropdown
-          options={Object.keys(ARTWORK_SORT_OPTIONS)}
-          selected={selectedFilter}
-          onChange={handleFilterChange}
+          options={Object.keys(COLLECTION_SORT_OPTIONS)}
+          selected={selectedOption}
+          onChange={handleSortChange}
           className='w-[155px]'
         />
       </div>
@@ -67,8 +70,8 @@ const CollectionTab = () => {
             {collections.map((collection) => (
               <ArtworkAndCollectionCard
                 key={collection.collectionId}
-                collection={collection}
                 isMine={isMine}
+                collection={collection}
               />
             ))}
           </div>
