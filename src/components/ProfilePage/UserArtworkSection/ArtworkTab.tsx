@@ -44,7 +44,7 @@ const ArtworkTab = () => {
   };
 
   return (
-    <div className='flex flex-col items-end'>
+    <div className='flex flex-col gap-[70px] items-end'>
       <SortDropdown
         options={SORT_OPTIONS}
         selected={currentSort}
