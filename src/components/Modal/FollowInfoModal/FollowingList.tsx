@@ -13,7 +13,7 @@ const FollowingList = ({ nickname }: { nickname: string }) => {
     <>
       {followingList.length === 0 ? (
         <div className='button-l w-full tablet:pr-[58px] text-center pb-[45px] text-white'>
-          팔로잉한 작가가 없습니다.
+          팔로우한 작가가 없습니다.
         </div>
       ) : (
         <>
