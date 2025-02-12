@@ -1,6 +1,7 @@
 import { OvalButtonProps } from '@/types';
 
 const OvalButton = ({
+  type = 'button',
   variant = 'primary',
   buttonSize,
   children,
@@ -41,12 +42,13 @@ const OvalButton = ({
       className={`
         flex items-center justify-center rounded-full gap-[10px]
         transition-all duration-300 ease-in-out active:scale-95
-        ${bgColorClasses[variant]}
-        ${hoverBgColorClasses[variant]}
-        ${textColorClasses[variant]}
+        ${disabled ? bgColorClasses['secondary'] : bgColorClasses[variant]} 
+        ${disabled ? 'cursor-not-allowed' : hoverBgColorClasses[variant]}
+        ${disabled ? textColorClasses['secondary'] : textColorClasses[variant]} 
         ${buttonSizeClasses[buttonSize]}
         ${className}
       `}
+      type={type}
     >
       {buttonSize === 'm' ? (
         <h4>{children}</h4>

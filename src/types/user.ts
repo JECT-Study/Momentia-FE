@@ -30,3 +30,18 @@ export interface UserArtworkResponse extends ArtworkListResponse {
   data: UserArtworkInfoType[];
   isMine: boolean;
 }
+
+export interface FollowUserType
+  extends Pick<
+    UserType,
+    'userId' | 'profileImage' | 'nickname' | 'introduction' | 'isFollow'
+  > {}
+
+export interface UserStringProfileType
+  extends Partial<Pick<UserType, 'nickname' | 'introduction'>> {
+  field?: string;
+}
+
+export interface UpdateProfileType extends Partial<UserStringProfileType> {
+  profileImage?: number;
+}
