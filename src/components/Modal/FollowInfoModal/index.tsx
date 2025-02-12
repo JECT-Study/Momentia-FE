@@ -15,9 +15,9 @@ const FollowInfoModal = ({ type, nickname }: FollowInfoModalProps) => {
   const [followType, setFollowType] = useState<'follower' | 'following'>(type);
 
   return (
-    <div className='relative flex flex-col gap-[25px] py-[23px] tablet:pt-[46px]'>
+    <div className='relative flex flex-col gap-[25px] h-[800px] py-[23px] tablet:pt-[46px]'>
       <TransitionToggle followType={followType} setFollowType={setFollowType} />
-      <div className='pl-[26px] tablet:pl-[103px]'>
+      <div className='flex-1 flex flex-col justify-center pl-[26px] pr-[26px] tablet:pl-[103px] tablet:pr-[45px] overflow-scroll'>
         {followType === 'follower' ? (
           <FollowerList nickname={nickname} />
         ) : (

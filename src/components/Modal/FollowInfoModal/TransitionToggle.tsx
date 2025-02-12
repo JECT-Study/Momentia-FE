@@ -27,7 +27,7 @@ const TransitionToggle = ({
   };
 
   return (
-    <div className='tablet:pr-[103px]'>
+    <div>
       <div className='flex gap-3 w-[223px] tablet:w-[282px] m-auto p-2.5 rounded-2xl bg-gray-900 text-gray-500'>
         <button
           type='button'
