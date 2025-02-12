@@ -3,7 +3,7 @@
 import FollowUserUnit from '@/components/Modal/FollowInfoModal/FollowUserUnit';
 import useGetFollowerList from '@/hooks/serverStateHooks/useGetFollowerList';
 
-const FollowerList = ({ nickname }: { nickname: string }) => {
+const FollowerList = (nickname: string) => {
   const { followerList, isLoading } = useGetFollowerList();
 
   if (isLoading) return <div>isLoading</div>;
