@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string, ZodIssueCode } from 'zod';
 
-import usePostSignUp from '@/apis/auth/signUp';
 import getValidateEmail from '@/apis/auth/validateEmail';
 import getValidateNickname from '@/apis/auth/validateNickname';
 import SquareButtonL from '@/components/Button/SquareButtonL';
@@ -17,6 +16,7 @@ import {
   SIGNIN_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
 import ROUTE from '@/constants/routes';
+import usePostSignUp from '@/hooks/serverStateHooks/usePostSignUp';
 import { SignUpFormType } from '@/types/auth';
 
 const PASSWORD_REGEX =
@@ -90,7 +90,7 @@ const SignUpPage = () => {
   const { isValid: isFormDataValid } = formHandlerMethods.formState;
 
   return (
-    <div className='h-full flex flex-col justify-center items-center gap-[60px]'>
+    <div className='h-full flex flex-col justify-center items-center max-w-[420px] w-full px-[20px] gap-[60px]'>
       <h4>회원가입</h4>
       <FormProvider {...formHandlerMethods}>
         <form
@@ -98,14 +98,14 @@ const SignUpPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <EmailInput mode={'sign-up'} />
-            <PasswordInput mode={'sign-up'} />
+            <EmailInput mode='sign-up' />
+            <PasswordInput mode='sign-up' />
             <NicknameInput />
           </div>
           <SquareButtonL
             type='submit'
             disabled={!isFormDataValid}
-            variant={isFormDataValid ? 'primary' : 'tertiaty'}
+            variant={isFormDataValid ? 'primary' : 'tertiary'}
           >
             <p>회원가입</p>
           </SquareButtonL>

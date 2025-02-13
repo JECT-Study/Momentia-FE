@@ -12,7 +12,91 @@ export interface ArtworkInfoType {
   isLiked: boolean;
 }
 
+export interface ArtworkPostType extends ArtworkInfoType {
+  artworkField: string;
+  createdTime: string;
+  explanation: string;
+  profileImage: string | null;
+  userField: string | null;
+  isFollow: boolean;
+  introduction: string;
+  isMine: boolean;
+  status: 'PUBLIC' | 'PRIVATE';
+}
+
+export interface ArtworkListParams {
+  sort: string;
+  artworkField?: string;
+  search: string;
+  page: number;
+  size: number;
+}
+
 export interface ArtworkListResponse {
   data: ArtworkInfoType[];
   page: PaginationType;
+}
+
+export interface ArtworkField {
+  name: string;
+  value: string;
+}
+
+export interface ArtworkPostSocialInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'nickname' | 'title' | 'likeCount' | 'isLiked'
+  > {}
+
+export interface PatchArtworkData {
+  title?: string;
+  artworkField?: string;
+  explanation?: string | null;
+  status?: 'PUBLIC' | 'PRIVATE';
+}
+
+export interface ArtworkFieldsErrors {
+  artworkTitleError?: string;
+  selectedArtworkFieldError?: string;
+  uploadedImageError?: string;
+}
+
+export interface ArtworkPostHeaderInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'title'
+    | 'artworkField'
+    | 'viewCount'
+    | 'profileImage'
+    | 'nickname'
+    | 'createdTime'
+    | 'userId'
+  > {}
+
+export interface ArtworkPostdetailInfoType
+  extends Pick<
+    ArtworkPostType,
+    'postId' | 'userId' | 'postImage' | 'explanation' | 'isMine'
+  > {}
+
+export interface ArtworkPostArtistInfoType
+  extends Pick<
+    ArtworkPostType,
+    | 'userId'
+    | 'profileImage'
+    | 'nickname'
+    | 'userField'
+    | 'isFollow'
+    | 'introduction'
+    | 'isMine'
+  > {}
+
+export interface ArtworkComment {
+  commentId: number;
+  userId: number;
+  profileImage: string;
+  nickname: string;
+  content: string;
+  createdTime: string;
+  isMine: boolean;
 }

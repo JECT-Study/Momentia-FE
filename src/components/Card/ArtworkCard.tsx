@@ -1,9 +1,9 @@
 'use client';
-
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { MouseEvent } from 'react';
 
-import DefaultImage from '@/../public/images/defaultArtworkImage.png';
-import RankingLabel from '@/../public/images/rankingLabel.png';
+import ROUTE from '@/constants/routes';
 import { ArtworkInfoType } from '@/types';
 
 import Icon from '../Icon/Icon';
@@ -25,7 +25,10 @@ const ArtworkCard = ({
   rank,
   artworkInfo,
 }: ArtworkCardProps) => {
+  const router = useRouter();
+
   const {
+    userId,
     postId,
     title,
     postImage,
@@ -41,7 +44,7 @@ const ArtworkCard = ({
   const modeClasses: Record<string, string> = {
     'followed-artists': 'w-full max-w-[200px] h-[267px]',
     'artwork-default':
-      'min-w-[402px] min-h-[458px]  mobile:min-w-[512px] mobile:min-h-[584px]',
+      'min-w-[402px] min-h-[458px] mobile:min-w-[512px] mobile:min-h-[584px]',
     'artwork-latest':
       'min-w-[269px] min-h-[306px] mobile:min-w-[376px] mobile:min-h-[434px]',
     'artwork-list': 'min-w-[395px] min-h-[511px]',
@@ -61,24 +64,36 @@ const ArtworkCard = ({
     'artwork-list': 'gap-[70px]',
   };
 
+  const clickArtworkCard = () => {
+    router.push(ROUTE.artworkDetail + `?postId=${postId}`);
+  };
+
+  const goToUserProfile = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    router.push(ROUTE.profile(userId));
+  };
+
   return (
     <div
-      className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]}`}
+      className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]} cursor-pointer`}
+      onClick={clickArtworkCard}
     >
       <Image
-        src={postImage || DefaultImage}
+        src={postImage || '/images/defaultArtworkImage.png'}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
-        priority
+        sizes={modeClasses[mode] || '402px'}
         className={postImage ? 'object-contain' : 'object-cover'}
       />
 
       {rank && (
-        <div className='absolute top-0 left-[44px] mobile:left-[63px] z-10'>
+        <div className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px] absolute top-0 left-[44px] mobile:left-[63px] z-10'>
           <Image
-            className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px]'
-            src={RankingLabel}
+            src='/images/rankingLabel.png'
             alt='ranking-label'
+            width={68}
+            height={97}
+            sizes='(max-width: 768px) 33px, 48px'
           />
           <p className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base font-medium mobile:text-[2rem] mobile:font-semibold'>
             {formattedRank}
@@ -94,7 +109,13 @@ const ArtworkCard = ({
       >
         <div className={`flex flex-col ${artworkInfoGapClass[mode]}`}>
           <p className='subtitle1'>{title}</p>
-          <p className='placeholder'>{nickname}</p>
+          <button
+            type='button'
+            className='w-fit placeholder hover:underline'
+            onClick={goToUserProfile}
+          >
+            {nickname}
+          </button>
         </div>
         <div
           className={`button-s flex

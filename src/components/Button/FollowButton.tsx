@@ -11,6 +11,7 @@ const FollowButton = ({
   initFollowState,
   followUserId,
   ariaLabel,
+  isFull = false,
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
   const { mutate: toggleFollow } = useToggleFollow({
@@ -26,7 +27,7 @@ const FollowButton = ({
       aria-label={ariaLabel}
       className={`
         button-s flex items-center justify-center rounded-full
-        w-[95px] h-[37px] gap-[3px] ml-auto
+        ${isFull ? 'w-full' : 'w-fit'} px-4 h-[37px] gap-[3px] ml-auto
         ${
           isFollowing
             ? 'border	border-gray-900 text-gray-900 bg-white'

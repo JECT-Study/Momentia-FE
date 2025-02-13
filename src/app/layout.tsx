@@ -7,25 +7,26 @@ import AppShell from '../components/Layout/AppShell';
 import { montserrat, pretendard } from './fonts';
 import KakaoProvider from './providers/KakaoProvider';
 import MSWProvider from './providers/MSWProvider';
-import ReactQueryProvider from './providers/ReactQueryProvider';
+import TanStackQueryProvider from './providers/TanStackQueryProvider';
 
 export const metadata: Metadata = {
   title: '',
   description: '',
 };
 
-const RootLayout = ({
-  children,
-}: Readonly<{
+interface LayoutProps {
   children: ReactNode;
-}>) => {
+  modal: ReactNode;
+}
+
+const RootLayout = ({ children, modal }: Readonly<LayoutProps>) => {
   return (
     <html lang='ko'>
       <body className={`${pretendard} ${montserrat.variable}`}>
         <MSWProvider>
-          <ReactQueryProvider>
+          <TanStackQueryProvider>
             <AppShell>{children}</AppShell>
-          </ReactQueryProvider>
+          </TanStackQueryProvider>
         </MSWProvider>
         <KakaoProvider />
       </body>

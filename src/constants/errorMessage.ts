@@ -28,10 +28,65 @@ export const EMAIL_VALIDATE_ERROR_MESSAGE: MessageConstantType = {
 
 export const FOLLOW_ERROR_MESSAGE: MessageConstantType = {
   FOLLOW_NOT_FOUND: '팔로잉 정보를 찾을 수 없습니다.',
-  USER_NOT_FOUND: 'UserId에 해당하는 유저를 찾을 수 없습니다.',
+  USER_NOT_FOUND: 'userId에 해당하는 유저를 찾을 수 없습니다.',
 };
 
 export const COMMON_ERROR_MESSAGE: MessageConstantType = {
   UNKNOWN_ERROR: '알 수 없는 에러가 발생했습니다. 다시 시도해주세요.',
   NETWORK_ERROR: '네트워크 오류가 발생했습니다. 인터넷 연결을 확인해주세요.',
+};
+
+export const LIKE_ERROR_MESSAGE: MessageConstantType = {
+  ALREADY_LIKE: '이미 좋아요한 작품입니다.',
+  POST_NOT_FOUND: '요청한 리소스가 없습니다.',
+  LIKE_ALREADY_REMOVED:
+    '좋아요 하지 않은 작품이거나 이미 좋아요 취소된 작품입니다.',
+};
+
+export const ARTWORK_ERROR_MESSAGE: MessageConstantType = {
+  NO_PERMISSION: '본인의 게시글이 아닙니다.',
+  ARTWORK_POST_NOT_FOUND: '리소스를 찾을 수 없습니다.',
+};
+
+export const COMMENT_ERROR_MESSAGE: MessageConstantType = {
+  NOT_OWNER: '본인의 댓글이 아닙니다.',
+  COMMENT_NOT_FOUND: '리소스를 찾을 수 없습니다.',
+  INVALID_COMMENT_CONTENT: '입력 정보가 올바르지 않습니다.',
+  POST_NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
+  NOT_AUTHORIZED: '댓글에 대한 권한이 없습니다.',
+};
+
+export const COLLECTION_ADD_ARTWORK_ERROR_MESSAGE: MessageConstantType = {
+  COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+  POST_NOT_FOUND: '작품 리소스를 찾을 수 없습니다.',
+  DUPLICATE_COLLECTION_ARTWORK: '컬렉션에 이미 저장된 작품입니다.',
+  NO_PERMISSION: '컬렉션에 대한 권한이 없습니다.',
+};
+
+export const PROFILE_COLLECTION_GET_ERROR_MESSAGE: MessageConstantType = {
+  USER_NOT_FOUND: '해당 유저를 찾을 수 없습니다.',
+  NO_PERMISSION: 'userId를 찾을 수 없고, 로그인하지 않은 상태입니다.',
+};
+
+export const COLLECTION_DELETE_ERROR_MESSAGE: MessageConstantType = {
+  NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
+  COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+};
+
+export const COLLECTION_PATCH_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_STATUS: '요청한 status가 잘못되었거나 유효하지 않습니다.',
+  INVALID_COLLECTION_NAME: 'name이 비어 있거나 글자 수 제한이 위반되었습니다.',
+  NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
+  COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+};
+
+export const COLLECTION_ARTWORKS_ERROR_MESSAGE: MessageConstantType = {
+  COLLECTION_NOT_FOUND: '요청한 컬렉션 id에 해당하는 컬렉션이 없습니다.',
+};
+
+export const EDIT_USER_PROFILE_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_FIELD: '작업 분야에 해당하는 형식이 아닙니다.',
+  INVALID_NICKNAME: '사용할 수 없는 닉네임 입니다.',
+  INVALID_INTRODUCTION: '잘못된 형태의 자기소개 입니다.',
+  DUPLICATE_NICKNAME: '이미 사용중인 닉네임 입니다.',
 };

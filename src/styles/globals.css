@@ -51,8 +51,7 @@
   }
 
   .body2,
-  .placeholder,
-  .custom-label {
+  .placeholder {
     font-size: 1rem; /* 16px */
   }
 
@@ -72,7 +71,6 @@
     font-weight: 600; /* SemiBold */
   }
 
-  .custom-label,
   .subtitle2,
   .placeholder,
   .button-l,

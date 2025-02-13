@@ -45,7 +45,7 @@ const EmailInput = ({ mode }: EmailInputProps) => {
         placeholder='이메일을 입력해주세요.'
         isInvalid={false}
         classNames={{
-          label: 'custom-label',
+          label: 'placeholder',
           input: 'placeholder:text-gray-700',
           inputWrapper: ['bg-gray-900', 'rounded-md'],
         }}

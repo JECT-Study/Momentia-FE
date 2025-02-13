@@ -2,33 +2,27 @@
 
 import { useState } from 'react';
 
-import useArtworkList from '@/apis/artwork/getArtworkList';
-import ArtworkFilter from '@/components/artwork/ArtworkFilter';
-import ArtworkSearchBar from '@/components/artwork/ArtworkSearchBar';
-import ArtworkShowcase from '@/components/artwork/ArtworkShowcase';
-import FollowedArtistsSection from '@/components/artwork/FollowedArtistsSection';
-
-const SORT_MAPPING: Record<string, string> = {
-  최신순: 'recent',
-  인기순: 'popular',
-  조회순: 'view',
-};
-const ITEMS_PER_PAGE = 12;
+import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
+import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
+import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
+import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
+import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const ArtworkList = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
   const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
-  const [selectedFilter, setSelectedFilter] = useState('최신순');
+  const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const sortValue = SORT_MAPPING[selectedFilter] || 'recent';
+  const sortValue = ARTWORK_SORT_OPTIONS[selectedOption] || 'recent';
 
   const {
     data: artworkList,
     isLoading: artworkListLoading,
     error: artworkListError,
-  } = useArtworkList({
+  } = useGetArtworkList({
     sort: sortValue,
     artworkField:
       selectedArtworkField === 'ALL' ? undefined : selectedArtworkField,
@@ -48,7 +42,7 @@ const ArtworkList = () => {
   const { data: artworkListData, page: artworkListPage } = artworkList;
 
   return (
-    <div className='max-w-[1920px] m-auto px-[36px] lg:px-[140px]'>
+    <div className='max-w-[1920px] w-full m-auto px-[36px] lg:px-[140px]'>
       <div className='pt-[70px]'>
         <FollowedArtistsSection />
         <ArtworkSearchBar
@@ -59,8 +53,8 @@ const ArtworkList = () => {
         <ArtworkFilter
           selectedArtworkField={selectedArtworkField}
           setSelectedArtworkField={setSelectedArtworkField}
-          selectedFilter={selectedFilter}
-          setSelectedFilter={setSelectedFilter}
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
           setCurrentPage={setCurrentPage}
         />
         <ArtworkShowcase

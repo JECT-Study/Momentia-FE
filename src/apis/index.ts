@@ -18,6 +18,12 @@ const defaultClient = axios.create({
   },
 });
 
+export const imageClient = axios.create({
+  headers: {
+    Accept: 'application/json',
+  },
+});
+
 export const authorizedClient = axios.create({
   baseURL,
   headers: {

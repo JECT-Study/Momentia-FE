@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 export interface BaseButtonProps {
-  variant: 'primary' | 'secondary' | 'tertiaty';
+  variant: 'primary' | 'secondary' | 'tertiary';
   children: ReactNode;
 
   onClick?: () => void;

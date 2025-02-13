@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { FormProvider, useForm } from 'react-hook-form';
 import { object, string } from 'zod';
 
-import usePostSignIn from '@/apis/auth/signIn';
 import SquareButtonL from '@/components/Button/SquareButtonL';
 import EmailInput from '@/components/Input/EmailInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import SocialSignInSection from '@/components/SocialSignInSection';
 import ROUTE from '@/constants/routes';
+import usePostSignIn from '@/hooks/serverStateHooks/usePostSignIn';
 import { SignInFormType } from '@/types/auth';
 
 const signInValidationSchema = object({
@@ -37,7 +37,7 @@ const SignInPage = () => {
   };
 
   return (
-    <div className='flex flex-col justify-center items-center gap-[60px]'>
+    <div className='flex flex-col justify-center items-center max-w-[420px] w-full px-[20px] gap-[60px]'>
       <h4>로그인</h4>
 
       <FormProvider {...formHandlerMethods}>
@@ -47,13 +47,13 @@ const SignInPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <EmailInput mode={'sign-in'} />
-            <PasswordInput mode={'sign-in'} />
+            <EmailInput mode='sign-in' />
+            <PasswordInput mode='sign-in' />
           </div>
           <SquareButtonL
             type='submit'
             disabled={!isFormDataValid}
-            variant={isFormDataValid ? 'primary' : 'tertiaty'}
+            variant={isFormDataValid ? 'primary' : 'tertiary'}
           >
             로그인
           </SquareButtonL>

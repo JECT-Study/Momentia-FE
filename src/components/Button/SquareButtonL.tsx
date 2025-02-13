@@ -1,7 +1,7 @@
 import { SquareButtonLProps } from '@/types';
 
 const SquareButtonL = ({
-  variant = 'tertiaty',
+  variant = 'tertiary',
   children,
 
   onClick,
@@ -15,19 +15,19 @@ const SquareButtonL = ({
   const bgColorClasses = {
     primary: 'bg-main',
     secondary: 'bg-gray-200',
-    tertiaty: 'bg-gray-800',
+    tertiary: 'bg-gray-800',
   };
 
   const hoverBgColorClasses = {
     primary: 'hover:bg-[#885DFF]',
     secondary: 'hover:bg-gray-300',
-    tertiaty: 'hover:bg-gray-700',
+    tertiary: 'hover:bg-gray-700',
   };
 
   const textColorClasses = {
     primary: 'text-white',
     secondary: 'text-gray-500',
-    tertiaty: 'text-gray-300',
+    tertiary: 'text-gray-300',
   };
 
   return (
@@ -38,7 +38,7 @@ const SquareButtonL = ({
       aria-label={ariaLabel}
       className={`
         button-m flex items-center justify-center rounded-md
-        w-[420px] h-[70px] px-[175px] py-[20px] gap-[20px]
+        w-full max-h-[70px] h-full py-[20px] gap-[20px]
         transition-all duration-300 ease-in-out active:scale-95
         ${disabled ? bgColorClasses['secondary'] : bgColorClasses[variant]} 
         ${disabled ? 'cursor-not-allowed' : hoverBgColorClasses[variant]}

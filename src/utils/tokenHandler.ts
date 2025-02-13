@@ -1,3 +1,5 @@
+import JWT from 'jsonwebtoken';
+
 import { AuthTokenType } from '@/types/auth';
 
 const TokenHandler = {
@@ -11,6 +13,14 @@ const TokenHandler = {
   },
   getRefreshToken() {
     return sessionStorage.getItem('refreshToken') || '';
+  },
+  getUserIdFromToken() {
+    const token = this.getAccessToken();
+    const decodedInfo = JWT.decode(token);
+
+    if (!decodedInfo || typeof decodedInfo === 'string') return 0;
+
+    return decodedInfo.id as number;
   },
 
   removeToken() {

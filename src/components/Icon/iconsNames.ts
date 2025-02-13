@@ -32,6 +32,7 @@ import Lock from './icons/Lock';
 import Menu from './icons/Menu';
 import Message from './icons/Message';
 import MoreHorizontal from './icons/MoreHorizontal';
+import MoreVertical from './icons/MoreVertical';
 import Notification from './icons/Notification';
 import Pause from './icons/Pause';
 import Person from './icons/Person';
@@ -39,6 +40,7 @@ import Plus from './icons/Plus';
 import Search from './icons/Search';
 import Settings from './icons/Settings';
 import Star from './icons/Star';
+import Trash from './icons/Trash';
 import Unlock from './icons/Unlock';
 import UploadShare from './icons/UploadShare';
 
@@ -81,6 +83,7 @@ export const iconsNames: Record<
   Menu,
   Message,
   MoreHorizontal,
+  MoreVertical,
   Notification,
   Pause,
   Person,
@@ -93,4 +96,5 @@ export const iconsNames: Record<
   Dropdown,
   Lock,
   Unlock,
+  Trash,
 };
