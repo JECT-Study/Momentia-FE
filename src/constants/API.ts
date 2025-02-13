@@ -9,6 +9,8 @@ const USER = {
   userProfile: '/user',
   artworkList: '/artwork/user/posts',
   likedArtworkList: '/artwork/like/posts',
+  followerList: (userId: number) => `/user/${userId}/followerList`,
+  followingList: (userId: number) => `/user/${userId}/followingList`,
 };
 
 const MONTHLY = {

@@ -54,7 +54,7 @@ const ArtworkAndCollectionCard = ({
 
   return (
     <div
-      className='relative overflow-hidden group rounded-[5px] w-full min-h-[224px] mobile:min-h-[511px] cursor-pointer'
+      className='relative overflow-hidden group rounded-[5px] w-full aspect-[4/5] cursor-pointer'
       onClick={clickArtwork}
     >
       {artworkInfo && (

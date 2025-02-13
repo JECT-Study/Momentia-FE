@@ -47,8 +47,8 @@ const SignInPage = () => {
           className='w-full flex flex-col gap-[60px]'
         >
           <div className='flex flex-col gap-[30px]'>
-            <EmailInput mode={'sign-in'} />
-            <PasswordInput mode={'sign-in'} />
+            <EmailInput mode='sign-in' />
+            <PasswordInput mode='sign-in' />
           </div>
           <SquareButtonL
             type='submit'

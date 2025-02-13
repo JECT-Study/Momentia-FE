@@ -68,7 +68,7 @@ const ContentTabs = ({
               key={option}
               type='button'
               value={option}
-              className={`flex-1 px-2.5 pb-2.5 relative z-10 ${
+              className={`flex-1 px-2.5 pb-2.5 ${
                 currentTab === option ? 'text-white' : 'text-gray-500'
               }`}
               onClick={changeTab}
