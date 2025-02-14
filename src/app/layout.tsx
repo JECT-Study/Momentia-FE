@@ -10,16 +10,15 @@ import MSWProvider from './providers/MSWProvider';
 import TanStackQueryProvider from './providers/TanStackQueryProvider';
 
 export const metadata: Metadata = {
-  title: '',
-  description: '',
+  title: '모멘티아',
+  description: '무명 작가들을 위한 전시 플랫폼',
 };
 
 interface LayoutProps {
   children: ReactNode;
-  modal: ReactNode;
 }
 
-const RootLayout = ({ children, modal }: Readonly<LayoutProps>) => {
+const RootLayout = ({ children }: Readonly<LayoutProps>) => {
   return (
     <html lang='ko'>
       <body className={`${pretendard} ${montserrat.variable}`}>
