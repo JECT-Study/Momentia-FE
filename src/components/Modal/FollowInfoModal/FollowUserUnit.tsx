@@ -50,9 +50,7 @@ const FollowUserUnit = ({
           <p className='button-s text-gray-500'>{introduction ?? ''}</p>
         </div>
       </button>
-      {followStatus !== null && (
-        <FollowButton initFollowState={followStatus} followUserId={userId} />
-      )}
+      <FollowButton initFollowState={followStatus} followUserId={userId} />
     </div>
   );
 };
