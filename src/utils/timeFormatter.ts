@@ -28,7 +28,9 @@ const timeFormatter = (timeString: string) => {
 
   if (nowMinute !== minute) return `${nowMinute - minute}분 전`;
 
-  return `${nowSeconds - second}초 전`;
+  const pastSeconds = nowSeconds - second;
+
+  return `${pastSeconds > 0 ? pastSeconds : 0}초 전`;
 };
 
 export default timeFormatter;

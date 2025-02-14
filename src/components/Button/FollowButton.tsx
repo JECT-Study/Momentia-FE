@@ -15,11 +15,13 @@ const FollowButton = ({
 }: FollowButtonProps) => {
   const [isFollowing, setIsFollowing] = useState(initFollowState);
   const { mutate: toggleFollow } = useToggleFollow({
-    isFollowing,
+    isFollowing: isFollowing ?? true,
     setIsFollowing,
   });
 
   const handleFollowClick = () => toggleFollow(followUserId);
+
+  if (isFollowing === null) return;
 
   return (
     <button

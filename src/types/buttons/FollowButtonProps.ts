@@ -11,7 +11,7 @@ export interface FollowButtonProps
     | 'iconPosition'
     | 'type'
   > {
-  initFollowState: boolean;
+  initFollowState: boolean | null;
   followUserId: number;
   isFull?: boolean;
 }

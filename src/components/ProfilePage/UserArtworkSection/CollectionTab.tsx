@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
@@ -14,14 +15,15 @@ import {
 } from '@/constants/pagination';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
-import TokenHandler from '@/utils/tokenHandler';
 
 const CollectionTab = () => {
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
   const { openModal, closeModal } = useStore(modalStore);
 
-  const userId = TokenHandler.getUserIdFromToken();
+  const params = useSearchParams();
+  const userIdParams = params.get('userId');
+  const userId = userIdParams ? Number(userIdParams) : 0;
 
   const handleSortChange = (newOption: string) => {
     setSelectedOption(newOption);

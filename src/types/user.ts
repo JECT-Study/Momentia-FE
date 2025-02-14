@@ -10,11 +10,11 @@ export interface UserType {
   followerCount: number;
   followingCount: number;
   userId: number;
-  profileImage: string;
+  profileImage: string | null;
   nickname: string;
-  introduction: string;
-  isFollow: boolean;
-  userField: string;
+  introduction: string | null;
+  isFollow: boolean | null;
+  userField: string | null;
 }
 
 export interface UserArtworkListParams

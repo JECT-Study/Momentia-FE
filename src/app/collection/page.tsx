@@ -1,7 +1,7 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { useStore } from 'zustand';
 
@@ -43,7 +43,8 @@ const Collection = () => {
     collectionId,
   });
 
-  const artworksLength = artworks.length;
+  const artworksLength = pageInfo.totalDataCnt;
+  const router = useRouter();
 
   const openShareModal = () => {
     openModal({
@@ -75,6 +76,7 @@ const Collection = () => {
           queryKey: [COLLECTION.collectionList],
         });
         closeModal();
+        router.back();
       },
     });
   };

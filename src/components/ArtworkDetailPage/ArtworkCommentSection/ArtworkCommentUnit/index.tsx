@@ -25,7 +25,7 @@ const ArtworkCommentUnit = ({
       <Image
         src={profileImage || '/images/defaultProfileImage.png'}
         alt='artwork default image'
-        className='rounded-full'
+        className='rounded-full aspect-square'
         width={56}
         height={56}
       />

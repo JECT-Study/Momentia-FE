@@ -40,7 +40,7 @@ const DefaultUserInfo = ({
             src={profileImage || '/images/defaultProfileImage.png'}
             alt={profileImage ? 'user-profile-image' : 'default-profile'}
             className={
-              'rounded-full w-[141px] h-[141px] mb-[30px] mobile:mb-[40px]'
+              'rounded-full w-[141px] h-[141px] mb-[30px] mobile:mb-[40px] aspect-square'
             }
             width={141}
             height={141}
