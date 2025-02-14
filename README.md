@@ -77,17 +77,18 @@ https://momentia.site
 
 
 ## 5. 발표 자료 및 화면 구성
-![002](https://github.com/user-attachments/assets/a2775d99-e56d-49df-b55a-fb1da46b0643)
-![003](https://github.com/user-attachments/assets/8f2be3e5-4d94-46d6-822f-b86dea5eefb5)
-![004](https://github.com/user-attachments/assets/2046d842-e68b-4e0d-a843-f1b1149ea3b4)
-![005](https://github.com/user-attachments/assets/662ca9e6-d0d4-4524-91a9-8b55019257c3)
-![006](https://github.com/user-attachments/assets/bcefccd8-f085-477c-8fb6-11af27316a71)
-![007](https://github.com/user-attachments/assets/0cef31e9-3d83-4b76-9e8c-c720d1c199ea)
-![008](https://github.com/user-attachments/assets/83c127c0-1efb-419b-9a5f-2a37fe2f3720)
-![009](https://github.com/user-attachments/assets/83310ab7-4eda-46aa-93b4-5b4279fef6ac)
-![010](https://github.com/user-attachments/assets/42ea9de3-e112-4e0f-a7e6-b8ff55e26c14)
-![011](https://github.com/user-attachments/assets/7ed03ced-8d0a-4e93-a30b-f3ccdc112f30)
-![012](https://github.com/user-attachments/assets/92f30cc3-9b0c-463c-91b6-c33ea66f552f)
+![서비스 아키텍처](https://github.com/user-attachments/assets/948ff9c9-9d53-445b-873a-32732fffe0ff)
+![1차 데모데이 개발 기록 (1)](https://github.com/user-attachments/assets/63676082-2051-41ea-a0a4-762cf2942ef5)
+![1차 데모데이 개발 기록 (2)](https://github.com/user-attachments/assets/6a6e0b8c-b442-4da2-b4ed-5e0a5bfaa6c3)
+![1차 데모데이 개발 기록 (3)](https://github.com/user-attachments/assets/0c36ead3-ef98-415b-b947-6c7f7c0b9971)
+![1차 데모데이 이후, 개선된 사항](https://github.com/user-attachments/assets/5ccd6b59-0249-4872-a203-302cc8c064ff)
+![2차 데모데이 개발 기록 (1)](https://github.com/user-attachments/assets/08e11061-1c52-483c-95fe-85410dbbbba9)
+![2차 데모데이 개발 기록 (2)](https://github.com/user-attachments/assets/72f32054-eb7f-42f9-9d13-f3ae5c1069d3)
+![2차 데모데이 개발 기록 (3)](https://github.com/user-attachments/assets/c976c346-a9f4-4d06-9326-39451c4489ea)
+![2차 데모데이 개발 기록 (4)](https://github.com/user-attachments/assets/02f5e85e-7a9f-4dc7-baeb-e622432ef193)
+![기술적/협업 문제 해결 (1)](https://github.com/user-attachments/assets/b2202801-0a39-421f-9267-c82161b3d6a2)
+![기술적/협업 문제 해결 (2)](https://github.com/user-attachments/assets/9308bacc-ca5a-4df4-bba4-68f426bf5924)
+![추후 운영/개발 계획](https://github.com/user-attachments/assets/5837565c-5bad-40b2-b3ea-f0c69c893f99)
 
 
 ## 6. 폴더 구조
