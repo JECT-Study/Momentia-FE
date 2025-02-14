@@ -39,7 +39,7 @@ const FollowUserUnit = ({
         <Image
           src={profileImage || '/images/defaultProfileImage.png'}
           alt={profileImage ? 'user-profile-image' : 'default-profile'}
-          className='rounded-full tablet:w-[94px] h-14 tablet:h-[94px]'
+          className='rounded-full tablet:w-[94px] h-14 tablet:h-[94px] aspect-square'
           width={56}
           height={56}
         />

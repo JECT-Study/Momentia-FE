@@ -64,6 +64,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
               profileImage ? 'profile image' : 'artist default profile image'
             }
             fill={true}
+            className='aspect-square'
           />
         </div>
         <div className='flex flex-col gap-[10px]'>

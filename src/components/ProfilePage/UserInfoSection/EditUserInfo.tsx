@@ -125,7 +125,7 @@ const EditUserInfo = ({
         <Image
           src={convertedProfileImage}
           alt='user-profile-image'
-          className='rounded-full w-[141px] h-[141px]'
+          className='rounded-full w-[141px] aspect-square'
           width={141}
           height={141}
         />
