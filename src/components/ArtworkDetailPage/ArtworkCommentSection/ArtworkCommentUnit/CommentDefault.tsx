@@ -35,7 +35,7 @@ const CommentDefault = ({
 
   return (
     <>
-      <p className='body2'>{content}</p>
+      <p className='body2 whitespace-pre'>{content}</p>
 
       {isMine && (
         <div className='flex justify-end gap-[31px] body2 mt-2.5'>
