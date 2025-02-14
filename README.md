@@ -86,7 +86,7 @@ https://momentia.site
 ![2차 데모데이 개발 기록 (2)](https://github.com/user-attachments/assets/72f32054-eb7f-42f9-9d13-f3ae5c1069d3)
 ![2차 데모데이 개발 기록 (3)](https://github.com/user-attachments/assets/c976c346-a9f4-4d06-9326-39451c4489ea)
 ![2차 데모데이 개발 기록 (4)](https://github.com/user-attachments/assets/02f5e85e-7a9f-4dc7-baeb-e622432ef193)
-![기술적/협업 문제 해결 (1)](https://github.com/user-attachments/assets/b2202801-0a39-421f-9267-c82161b3d6a2)
+![기술적/협업 문제 해결 (1)](https://github.com/user-attachments/assets/b580f32d-c554-4fe2-bc67-a09432feea1c)
 ![기술적/협업 문제 해결 (2)](https://github.com/user-attachments/assets/9308bacc-ca5a-4df4-bba4-68f426bf5924)
 ![추후 운영/개발 계획](https://github.com/user-attachments/assets/5837565c-5bad-40b2-b3ea-f0c69c893f99)
 
