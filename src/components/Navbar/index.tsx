@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-import { USER } from '@/constants/API';
 import ROUTE from '@/constants/routes';
 import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
 import TokenHandler from '@/utils/tokenHandler';
@@ -43,6 +42,11 @@ const Navbar = () => {
     TokenHandler.removeToken();
     router.push(ROUTE.signIn);
     if (isMenuOpen) toggleMenu();
+  };
+
+  const moveToProfilePage = () => {
+    router.push(ROUTE.profile(userId));
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -150,12 +154,13 @@ const Navbar = () => {
                 <div className=' space-y-1 bg-black'>
                   {isSignedIn ? (
                     <div className='flex flex-col items-start'>
-                      <Link
-                        href={`${USER.userProfile}?userId=${userId}`}
+                      <button
+                        type='button'
+                        onClick={moveToProfilePage}
                         className='button-m text-white px-10 py-8 hover:underline'
                       >
                         {nickname}
-                      </Link>
+                      </button>
                       <button
                         className='button-m text-main px-10 py-8'
                         onClick={moveToArtworkUpload}
