@@ -13,7 +13,7 @@ import modalStore from '@/stores/modalStore';
 const usePostCollection = () => {
   const { openModal, closeModal } = useStore(modalStore);
   const queryClient = useQueryClient();
-  const isProfile = usePathname().includes('collection');
+  const isProfile = usePathname().includes('profile');
 
   const { mutate } = useMutation({
     mutationFn: ({ name, isPrivate }: PostCollectionProps) =>
