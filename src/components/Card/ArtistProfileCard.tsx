@@ -63,8 +63,9 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
             alt={
               profileImage ? 'profile image' : 'artist default profile image'
             }
-            fill={true}
             className='aspect-square'
+            width={69}
+            height={69}
           />
         </div>
         <div className='flex flex-col gap-[10px]'>
