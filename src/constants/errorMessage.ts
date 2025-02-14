@@ -68,6 +68,10 @@ export const PROFILE_COLLECTION_GET_ERROR_MESSAGE: MessageConstantType = {
   NO_PERMISSION: 'userId를 찾을 수 없고, 로그인하지 않은 상태입니다.',
 };
 
+export const COLLECTION_POST_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_COLLECTION_NAME: 'name이 비어 있거나 글자 수 제한이 위반되었습니다.',
+};
+
 export const COLLECTION_DELETE_ERROR_MESSAGE: MessageConstantType = {
   NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
   COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',

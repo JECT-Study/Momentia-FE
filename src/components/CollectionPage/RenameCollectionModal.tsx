@@ -45,7 +45,7 @@ const RenameCollectionModal = ({
       {
         onSuccess: () => {
           queryClient.invalidateQueries({
-            queryKey: [COLLECTION.collectionList],
+            queryKey: [COLLECTION.collection],
           });
           closeModal();
         },

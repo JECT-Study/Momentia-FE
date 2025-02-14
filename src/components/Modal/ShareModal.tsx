@@ -33,7 +33,7 @@ const ShareModal = ({ title, nickname, artworksLength }: ShareModalProps) => {
     <div className='flex flex-col tablet:px-[56px] px-[18px] py-[50px]'>
       <div className='flex justify-between items-center'>
         {nickname && <h2 className='text-gray-100'>작품 공유</h2>}
-        {artworksLength && <h2 className='text-gray-100'>컬렉션 공유</h2>}
+        {title && <h2 className='text-gray-100'>컬렉션 공유</h2>}
         <Icon
           name='Close'
           size='l'
@@ -45,7 +45,7 @@ const ShareModal = ({ title, nickname, artworksLength }: ShareModalProps) => {
       <div className='flex gap-5 items-center mt-5'>
         <p className='subtitle2 text-gray-200'>{title}</p>
         {nickname && <p className='body1 text-gray-300'>{nickname}</p>}
-        {artworksLength && (
+        {title && (
           <p className='body1 text-gray-300'>{artworksLength}개의 작품</p>
         )}
       </div>
