@@ -52,9 +52,9 @@ const EditUserInfo = ({
     mode: 'all',
     defaultValues: {
       nickname,
-      introduction,
-      field: userField,
-      profileImage,
+      introduction: introduction ?? '',
+      field: userField ?? '회화',
+      profileImage: profileImage ?? '/images/defaultProfileImage.png',
     },
   });
 

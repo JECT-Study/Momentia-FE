@@ -8,10 +8,10 @@ import modalStore from '@/stores/modalStore';
 
 interface FollowUserUnitProps {
   userId: number;
-  profileImage: string;
+  profileImage: string | null;
   nickname: string;
-  introduction: string;
-  followStatus: boolean;
+  introduction: string | null;
+  followStatus: boolean | null;
 }
 
 const FollowUserUnit = ({
@@ -47,10 +47,14 @@ const FollowUserUnit = ({
           <p className='placeholder text-white mb-[4px] group-hover:underline'>
             {nickname}
           </p>
-          <p className='button-s text-gray-500'>{introduction}fdsfafsdfas</p>
+          <p className='button-s text-gray-500'>
+            {introduction ?? ''}fdsfafsdfas
+          </p>
         </div>
       </button>
-      <FollowButton initFollowState={followStatus} followUserId={userId} />
+      {followStatus !== null && (
+        <FollowButton initFollowState={followStatus} followUserId={userId} />
+      )}
     </div>
   );
 };
