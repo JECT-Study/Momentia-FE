@@ -29,9 +29,9 @@ const ContentTabs = ({
   const path = usePathname();
 
   const updatePaperId = (newId: string) => {
-    const params = new URLSearchParams(searchParams); // 기존 query params 유지
-    params.set('currentTab', newId); // paperId 변경
-    router.push(`${path}?${params.toString()}`); // 새로운 URL로 변경
+    const params = new URLSearchParams(searchParams);
+    params.set('currentTab', newId);
+    router.push(`${path}?${params.toString()}`);
   };
 
   const updateIndicator = () => {
