@@ -1,3 +1,4 @@
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import {
   Dispatch,
   MouseEvent,
@@ -22,6 +23,16 @@ const ContentTabs = ({
 }: ContentTabsProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const path = usePathname();
+
+  const updatePaperId = (newId: string) => {
+    const params = new URLSearchParams(searchParams);
+    params.set('currentTab', newId);
+    router.push(`${path}?${params.toString()}`);
+  };
 
   const updateIndicator = () => {
     const buttons = containerRef.current?.querySelectorAll('button');
@@ -53,6 +64,7 @@ const ContentTabs = ({
     const { value } = event.currentTarget;
     if (value) {
       setCurrentTab(value as TabType);
+      updatePaperId(value);
     }
   };
 

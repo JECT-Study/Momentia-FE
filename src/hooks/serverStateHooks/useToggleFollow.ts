@@ -2,7 +2,8 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import deleteFollow from '@/apis/follow/deleteFollow';
 import postFollow from '@/apis/follow/postFollow';
-import { ARTWORK } from '@/constants/API';
+import { ARTWORK, USER } from '@/constants/API';
+import TokenHandler from '@/utils/tokenHandler';
 
 interface ToggleFollowParams {
   isFollowing: boolean;
@@ -23,9 +24,19 @@ const useToggleFollow = ({
     },
 
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [ARTWORK.followedArtists],
-      });
+      const currentUserId = TokenHandler.getUserIdFromToken();
+
+      if (currentUserId)
+        [
+          ARTWORK.followedArtists,
+          USER.followerList(currentUserId),
+          USER.followingList(currentUserId),
+        ].forEach((queryKey) => {
+          queryClient.invalidateQueries({
+            queryKey: [queryKey],
+          });
+        });
+
       setIsFollowing(!isFollowing);
     },
 

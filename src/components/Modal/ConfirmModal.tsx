@@ -26,11 +26,6 @@ const ConfirmModal = ({
 }: ConfirmModalProps) => {
   const { closeModal } = useStore(modalStore);
 
-  const handleConfirm = () => {
-    closeModal();
-    window.history.back();
-  };
-
   const buttonOrderClassName = isButtonOnRow
     ? reverseButtonOrder
       ? 'flex-row-reverse'
@@ -45,7 +40,7 @@ const ConfirmModal = ({
       <div className={`flex ${buttonOrderClassName} gap-[20px]`}>
         <SquareButtonL
           variant='primary'
-          onClick={onClickConfirmButton || handleConfirm}
+          onClick={onClickConfirmButton || closeModal}
         >
           <p>{confirmButtonText}</p>
         </SquareButtonL>

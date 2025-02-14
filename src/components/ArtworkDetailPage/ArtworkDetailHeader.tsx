@@ -37,7 +37,7 @@ const ArtworkDetailHeader = ({
         <Image
           src={profileImage || '/images/defaultProfileImage.png'}
           alt={profileImage ? 'artwork image' : 'artwork default image'}
-          className='object-contain rounded-full'
+          className='object-cover rounded-full aspect-square'
           width={67}
           height={67}
         />
