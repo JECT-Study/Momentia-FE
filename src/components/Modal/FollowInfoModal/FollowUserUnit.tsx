@@ -47,9 +47,7 @@ const FollowUserUnit = ({
           <p className='placeholder text-white mb-[4px] group-hover:underline'>
             {nickname}
           </p>
-          <p className='button-s text-gray-500'>
-            {introduction ?? ''}fdsfafsdfas
-          </p>
+          <p className='button-s text-gray-500'>{introduction ?? ''}</p>
         </div>
       </button>
       {followStatus !== null && (
