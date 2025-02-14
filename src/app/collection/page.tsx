@@ -43,7 +43,7 @@ const Collection = () => {
     collectionId,
   });
 
-  const artworksLength = artworks.length;
+  const artworksLength = pageInfo.totalDataCnt;
   const router = useRouter();
 
   const openShareModal = () => {
