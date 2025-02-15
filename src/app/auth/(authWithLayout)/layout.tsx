@@ -21,7 +21,7 @@ const layout = ({ children }: LayoutProps) => {
   }, []);
 
   return (
-    <div className='h-full w-full flex flex-col justify-center items-center gap-[25px] m-auto overflow-y-scroll'>
+    <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full w-full flex flex-col justify-center items-center gap-[25px] m-auto overflow-y-scroll'>
       <Image
         src='/images/momentiaLogoSymbol.png'
         alt='모멘티아 로고'
