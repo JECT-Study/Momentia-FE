@@ -90,7 +90,7 @@ const SignUpPage = () => {
   const { isValid: isFormDataValid } = formHandlerMethods.formState;
 
   return (
-    <div className='h-full flex flex-col justify-center items-center max-w-[420px] w-full px-[20px] gap-[60px]'>
+    <div className='flex flex-col justify-center items-center max-w-[420px] w-full px-[20px] gap-[60px]'>
       <h4>회원가입</h4>
       <FormProvider {...formHandlerMethods}>
         <form
