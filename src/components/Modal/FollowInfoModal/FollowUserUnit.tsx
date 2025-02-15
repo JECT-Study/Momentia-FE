@@ -8,10 +8,10 @@ import modalStore from '@/stores/modalStore';
 
 interface FollowUserUnitProps {
   userId: number;
-  profileImage: string;
+  profileImage: string | null;
   nickname: string;
-  introduction: string;
-  followStatus: boolean;
+  introduction: string | null;
+  followStatus: boolean | null;
 }
 
 const FollowUserUnit = ({
@@ -39,7 +39,7 @@ const FollowUserUnit = ({
         <Image
           src={profileImage || '/images/defaultProfileImage.png'}
           alt={profileImage ? 'user-profile-image' : 'default-profile'}
-          className='rounded-full tablet:w-[94px] h-14 tablet:h-[94px]'
+          className='rounded-full tablet:w-[94px] h-14 tablet:h-[94px] aspect-square'
           width={56}
           height={56}
         />
@@ -47,7 +47,7 @@ const FollowUserUnit = ({
           <p className='placeholder text-white mb-[4px] group-hover:underline'>
             {nickname}
           </p>
-          <p className='button-s text-gray-500'>{introduction}fdsfafsdfas</p>
+          <p className='button-s text-gray-500'>{introduction ?? ''}</p>
         </div>
       </button>
       <FollowButton initFollowState={followStatus} followUserId={userId} />

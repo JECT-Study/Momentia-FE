@@ -17,7 +17,7 @@ const usePostCollectionAddArtwork = () => {
   const { mutate } = useMutation({
     mutationFn: (collectionId: number) =>
       postCollectionAddArtwork({ collectionId, postId: artworkId }),
-    onSuccess: () => {
+    onSuccess: (_, variables) => {
       closeModal();
 
       openModal({
@@ -26,7 +26,8 @@ const usePostCollectionAddArtwork = () => {
           <ConfirmModal
             otherButtonText='컬렉션으로 이동'
             onClickOtherButton={() => {
-              router.push(ROUTE.collection);
+              router.push(`${ROUTE.collection}?collectionId=${variables}`);
+              closeModal();
             }}
           >
             <p className='body1'>작품이 컬렉션에 저장되었습니다.</p>

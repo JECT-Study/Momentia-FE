@@ -94,7 +94,7 @@ const FollowedArtistsSection = () => {
                         width={100}
                         height={100}
                         priority
-                        className='w-[50px] h-[50px] bg-gray-700 rounded-full'
+                        className='w-[50px] h-[50px] bg-gray-700 rounded-full aspect-square'
                       />
                       <div className='gap-[30px]'>
                         <p className='subtitle2 text-white group-hover:underline'>

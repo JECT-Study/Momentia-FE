@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import ArtworkTab from './ArtworkTab';
@@ -12,7 +13,9 @@ export const TAB_OPTIONS = ['작품', '좋아요', '컬렉션'] as const;
 export type TabType = (typeof TAB_OPTIONS)[number];
 
 const UserArtworkSection = ({ isMine }: { isMine: boolean }) => {
-  const [currentTab, setCurrentTab] = useState<TabType>('작품');
+  const searchParams = useSearchParams();
+  const initialTab = (searchParams.get('currentTab') as TabType) || '작품';
+  const [currentTab, setCurrentTab] = useState<TabType>(initialTab);
 
   const content = () => {
     if (currentTab === '작품') return <ArtworkTab />;

@@ -32,7 +32,7 @@ const ArtistInfoSection = ({
           <Image
             src={profileImage || '/images/defaultProfileImage.png'}
             alt='profile-image'
-            className='object-contain rounded-full'
+            className='object-cover rounded-full aspect-square'
             width={141}
             height={141}
           />

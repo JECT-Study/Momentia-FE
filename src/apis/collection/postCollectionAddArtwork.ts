@@ -36,8 +36,9 @@ const postCollectionAddArtwork = async ({
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
-      throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
+      alert('이미 선택한 컬렉션에 저장한 작품입니다.');
+      // console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
+      // throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }
 };

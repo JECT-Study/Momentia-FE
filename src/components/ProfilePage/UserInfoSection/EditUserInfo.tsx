@@ -15,10 +15,15 @@ import ARTWORK_FIELDS from '@/constants/artworkFields';
 import usePatchProfileInfo from '@/hooks/serverStateHooks/usePatchProfileInfo';
 import { UserStringProfileType, UserType } from '@/types/user';
 
+const ARTWORK_FIELDS_NAMES = ARTWORK_FIELDS.map((field) => field.name) as [
+  string,
+  ...string[],
+];
+
 const USER_INFO_SCHEMA = z.object({
   nickname: z.string().min(1, '닉네임을 입력해주세요.'),
   introduction: z.string().min(1, '자기 소개를 입력해주세요.'),
-  field: z.string().optional(),
+  field: z.enum(ARTWORK_FIELDS_NAMES),
   profileImage: z.union([z.string(), z.instanceof(File)]).optional(),
 });
 
@@ -52,9 +57,9 @@ const EditUserInfo = ({
     mode: 'all',
     defaultValues: {
       nickname,
-      introduction,
-      field: userField,
-      profileImage,
+      introduction: introduction ?? '',
+      field: userField ?? '',
+      profileImage: profileImage ?? '/images/defaultProfileImage.png',
     },
   });
 
@@ -75,6 +80,11 @@ const EditUserInfo = ({
   const changeIntroduction = (event: ChangeEvent<HTMLInputElement>) => {
     setValue('introduction', event.target.value);
     trigger('introduction');
+  };
+
+  const changeField = (value: string) => {
+    setValue('field', value);
+    trigger('field');
   };
 
   const convertedProfileImage = useMemo(() => {
@@ -125,7 +135,7 @@ const EditUserInfo = ({
         <Image
           src={convertedProfileImage}
           alt='user-profile-image'
-          className='rounded-full w-[141px] h-[141px]'
+          className='rounded-full w-[141px] aspect-square'
           width={141}
           height={141}
         />
@@ -159,9 +169,9 @@ const EditUserInfo = ({
             <SortDropdown
               label='작품 카테고리'
               placeholder='카테고리 선택'
-              options={ARTWORK_FIELDS.map((field) => field.name)}
-              selected={watch('field') || 'OTHERS'}
-              onChange={(value) => setValue('field', value)}
+              options={ARTWORK_FIELDS_NAMES}
+              selected={watch('field') || ''}
+              onChange={changeField}
               className='w-full'
             />
           </span>

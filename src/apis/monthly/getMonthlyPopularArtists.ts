@@ -3,8 +3,9 @@ import { useQuery } from '@tanstack/react-query';
 import { MONTHLY } from '@/constants/API';
 import { COMMON_ERROR_MESSAGE } from '@/constants/errorMessage';
 import { ArtistInfoType } from '@/types/artist';
+import TokenHandler from '@/utils/tokenHandler';
 
-import defaultClient from '..';
+import defaultClient, { authorizedClient } from '..';
 
 interface MonthlyPopularArtistsResponseType {
   users: ArtistInfoType[];
@@ -12,7 +13,10 @@ interface MonthlyPopularArtistsResponseType {
 
 const getMonthlyPopularArtists = async () => {
   try {
-    const { data } = await defaultClient.get<MonthlyPopularArtistsResponseType>(
+    const currentClient =
+      TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
+
+    const { data } = await currentClient.get<MonthlyPopularArtistsResponseType>(
       MONTHLY.artistOfTheMonth,
     );
 

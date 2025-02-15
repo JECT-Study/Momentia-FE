@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-
 import useToggleFollow from '@/hooks/serverStateHooks/useToggleFollow';
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
@@ -13,13 +11,13 @@ const FollowButton = ({
   ariaLabel,
   isFull = false,
 }: FollowButtonProps) => {
-  const [isFollowing, setIsFollowing] = useState(initFollowState);
-  const { mutate: toggleFollow } = useToggleFollow({
-    isFollowing,
-    setIsFollowing,
+  const { isFollowing, toggleFollow } = useToggleFollow({
+    initFollowState,
   });
 
   const handleFollowClick = () => toggleFollow(followUserId);
+
+  if (isFollowing === null) return null;
 
   return (
     <button

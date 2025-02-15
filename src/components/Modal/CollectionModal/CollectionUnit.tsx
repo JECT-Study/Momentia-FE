@@ -26,7 +26,7 @@ const CollectionUnit = ({
 
   return (
     <button
-      className='flex tablet:flex-col items-center tabelt:gap-[8px] gap-4 tablet:p-0 p-[9px]'
+      className='flex tablet:flex-col items-center tablet:gap-[8px] gap-4 tablet:p-0 p-[9px]'
       onClick={selectCollectionUnit}
       disabled={blockButton}
     >

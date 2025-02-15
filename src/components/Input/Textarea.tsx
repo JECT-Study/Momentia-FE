@@ -58,6 +58,7 @@ const Textarea = ({
                 ${(value ?? '').length ? 'text-white' : 'placeholder:text-gray-700'}
                 ${fadedBackground ? 'bg-gray-800' : 'bg-gray-900'}
                 focus:outline-none focus:ring-0  hover:bg-[#18181b] focus:bg-[#18181b]
+                whitespace-pre
                 `}
           style={{
             minHeight: '256px',
