@@ -8,8 +8,9 @@ import {
 import { ProfileCollectionListResponse } from '@/types/collection';
 import { ErrorResponseType } from '@/types/errorResponse';
 import { UserArtworkListParams } from '@/types/user';
+import TokenHandler from '@/utils/tokenHandler';
 
-import { authorizedClient } from '..';
+import defaultClient, { authorizedClient } from '..';
 
 const getProfileCollectionList = async ({
   sort,
@@ -18,7 +19,10 @@ const getProfileCollectionList = async ({
   userId,
 }: UserArtworkListParams) => {
   try {
-    const { data } = await authorizedClient.get<ProfileCollectionListResponse>(
+    const currentClient =
+      TokenHandler.getAccessToken() !== '' ? authorizedClient : defaultClient;
+
+    const { data } = await currentClient.get<ProfileCollectionListResponse>(
       `${COLLECTION.collectionList}?userId=${userId}&page=${page}&size=${size}&sort=${sort}`,
     );
 
