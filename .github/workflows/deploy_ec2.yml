@@ -2,7 +2,7 @@ name: Deploy to EC2 with docker-image
 
 on:
   push:
-    branches: ['main']
+    branches: ['main', 'deploy']
   pull_request:
     branches: ['main']
 
