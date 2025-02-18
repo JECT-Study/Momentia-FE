@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import ROUTE from '@/constants/routes';
@@ -31,11 +31,26 @@ const FollowedArtistsSection = () => {
     router.push(ROUTE.profile(userId));
   };
 
+  useEffect(() => {
+    const savedState = localStorage.getItem('showFollowedArtistsCards');
+    if (savedState !== null) {
+      setShowFollowedArtistsCards(savedState === 'true');
+    }
+  }, []);
+
+  const toggleShowFollowedArtistsCards = () => {
+    setShowFollowedArtistsCards((prev) => {
+      const newState = !prev;
+      localStorage.setItem('showFollowedArtistsCards', String(newState));
+      return newState;
+    });
+  };
+
   return (
     <>
       <button
         className='flex items-center pb-[56px] w-[202px] justify-between'
-        onClick={() => setShowFollowedArtistsCards((prev) => !prev)}
+        onClick={toggleShowFollowedArtistsCards}
       >
         <h3 className='text-white'>내가 팔로우한 작가</h3>
         <Icon
