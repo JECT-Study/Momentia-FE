@@ -4,14 +4,6 @@ FROM node:20 AS builder
 # 2️⃣ 작업 디렉토리 설정
 WORKDIR /app
 
-# 3️⃣ 환경 변수 설정 (Docker Build 시 전달)
-ARG NEXT_PUBLIC_KAKAO_API_KEY
-ARG NEXT_PUBLIC_KAKAO_REDIRECT_PATH
-ARG NEXT_PUBLIC_GOOGLE_CLIENT_ID
-ARG NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY
-ARG NEXT_PUBLIC_GOOGLE_REDIRECT_PATH
-ARG NEXT_PUBLIC_API_BASE_URL
-
 # 4️⃣ 필요 파일 먼저 복사 (캐싱 최적화)
 COPY package.json pnpm-lock.yaml .npmrc* ./
 
@@ -47,6 +39,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
+COPY .env .env
 
 # ⓭ 포트 설정
 EXPOSE 3000
