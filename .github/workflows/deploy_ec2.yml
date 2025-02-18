@@ -56,6 +56,15 @@ jobs:
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
+      - name: Transfer .env file to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          source: '.env'
+          target: '~/Momentia-FE/'
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.10
         with:
@@ -63,15 +72,12 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            if [ "$(docker ps -q -f name=${{secrets.SERVICE_NAME}})" ]; then
-                docker stop ${{secrets.SERVICE_NAME}}
-                docker rm ${{secrets.SERVICE_NAME}}
-            fi
-
+            docker stop ${{secrets.SERVICE_NAME}} || true
+            docker rm ${{secrets.SERVICE_NAME}} || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
             docker run -d \
               --name ${{secrets.SERVICE_NAME}} \
               -p 3000:3000 \
-              --env-file .env \
+              --env-file ~/Momentia-FE/.env \
               ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
