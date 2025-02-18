@@ -7,8 +7,8 @@ WORKDIR /app
 # 3️⃣ 필요 파일 먼저 복사 (캐싱 최적화)
 COPY package.json pnpm-lock.yaml .npmrc* ./
 
-# 4️⃣ 최신 pnpm 설치 (npm 최신화 제거)
-RUN npm install -g pnpm
+# 4️⃣ 로컬과 동일한 pnpm 버전(9.14.4) 고정 설치
+RUN npm install -g pnpm@9.14.4
 
 # 5️⃣ 의존성 설치 (생산 환경을 고려해 --frozen-lockfile 사용)
 RUN pnpm install --frozen-lockfile
@@ -24,8 +24,8 @@ RUN pnpm build
 FROM node:20 AS runner
 WORKDIR /app
 
-# 9️⃣ 최신 pnpm 설치 (npm 최신화 제거)
-RUN npm install -g pnpm
+# 9️⃣ 로컬과 동일한 pnpm 버전(9.14.4) 고정 설치
+RUN npm install -g pnpm@9.14.4
 
 # 🔟 빌드된 파일과 node_modules 복사
 COPY --from=builder /app/node_modules ./node_modules
