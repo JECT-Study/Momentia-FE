@@ -1,0 +1,69 @@
+name: Deploy to EC2 with docker-image
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Cache
+        id: cache
+        uses: actions/cache@v4.0.2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}
+
+      - name: Install Dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pnpm install
+
+      - name: Setting .env
+        run: |
+          echo "NEXT_PUBLIC_KAKAO_API_KEY=$NEXT_PUBLIC_KAKAO_API_KEY" >> .env
+          echo "NEXT_PUBLIC_KAKAO_REDIRECT_PATH=$NEXT_PUBLIC_KAKAO_REDIRECT_PATH" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=$NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=$NEXT_PUBLIC_GOOGLE_REDIRECT_PATH" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL" >> .env
+        env:
+          NEXT_PUBLIC_KAKAO_API_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}
+          NEXT_PUBLIC_KAKAO_REDIRECT_PATH: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }}
+          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
+          NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }}
+          NEXT_PUBLIC_GOOGLE_REDIRECT_PATH: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }}
+          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
+
+      - name: Build and Push Docker Image
+        run: |
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
+          docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
+
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v0.1.10
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          script: |
+            if [ "$(docker ps -q -f name=${{secrets.SERVICE_NAME}})" ]; then
+                docker stop ${{secrets.SERVICE_NAME}}
+                docker rm ${{secrets.SERVICE_NAME}}
+            fi
+
+            docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
+
+            docker run -d \
+              --name ${{secrets.SERVICE_NAME}} \
+              -p 3000:3000 \
+              --env-file .env \
+              ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
