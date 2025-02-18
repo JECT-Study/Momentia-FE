@@ -32,22 +32,6 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install
 
-      - name: Setting .env
-        run: |
-          echo "NEXT_PUBLIC_KAKAO_API_KEY=$NEXT_PUBLIC_KAKAO_API_KEY" >> .env
-          echo "NEXT_PUBLIC_KAKAO_REDIRECT_PATH=$NEXT_PUBLIC_KAKAO_REDIRECT_PATH" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=$NEXT_PUBLIC_GOOGLE_CLIENT_ID" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=$NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=$NEXT_PUBLIC_GOOGLE_REDIRECT_PATH" >> .env
-          echo "NEXT_PUBLIC_API_BASE_URL=$NEXT_PUBLIC_API_BASE_URL" >> .env
-        env:
-          NEXT_PUBLIC_KAKAO_API_KEY: ${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}
-          NEXT_PUBLIC_KAKAO_REDIRECT_PATH: ${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }}
-          NEXT_PUBLIC_GOOGLE_CLIENT_ID: ${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}
-          NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY: ${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }}
-          NEXT_PUBLIC_GOOGLE_REDIRECT_PATH: ${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }}
-          NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
-
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
@@ -55,15 +39,6 @@ jobs:
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
-
-      - name: Transfer .env file to EC2
-        uses: appleboy/scp-action@v0.1.4
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
-          source: '.env'
-          target: '~/Momentia-FE/'
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v0.1.10
@@ -79,5 +54,10 @@ jobs:
             docker run -d \
               --name ${{secrets.SERVICE_NAME}} \
               -p 3000:3000 \
-              --env-file ~/Momentia-FE/.env \
+              -e NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }} \
+              -e NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }} \
+              -e NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} \
+              -e NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }} \
+              -e NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }} \
+              -e NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }} \
               ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
