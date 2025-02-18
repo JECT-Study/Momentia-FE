@@ -33,7 +33,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # 9️⃣ Next.js 빌드 실행
-RUN pnpm build
+RUN pnpm run build
 
 # 🔟 실제 실행용 스테이지 (멀티스테이지 빌드)
 FROM node:20 AS runner
