@@ -16,37 +16,36 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8
+          version: 9.14.4 # Dockerfile과 동일한 버전
 
       - name: Cache
         id: cache
         uses: actions/cache@v4
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
-        run: pnpm install
-
-      - name: Create .env file
-        run: |
-          echo "NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}" >> .env
-          echo "NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }}" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }}" >> .env
-          echo "NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }}" >> .env
-          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+        run: pnpm install --frozen-lockfile
 
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image
         run: |
-          docker build --env-file .env -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
+          docker build \
+            --build-arg NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }} \
+            --build-arg NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }} \
+            --build-arg NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
+
           docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
       - name: Deploy to EC2
@@ -56,11 +55,22 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
+            # 컨테이너 정리
             docker stop ${{secrets.SERVICE_NAME}} || true
             docker rm ${{secrets.SERVICE_NAME}} || true
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
+            # EC2에서 .env 파일 직접 생성
+            echo "NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}" > .env
+            echo "NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }}" >> .env
+            echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> .env
+            echo "NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }}" >> .env
+            echo "NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }}" >> .env
+            echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+
+            # 컨테이너 실행
             docker run -d \
               --name ${{secrets.SERVICE_NAME}} \
+              --env-file .env \
               -p 3000:3000 \
               ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
