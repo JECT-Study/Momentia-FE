@@ -1,3 +1,5 @@
+import { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import { ArtworkField } from '@/types';
 
@@ -7,8 +9,9 @@ import DefaultCarousel from '../Carousel/DefaultCarousel';
 import SortDropdown from '../SortDropdown';
 
 interface ArtworkFilterProps {
+  router: AppRouterInstance;
+  searchParams: URLSearchParams;
   selectedArtworkField: string;
-  setSelectedArtworkField: (value: string | ((prev: string) => string)) => void;
   selectedOption: string;
   setSelectedOption: (value: string | ((prev: string) => string)) => void;
   setCurrentPage: (value: number | ((prev: number) => number)) => void;
@@ -20,8 +23,9 @@ const ARTWORK_FIELDS_WITH_ALL_OPTION = [
 ];
 
 const ArtworkFilter = ({
+  router,
+  searchParams,
   selectedArtworkField,
-  setSelectedArtworkField,
   selectedOption,
   setSelectedOption,
   setCurrentPage,
@@ -32,7 +36,9 @@ const ArtworkFilter = ({
     )?.name || '전체';
 
   const handleArtworkFieldClick = (artworkField: string) => {
-    setSelectedArtworkField(artworkField);
+    const params = new URLSearchParams(searchParams.toString());
+    params.set('category', artworkField);
+    router.replace(`?${params.toString()}`, { scroll: false });
     setCurrentPage(1);
   };
 
