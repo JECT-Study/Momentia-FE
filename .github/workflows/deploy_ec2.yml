@@ -37,7 +37,15 @@ jobs:
 
       - name: Build and Push Docker Image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
+          docker build \
+            --build-arg NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }} \
+            --build-arg NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }} \
+            --build-arg NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }} \
+            --build-arg NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }} \
+            -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
+
           docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
       - name: Deploy to EC2
@@ -54,10 +62,4 @@ jobs:
             docker run -d \
               --name ${{secrets.SERVICE_NAME}} \
               -p 3000:3000 \
-              -e NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }} \
-              -e NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }} \
-              -e NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} \
-              -e NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }} \
-              -e NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }} \
-              -e NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }} \
               ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
