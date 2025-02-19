@@ -32,20 +32,21 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: pnpm install --frozen-lockfile
 
+      - name: Create .env file
+        run: |
+          echo "NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}" > .env
+          echo "NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }}" >> .env
+          echo "NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }}" >> .env
+          echo "NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }}" >> .env
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
       - name: Build and Push Docker Image
         run: |
-          docker build \
-            --build-arg NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }} \
-            --build-arg NEXT_PUBLIC_KAKAO_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_KAKAO_REDIRECT_PATH }} \
-            --build-arg NEXT_PUBLIC_GOOGLE_CLIENT_ID=${{ secrets.NEXT_PUBLIC_GOOGLE_CLIENT_ID }} \
-            --build-arg NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY=${{ secrets.NEXT_PUBLIC_GOOGLE_PRIVATE_API_KEY }} \
-            --build-arg NEXT_PUBLIC_GOOGLE_REDIRECT_PATH=${{ secrets.NEXT_PUBLIC_GOOGLE_REDIRECT_PATH }} \
-            --build-arg NEXT_PUBLIC_API_BASE_URL=${{ secrets.NEXT_PUBLIC_API_BASE_URL }} \
-            -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
-
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest .
           docker push ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
       - name: Deploy to EC2

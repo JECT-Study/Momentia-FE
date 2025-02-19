@@ -16,25 +16,24 @@ RUN pnpm install --frozen-lockfile
 # 6️⃣ 모든 프로젝트 파일 복사
 COPY . .
 
-# 8️⃣ Next.js 빌드 실행 (`.env` 파일 기반으로 환경변수 적용됨)
+# 7️⃣ Next.js 빌드 실행
 RUN pnpm run build
 
-# 🔟 실제 실행용 스테이지 (멀티스테이지 빌드)
+# 8️⃣ 실제 실행용 스테이지 (멀티스테이지 빌드)
 FROM node:20 AS runner
 WORKDIR /app
 
-# ⓫ 로컬과 동일한 pnpm 버전(9.14.4) 고정 설치
+# 9️⃣ 로컬과 동일한 pnpm 버전(9.14.4) 고정 설치
 RUN npm install -g pnpm@9.14.4
 
-# ⓬ 빌드된 파일과 node_modules 복사
+# 🔟 빌드된 파일과 node_modules 복사
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/.env .env
 
-# ⓭ 포트 설정
+# ⓫ 포트 설정
 EXPOSE 3000
 
-# ⓮ 애플리케이션 실행
+# ⓬ 애플리케이션 실행
 CMD ["pnpm", "run", "start"]
