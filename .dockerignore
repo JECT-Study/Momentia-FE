@@ -1,5 +1,5 @@
 node_modules
 .pnpm
 .next/cache
-.env
+# .env
 .git
