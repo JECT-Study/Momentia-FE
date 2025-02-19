@@ -56,10 +56,13 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
           script: |
-            # 컨테이너 정리
+            # 컨테이너 및 기존 이미지 삭제
             docker stop ${{secrets.SERVICE_NAME}} || true
             docker rm ${{secrets.SERVICE_NAME}} || true
-            docker pull ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
+            docker rmi -f ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest || true
+
+            # 최신 이미지 강제 pull
+            docker pull --no-cache ${{ secrets.DOCKER_USERNAME }}/${{secrets.SERVICE_NAME}}:latest
 
             # EC2에서 .env 파일 직접 생성
             echo "NEXT_PUBLIC_KAKAO_API_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_API_KEY }}" > .env
