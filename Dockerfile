@@ -31,7 +31,7 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./
-COPY --from=builder /app/.env .env  # 실행 시점에도 환경변수 유지
+COPY --from=builder /app/.env .env
 
 # ⓭ 포트 설정
 EXPOSE 3000
