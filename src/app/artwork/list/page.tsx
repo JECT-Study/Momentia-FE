@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 
 import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
@@ -10,9 +11,12 @@ import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 
 const ArtworkList = () => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const selectedArtworkField = searchParams.get('category') || 'ALL';
+
   const [searchKeyword, setSearchKeyword] = useState('');
   const [submittedKeyword, setSubmittedKeyword] = useState('');
-  const [selectedArtworkField, setSelectedArtworkField] = useState('ALL');
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -51,8 +55,9 @@ const ArtworkList = () => {
           setSubmittedKeyword={setSubmittedKeyword}
         />
         <ArtworkFilter
+          router={router}
+          searchParams={searchParams}
           selectedArtworkField={selectedArtworkField}
-          setSelectedArtworkField={setSelectedArtworkField}
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
           setCurrentPage={setCurrentPage}
