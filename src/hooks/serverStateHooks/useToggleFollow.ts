@@ -6,6 +6,15 @@ import postFollow from '@/apis/follow/postFollow';
 import { ARTWORK, USER } from '@/constants/API';
 import TokenHandler from '@/utils/tokenHandler';
 
+interface TogglePropsType {
+  userId: number;
+  following: boolean;
+}
+
+interface MutationContextType {
+  prevFollowStatus: boolean | null;
+}
+
 const useToggleFollow = ({
   initFollowState,
 }: {
@@ -21,13 +30,23 @@ const useToggleFollow = ({
   const mutation = useMutation<
     void,
     Error,
-    { userId: number; following: boolean }
+    TogglePropsType,
+    MutationContextType
   >({
     mutationFn: async ({ userId, following }) => {
       following ? await deleteFollow(userId) : await postFollow(userId);
     },
 
-    onSuccess: (_, { following }) => {
+    onMutate: async ({ following }) => {
+      await queryClient.cancelQueries();
+
+      const prevFollowStatus = isFollowing;
+      setIsFollowing(!following);
+
+      return { prevFollowStatus };
+    },
+
+    onSuccess: () => {
       const currentUserId = TokenHandler.getUserIdFromToken();
 
       if (currentUserId) {
@@ -39,12 +58,14 @@ const useToggleFollow = ({
           queryClient.invalidateQueries({ queryKey: [queryKey] });
         });
       }
-
-      setIsFollowing(!following);
     },
 
-    onError: (error) => {
+    onError: (error, _, context) => {
       console.error('팔로우 상태 변경 에러: ', error.message);
+
+      if (context?.prevFollowStatus !== undefined) {
+        setIsFollowing(context.prevFollowStatus);
+      }
     },
   });
 
