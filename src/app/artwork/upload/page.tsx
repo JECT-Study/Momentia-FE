@@ -124,7 +124,7 @@ const ArtworkUpload = () => {
       newErrors.artworkTitleError = REQUIRED_FIELDS_ERROR_MESSAGE;
     if (!selectedArtworkField.trim())
       newErrors.selectedArtworkFieldError = REQUIRED_FIELDS_ERROR_MESSAGE;
-    if (!(isEditMode && uploadedImage))
+    if (!isEditMode && !uploadedImage)
       newErrors.uploadedImageError = REQUIRED_FIELDS_ERROR_MESSAGE;
 
     setErrors(newErrors);

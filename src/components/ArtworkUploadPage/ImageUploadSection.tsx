@@ -89,11 +89,12 @@ const ImageUploadSection = ({
     if (imageFile) {
       setUploadedImage(imageFile);
       uploadImage(imageFile);
-      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
     }
   };
 
   const handleImageUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+
     if (e.target.files && e.target.files[0]) {
       if (uploadedImage) {
         setErrors((prevErrors) => ({
