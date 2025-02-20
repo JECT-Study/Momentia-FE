@@ -103,8 +103,6 @@ const ImageUploadSection = ({
         return;
       }
 
-      if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
-
       const imageFile = e.target.files[0];
       setUploadedImage(imageFile);
       uploadImage(imageFile);
@@ -115,6 +113,11 @@ const ImageUploadSection = ({
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
+  };
+
+  const ClickChangeImageBtn = () => {
+    if (errors.uploadedImageError) clearErrorMessage('uploadedImageError');
+    setUploadedImage(null);
   };
 
   return (
@@ -148,7 +151,7 @@ const ImageUploadSection = ({
           {isEditMode ? null : (
             <button
               aria-label='Button to change artwork image'
-              onClick={() => setUploadedImage(null)}
+              onClick={ClickChangeImageBtn}
               className='absolute group flex items-center justify-center w-[57px] h-[57px] md:w-[77px] md:h-[77px]
               right-[30px] bottom-[30px] rounded-full
               bg-[rgba(35,34,37,0.5)] backdrop-blur-[12px]
