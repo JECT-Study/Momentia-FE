@@ -59,7 +59,7 @@ const CreateCollectionModal = () => {
             onClick={clickCreateButton}
             disabled={collectionName.length === 0}
           >
-            생성
+            <p className='button-s'>생성</p>
           </SquareButtonL>
         </span>
         <button
