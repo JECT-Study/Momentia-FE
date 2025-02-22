@@ -48,9 +48,10 @@ const NicknameInput = () => {
         placeholder='닉네임을 입력해주세요.'
         maxLength={MAX_NICKNAME_LENGTH}
         classNames={{
-          label: 'placeholder',
-          input: 'placeholder:text-gray-700',
-          inputWrapper: ['bg-gray-900', 'rounded-md'],
+          label: '!placeholder !top-[22px] !text-gray-400',
+          input: ['!placeholder', 'text-gray-700'],
+          mainWrapper: 'h-[60px]',
+          inputWrapper: ['bg-gray-900', 'rounded-md', 'h-full'],
         }}
         onChange={handleNicknameInputOnChange}
         endContent={
