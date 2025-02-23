@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import patchArtworkComment from '@/apis/artwork/patchArtwokrComment';
+import patchArtworkComment from '@/apis/artwork/patchArtworkComment';
 
 interface MutateProps {
   content: string;
