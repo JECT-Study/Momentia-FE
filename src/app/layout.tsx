@@ -3,8 +3,6 @@ import '../styles/globals.css';
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
 
-import ToastPopup from '@/components/ToastPopup';
-
 import AppShell from '../components/Layout/AppShell';
 import { montserrat, pretendard } from './fonts';
 import KakaoProvider from './providers/KakaoProvider';
@@ -26,10 +24,7 @@ const RootLayout = ({ children }: Readonly<LayoutProps>) => {
       <body className={`${pretendard} ${montserrat.variable}`}>
         <MSWProvider>
           <TanStackQueryProvider>
-            <AppShell>
-              <ToastPopup />
-              {children}
-            </AppShell>
+            <AppShell>{children}</AppShell>
           </TanStackQueryProvider>
         </MSWProvider>
         <KakaoProvider />

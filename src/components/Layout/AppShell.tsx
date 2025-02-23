@@ -8,6 +8,8 @@ import ModalProvider from '@/app/providers/ModalProvider';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
+import ToastPopup from '../ToastPopup';
+
 const AppShell = ({ children }: { children: ReactNode }) => {
   return (
     <>
@@ -20,6 +22,7 @@ const AppShell = ({ children }: { children: ReactNode }) => {
           }}
         >
           <div className='box-border h-full'>
+            <ToastPopup />
             <Navbar />
             <main className='pt-[90px] min-h-full'>{children}</main>
             <Footer />
