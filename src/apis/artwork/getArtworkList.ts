@@ -32,8 +32,7 @@ const getArtworkList = async ({
       page: response.data.page,
     };
   } catch (error) {
-    console.error('작품 목록 조회 중 에러 발생: ', error);
-    throw new Error('작품 목록 조회에 실패하였습니다. 다시 시도해주세요.');
+    throw new Error('작품 목록 조회에 실패하였습니다.');
   }
 };
 

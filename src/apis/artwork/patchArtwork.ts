@@ -15,9 +15,7 @@ const patchArtwork = async (postId: number, data: PatchArtworkData) => {
       {},
     );
 
-    if (Object.keys(updatedData).length === 0) {
-      return null;
-    }
+    if (Object.keys(updatedData).length === 0) return null;
 
     const response = await authorizedClient.patch(
       ARTWORK.patchArtwork(postId),
@@ -26,8 +24,7 @@ const patchArtwork = async (postId: number, data: PatchArtworkData) => {
 
     return response.data.postId;
   } catch (error) {
-    console.error('작품 수정 중 에러 발생: ', error);
-    throw new Error('작품 수정에 실패하였습니다. 다시 시도해주세요.');
+    throw new Error('작품 수정에 실패하였습니다.');
   }
 };
 

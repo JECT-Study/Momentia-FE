@@ -13,24 +13,19 @@ const deleteArtworkLike = async (postId: number) => {
   try {
     const response = await authorizedClient.delete(ARTWORK.artworkLike(postId));
 
-    if (response.status === 204) {
-      return true;
-    } else {
-      throw new Error('좋아요 취소 요청 실패');
-    }
+    if (response.status === 204) return true;
+
+    throw new Error('좋아요 취소가 반영되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;
 
       if (code) {
-        console.error(LIKE_ERROR_MESSAGE[code]);
         throw new Error(LIKE_ERROR_MESSAGE[code]);
       } else {
-        console.error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }

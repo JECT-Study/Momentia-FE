@@ -19,24 +19,19 @@ const deleteCollectionArtwork = async ({
       COLLECTION.collectionAddAndRemoveArtwork(collectionId, postId),
     );
 
-    if (response.status === 204) {
-      return true;
-    } else {
-      throw new Error('작품 삭제 실패');
-    }
+    if (response.status === 204) return true;
+
+    throw new Error('작품이 삭제되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;
 
       if (code) {
-        console.error(ARTWORK_ERROR_MESSAGE[code]);
         throw new Error(ARTWORK_ERROR_MESSAGE[code]);
       } else {
-        console.error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }
