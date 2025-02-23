@@ -17,6 +17,7 @@ const patchArtworkComment = async (commentId: number, content: string) => {
     );
 
     if (response.status === 204) return content;
+
     throw new Error('댓글 수정에 실패하였습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
