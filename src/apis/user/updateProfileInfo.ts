@@ -17,7 +17,7 @@ const uploadProfileImage = async (imageFile: File): Promise<number> => {
     fileType: imageFile.type,
   });
 
-  if (!presignedData) throw new Error('Presigned URL 요청 실패');
+  if (!presignedData) throw new Error('Presigned URL 요청에 실패하였습니다.');
 
   const { presignedUrl, imageId } = presignedData;
 
@@ -26,7 +26,7 @@ const uploadProfileImage = async (imageFile: File): Promise<number> => {
     uploadUrl: presignedUrl,
   });
 
-  if (!uploadSuccess) throw new Error('이미지 업로드 실패');
+  if (!uploadSuccess) throw new Error('이미지 업로드에 실패하였습니다.');
 
   await putNotifyImageUploadComplete(imageId);
 

@@ -15,10 +15,10 @@ import ArtworkCard from '../Card/ArtworkCard';
 import Icon from '../Icon/Icon';
 
 const FollowedArtistsSection = () => {
-  const router = useRouter();
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
     useState(true);
 
+  const router = useRouter();
   const accessToken = TokenHandler.getAccessToken();
 
   const {

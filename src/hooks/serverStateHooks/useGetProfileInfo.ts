@@ -9,7 +9,7 @@ const useGetProfileInfo = (userId: number | null) => {
     queryKey: [USER.userProfile, userId],
     queryFn: () => {
       if (userId === null) {
-        throw new Error('userId is required');
+        throw new Error('userId는 필수입니다.');
       }
       return getProfileInfo(userId);
     },
