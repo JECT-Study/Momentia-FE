@@ -6,7 +6,7 @@ import useGetFollowerList from '@/hooks/serverStateHooks/useGetFollowerList';
 const FollowerList = ({ nickname }: { nickname: string }) => {
   const { followerList, isLoading } = useGetFollowerList();
 
-  if (isLoading) return <div>isLoading</div>;
+  if (isLoading) return <div>로딩 중...</div>;
 
   return (
     <>

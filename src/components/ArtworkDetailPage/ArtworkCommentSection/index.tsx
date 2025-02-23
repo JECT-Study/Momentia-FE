@@ -33,7 +33,7 @@ const ArtworkCommentSection = ({
     commentData === undefined ||
     commentData?.pages.flatMap((page) => page.comments).length === 0;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>로딩 중...</div>;
 
   return (
     <div className='flex-1 flex flex-col gap-5'>

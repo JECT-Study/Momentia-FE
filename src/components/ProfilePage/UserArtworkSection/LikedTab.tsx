@@ -13,9 +13,10 @@ import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetLikedArtworkList from '@/hooks/serverStateHooks/useGetLikedArtworkList';
 
 const LikedTab = () => {
-  const router = useRouter();
   const [currentSort, setCurrentSort] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
+
+  const router = useRouter();
 
   const { artworkList, pageInfo } = useGetLikedArtworkList({
     sort: ARTWORK_SORT_OPTIONS[currentSort] || 'recent',

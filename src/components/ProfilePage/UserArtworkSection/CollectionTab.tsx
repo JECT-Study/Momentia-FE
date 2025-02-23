@@ -19,6 +19,7 @@ import modalStore from '@/stores/modalStore';
 const CollectionTab = () => {
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
+
   const { openModal, closeModal } = useStore(modalStore);
 
   const params = useSearchParams();

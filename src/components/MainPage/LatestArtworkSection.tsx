@@ -15,7 +15,7 @@ const LatestArtworkSection = () => {
     size: 10,
   });
 
-  if (isLoading) return <div>로딩중</div>;
+  if (isLoading) return <div>로딩 중...</div>;
 
   return (
     <div className='flex flex-col gap-[90px]'>

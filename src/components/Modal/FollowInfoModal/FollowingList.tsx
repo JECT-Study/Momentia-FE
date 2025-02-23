@@ -7,7 +7,7 @@ import FollowUserUnit from './FollowUserUnit';
 const FollowingList = ({ nickname }: { nickname: string }) => {
   const { followingList, isLoading } = useGetFollowingList();
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>로딩 중...</div>;
 
   return (
     <>
