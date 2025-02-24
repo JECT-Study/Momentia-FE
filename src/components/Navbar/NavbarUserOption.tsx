@@ -5,14 +5,19 @@ import { useState } from 'react';
 import ROUTE from '@/constants/routes';
 import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
 import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
+import useToastStore from '@/stores/useToastStore';
 import TokenHandler from '@/utils/tokenHandler';
 
 const NavbarUserOption = () => {
-  const router = useRouter();
   const [toggleOptionArea, setToggleOptionArea] = useState(false);
 
+  const router = useRouter();
   const userId = TokenHandler.getUserIdFromToken();
-  const { userInfo } = useGetProfileInfo(userId);
+
+  const { userInfo, isError } = useGetProfileInfo(userId);
+  const { showToast } = useToastStore();
+
+  if (isError) showToast('error', '프로필 정보 조회에 실패하였습니다.');
 
   const targetRef = useClickOutside<HTMLDivElement>(() => {
     setToggleOptionArea(false);

@@ -15,7 +15,7 @@ const deleteArtworkLike = async (postId: number) => {
 
     if (response.status === 204) return true;
 
-    throw new Error('좋아요 취소가 반영되지 않았습니다.');
+    throw new Error('좋아요가 취소되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;

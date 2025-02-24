@@ -22,7 +22,7 @@ const patchCollection = async ({
 
     if (response.status === 204) return true;
 
-    throw new Error('컬렉션 수정에 실패하였습니다.');
+    throw new Error('컬렉션이 수정되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;

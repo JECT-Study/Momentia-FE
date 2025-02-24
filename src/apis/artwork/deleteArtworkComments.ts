@@ -17,7 +17,7 @@ const deleteArtworkComments = async (postId: number) => {
 
     if (response.status === 204) return true;
 
-    throw new Error('댓글 삭제에 실패하였습니다.');
+    throw new Error('댓글이 삭제되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;

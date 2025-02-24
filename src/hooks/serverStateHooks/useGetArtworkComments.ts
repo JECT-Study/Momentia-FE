@@ -21,6 +21,7 @@ const useGetArtworkComments = ({
     hasNextPage,
     isFetching,
     isFetchingNextPage,
+    isError,
   } = useInfiniteQuery({
     queryKey: [ARTWORK.artworkPostComments(postId)],
     queryFn: ({ pageParam = 0 }) =>
@@ -67,11 +68,12 @@ const useGetArtworkComments = ({
 
   return {
     commentData,
-    isLoading,
     hasNextPage,
     lastCommentRef,
     observerActive,
     activeObserver,
+    isLoading,
+    isError,
   };
 };
 

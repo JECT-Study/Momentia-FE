@@ -19,8 +19,14 @@ const usePatchArtwork = () => {
     onSuccess: () => {
       showToast('success', '작품이 수정되었습니다.');
     },
-    onError: () => {
-      showToast('error', '작품 수정에 실패했습니다.');
+    onError: (error) => {
+      if (error instanceof Error) {
+        if (error.message === '작품 수정에 실패했습니다.') {
+          showToast('error', error.message);
+        } else {
+          console.error(error.message);
+        }
+      }
     },
   });
 };

@@ -5,7 +5,7 @@ import { USER } from '@/constants/API';
 import { UserType } from '@/types/user';
 
 const useGetProfileInfo = (userId: number | null) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [USER.userProfile, userId],
     queryFn: () => {
       if (userId === null) {
@@ -28,7 +28,7 @@ const useGetProfileInfo = (userId: number | null) => {
     enabled: !!userId,
   });
 
-  return { userInfo: data, isLoading };
+  return { userInfo: data, isLoading, isError };
 };
 
 export default useGetProfileInfo;

@@ -15,12 +15,14 @@ import {
 } from '@/constants/pagination';
 import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
+import useToastStore from '@/stores/useToastStore';
 
 const CollectionTab = () => {
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
   const { openModal, closeModal } = useStore(modalStore);
+  const { showToast } = useToastStore();
 
   const params = useSearchParams();
   const userIdParams = params.get('userId');
@@ -38,13 +40,15 @@ const CollectionTab = () => {
     });
   };
 
-  const { isMine, collections, pageInfo, isLoading } =
+  const { isMine, collections, pageInfo, isLoading, isError } =
     useGetProfileCollectionList({
       sort: COLLECTION_SORT_OPTIONS[selectedOption] || 'recent',
       page: currentPage - 1,
       size: ITEMS_PER_PAGE,
       userId,
     });
+
+  if (isError) showToast('error', '컬렉션 목록 조회에 실패하였습니다.');
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

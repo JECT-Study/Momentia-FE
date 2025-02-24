@@ -18,7 +18,7 @@ const postArtwork = async (artworkData: ArtworkUploadData) => {
 
     return response.data;
   } catch (error) {
-    throw new Error('작품 업로드에 실패하였습니다.');
+    throw new Error('작품이 업로드되지 않았습니다.');
   }
 };
 

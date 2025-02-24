@@ -9,7 +9,7 @@ const useGetFollowerList = () => {
   const userIdParam = searchParams.get('userId');
   const userId = userIdParam ? Number(userIdParam) : null;
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [USER.followerList(userId as number)],
     queryFn: () => getFollowerList(userId as number),
   });
@@ -17,6 +17,7 @@ const useGetFollowerList = () => {
   return {
     followerList: data?.users ?? [],
     isLoading,
+    isError,
   };
 };
 

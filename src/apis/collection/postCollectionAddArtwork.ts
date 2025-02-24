@@ -21,7 +21,7 @@ const postCollectionAddArtwork = async ({
 
     if (response.status === 201) return true;
 
-    throw new Error('컬렉션에 작품이 추가되지 않았습니다.');
+    throw new Error('작품이 컬렉션에 저장되지 않았습니다.');
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
       const { code } = error;

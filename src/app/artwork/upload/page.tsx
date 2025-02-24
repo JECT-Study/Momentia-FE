@@ -153,7 +153,9 @@ const ArtworkUpload = () => {
 
   const { mutate: patchArtwork } = usePatchArtwork();
 
-  const { existingArtwork } = useGetArtworkPost(parsedPostId);
+  const { existingArtwork, isError } = useGetArtworkPost(parsedPostId);
+
+  if (isError) showToast('error', '수정할 작품 조회에 실패하였습니다.');
 
   useEffect(() => {
     if (existingArtwork && !existingArtworkRef.current) {

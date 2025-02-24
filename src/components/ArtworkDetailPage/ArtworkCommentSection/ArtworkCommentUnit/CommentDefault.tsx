@@ -26,9 +26,6 @@ const CommentDefault = ({
         queryClient.invalidateQueries({
           queryKey: [ARTWORK.artworkPostComments(postId)],
         });
-
-        // 토스트 메세지로 수정
-        alert('댓글 삭제 성공');
       },
     });
   };

@@ -9,6 +9,7 @@ import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
 import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
+import useToastStore from '@/stores/useToastStore';
 
 const ArtworkList = () => {
   const router = useRouter();
@@ -20,12 +21,14 @@ const ArtworkList = () => {
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
+  const { showToast } = useToastStore();
+
   const sortValue = ARTWORK_SORT_OPTIONS[selectedOption] || 'recent';
 
   const {
     data: artworkList,
     isLoading: artworkListLoading,
-    error: artworkListError,
+    isError: artworkListError,
   } = useGetArtworkList({
     sort: sortValue,
     artworkField:
@@ -40,6 +43,7 @@ const ArtworkList = () => {
   }
 
   if (artworkListError) {
+    showToast('error', '작품 목록 조회에 실패하였습니다.');
     return <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>;
   }
 

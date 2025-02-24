@@ -1,13 +1,17 @@
 'use client';
 
 import useGetFollowingList from '@/hooks/serverStateHooks/useGetFollowingList';
+import useToastStore from '@/stores/useToastStore';
 
 import FollowUserUnit from './FollowUserUnit';
 
 const FollowingList = ({ nickname }: { nickname: string }) => {
-  const { followingList, isLoading } = useGetFollowingList();
+  const { showToast } = useToastStore();
+  const { followingList, isLoading, isError } = useGetFollowingList();
 
   if (isLoading) return <div>로딩 중...</div>;
+
+  if (isError) showToast('error', '팔로잉 목록 조회에 실패하였습니다.');
 
   return (
     <>

@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import ROUTE from '@/constants/routes';
 import useGetFollowedArtists from '@/hooks/serverStateHooks/useGetFollowedArtists';
+import useToastStore from '@/stores/useToastStore';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
 import TokenHandler from '@/utils/tokenHandler';
 
@@ -21,10 +22,12 @@ const FollowedArtistsSection = () => {
   const router = useRouter();
   const accessToken = TokenHandler.getAccessToken();
 
+  const { showToast } = useToastStore();
+
   const {
     data: followedArtists,
     isLoading: followedArtistsLoading,
-    error: followedArtistsError,
+    isError: followedArtistsError,
   } = useGetFollowedArtists();
 
   const clickUserInfo = (userId: number) => {
@@ -45,6 +48,10 @@ const FollowedArtistsSection = () => {
       return newState;
     });
   };
+
+  if (followedArtistsError) {
+    showToast('error', '내가 팔로우한 작가 목록 조회에 실패하였습니다.');
+  }
 
   return (
     <>
@@ -73,8 +80,6 @@ const FollowedArtistsSection = () => {
             </div>
           ) : followedArtistsLoading ? (
             <p className='px-[36px] lg:px-[140px]'>데이터 로딩 중...</p>
-          ) : followedArtistsError ? (
-            <p className='px-[36px] lg:px-[140px]'>데이터 로드 중 오류 발생</p>
           ) : !followedArtists.length ? (
             <div
               className='grid flex-col col-span-full items-center justify-center

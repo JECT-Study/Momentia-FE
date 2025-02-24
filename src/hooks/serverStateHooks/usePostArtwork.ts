@@ -15,8 +15,14 @@ const usePostArtwork = () => {
       showToast('success', '작품이 업로드되었습니다.');
       router.push(`${ROUTE.artworkDetail}?postId=${data.postId}`);
     },
-    onError: () => {
-      showToast('error', '작품 업로드에 실패했습니다. 다시 시도해 주세요.');
+    onError: (error) => {
+      if (error instanceof Error) {
+        if (error.message === '작품이 업로드되지 않았습니다.') {
+          showToast('error', error.message);
+        } else {
+          console.error(error.message);
+        }
+      }
     },
   });
 };
