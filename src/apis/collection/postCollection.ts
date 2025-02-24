@@ -32,7 +32,6 @@ const postCollection = async ({ name, isPrivate }: PostCollectionProps) => {
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      alert('이미 존재하는 컬렉션 이름입니다.');
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }
