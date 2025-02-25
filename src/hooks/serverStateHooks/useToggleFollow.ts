@@ -7,6 +7,15 @@ import { ARTWORK, USER } from '@/constants/API';
 import useToastStore from '@/stores/useToastStore';
 import TokenHandler from '@/utils/tokenHandler';
 
+interface TogglePropsType {
+  userId: number;
+  following: boolean;
+}
+
+interface MutationContextType {
+  prevFollowStatus: boolean | null;
+}
+
 const useToggleFollow = ({
   initFollowState,
 }: {
@@ -24,13 +33,23 @@ const useToggleFollow = ({
   const mutation = useMutation<
     void,
     Error,
-    { userId: number; following: boolean }
+    TogglePropsType,
+    MutationContextType
   >({
     mutationFn: async ({ userId, following }) => {
       following ? await deleteFollow(userId) : await postFollow(userId);
     },
 
-    onSuccess: (_, { following }) => {
+    onMutate: async ({ following }) => {
+      await queryClient.cancelQueries();
+
+      const prevFollowStatus = isFollowing;
+      setIsFollowing(!following);
+
+      return { prevFollowStatus };
+    },
+
+    onSuccess: () => {
       const currentUserId = TokenHandler.getUserIdFromToken();
 
       if (currentUserId) {
@@ -43,11 +62,11 @@ const useToggleFollow = ({
         });
       }
 
-      setIsFollowing(!following);
+      setIsFollowing(!isFollowing);
       showToast('success', '팔로우 상태가 변경되었습니다.');
     },
 
-    onError: (error) => {
+    onError: (error, _, context) => {
       if (error instanceof Error) {
         if (
           error.message === '팔로우가 취소되지 않았습니다.' ||
@@ -57,6 +76,10 @@ const useToggleFollow = ({
         } else {
           console.error(error.message);
         }
+      }
+
+      if (context?.prevFollowStatus !== undefined) {
+        setIsFollowing(context.prevFollowStatus);
       }
     },
   });
