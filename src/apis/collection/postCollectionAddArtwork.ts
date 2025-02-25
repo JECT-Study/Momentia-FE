@@ -5,6 +5,7 @@ import {
   COLLECTION_ADD_ARTWORK_ERROR_MESSAGE,
   COMMON_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
+import useToastStore from '@/stores/useToastStore';
 import { CollectionAddAndRemoveArtworkParams } from '@/types/collection';
 import { ErrorResponseType } from '@/types/errorResponse';
 
@@ -14,6 +15,8 @@ const postCollectionAddArtwork = async ({
   collectionId,
   postId,
 }: CollectionAddAndRemoveArtworkParams) => {
+  const { showToast } = useToastStore();
+
   try {
     const response = await authorizedClient.post<null>(
       COLLECTION.collectionAddAndRemoveArtwork(collectionId, postId),
@@ -32,7 +35,7 @@ const postCollectionAddArtwork = async ({
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      alert('이미 선택한 컬렉션에 저장한 작품입니다.');
+      showToast('error', '이미 선택한 컬렉션에 저장한 작품입니다.');
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }
