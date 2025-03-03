@@ -23,7 +23,6 @@ const usePatchProfileInfo = () => {
     },
     onError: (error) => {
       showToast('success', '프로필이 수정되지 않았습니다.');
-      console.error(error.message);
     },
   });
 
