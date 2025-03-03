@@ -59,11 +59,9 @@ const ShareModal = ({ title, nickname, artworksLength }: ShareModalProps) => {
         />
 
         <span className='h-[60px]'>
-          <SquareButtonL
-            variant='tertiary'
-            children={copyStatus ? '복사 완료' : 'URL 복사'}
-            onClick={clickCopyButton}
-          />
+          <SquareButtonL variant='tertiary' onClick={clickCopyButton}>
+            <p className='button-s'>{copyStatus ? '복사 완료' : 'URL 복사'}</p>
+          </SquareButtonL>
         </span>
       </div>
     </div>

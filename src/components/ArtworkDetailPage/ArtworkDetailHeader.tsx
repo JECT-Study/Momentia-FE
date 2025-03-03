@@ -32,7 +32,7 @@ const ArtworkDetailHeader = ({
       </div>
       <Link
         href={ROUTE.profile(userId)}
-        className='flex items-center gap-[22px] hover:underline'
+        className='flex items-center gap-[22px] hover:underline subtitle2'
       >
         <Image
           src={profileImage || '/images/defaultProfileImage.png'}
@@ -43,7 +43,7 @@ const ArtworkDetailHeader = ({
         />
         <p>{nickname}</p>
       </Link>
-      <div className='flex tablet:flex-row flex-col tablet:gap-[22px] justify-end tablet:items-center items-end'>
+      <div className='flex tablet:flex-row flex-col tablet:gap-[22px] justify-end tablet:items-center items-end subtitle2'>
         <div className='flex gap-[13px] justify-end items-center'>
           <Icon name='Eye' size='s' />
           <p>{viewCount}</p>
