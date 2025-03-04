@@ -101,7 +101,6 @@ const Navbar = () => {
               작품
             </li>
             <li className='hover:text-gray-300 cursor-pointer'>전시회</li>
-            <li className='hover:text-gray-300 cursor-pointer'>커뮤니티</li>
           </ul>
           <div className='flex justify-end item-center gap-[50px] justify-items-end'>
             {isSignedIn && <NavbarNoticeDetail />}
@@ -189,9 +188,6 @@ const Navbar = () => {
                   </li>
                   <li className='hover:text-gray-300 cursor-pointer px-10 py-8'>
                     전시회
-                  </li>
-                  <li className='hover:text-gray-300 cursor-pointer px-10 py-8'>
-                    커뮤니티
                   </li>
                 </ul>
               </div>
