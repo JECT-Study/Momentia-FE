@@ -5,7 +5,7 @@ import { COLLECTION } from '@/constants/API';
 import { CollectionType } from '@/types/collection';
 
 const useGetAllCollectionList = () => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [COLLECTION.collectionList],
     queryFn: () => getAllCollectionList(),
   });
@@ -13,6 +13,7 @@ const useGetAllCollectionList = () => {
   return {
     collections: data ? data.collections : ([] as CollectionType[]),
     isLoading,
+    isError,
   };
 };
 

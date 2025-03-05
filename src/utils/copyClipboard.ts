@@ -5,7 +5,7 @@ const copyClipboard = async (text: string) => {
 
       return true;
     } else {
-      throw new Error('Clipboard API not available');
+      throw new Error('Clipboard API를 사용할 수 없습니다.');
     }
   } catch (e) {
     console.error(e);

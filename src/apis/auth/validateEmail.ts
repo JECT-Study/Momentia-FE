@@ -12,6 +12,7 @@ const getValidateEmail = async (email: string) => {
         email,
       },
     });
+
     return response.status;
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response)

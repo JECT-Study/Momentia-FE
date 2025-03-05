@@ -48,10 +48,30 @@ export const ARTWORK_ERROR_MESSAGE: MessageConstantType = {
   ARTWORK_POST_NOT_FOUND: '리소스를 찾을 수 없습니다.',
 };
 
+export const ARTWORK_POST_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_PARAMETER: '요청한 정보가 올바르지 않습니다.',
+  INVALID_ARTWORK_TITLE: '제목을 1자 이상 50자 이하로 입력해 주세요.',
+  INVALID_ARTWORK_FIELD: '카테고리를 올바르게 지정해 주세요.',
+  INVALID_STATUS: '공개 여부를 올바르게 지정해 주세요.',
+  IMAGE_NOT_FOUND: '이미지 정보가 올바르지 않습니다.',
+  INVALID_ARTWORK_EXPLANATION: '설명을 1000자 이하로 입력해 주세요.',
+};
+
+export const ARTWORK_PATCH_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_PARAMETER: '요청한 정보가 올바르지 않습니다.',
+  INVALID_ARTWORK_TITLE: '제목을 1자 이상 50자 이하로 입력해 주세요.',
+  INVALID_ARTWORK_FIELD: '카테고리를 올바르게 지정해 주세요.',
+  INVALID_STATUS: '공개 여부를 올바르게 지정해 주세요.',
+  INVALID_ARTWORK_EXPLANATION: '설명을 1000자 이하로 입력해 주세요.',
+  NOT_OWNER: '본인의 작품이 아닙니다.',
+};
+
 export const COMMENT_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_PARAMETER: '요청한 정보가 올바르지 않습니다.',
   NOT_OWNER: '본인의 댓글이 아닙니다.',
   COMMENT_NOT_FOUND: '리소스를 찾을 수 없습니다.',
-  INVALID_COMMENT_CONTENT: '입력 정보가 올바르지 않습니다.',
+  INVALID_COMMENT_CONTENT:
+    '댓글은 최소 1자 이상의 문자를 포함해야 하며, 공백만으로 구성된 내용은 입력할 수 없습니다.',
   POST_NOT_FOUND: '요청한 리소스를 찾을 수 없습니다.',
   NOT_AUTHORIZED: '댓글에 대한 권한이 없습니다.',
 };
@@ -69,7 +89,10 @@ export const PROFILE_COLLECTION_GET_ERROR_MESSAGE: MessageConstantType = {
 };
 
 export const COLLECTION_POST_ERROR_MESSAGE: MessageConstantType = {
-  INVALID_COLLECTION_NAME: 'name이 비어 있거나 글자 수 제한이 위반되었습니다.',
+  INVALID_PARAMETER: '요청한 정보가 올바르지 않습니다.',
+  INVALID_COLLECTION_NAME: '컬렉션 이름을 1자 이상 10자 이하로 입력해 주세요.',
+  INVALID_STATUS: '공개 여부를 올바르게 지정해 주세요.',
+  DUPLICATE_COLLECTION_NAME: '이미 존재하는 컬렉션 이름입니다.',
 };
 
 export const COLLECTION_DELETE_ERROR_MESSAGE: MessageConstantType = {
@@ -78,10 +101,12 @@ export const COLLECTION_DELETE_ERROR_MESSAGE: MessageConstantType = {
 };
 
 export const COLLECTION_PATCH_ERROR_MESSAGE: MessageConstantType = {
+  INVALID_PARAMETER: '요청한 정보가 올바르지 않습니다.',
+  INVALID_COLLECTION_NAME: '컬렉션 이름을 1자 이상 10자 이하로 입력해 주세요.',
   INVALID_STATUS: '요청한 status가 잘못되었거나 유효하지 않습니다.',
-  INVALID_COLLECTION_NAME: 'name이 비어 있거나 글자 수 제한이 위반되었습니다.',
   NO_PERMISSION: '본인의 컬렉션이 아닙니다.',
-  COLLECTION_NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+  NOT_FOUND: '컬렉션 리소스를 찾을 수 없습니다.',
+  DUPLICATE_COLLECTION_NAME: '이미 존재하는 컬렉션 이름입니다.',
 };
 
 export const COLLECTION_ARTWORKS_ERROR_MESSAGE: MessageConstantType = {

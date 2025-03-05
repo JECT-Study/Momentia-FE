@@ -1,5 +1,12 @@
+import { isAxiosError } from 'axios';
+
 import { authorizedClient } from '@/apis';
 import { ARTWORK } from '@/constants/API';
+import {
+  ARTWORK_POST_ERROR_MESSAGE,
+  COMMON_ERROR_MESSAGE,
+} from '@/constants/errorMessage';
+import { ErrorResponseType } from '@/types/errorResponse';
 
 interface ArtworkUploadData {
   title: string;
@@ -15,10 +22,22 @@ const postArtwork = async (artworkData: ArtworkUploadData) => {
       ARTWORK.uploadArtwork,
       artworkData,
     );
-    return response.data;
+
+    if (response.status === 201) return response.data;
+
+    throw new Error('작품이 업로드되지 않았습니다.');
   } catch (error) {
-    console.error('작품 업로드 중 에러 발생: ', error);
-    throw new Error('작품 업로드에 실패하였습니다. 다시 시도해주세요.');
+    if (isAxiosError<ErrorResponseType<null>>(error) && error.response) {
+      const { code } = error;
+
+      if (code) {
+        throw new Error(ARTWORK_POST_ERROR_MESSAGE[code]);
+      } else {
+        throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
+      }
+    } else {
+      throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
+    }
   }
 };
 

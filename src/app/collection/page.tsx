@@ -17,11 +17,14 @@ import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
 import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
+import useToastStore from '@/stores/useToastStore';
 
 const Collection = () => {
   const [selectedOption, setSelectedOption] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
+
   const { openModal, closeModal } = useStore(modalStore);
+  const { showToast } = useToastStore();
 
   const collectionIdParams = useSearchParams().get('collectionId');
   const collectionId = collectionIdParams ? Number(collectionIdParams) : 0;
@@ -30,18 +33,22 @@ const Collection = () => {
   };
 
   const queryClient = useQueryClient();
+
   const {
     isMine,
     name: collectionName,
     artworks,
     pageInfo,
     isLoading,
+    isError,
   } = useGetCollectionArtworks({
     sort: ARTWORK_SORT_OPTIONS[selectedOption] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     collectionId,
   });
+
+  if (isError) showToast('error', '작품 목록 조회에 실패하였습니다.');
 
   const artworksLength = pageInfo.totalDataCnt;
   const router = useRouter();

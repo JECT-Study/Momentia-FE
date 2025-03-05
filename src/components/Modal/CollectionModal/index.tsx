@@ -7,15 +7,20 @@ import { useStore } from 'zustand';
 import Icon from '@/components/Icon/Icon';
 import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetAllCollectionList';
 import modalStore from '@/stores/modalStore';
+import useToastStore from '@/stores/useToastStore';
 
 import CollectionUnit from './CollectionUnit';
 import CreateCollectionUnit from './CreateCollectionUnit';
 
 const CollectionModal = () => {
   const { closeModal } = useStore(modalStore);
-  const { collections, isLoading } = useGetAllCollectionList();
+  const { showToast } = useToastStore();
+
+  const { collections, isLoading, isError } = useGetAllCollectionList();
 
   if (isLoading) return <div>Loading</div>;
+
+  if (isError) showToast('error', '컬렉션 목록 조회에 실패하였습니다.');
 
   return (
     <div className='flex flex-col gap-[50px] tablet:pl-[56px] tablet:pr-[22px] px-[18px] py-[50px]'>

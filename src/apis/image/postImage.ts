@@ -27,7 +27,7 @@ export const postPresignedUrl = async ({
     const { presignedUrl, imageId } = response.data;
 
     if (!(presignedUrl || imageId)) {
-      throw new Error('Presigned URL 또는 Image ID가 누락되었습니다.');
+      console.error('Presigned URL 또는 Image ID가 누락되었습니다.');
     }
 
     return { presignedUrl, imageId };

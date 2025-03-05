@@ -6,7 +6,7 @@ import getArtworkPost from '@/apis/artwork/getArtworkPost';
 import { ARTWORK } from '@/constants/API';
 
 const useGetArtworkPost = (postId: number | null) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [ARTWORK.patchArtwork(postId as number)],
     queryFn: () => getArtworkPost(postId as number),
     enabled: !!postId,
@@ -93,9 +93,10 @@ const useGetArtworkPost = (postId: number | null) => {
     socialInfo,
     detailInfo,
     artistInfo,
-    isLoading,
     existingArtwork,
     commentCount,
+    isLoading,
+    isError,
   };
 };
 

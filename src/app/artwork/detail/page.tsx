@@ -9,20 +9,26 @@ import ArtworkDetailHeader from '@/components/ArtworkDetailPage/ArtworkDetailHea
 import ArtworkDetailInfoSection from '@/components/ArtworkDetailPage/ArtworkDetailInfoSection';
 import ButtonGroup from '@/components/ArtworkDetailPage/ButtonGroup';
 import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
+import useToastStore from '@/stores/useToastStore';
 
 const ArtworkDetailPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const postId = Number(searchParams.get('postId'));
 
+  const { showToast } = useToastStore();
+
   const {
     headerInfo,
     socialInfo,
     detailInfo,
     artistInfo,
-    isLoading,
     commentCount,
+    isLoading,
+    isError,
   } = useGetArtworkPost(postId);
+
+  if (isError) showToast('error', '작품 조회에 실패하였습니다.');
 
   useEffect(() => {
     if (!postId) router.back();

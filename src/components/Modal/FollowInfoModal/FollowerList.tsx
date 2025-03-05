@@ -2,11 +2,15 @@
 
 import FollowUserUnit from '@/components/Modal/FollowInfoModal/FollowUserUnit';
 import useGetFollowerList from '@/hooks/serverStateHooks/useGetFollowerList';
+import useToastStore from '@/stores/useToastStore';
 
 const FollowerList = ({ nickname }: { nickname: string }) => {
-  const { followerList, isLoading } = useGetFollowerList();
+  const { followerList, isLoading, isError } = useGetFollowerList();
+  const { showToast } = useToastStore();
 
-  if (isLoading) return <div>isLoading</div>;
+  if (isLoading) return <div>로딩 중...</div>;
+
+  if (isError) showToast('error', '팔로워 목록 조회에 실패하였습니다.');
 
   return (
     <>

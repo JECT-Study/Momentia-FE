@@ -11,6 +11,7 @@ import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetProfileArtworkList from '@/hooks/serverStateHooks/useGetProfileArtworkList';
+import useToastStore from '@/stores/useToastStore';
 
 const ArtworkTab = () => {
   const router = useRouter();
@@ -21,12 +22,16 @@ const ArtworkTab = () => {
   const [currentSort, setCurrentSort] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { isMine, artworkList, pageInfo } = useGetProfileArtworkList({
+  const { showToast } = useToastStore();
+
+  const { isMine, artworkList, pageInfo, isError } = useGetProfileArtworkList({
     sort: ARTWORK_SORT_OPTIONS[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
     userId,
   });
+
+  if (isError) showToast('error', '작품 목록 조회에 실패하였습니다.');
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

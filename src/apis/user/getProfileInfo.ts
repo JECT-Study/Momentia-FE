@@ -15,8 +15,7 @@ const getProfileInfo = async (userId: number) => {
 
     return data;
   } catch (error) {
-    console.error('작가 정보 조회 중 에러 발생: ', error);
-    throw new Error('작가 정보 조회 실패');
+    throw new Error('작가 정보 조회에 실패하였습니다.');
   }
 };
 

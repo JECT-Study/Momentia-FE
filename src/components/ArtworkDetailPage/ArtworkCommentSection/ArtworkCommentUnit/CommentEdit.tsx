@@ -40,9 +40,6 @@ const CommentEdit = ({
             queryKey: [ARTWORK.artworkPostComments(postId)],
           });
           setIsEditMode(false);
-
-          // 토스트 메세지 적용
-          alert('댓글 수정 성공');
         },
       },
     );

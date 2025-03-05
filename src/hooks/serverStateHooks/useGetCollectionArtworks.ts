@@ -6,7 +6,7 @@ import { PaginationType } from '@/types';
 import { CollectionArtworksParams } from '@/types/collection';
 
 const useGetCollectionArtworks = (params: CollectionArtworksParams) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [COLLECTION.collection, params],
     queryFn: () => getCollectionArtworks({ ...params }),
   });
@@ -24,6 +24,7 @@ const useGetCollectionArtworks = (params: CollectionArtworksParams) => {
     artworks: response.data,
     pageInfo: response.page,
     isLoading,
+    isError,
   };
 };
 

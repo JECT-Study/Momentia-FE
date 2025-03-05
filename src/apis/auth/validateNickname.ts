@@ -12,6 +12,7 @@ const getValidateNickname = async (nickname: string) => {
         nickname,
       },
     });
+
     return response.status;
   } catch (error) {
     if (isAxiosError<ErrorResponseType<null>>(error) && error.response)

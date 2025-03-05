@@ -14,6 +14,7 @@ import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
 import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
 import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
 import modalStore from '@/stores/modalStore';
+import useToastStore from '@/stores/useToastStore';
 import { ArtworkFieldsErrors, PatchArtworkData } from '@/types';
 
 import Textarea from '../../../components/Input/Textarea';
@@ -55,6 +56,8 @@ const ArtworkUpload = () => {
   const parsedPostId = postId ? parseInt(postId, 10) : null;
   const isEditMode = Boolean(postId);
   const existingArtworkRef = useRef<PatchArtworkData | null>(null);
+
+  const { showToast } = useToastStore();
 
   const handleArtworkDescriptionOnChange = (
     e: ChangeEvent<HTMLTextAreaElement>,
@@ -121,18 +124,18 @@ const ArtworkUpload = () => {
       newErrors.artworkTitleError = REQUIRED_FIELDS_ERROR_MESSAGE;
     if (!selectedArtworkField.trim())
       newErrors.selectedArtworkFieldError = REQUIRED_FIELDS_ERROR_MESSAGE;
-    if (!(isEditMode && uploadedImage))
+    if (!isEditMode && !uploadedImage)
       newErrors.uploadedImageError = REQUIRED_FIELDS_ERROR_MESSAGE;
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const { mutate: postArtwork, isError: postArtworkError } = usePostArtwork();
+  const { mutate: postArtwork } = usePostArtwork();
 
   const handleArtworkUpload = () => {
     if (!uploadedImage) {
-      console.error('이미지가 업로드되지 않았습니다.');
+      showToast('error', '이미지가 업로드되지 않았습니다.');
       return;
     }
 
@@ -148,10 +151,11 @@ const ArtworkUpload = () => {
     postArtwork(uploadedArtworkData);
   };
 
-  const { mutate: patchArtwork, isError: patchArtworkError } =
-    usePatchArtwork();
+  const { mutate: patchArtwork } = usePatchArtwork();
 
-  const { existingArtwork } = useGetArtworkPost(parsedPostId);
+  const { existingArtwork, isError } = useGetArtworkPost(parsedPostId);
+
+  if (isError) showToast('error', '수정할 작품 조회에 실패하였습니다.');
 
   useEffect(() => {
     if (existingArtwork && !existingArtworkRef.current) {
@@ -235,13 +239,6 @@ const ArtworkUpload = () => {
 
   return (
     <div className='max-w-[1920px] m-auto px-[36px] py-[70px] lg:px-[140px]'>
-      {/* {toastMessage && (
-          <ToastPopup
-            message={toastMessage}
-            onClose={() => setToastMessage(null)}
-          />
-        )} */}
-
       <h1>작품 업로드</h1>
       <div className='pt-[70px] pb-[58px] md:pb-[40px]'>
         <BasicInput
@@ -323,9 +320,6 @@ const ArtworkUpload = () => {
             {isEditMode ? '수정' : '업로드'}
           </button>
         )}
-
-        {postArtworkError && <p>[업로드 실패] 다시 시도해 주세요.</p>}
-        {patchArtworkError && <p>[수정 실패] 다시 시도해 주세요.</p>}
       </div>
     </div>
   );

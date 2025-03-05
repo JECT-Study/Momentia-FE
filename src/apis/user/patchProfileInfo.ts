@@ -18,7 +18,7 @@ const patchProfileInfo = async (updateInfo: UpdateProfileType) => {
     );
 
     if (response.status !== 204) {
-      throw new Error('프로필 수정 실패');
+      throw new Error('프로필 수정에 실패하였습니다.');
     }
 
     return true;
@@ -27,14 +27,11 @@ const patchProfileInfo = async (updateInfo: UpdateProfileType) => {
       const { code } = error;
 
       if (code) {
-        console.error(EDIT_USER_PROFILE_ERROR_MESSAGE[code]);
         throw new Error(EDIT_USER_PROFILE_ERROR_MESSAGE[code]);
       } else {
-        console.error(EDIT_USER_PROFILE_ERROR_MESSAGE.UNKNOWN_ERROR);
         throw new Error(EDIT_USER_PROFILE_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }

@@ -8,7 +8,7 @@ interface UseGetLikedArtworkListProps
   extends Pick<ArtworkListParams, 'sort' | 'page' | 'size'> {}
 
 const useGetLikedArtworkList = (params: UseGetLikedArtworkListProps) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [USER.likedArtworkList, params],
     queryFn: () => getLikedArtworkList({ ...params }),
   });
@@ -22,6 +22,7 @@ const useGetLikedArtworkList = (params: UseGetLikedArtworkListProps) => {
     artworkList: result.data,
     pageInfo: result.page,
     isLoading,
+    isError,
   };
 };
 

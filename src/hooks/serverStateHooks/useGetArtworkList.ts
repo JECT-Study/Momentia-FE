@@ -9,7 +9,7 @@ import {
 } from '@/types';
 
 const useGetArtworkList = (params: ArtworkListParams) => {
-  const { data, isLoading, error } = useQuery<ArtworkListResponse>({
+  const { data, isLoading, isError } = useQuery<ArtworkListResponse>({
     queryKey: [ARTWORK.artworkList, params],
     queryFn: () => getArtworkList({ ...params }),
     retry: 3,
@@ -18,7 +18,7 @@ const useGetArtworkList = (params: ArtworkListParams) => {
   return {
     data: data || { data: [], page: {} as PaginationType },
     isLoading,
-    error,
+    isError,
   };
 };
 

@@ -6,7 +6,7 @@ import { PaginationType } from '@/types';
 import { UserArtworkListParams } from '@/types/user';
 
 const useGetProfileCollectionList = (params: UserArtworkListParams) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [COLLECTION.collectionList, params],
     queryFn: () => getProfileCollectionList({ ...params }),
   });
@@ -22,6 +22,7 @@ const useGetProfileCollectionList = (params: UserArtworkListParams) => {
     collections: response.data,
     pageInfo: response.page,
     isLoading,
+    isError,
   };
 };
 

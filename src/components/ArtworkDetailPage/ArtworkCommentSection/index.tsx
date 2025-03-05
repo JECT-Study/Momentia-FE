@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 
 import Icon from '@/components/Icon/Icon';
 import useGetArtworkComments from '@/hooks/serverStateHooks/useGetArtworkComments';
+import useToastStore from '@/stores/useToastStore';
 
 import ArtworkCommentUnit from './ArtworkCommentUnit';
 import ArtworkWriteCommentSection from './ArtworkWriteCommentSection';
@@ -17,13 +18,16 @@ const ArtworkCommentSection = ({
   postId,
   commentCount,
 }: ArtworkCommentSectionProps) => {
+  const { showToast } = useToastStore();
+
   const {
     commentData,
-    isLoading,
     hasNextPage,
     lastCommentRef,
     observerActive,
     activeObserver,
+    isLoading,
+    isError,
   } = useGetArtworkComments({
     postId,
     skip: 0,
@@ -33,7 +37,9 @@ const ArtworkCommentSection = ({
     commentData === undefined ||
     commentData?.pages.flatMap((page) => page.comments).length === 0;
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <div>로딩 중...</div>;
+
+  if (isError) showToast('error', '댓글 조회에 실패하였습니다.');
 
   return (
     <div className='flex-1 flex flex-col gap-5'>

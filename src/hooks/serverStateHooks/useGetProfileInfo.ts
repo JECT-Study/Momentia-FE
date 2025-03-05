@@ -5,11 +5,11 @@ import { USER } from '@/constants/API';
 import { UserType } from '@/types/user';
 
 const useGetProfileInfo = (userId: number | null) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError } = useQuery({
     queryKey: [USER.userProfile, userId],
     queryFn: () => {
       if (userId === null) {
-        throw new Error('userId is required');
+        throw new Error('userId는 필수입니다.');
       }
       return getProfileInfo(userId);
     },
@@ -28,7 +28,7 @@ const useGetProfileInfo = (userId: number | null) => {
     enabled: !!userId,
   });
 
-  return { userInfo: data, isLoading };
+  return { userInfo: data, isLoading, isError };
 };
 
 export default useGetProfileInfo;

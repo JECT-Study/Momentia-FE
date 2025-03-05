@@ -11,17 +11,23 @@ import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetLikedArtworkList from '@/hooks/serverStateHooks/useGetLikedArtworkList';
+import useToastStore from '@/stores/useToastStore';
 
 const LikedTab = () => {
-  const router = useRouter();
   const [currentSort, setCurrentSort] = useState('최신순');
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { artworkList, pageInfo } = useGetLikedArtworkList({
+  const { showToast } = useToastStore();
+
+  const router = useRouter();
+
+  const { artworkList, pageInfo, isError } = useGetLikedArtworkList({
     sort: ARTWORK_SORT_OPTIONS[currentSort] || 'recent',
     page: currentPage - 1,
     size: ITEMS_PER_PAGE,
   });
+
+  if (isError) showToast('error', '좋아요한 작품 목록 조회에 실패하였습니다.');
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);

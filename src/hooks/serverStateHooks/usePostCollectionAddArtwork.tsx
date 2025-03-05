@@ -6,10 +6,12 @@ import postCollectionAddArtwork from '@/apis/collection/postCollectionAddArtwork
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import ROUTE from '@/constants/routes';
 import modalStore from '@/stores/modalStore';
+import useToastStore from '@/stores/useToastStore';
 
 const usePostCollectionAddArtwork = () => {
   const router = useRouter();
   const { openModal, closeModal } = useStore(modalStore);
+  const { showToast } = useToastStore();
 
   const searchParams = useSearchParams();
   const artworkId = Number(searchParams.get('postId'));
@@ -17,6 +19,7 @@ const usePostCollectionAddArtwork = () => {
   const { mutate } = useMutation({
     mutationFn: (collectionId: number) =>
       postCollectionAddArtwork({ collectionId, postId: artworkId }),
+
     onSuccess: (_, variables) => {
       closeModal();
 
@@ -34,6 +37,16 @@ const usePostCollectionAddArtwork = () => {
           </ConfirmModal>
         ),
       });
+    },
+
+    onError: (error) => {
+      if (error instanceof Error) {
+        if (error.message === '작품이 컬렉션에 저장되지 않았습니다.') {
+          showToast('error', error.message);
+        } else {
+          console.error(error.message);
+        }
+      }
     },
   });
 

@@ -32,14 +32,11 @@ const getProfileCollectionList = async ({
       const { code } = error;
 
       if (code) {
-        console.error(PROFILE_COLLECTION_GET_ERROR_MESSAGE[code]);
         throw new Error(PROFILE_COLLECTION_GET_ERROR_MESSAGE[code]);
       } else {
-        console.error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
         throw new Error(COMMON_ERROR_MESSAGE.UNKNOWN_ERROR);
       }
     } else {
-      console.error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
       throw new Error(COMMON_ERROR_MESSAGE.NETWORK_ERROR);
     }
   }

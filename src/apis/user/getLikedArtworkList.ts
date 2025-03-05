@@ -19,11 +19,7 @@ const getLikedArtworkList = async ({
 
     return data;
   } catch (error) {
-    console.error(
-      '프로필 페이지 내 좋아요 작품 리스트 조회 중 에러 발생: ',
-      error,
-    );
-    throw new Error('프로필 페이지 내 좋아요 작품 리스트 조회 실패');
+    throw new Error('좋아요한 작품 목록 조회에 실패하였습니다.');
   }
 };
 
