@@ -32,7 +32,7 @@ const LatestArtworkSection = () => {
       <ControlledCarousel
         slides={artwork}
         renderSlide={(info: ArtworkInfoType) => (
-          <ArtworkCard artworkInfo={info} mode='artwork-latest' />
+          <ArtworkCard artworkInfo={info} mode='artwork-list' />
         )}
       />
     </div>

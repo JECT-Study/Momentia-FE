@@ -24,7 +24,7 @@ const MonthlyPopularArtworkSection = () => {
           <ArtworkCard
             key={info.postId}
             artworkInfo={info}
-            mode='artwork-default'
+            mode='artwork-popular'
             rank={index + 1}
           />
         )}

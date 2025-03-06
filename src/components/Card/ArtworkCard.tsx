@@ -7,11 +7,11 @@ import ROUTE from '@/constants/routes';
 import { ArtworkInfoType } from '@/types';
 
 import Icon from '../Icon/Icon';
+import CardLayout from './CardLayout';
 
 type ARTWORK_CARD_MODE =
   | 'followed-artists'
-  | 'artwork-default'
-  | 'artwork-latest'
+  | 'artwork-popular'
   | 'artwork-list';
 
 interface ArtworkCardProps {
@@ -21,7 +21,7 @@ interface ArtworkCardProps {
 }
 
 const ArtworkCard = ({
-  mode = 'artwork-default',
+  mode = 'artwork-popular',
   rank,
   artworkInfo,
 }: ArtworkCardProps) => {
@@ -42,25 +42,20 @@ const ArtworkCard = ({
   const formattedRank = rank && rank < 10 ? `0${rank}` : rank;
 
   const modeClasses: Record<string, string> = {
-    'followed-artists': 'w-full max-w-[200px] h-[267px]',
-    'artwork-default':
-      'min-w-[402px] min-h-[458px] mobile:min-w-[512px] mobile:min-h-[584px]',
-    'artwork-latest':
-      'min-w-[269px] min-h-[306px] mobile:min-w-[376px] mobile:min-h-[434px]',
-    'artwork-list': 'min-w-[395px] min-h-[511px]',
+    'followed-artists': 'w-full max-w-[200px]',
+    'artwork-popular': 'min-w-[402px] mobile:min-w-[512px]',
+    'artwork-list': 'min-w-[395px]',
   };
 
   const artworkBoxSizeClasses: Record<string, string> = {
     'followed-artists': 'gap-[10px] px-[15px] py-[15px]',
-    'artwork-default': 'gap-[34px] px-[63px] py-[62px] mobile:gap-[45px]',
-    'artwork-latest': 'gap-[24px] px-[45px] py-[51px] mobile:gap-[34px]',
+    'artwork-popular': 'gap-[34px] px-[63px] py-[62px] mobile:gap-[45px]',
     'artwork-list': 'gap-[34px] px-[42px] py-[27px]',
   };
 
   const artworkInfoGapClass: Record<string, string> = {
     'followed-artists': 'gap-[70px]',
-    'artwork-default': 'gap-[70px] mobile:gap-[90px]',
-    'artwork-latest': 'gap-[50px] mobile:gap-[70px]',
+    'artwork-popular': 'gap-[70px] mobile:gap-[90px]',
     'artwork-list': 'gap-[70px]',
   };
 
@@ -74,10 +69,7 @@ const ArtworkCard = ({
   };
 
   return (
-    <div
-      className={`relative overflow-hidden group rounded-[5px] ${modeClasses[mode]} cursor-pointer`}
-      onClick={clickArtworkCard}
-    >
+    <CardLayout onClick={clickArtworkCard} classname={modeClasses[mode]}>
       <Image
         src={postImage || '/images/defaultArtworkImage.png'}
         alt={postImage ? `artwork-${postId}` : 'default_image'}
@@ -143,7 +135,7 @@ const ArtworkCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </CardLayout>
   );
 };
 

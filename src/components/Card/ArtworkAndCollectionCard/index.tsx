@@ -9,6 +9,7 @@ import ROUTE from '@/constants/routes';
 import { CollectionType } from '@/types/collection';
 import { UserArtworkInfoType } from '@/types/user';
 
+import CardLayout from '../CardLayout';
 import CardController from './CardController';
 
 interface ArtworkAndCollectionCardProps {
@@ -53,10 +54,7 @@ const ArtworkAndCollectionCard = ({
   };
 
   return (
-    <div
-      className='relative overflow-hidden group rounded-[5px] w-full aspect-[4/5] cursor-pointer'
-      onClick={clickArtwork}
-    >
+    <CardLayout onClick={clickArtwork} classname='bg-gray-900'>
       {artworkInfo && (
         <Image
           src={postImage || '/images/defaultArtworkImage.png'}
@@ -158,7 +156,7 @@ const ArtworkAndCollectionCard = ({
           )}
         </div>
       </div>
-    </div>
+    </CardLayout>
   );
 };
 
