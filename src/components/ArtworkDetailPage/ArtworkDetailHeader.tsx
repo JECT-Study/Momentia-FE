@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import ROUTE from '@/constants/routes';
@@ -6,6 +5,7 @@ import { ArtworkPostHeaderInfoType } from '@/types';
 import timeFormatter from '@/utils/timeFormatter';
 
 import Icon from '../Icon/Icon';
+import UserThumbnail from '../UserThumbnail';
 
 interface ArtworkDetailHeaderProps {
   headerInfo: ArtworkPostHeaderInfoType;
@@ -34,13 +34,7 @@ const ArtworkDetailHeader = ({
         href={ROUTE.profile(userId)}
         className='flex items-center gap-[22px] hover:underline subtitle2'
       >
-        <Image
-          src={profileImage || '/images/defaultProfileImage.png'}
-          alt={profileImage ? 'artwork image' : 'artwork default image'}
-          className='object-cover rounded-full aspect-square'
-          width={67}
-          height={67}
-        />
+        <UserThumbnail profileImage={profileImage} />
         <p>{nickname}</p>
       </Link>
       <div className='flex tablet:flex-row flex-col tablet:gap-[22px] justify-end tablet:items-center items-end subtitle2'>

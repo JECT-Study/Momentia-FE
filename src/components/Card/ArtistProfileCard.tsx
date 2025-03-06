@@ -7,6 +7,7 @@ import ROUTE from '@/constants/routes';
 import { ArtistInfoType } from '@/types/artist';
 
 import FollowButton from '../Button/FollowButton';
+import UserThumbnail from '../UserThumbnail';
 
 interface ArtistProfileCardProps {
   rank: number;
@@ -57,23 +58,17 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
       />
 
       <div className='absolute left-0 bottom-0 w-full pt-10 pb-[15px] px-[30px] bg-white'>
-        <div className='absolute left-[30px] -top-[34px] w-[69px] h-[69px] rounded-full overflow-hidden'>
-          <Image
-            src={profileImage ?? '/images/defaultProfileImage.png'}
-            alt={
-              profileImage ? 'profile image' : 'artist default profile image'
-            }
-            className='aspect-square'
-            width={69}
-            height={69}
-          />
-        </div>
+        <UserThumbnail
+          profileImage={profileImage}
+          className='absolute left-[30px] -top-[34px] aspect-square'
+        />
         <div className='flex flex-col gap-[10px]'>
           <div className='flex justify-between'>
             <p
               className='subtitle2 text-gray-900 cursor-pointer hover:underline'
               onClick={clickArtistName}
             >
+              dfsdfsd
               {nickname}
             </p>
             <FollowButton initFollowState={isFollow} followUserId={userId} />
