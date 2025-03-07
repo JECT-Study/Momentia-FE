@@ -60,7 +60,7 @@ const ArtworkAndCollectionCard = ({
           src={postImage || '/images/defaultArtworkImage.png'}
           alt={postImage ? `artwork-${postId}` : 'default_image'}
           fill={true}
-          className={postImage ? 'object-contain' : 'object-cover'}
+          className={'object-cover'}
           priority
         />
       )}
@@ -70,7 +70,7 @@ const ArtworkAndCollectionCard = ({
           src={collectionImage || '/images/defaultArtworkImage.png'}
           alt={collectionImage ? `collection-${collectionId}` : 'default_image'}
           fill={true}
-          className={collectionImage ? 'object-contain' : 'object-cover'}
+          className={'object-cover'}
           priority
         />
       )}

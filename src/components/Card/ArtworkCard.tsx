@@ -43,8 +43,8 @@ const ArtworkCard = ({
 
   const modeClasses: Record<string, string> = {
     'followed-artists': 'w-full max-w-[200px]',
-    'artwork-popular': 'min-w-[402px] mobile:min-w-[512px]',
-    'artwork-list': 'min-w-[395px]',
+    'artwork-popular': 'w-[402px] mobile:w-[512px]',
+    'artwork-list': 'w-[395px]',
   };
 
   const artworkBoxSizeClasses: Record<string, string> = {
@@ -75,7 +75,7 @@ const ArtworkCard = ({
         alt={postImage ? `artwork-${postId}` : 'default_image'}
         fill={true}
         sizes={modeClasses[mode] || '402px'}
-        className={postImage ? 'object-contain' : 'object-cover'}
+        className={'object-cover'}
       />
 
       {rank && (
