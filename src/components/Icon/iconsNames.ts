@@ -37,6 +37,7 @@ import Notification from './icons/Notification';
 import Pause from './icons/Pause';
 import Person from './icons/Person';
 import Plus from './icons/Plus';
+import RankingLabel from './icons/RankingLabel';
 import Search from './icons/Search';
 import Settings from './icons/Settings';
 import Star from './icons/Star';
@@ -96,5 +97,6 @@ export const iconsNames: Record<
   Dropdown,
   Lock,
   Unlock,
+  RankingLabel,
   Trash,
 };

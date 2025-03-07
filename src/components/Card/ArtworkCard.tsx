@@ -80,12 +80,9 @@ const ArtworkCard = ({
 
       {rank && (
         <div className='w-[33px] h-[48px] mobile:w-[68px] mobile:h-[97px] absolute top-0 left-[44px] mobile:left-[63px] z-10'>
-          <Image
-            src='/images/rankingLabel.png'
-            alt='ranking-label'
-            width={68}
-            height={97}
-            sizes='(max-width: 768px) 33px, 48px'
+          <Icon
+            name='RankingLabel'
+            className='w-[33px] mobile:w-[68px] h-auto opacity-50'
           />
           <p className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-base font-medium mobile:text-[2rem] mobile:font-semibold'>
             {formattedRank}

@@ -7,6 +7,7 @@ import ROUTE from '@/constants/routes';
 import { ArtistInfoType } from '@/types/artist';
 
 import FollowButton from '../Button/FollowButton';
+import Icon from '../Icon/Icon';
 import UserThumbnail from '../UserThumbnail';
 
 interface ArtistProfileCardProps {
@@ -36,13 +37,7 @@ const ArtistProfileCard = ({ rank, artistInfo }: ArtistProfileCardProps) => {
   return (
     <div className='relative w-[346px] h-[330px] rounded-[10px] overflow-hidden'>
       <div className='absolute left-[30px] top-0 z-10 w-[33px] h-[48px]'>
-        <Image
-          src='/images/rankingLabel.png'
-          alt='ranking label'
-          width={68}
-          height={97}
-          style={{ width: '33px', height: 'auto' }}
-        />
+        <Icon name='RankingLabel' className='w-[33px] h-auto opacity-50' />
         <p className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 placeholder'>
           {formattedRank}
         </p>
