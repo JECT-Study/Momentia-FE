@@ -73,7 +73,7 @@ https://momentia.site
 
 
 ## 4. User Flow
-![Momentia | User Flow](https://github.com/user-attachments/assets/0aed4e03-13a2-4c8d-925c-f885e9126d57)
+![Momentia User Flow](https://github.com/user-attachments/assets/367108c5-d448-43fc-b288-337dade81531)
 
 
 ## 5. 발표 자료 및 화면 구성
