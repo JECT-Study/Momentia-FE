@@ -92,11 +92,66 @@ https://momentia.site
 
 
 ## 6. 폴더 구조
-
-*** 깔끔히 정리해서 추가할 예정 ***
-
 ```bash
-
+📦src
+ ┣ 📂apis → API 요청 관련 코드 모음
+ ┃ ┣ 📂artwork → 작품 관련 API (조회, 생성, 수정, 삭제)
+ ┃ ┣ 📂auth → 인증 관련 API (로그인, 회원가입, 토큰 갱신 등)
+ ┃ ┣ 📂collection → 작품 컬렉션 관리 API
+ ┃ ┣ 📂follow → 팔로우/언팔로우 API
+ ┃ ┣ 📂image → 이미지 업로드 API
+ ┃ ┣ 📂monthly → 월간 인기 작품 및 아티스트 조회 API
+ ┃ ┣ 📂user → 사용자 정보 및 좋아요한 작품 조회 API
+ ┃ ┗ 📜index.ts → API 모듈 관리
+ ┣ 📂app → Next.js 라우트 (페이지)
+ ┃ ┣ 📂artwork → 작품 관련 페이지 (목록, 상세, 업로드)
+ ┃ ┣ 📂auth → 로그인/회원가입 페이지
+ ┃ ┃ ┣ 📂(authWithLayout) → 인증 관련 공통 레이아웃 적용
+ ┃ ┃ ┃ ┣ 📂sign-in → 로그인 페이지
+ ┃ ┃ ┃ ┣ 📂sign-up → 회원가입 페이지
+ ┃ ┃ ┗ 📂redirect → 소셜 로그인 리디렉션 처리
+ ┃ ┃ ┃ ┗ 📂[provider]
+ ┃ ┣ 📂collection → 컬렉션 페이지
+ ┃ ┣ 📂fonts → 폰트 설정 및 파일 관리
+ ┃ ┣ 📂profile → 프로필 페이지
+ ┃ ┣ 📂providers → 글로벌 상태 및 기능 제공자 (TanStack Query, Modal 등)
+ ┃ ┣ 📜layout.tsx → 공통 레이아웃
+ ┃ ┣ 📜not-found.tsx → 404 페이지
+ ┃ ┗ 📜page.tsx → 메인 페이지
+ ┣ 📂components → 재사용 가능한 UI 컴포넌트 모음
+ ┃ ┣ 📂ArtworkDetailPage → 작품 상세 페이지 관련 컴포넌트
+ ┃ ┣ 📂ArtworkListPage
+ ┃ ┣ 📂ArtworkUploadPage
+ ┃ ┣ 📂Button
+ ┃ ┣ 📂Card
+ ┃ ┣ 📂Carousel
+ ┃ ┣ 📂CollectionPage
+ ┃ ┣ 📂Footer
+ ┃ ┣ 📂Icon
+ ┃ ┃ ┣ 📂icons → SVG를 포함한 아이콘 컴포넌트
+ ┃ ┃ ┣ 📜Icon.tsx → 아이콘 컴포넌트 관리
+ ┃ ┃ ┣ 📜iconSizes.ts → icon size 중앙에서 관리
+ ┃ ┃ ┗ 📜iconsNames.ts → 아이콘 이름을 중앙에서 관리해, 아이콘을 사용할 때마다 아이콘 컴포넌트를 import 할 필요 없음
+ ┃ ┣ 📂Input
+ ┃ ┣ 📂Layout → Navbar, Footer 등을 한 곳에서 관리
+ ┃ ┣ 📂MainPage
+ ┃ ┣ 📂Modal
+ ┃ ┣ 📂Navbar
+ ┃ ┣ 📂Pagination
+ ┃ ┣ 📂ProfilePage
+ ┃ ┣ 📂SortDropdown
+ ┃ ┣ 📂ToastPopup
+ ┃ ┣ 📜Loading.tsx → Loading UI 컴포넌트
+ ┃ ┗ 📜SocialSignInSection.tsx
+ ┣ 📂constants → 상수 관리 (API, Error Message 등)
+ ┣ 📂hooks → TanStack Query를 활용한 서버 상태 관리 및 Custom Hook 담당
+ ┃ ┣ 📂client → 클라이언트 상태 관리용 Hook (useState, useReducer 기반)
+ ┃ ┗ 📂server → 서버 데이터 패칭 및 캐싱을 위한 Hook (useQuery, useMutation 기반)
+ ┣ 📂mocks → Mock Server 관련 코드 모음
+ ┣ 📂stores → 전역 상태 관리를 위한 폴더 (zustand 상태 관리 라이브러리 사용)
+ ┣ 📂styles → Tailwind를 주로 사용하지만, Tailwind로 처리하기 어려운 CSS를 정의
+ ┣ 📂types → 2회 이상 사용되는 Type 집합
+ ┗ 📂utils → 프로젝트 전반에 걸쳐 재사용 가능한 함수 및 유틸리티
 ```
 
 
