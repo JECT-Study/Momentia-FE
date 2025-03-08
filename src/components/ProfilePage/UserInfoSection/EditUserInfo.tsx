@@ -12,7 +12,7 @@ import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
 import SortDropdown from '@/components/SortDropdown';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
-import usePatchProfileInfo from '@/hooks/serverStateHooks/usePatchProfileInfo';
+import usePatchProfileInfo from '@/hooks/server/usePatchProfileInfo';
 import { UserStringProfileType, UserType } from '@/types/user';
 
 const ARTWORK_FIELDS_NAMES = ARTWORK_FIELDS.map((field) => field.name) as [

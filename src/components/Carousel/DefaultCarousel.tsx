@@ -4,7 +4,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
-import useIsCarouselOverflow from '@/hooks/clientStateHooks/useIsCarouselOverflow';
+import useIsCarouselOverflow from '@/hooks/client/useIsCarouselOverflow';
 
 interface DefaultCarouselPropsType<T> {
   slides: T[];

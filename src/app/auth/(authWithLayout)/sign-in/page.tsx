@@ -10,7 +10,7 @@ import EmailInput from '@/components/Input/EmailInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import SocialSignInSection from '@/components/SocialSignInSection';
 import ROUTE from '@/constants/routes';
-import usePostSignIn from '@/hooks/serverStateHooks/usePostSignIn';
+import usePostSignIn from '@/hooks/server/usePostSignIn';
 import { SignInFormType } from '@/types/auth';
 
 const signInValidationSchema = object({

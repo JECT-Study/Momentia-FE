@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
+import useClickOutside from '@/hooks/client/useClickOutside';
 
 import Icon from '../Icon/Icon';
 

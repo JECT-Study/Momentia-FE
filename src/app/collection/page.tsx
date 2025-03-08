@@ -15,8 +15,8 @@ import SortDropdown from '@/components/SortDropdown';
 import { COLLECTION } from '@/constants/API';
 import { ITEMS_PER_PAGE } from '@/constants/pagination';
 import { ARTWORK_SORT_OPTIONS } from '@/constants/sortOptions';
-import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
-import useGetCollectionArtworks from '@/hooks/serverStateHooks/useGetCollectionArtworks';
+import useDeleteCollection from '@/hooks/server/useDeleteCollection';
+import useGetCollectionArtworks from '@/hooks/server/useGetCollectionArtworks';
 import modalStore from '@/stores/modalStore';
 import useToastStore from '@/stores/useToastStore';
 

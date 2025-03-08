@@ -8,7 +8,7 @@ import SquareButtonL from '@/components/Button/SquareButtonL';
 import Icon from '@/components/Icon/Icon';
 import BasicInput from '@/components/Input/BasicInput';
 import { COLLECTION } from '@/constants/API';
-import usePatchCollection from '@/hooks/serverStateHooks/usePatchCollection';
+import usePatchCollection from '@/hooks/server/usePatchCollection';
 import modalStore from '@/stores/modalStore';
 
 interface RenameCollectionModalProps {

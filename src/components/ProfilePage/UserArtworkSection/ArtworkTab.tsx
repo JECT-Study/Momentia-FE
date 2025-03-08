@@ -10,7 +10,7 @@ import SortDropdown from '@/components/SortDropdown';
 import { ITEMS_PER_PAGE } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { ARTWORK_SORT_OPTIONS, SORT_OPTIONS } from '@/constants/sortOptions';
-import useGetProfileArtworkList from '@/hooks/serverStateHooks/useGetProfileArtworkList';
+import useGetProfileArtworkList from '@/hooks/server/useGetProfileArtworkList';
 import useToastStore from '@/stores/useToastStore';
 
 const ArtworkTab = () => {

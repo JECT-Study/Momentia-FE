@@ -3,8 +3,8 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import ROUTE from '@/constants/routes';
-import useClickOutside from '@/hooks/clientStateHooks/useClickOutside';
-import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
+import useClickOutside from '@/hooks/client/useClickOutside';
+import useGetProfileInfo from '@/hooks/server/useGetProfileInfo';
 import useToastStore from '@/stores/useToastStore';
 import TokenHandler from '@/utils/tokenHandler';
 

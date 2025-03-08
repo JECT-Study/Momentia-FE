@@ -5,11 +5,11 @@ import { useStore } from 'zustand';
 import Icon from '@/components/Icon/Icon';
 import ConfirmModal from '@/components/Modal/ConfirmModal';
 import { COLLECTION, USER } from '@/constants/API';
-import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
-import useDeleteCollection from '@/hooks/serverStateHooks/useDeleteCollection';
-import useDeleteCollectionArtwork from '@/hooks/serverStateHooks/useDeleteCollectionArtwork';
-import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
-import usePatchCollection from '@/hooks/serverStateHooks/usePatchCollection';
+import useDeleteArtwork from '@/hooks/server/useDeleteArtwork';
+import useDeleteCollection from '@/hooks/server/useDeleteCollection';
+import useDeleteCollectionArtwork from '@/hooks/server/useDeleteCollectionArtwork';
+import usePatchArtwork from '@/hooks/server/usePatchArtwork';
+import usePatchCollection from '@/hooks/server/usePatchCollection';
 import modalStore from '@/stores/modalStore';
 
 interface CardControllerProps {

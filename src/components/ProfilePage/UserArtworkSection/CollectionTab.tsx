@@ -11,7 +11,7 @@ import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
 import { ITEMS_PER_PAGE } from '@/constants/pagination';
 import { COLLECTION_SORT_OPTIONS } from '@/constants/sortOptions';
-import useGetProfileCollectionList from '@/hooks/serverStateHooks/useGetProfileCollectionList';
+import useGetProfileCollectionList from '@/hooks/server/useGetProfileCollectionList';
 import modalStore from '@/stores/modalStore';
 import useToastStore from '@/stores/useToastStore';
 

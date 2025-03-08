@@ -1,7 +1,7 @@
 'use client';
 
 import FollowUserUnit from '@/components/Modal/FollowInfoModal/FollowUserUnit';
-import useGetFollowerList from '@/hooks/serverStateHooks/useGetFollowerList';
+import useGetFollowerList from '@/hooks/server/useGetFollowerList';
 import useToastStore from '@/stores/useToastStore';
 
 const FollowerList = ({ nickname }: { nickname: string }) => {

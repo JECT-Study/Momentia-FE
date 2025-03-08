@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 
 import DefaultCarousel from '@/components/Carousel/DefaultCarousel';
 import ROUTE from '@/constants/routes';
-import useGetFollowedArtists from '@/hooks/serverStateHooks/useGetFollowedArtists';
+import useGetFollowedArtists from '@/hooks/server/useGetFollowedArtists';
 import useToastStore from '@/stores/useToastStore';
 import { ArtworkInfoType, FollowedArtist } from '@/types';
 import TokenHandler from '@/utils/tokenHandler';

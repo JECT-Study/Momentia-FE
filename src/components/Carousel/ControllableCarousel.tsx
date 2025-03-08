@@ -4,8 +4,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 import { ReactNode } from 'react';
 
-import useIsCarouselOverflow from '@/hooks/clientStateHooks/useIsCarouselOverflow';
-import { usePrevNextButtons } from '@/hooks/clientStateHooks/usePrevNextButtons';
+import useIsCarouselOverflow from '@/hooks/client/useIsCarouselOverflow';
+import { usePrevNextButtons } from '@/hooks/client/usePrevNextButtons';
 
 import Icon from '../Icon/Icon';
 import { IndicatorButton, useIndicatorButton } from './CarouselIndicator';

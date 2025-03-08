@@ -1,6 +1,6 @@
 'use client';
 
-import useToggleFollow from '@/hooks/serverStateHooks/useToggleFollow';
+import useToggleFollow from '@/hooks/server/useToggleFollow';
 import { FollowButtonProps } from '@/types/buttons/FollowButtonProps';
 
 import Icon from '../Icon/Icon';

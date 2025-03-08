@@ -3,7 +3,7 @@
 import { ChangeEvent, useState } from 'react';
 import { useStore } from 'zustand';
 
-import usePostCollection from '@/hooks/serverStateHooks/usePostCollection';
+import usePostCollection from '@/hooks/server/usePostCollection';
 import modalStore from '@/stores/modalStore';
 
 import SquareButtonL from '../Button/SquareButtonL';

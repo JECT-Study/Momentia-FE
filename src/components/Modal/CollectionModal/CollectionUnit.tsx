@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 
 import Icon from '@/components/Icon/Icon';
-import usePostCollectionAddArtwork from '@/hooks/serverStateHooks/usePostCollectionAddArtwork';
+import usePostCollectionAddArtwork from '@/hooks/server/usePostCollectionAddArtwork';
 import { CollectionType } from '@/types/collection';
 
 const CollectionUnit = ({

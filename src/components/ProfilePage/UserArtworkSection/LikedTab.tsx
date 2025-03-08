@@ -10,7 +10,7 @@ import SortDropdown from '@/components/SortDropdown';
 import { ITEMS_PER_PAGE } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
 import { ARTWORK_SORT_OPTIONS, SORT_OPTIONS } from '@/constants/sortOptions';
-import useGetLikedArtworkList from '@/hooks/serverStateHooks/useGetLikedArtworkList';
+import useGetLikedArtworkList from '@/hooks/server/useGetLikedArtworkList';
 import useToastStore from '@/stores/useToastStore';
 
 const LikedTab = () => {

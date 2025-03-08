@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 
 import UserInfoSection from '@/components/ProfilePage/UserInfoSection';
-import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
+import useGetProfileInfo from '@/hooks/server/useGetProfileInfo';
 import useToastStore from '@/stores/useToastStore';
 
 import UserArtworkSection from '../../components/ProfilePage/UserArtworkSection';
