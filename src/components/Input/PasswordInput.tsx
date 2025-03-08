@@ -7,11 +7,11 @@ import { useFormContext } from 'react-hook-form';
 
 import Icon from '../Icon/Icon';
 
-interface PasswordnputProps {
+interface PasswordInputProps {
   mode: 'sign-up' | 'sign-in';
 }
 
-const PasswordInput = ({ mode }: PasswordnputProps) => {
+const PasswordInput = ({ mode }: PasswordInputProps) => {
   const [isPasswordValidating, setIsPasswordValidating] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
