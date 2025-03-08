@@ -19,14 +19,17 @@ jobs:
         with:
           script: |
             const commitKeywords = {
-              feat: 'feature',
-              fix: 'bug',
+              feat: 'feat',
+              fix: 'fix',
               chore: 'chore',
-              docs: 'documentation',
+              docs: 'docs',
               style: 'style',
               refactor: 'refactor',
+              rename: 'rename',
+              remove: 'remove',
+              move: 'move',
               test: 'test',
-              perf: 'performance',
+              setting: 'setting',
             };
       
             // context와 github는 기본적으로 제공됨
