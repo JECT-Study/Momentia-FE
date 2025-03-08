@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
@@ -65,9 +65,9 @@ const ArtworkUpload = () => {
     setArtworkDescription(e.target.value);
   };
 
-  const clearErrorMessage = useCallback((targetField: string) => {
+  const clearErrorMessage = (targetField: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
-  }, []);
+  };
 
   const handleArtworkTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (errors.artworkTitleError) clearErrorMessage('artworkTitleError');
