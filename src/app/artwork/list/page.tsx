@@ -7,7 +7,8 @@ import ArtworkFilter from '@/components/ArtworkListPage/ArtworkFilter';
 import ArtworkSearchBar from '@/components/ArtworkListPage/ArtworkSearchBar';
 import ArtworkShowcase from '@/components/ArtworkListPage/ArtworkShowcase';
 import FollowedArtistsSection from '@/components/ArtworkListPage/FollowedArtistsSection';
-import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import { ITEMS_PER_PAGE } from '@/constants/pagination';
+import { ARTWORK_SORT_OPTIONS } from '@/constants/sortOptions';
 import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
 import useToastStore from '@/stores/useToastStore';
 
