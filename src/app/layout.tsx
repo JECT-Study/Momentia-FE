@@ -19,14 +19,22 @@ interface LayoutProps {
 }
 
 const RootLayout = ({ children }: Readonly<LayoutProps>) => {
+  const useMSW = process.env.NEXT_PUBLIC_USE_MSW === 'true';
+
   return (
     <html lang='ko'>
       <body className={`${pretendard} ${montserrat.variable}`}>
-        <MSWProvider>
+        {useMSW ? (
+          <MSWProvider>
+            <TanStackQueryProvider>
+              <AppShell>{children}</AppShell>
+            </TanStackQueryProvider>
+          </MSWProvider>
+        ) : (
           <TanStackQueryProvider>
             <AppShell>{children}</AppShell>
           </TanStackQueryProvider>
-        </MSWProvider>
+        )}
         <KakaoProvider />
       </body>
     </html>
