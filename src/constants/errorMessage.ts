@@ -1,9 +1,9 @@
 type MessageConstantType = Record<string, string>;
 
-export const SIGNIN_ERROR_MESSAGE: MessageConstantType = {
+export const SIGNUP_ERROR_MESSAGE: MessageConstantType = {
   EMAIL_REQUIRED: '이메일은 필수입니다.',
   NICKNAME_REQUIRED: '닉네임은 필수입니다.',
-  PASSWORD_REQUIRED: '닉네임은 필수입니다.',
+  PASSWORD_REQUIRED: '비밀번호는 필수입니다.',
   INVALID_EMAIL: '유효하지 않은 이메일 형식입니다.',
   INVALID_PASSWORD: '영문, 숫자, 특수문자를 포함해 9자 이상 입력해주세요.',
   INVALID_NICKNAME: '사용할 수 없는 닉네임입니다.',
@@ -11,10 +11,12 @@ export const SIGNIN_ERROR_MESSAGE: MessageConstantType = {
   EMAIL_NOT_VERIFIED: '잘못된 인증번호입니다.',
   DUPLICATE_EMAIL: '이미 가입된 이메일입니다.',
   DUPLICATE_NICKNAME: '이미 사용 중인 닉네임입니다.',
+  ERR_BAD_REQUEST: '폼 입력 값이 올바르지 않습니다.',
 };
 
-export const SIGNUP_ERROR_MESSAGE: MessageConstantType = {
+export const SIGNIN_ERROR_MESSAGE: MessageConstantType = {
   NOT_EXIST_USER: '로그인에 실패했습니다. 아이디 또는 비밀번호를 확인해주세요.',
+  ERR_BAD_REQUEST: '이메일 / 비밀번호가 올바르지 않습니다.',
 };
 
 export const NICKNAME_VALIDATE_ERROR_MESSAGE: MessageConstantType = {
