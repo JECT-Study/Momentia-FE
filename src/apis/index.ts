@@ -52,14 +52,18 @@ authorizedClient.interceptors.response.use(
     if (error.response?.status === 401) {
       const refreshToken = TokenHandler.getRefreshToken();
 
-      if (refreshToken === '') window.location.href = ROUTE.home;
-      const newToken = await postRefreshToken(refreshToken);
+      if (refreshToken === '') {
+        TokenHandler.removeToken();
+        window.location.href = ROUTE.signIn;
+      } else {
+        const newToken = await postRefreshToken(refreshToken);
 
-      TokenHandler.setToken(newToken);
+        TokenHandler.setToken(newToken);
 
-      if (newToken) {
-        originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;
-        return authorizedClient(originalRequest);
+        if (newToken) {
+          originalRequest.headers.Authorization = `Bearer ${newToken.accessToken}`;
+          return authorizedClient(originalRequest);
+        }
       }
     }
   },
