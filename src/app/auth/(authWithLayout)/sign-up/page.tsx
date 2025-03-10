@@ -13,7 +13,7 @@ import NicknameInput from '@/components/Input/NicknameInput';
 import PasswordInput from '@/components/Input/PasswordInput';
 import {
   NICKNAME_VALIDATE_ERROR_MESSAGE,
-  SIGNIN_ERROR_MESSAGE,
+  SIGNUP_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
 import ROUTE from '@/constants/routes';
 import usePostSignUp from '@/hooks/serverStateHooks/usePostSignUp';
@@ -26,32 +26,32 @@ const MAX_NICKNAME_LENGTH = 10;
 
 const signUpValidationSchema = object({
   email: string()
-    .min(1, SIGNIN_ERROR_MESSAGE.EMAIL_REQUIRED)
-    .email(SIGNIN_ERROR_MESSAGE.INVALID_EMAIL)
+    .min(1, SIGNUP_ERROR_MESSAGE.EMAIL_REQUIRED)
+    .email(SIGNUP_ERROR_MESSAGE.INVALID_EMAIL)
     .superRefine(async (email, ctx) => {
       const status = await getValidateEmail(email);
 
       if (status === 400) {
         ctx.addIssue({
           code: ZodIssueCode.custom,
-          message: SIGNIN_ERROR_MESSAGE.INVALID_EMAIL,
+          message: SIGNUP_ERROR_MESSAGE.INVALID_EMAIL,
         });
       }
 
       if (status === 409) {
         ctx.addIssue({
           code: ZodIssueCode.custom,
-          message: SIGNIN_ERROR_MESSAGE.DUPLICATE_EMAIL,
+          message: SIGNUP_ERROR_MESSAGE.DUPLICATE_EMAIL,
         });
       }
     }),
   password: string()
-    .min(1, SIGNIN_ERROR_MESSAGE.PASSWORD_REQUIRED)
-    .regex(PASSWORD_REGEX, SIGNIN_ERROR_MESSAGE.INVALID_PASSWORD),
+    .min(1, SIGNUP_ERROR_MESSAGE.PASSWORD_REQUIRED)
+    .regex(PASSWORD_REGEX, SIGNUP_ERROR_MESSAGE.INVALID_PASSWORD),
   nickname: string()
-    .min(1, SIGNIN_ERROR_MESSAGE.NICKNAME_REQUIRED)
-    .max(MAX_NICKNAME_LENGTH, SIGNIN_ERROR_MESSAGE.EXCEED_NICKNAME_LENGTH)
-    .regex(NICKNAME_REGEX, SIGNIN_ERROR_MESSAGE.INVALID_NICKNAME)
+    .min(1, SIGNUP_ERROR_MESSAGE.NICKNAME_REQUIRED)
+    .max(MAX_NICKNAME_LENGTH, SIGNUP_ERROR_MESSAGE.EXCEED_NICKNAME_LENGTH)
+    .regex(NICKNAME_REGEX, SIGNUP_ERROR_MESSAGE.INVALID_NICKNAME)
     .superRefine(async (nickname, ctx) => {
       const status = await getValidateNickname(nickname);
 
