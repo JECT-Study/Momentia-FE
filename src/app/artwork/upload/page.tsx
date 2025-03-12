@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 
 import ImageUploadSection from '@/components/ArtworkUploadPage/ImageUploadSection';
 import OvalButton from '@/components/Button/OvalButton';
@@ -10,9 +10,9 @@ import ConfirmModal from '@/components/Modal/ConfirmModal';
 import SortDropdown from '@/components/SortDropdown';
 import ARTWORK_FIELDS from '@/constants/artworkFields';
 import ROUTE from '@/constants/routes';
-import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
-import usePatchArtwork from '@/hooks/serverStateHooks/usePatchArtwork';
-import usePostArtwork from '@/hooks/serverStateHooks/usePostArtwork';
+import useGetArtworkPost from '@/hooks/server/useGetArtworkPost';
+import usePatchArtwork from '@/hooks/server/usePatchArtwork';
+import usePostArtwork from '@/hooks/server/usePostArtwork';
 import modalStore from '@/stores/modalStore';
 import useToastStore from '@/stores/useToastStore';
 import { ArtworkFieldsErrors, PatchArtworkData } from '@/types';
@@ -65,9 +65,9 @@ const ArtworkUpload = () => {
     setArtworkDescription(e.target.value);
   };
 
-  const clearErrorMessage = useCallback((targetField: string) => {
+  const clearErrorMessage = (targetField: string) => {
     setErrors((prevErrors) => ({ ...prevErrors, [targetField]: '' }));
-  }, []);
+  };
 
   const handleArtworkTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (errors.artworkTitleError) clearErrorMessage('artworkTitleError');

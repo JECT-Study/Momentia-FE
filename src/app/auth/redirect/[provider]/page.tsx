@@ -4,7 +4,7 @@ import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 
 import ROUTE from '@/constants/routes';
-import useGetSocialSignIn from '@/hooks/serverStateHooks/useGetSocialSignIn';
+import useGetSocialSignIn from '@/hooks/server/useGetSocialSignIn';
 
 const RedirectPage = () => {
   const router = useRouter();

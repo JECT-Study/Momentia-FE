@@ -3,7 +3,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { ARTWORK } from '@/constants/API';
 import { CommentControllerProps } from '@/types/comment';
 
-import useDeleteComments from '../../../../hooks/serverStateHooks/useDeleteComment';
+import useDeleteComments from '../../../../hooks/server/useDeleteComment';
 
 const CommentDefault = ({
   comment,

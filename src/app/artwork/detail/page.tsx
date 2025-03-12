@@ -8,7 +8,7 @@ import ArtworkCommentSection from '@/components/ArtworkDetailPage/ArtworkComment
 import ArtworkDetailHeader from '@/components/ArtworkDetailPage/ArtworkDetailHeader';
 import ArtworkDetailInfoSection from '@/components/ArtworkDetailPage/ArtworkDetailInfoSection';
 import ButtonGroup from '@/components/ArtworkDetailPage/ButtonGroup';
-import useGetArtworkPost from '@/hooks/serverStateHooks/useGetArtworkPost';
+import useGetArtworkPost from '@/hooks/server/useGetArtworkPost';
 import useToastStore from '@/stores/useToastStore';
 
 const ArtworkDetailPage = () => {

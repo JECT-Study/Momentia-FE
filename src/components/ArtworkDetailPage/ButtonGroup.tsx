@@ -5,7 +5,7 @@ import { useStore } from 'zustand';
 
 import Icon from '@/components/Icon/Icon';
 import CollectionModal from '@/components/Modal/CollectionModal';
-import useToggleLike from '@/hooks/serverStateHooks/useToggleLike';
+import useToggleLike from '@/hooks/server/useToggleLike';
 import modalStore from '@/stores/modalStore';
 import { ArtworkPostSocialInfoType } from '@/types';
 

@@ -1,4 +1,4 @@
-import useGetArtworkList from '@/hooks/serverStateHooks/useGetArtworkList';
+import useGetArtworkList from '@/hooks/server/useGetArtworkList';
 import useToastStore from '@/stores/useToastStore';
 import { ArtworkInfoType } from '@/types';
 

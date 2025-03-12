@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from 'react';
 import OvalButton from '@/components/Button/OvalButton';
 import Textarea from '@/components/Input/Textarea';
 import { ARTWORK } from '@/constants/API';
-import usePatchArtworkComment from '@/hooks/serverStateHooks/usePatchArtworkComment';
+import usePatchArtworkComment from '@/hooks/server/usePatchArtworkComment';
 import { CommentControllerProps } from '@/types/comment';
 
 const CommentEdit = ({

@@ -1,6 +1,6 @@
 'use client';
 
-import useGetFollowingList from '@/hooks/serverStateHooks/useGetFollowingList';
+import useGetFollowingList from '@/hooks/server/useGetFollowingList';
 import useToastStore from '@/stores/useToastStore';
 
 import FollowUserUnit from './FollowUserUnit';

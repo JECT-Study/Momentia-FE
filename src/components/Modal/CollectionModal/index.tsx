@@ -5,7 +5,7 @@ import '@/styles/scroll.css';
 import { useStore } from 'zustand';
 
 import Icon from '@/components/Icon/Icon';
-import useGetAllCollectionList from '@/hooks/serverStateHooks/useGetAllCollectionList';
+import useGetAllCollectionList from '@/hooks/server/useGetAllCollectionList';
 import modalStore from '@/stores/modalStore';
 import useToastStore from '@/stores/useToastStore';
 

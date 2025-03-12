@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import ROUTE from '@/constants/routes';
-import useGetProfileInfo from '@/hooks/serverStateHooks/useGetProfileInfo';
+import useGetProfileInfo from '@/hooks/server/useGetProfileInfo';
 import TokenHandler from '@/utils/tokenHandler';
 
 import OvalButton from '../Button/OvalButton';

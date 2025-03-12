@@ -16,7 +16,7 @@ import {
   SIGNIN_ERROR_MESSAGE,
 } from '@/constants/errorMessage';
 import ROUTE from '@/constants/routes';
-import usePostSignUp from '@/hooks/serverStateHooks/usePostSignUp';
+import usePostSignUp from '@/hooks/server/usePostSignUp';
 import { SignUpFormType } from '@/types/auth';
 
 const PASSWORD_REGEX =

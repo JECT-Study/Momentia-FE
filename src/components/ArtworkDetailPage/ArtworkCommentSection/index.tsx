@@ -3,7 +3,7 @@
 import { Fragment } from 'react';
 
 import Icon from '@/components/Icon/Icon';
-import useGetArtworkComments from '@/hooks/serverStateHooks/useGetArtworkComments';
+import useGetArtworkComments from '@/hooks/server/useGetArtworkComments';
 import useToastStore from '@/stores/useToastStore';
 
 import ArtworkCommentUnit from './ArtworkCommentUnit';

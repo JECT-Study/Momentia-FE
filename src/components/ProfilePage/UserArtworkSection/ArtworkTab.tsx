@@ -7,10 +7,10 @@ import OvalButton from '@/components/Button/OvalButton';
 import ArtworkAndCollectionCard from '@/components/Card/ArtworkAndCollectionCard';
 import Pagination from '@/components/Pagination';
 import SortDropdown from '@/components/SortDropdown';
-import { ARTWORK_SORT_OPTIONS, ITEMS_PER_PAGE } from '@/constants/pagination';
+import { ITEMS_PER_PAGE } from '@/constants/pagination';
 import ROUTE from '@/constants/routes';
-import { SORT_OPTIONS } from '@/constants/sortOptions';
-import useGetProfileArtworkList from '@/hooks/serverStateHooks/useGetProfileArtworkList';
+import { ARTWORK_SORT_OPTIONS, SORT_OPTIONS } from '@/constants/sortOptions';
+import useGetProfileArtworkList from '@/hooks/server/useGetProfileArtworkList';
 import useToastStore from '@/stores/useToastStore';
 
 const ArtworkTab = () => {

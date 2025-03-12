@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { useStore } from 'zustand';
 
 import ROUTE from '@/constants/routes';
-import useDeleteArtwork from '@/hooks/serverStateHooks/useDeleteArtwork';
+import useDeleteArtwork from '@/hooks/server/useDeleteArtwork';
 import modalStore from '@/stores/modalStore';
 import { ArtworkPostdetailInfoType } from '@/types';
 
