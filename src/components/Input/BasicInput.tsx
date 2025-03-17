@@ -1,7 +1,7 @@
 'use client';
 
 import { Input } from '@nextui-org/react';
-import { ChangeEvent, Ref, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, Ref, useRef, useState } from 'react';
 
 import Icon from '../Icon/Icon';
 
@@ -71,45 +71,14 @@ const BasicInput = ({
   };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (!isControlled) {
-      setUncontrolledLength(e.target.value.length);
+    if (!isControlled && inputRef.current) {
+      setUncontrolledLength(inputRef.current.value.length);
     }
 
     if (onChange) {
       onChange(e);
     }
   };
-
-  useEffect(() => {
-    if (!isControlled && defaultValue !== undefined) {
-      setUncontrolledLength(defaultValue.length);
-    }
-  }, [defaultValue, isControlled]);
-
-  useEffect(() => {
-    if (!isControlled && inputRef.current) {
-      const updateLength = () => {
-        setUncontrolledLength(inputRef.current?.value.length || 0);
-      };
-
-      const observer = new MutationObserver((mutations) => {
-        for (const mutation of mutations) {
-          if (
-            mutation.type === 'attributes' &&
-            mutation.attributeName === 'value'
-          ) {
-            updateLength();
-          }
-        }
-      });
-
-      observer.observe(inputRef.current, { attributes: true });
-
-      return () => {
-        observer.disconnect();
-      };
-    }
-  }, [isControlled]);
 
   const textLengthColor =
     currentTextLength === 0
