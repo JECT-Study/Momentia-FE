@@ -2,12 +2,13 @@
 
 import { NextUIProvider } from '@nextui-org/react';
 import { ThemeProvider as NextThemesProvider } from 'next-themes';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 import ModalProvider from '@/app/providers/ModalProvider';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
 
+import Loading from '../Loading';
 import ToastPopup from '../ToastPopup';
 
 const AppShell = ({ children }: { children: ReactNode }) => {
@@ -24,7 +25,10 @@ const AppShell = ({ children }: { children: ReactNode }) => {
           <div className='box-border h-full'>
             <ToastPopup />
             <Navbar />
-            <main className='pt-[90px] min-h-full'>{children}</main>
+
+            <Suspense fallback={<Loading />}>
+              <main className='pt-[90px] min-h-full'>{children}</main>
+            </Suspense>
             <Footer />
           </div>
           <ModalProvider />
