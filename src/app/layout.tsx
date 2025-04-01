@@ -13,28 +13,19 @@ export const metadata: Metadata = {
   title: '모멘티아',
   description: '무명 작가들을 위한 전시 플랫폼',
 };
-
 interface LayoutProps {
   children: ReactNode;
 }
 
 const RootLayout = ({ children }: Readonly<LayoutProps>) => {
-  const useMSW = process.env.NEXT_PUBLIC_USE_MSW === 'true';
-
   return (
     <html lang='ko'>
       <body className={`${pretendard} ${montserrat.variable}`}>
-        {useMSW ? (
-          <MSWProvider>
-            <TanStackQueryProvider>
-              <AppShell>{children}</AppShell>
-            </TanStackQueryProvider>
-          </MSWProvider>
-        ) : (
+        <MSWProvider>
           <TanStackQueryProvider>
             <AppShell>{children}</AppShell>
           </TanStackQueryProvider>
-        )}
+        </MSWProvider>
         <KakaoProvider />
       </body>
     </html>
