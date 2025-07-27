@@ -6,7 +6,7 @@
 
 ## 배포 주소
 
-https://momentia.site
+https://momentia-fe-62do.vercel.app (https://momentia.site 에서 변경됨)
 
 
 ## 목차
