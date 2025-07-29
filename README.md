@@ -1,6 +1,5 @@
 <div align="center">
-  <h1>Momentia (모멘티아)</h1>
-  <img width="160" alt="momentia-logo" src="https://github.com/user-attachments/assets/be9da36c-77be-49f7-9172-ad51cb6430f3" />
+  <img width="1000" alt="momentia-logo" src="https://d2lmyznn5nj2bl.cloudfront.net/76/momenreal.png_f6310482-9956-4e30-8381-dffc8427b926" />
 </div>
 
 
