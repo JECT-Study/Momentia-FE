@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useStore } from 'zustand';
 
 import FollowButton from '@/components/Button/FollowButton';
+import UserThumbnail from '@/components/UserThumbnail';
 import ROUTE from '@/constants/routes';
 import modalStore from '@/stores/modalStore';
 
@@ -36,12 +36,10 @@ const FollowUserUnit = ({
         className='group flex gap-[33px] tablet:gap-[53px] items-center'
         onClick={moveToProfilePage}
       >
-        <Image
-          src={profileImage || '/images/defaultProfileImage.png'}
-          alt={profileImage ? 'user-profile-image' : 'default-profile'}
-          className='rounded-full tablet:w-[94px] h-14 tablet:h-[94px] aspect-square'
-          width={56}
-          height={56}
+        <UserThumbnail
+          profileImage={profileImage}
+          size='sm'
+          className='tablet:w-[94px] tablet:h-[94px]'
         />
         <div className='text-start'>
           <p className='placeholder text-white mb-[4px] group-hover:underline'>

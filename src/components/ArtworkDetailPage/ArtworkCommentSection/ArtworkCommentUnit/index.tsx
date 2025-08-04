@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import { Ref, useState } from 'react';
 
 import { CommonCommentProps } from '@/types/comment';
 import timeFormatter from '@/utils/timeFormatter';
 
+import UserThumbnail from '../../../UserThumbnail';
 import CommentDefault from './CommentDefault';
 import CommentEdit from './CommentEdit';
 
@@ -22,13 +22,7 @@ const ArtworkCommentUnit = ({
 
   return (
     <div className='flex items-start gap-[29px]' ref={ref}>
-      <Image
-        src={profileImage || '/images/defaultProfileImage.png'}
-        alt='artwork default image'
-        className='rounded-full aspect-square'
-        width={56}
-        height={56}
-      />
+      <UserThumbnail profileImage={profileImage} size='sm' />
       <div className='w-full'>
         <div className='flex justify-between items-center mb-2.5'>
           <div className='flex items-center gap-2.5'>

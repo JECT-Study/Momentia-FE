@@ -1,6 +1,5 @@
 'use Client';
 
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -14,6 +13,7 @@ import TokenHandler from '@/utils/tokenHandler';
 import FollowButton from '../Button/FollowButton';
 import ArtworkCard from '../Card/ArtworkCard';
 import Icon from '../Icon/Icon';
+import UserThumbnail from '../UserThumbnail';
 
 const FollowedArtistsSection = () => {
   const [showFollowedArtistsCards, setShowFollowedArtistsCards] =
@@ -103,18 +103,13 @@ const FollowedArtistsSection = () => {
                   <div className='flex items-center justify-between w-full'>
                     <button
                       type='button'
-                      className='group flex gap-[30px] text-start'
+                      className='group flex items-center gap-[30px] text-start'
                       onClick={() => clickUserInfo(artist.userId)}
                     >
-                      <Image
-                        src={
-                          artist.userImage || '/images/defaultProfileImage.png'
-                        }
-                        alt={artist.nickname}
-                        width={100}
-                        height={100}
-                        priority
-                        className='w-[50px] h-[50px] bg-gray-700 rounded-full aspect-square'
+                      <UserThumbnail
+                        profileImage={artist.userImage}
+                        className='bg-gray-700'
+                        size='sm'
                       />
                       <div className='gap-[30px]'>
                         <p className='subtitle2 text-white group-hover:underline'>

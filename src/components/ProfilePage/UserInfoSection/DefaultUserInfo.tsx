@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import { useStore } from 'zustand';
 
 import FollowButton from '@/components/Button/FollowButton';
 import OvalButton from '@/components/Button/OvalButton';
 import FollowInfoModal from '@/components/Modal/FollowInfoModal';
+import UserThumbnail from '@/components/UserThumbnail';
 import modalStore from '@/stores/modalStore';
 import { UserType } from '@/types/user';
 
@@ -36,14 +36,10 @@ const DefaultUserInfo = ({
     <div>
       <div className='relative flex flex-col mobile:flex-row mobile:gap-[95px] gap-[30px] items-center mobile:items-start'>
         <div className='w-[141px]'>
-          <Image
-            src={profileImage || '/images/defaultProfileImage.png'}
-            alt={profileImage ? 'user-profile-image' : 'default-profile'}
-            className={
-              'rounded-full w-[141px] h-[141px] mb-[30px] mobile:mb-[40px] aspect-square'
-            }
-            width={141}
-            height={141}
+          <UserThumbnail
+            profileImage={profileImage}
+            size='lg'
+            className='mb-[30px] mobile:mb-[40px]'
           />
           {isMine ? (
             <OvalButton

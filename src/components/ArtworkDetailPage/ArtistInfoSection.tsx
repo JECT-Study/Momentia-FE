@@ -1,10 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 import ROUTE from '@/constants/routes';
 import { ArtworkPostArtistInfoType } from '@/types';
 
 import FollowButton from '../Button/FollowButton';
+import UserThumbnail from '../UserThumbnail';
 
 interface ArtistInfoSectionProps {
   artistInfo: ArtworkPostArtistInfoType;
@@ -29,13 +29,7 @@ const ArtistInfoSection = ({
           href={ROUTE.profile(userId)}
           className='group flex gap-[42px] justify-center items-center'
         >
-          <Image
-            src={profileImage || '/images/defaultProfileImage.png'}
-            alt='profile-image'
-            className='object-cover rounded-full aspect-square'
-            width={141}
-            height={141}
-          />
+          <UserThumbnail profileImage={profileImage} size='lg' />
           <div className='flex flex-col flex-1 gap-[22px] subtitle2'>
             <p className='group-hover:underline'>{nickname}</p>
             <p>{userField}</p>

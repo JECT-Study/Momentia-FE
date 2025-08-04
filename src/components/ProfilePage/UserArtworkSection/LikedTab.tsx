@@ -51,7 +51,7 @@ const LikedTab = () => {
       />
       {artworkList.length > 0 ? (
         <>
-          <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10'>
+          <div className='w-full grid grid-cols-2 mobile:grid-cols-3 tablet:grid-cols-4 gap-x-[20px] gap-y-10 pt-[70px]'>
             {artworkList.map((artwork) => (
               <ArtworkAndCollectionCard
                 key={artwork.postId}

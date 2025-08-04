@@ -13,7 +13,6 @@ export const metadata: Metadata = {
   title: '모멘티아',
   description: '무명 작가들을 위한 전시 플랫폼',
 };
-
 interface LayoutProps {
   children: ReactNode;
 }

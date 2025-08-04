@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -7,6 +6,8 @@ import useClickOutside from '@/hooks/client/useClickOutside';
 import useGetProfileInfo from '@/hooks/server/useGetProfileInfo';
 import useToastStore from '@/stores/useToastStore';
 import TokenHandler from '@/utils/tokenHandler';
+
+import UserThumbnail from '../UserThumbnail';
 
 const NavbarUserOption = () => {
   const [toggleOptionArea, setToggleOptionArea] = useState(false);
@@ -40,14 +41,10 @@ const NavbarUserOption = () => {
         type='button'
         onClick={() => setToggleOptionArea((prev) => !prev)}
       >
-        <Image
-          src={userInfo.profileImage || '/images/defaultProfileImage.png'}
-          alt={
-            userInfo.profileImage ? 'profile image' : 'default profile image'
-          }
-          className='object-cover rounded-full aspect-square flex-shrink-0'
-          width={50}
-          height={50}
+        <UserThumbnail
+          profileImage={userInfo.profileImage}
+          size='sm'
+          className='flex-shrink-0'
         />
       </button>
       {toggleOptionArea && (
@@ -55,16 +52,9 @@ const NavbarUserOption = () => {
           <div className='absolute top-[-8px] left-2/3 transform -translate-x-1/2 w-0 h-0 border-l-[15px] border-l-transparent border-r-[15px] border-r-transparent border-b-[15px] border-b-background-overlay' />
           <div className='flex flex-col h-full subtitle1'>
             <div className='flex gap-10 mb-[26px] p-[30px] items-center'>
-              <Image
-                src={userInfo.profileImage || '/images/defaultProfileImage.png'}
-                alt={
-                  userInfo.profileImage
-                    ? 'profile image'
-                    : 'default profile image'
-                }
-                className='object-cover rounded-full aspect-square flex-shrink-0'
-                width={71}
-                height={71}
+              <UserThumbnail
+                profileImage={userInfo.profileImage}
+                className='flex-shrink-0'
               />
               <div className='button-m'>{userInfo.nickname}</div>
             </div>

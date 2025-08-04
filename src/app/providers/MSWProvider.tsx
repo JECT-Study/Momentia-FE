@@ -2,6 +2,8 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 
+import Loading from '@/components/Loading';
+
 const MSWProvider = ({ children }: { children: ReactNode }) => {
   const [isMSWReady, setIsMSWReady] = useState(false);
 
@@ -18,7 +20,11 @@ const MSWProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   if (!isMSWReady) {
-    return <div>Loading Mock Service Worker...</div>;
+    return (
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <Loading width={300} height={400} />
+      </div>
+    );
   }
 
   return <>{children}</>;
